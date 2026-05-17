@@ -17,50 +17,41 @@
     overflow: hidden;
     position: relative;
   }
-  .glow1 {
-    position: fixed; top: -20%; left: -10%;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,200,150,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .glow2 {
-    position: fixed; bottom: -20%; right: -10%;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,120,255,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .glow1 { position: fixed; top: -20%; left: -10%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,200,150,0.08) 0%, transparent 70%); pointer-events: none; }
+  .glow2 { position: fixed; bottom: -20%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,120,255,0.07) 0%, transparent 70%); pointer-events: none; }
   @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
   @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
-  /* KEY SCREEN */
-  #keyScreen {
+  #loginScreen {
     width: 100%; max-width: 400px;
     background: rgba(10,18,30,0.97);
     border: 1px solid rgba(0,200,150,0.2);
-    border-radius: 24px; padding: 40px 32px;
-    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    border-radius: 24px; padding: 48px 32px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
     box-shadow: 0 0 60px rgba(0,200,150,0.05), 0 30px 80px rgba(0,0,0,0.6);
+    animation: fadeIn 0.5s ease;
   }
-  #keyScreen .icon { font-size: 48px; }
-  #keyScreen h1 { font-family: 'Space Mono', monospace; font-size: 18px; color: #e0fff8; letter-spacing: 1px; }
-  #keyScreen p { font-size: 13px; color: rgba(200,232,224,0.6); text-align: center; line-height: 1.7; }
-  #keyScreen a { color: #00c896; text-decoration: none; }
-  #keyInput {
-    width: 100%; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(0,200,150,0.2); border-radius: 12px;
-    padding: 12px 16px; font-size: 13px; color: #e0fff8;
-    font-family: 'Space Mono', monospace; outline: none;
+  .login-icon { font-size: 56px; }
+  .login-title { font-family: 'Space Mono', monospace; font-size: 20px; color: #e0fff8; letter-spacing: 1px; }
+  .login-sub { font-size: 13px; color: rgba(200,232,224,0.5); text-align: center; line-height: 1.7; }
+  #googleBtn {
+    width: 100%; padding: 14px 20px; border-radius: 14px;
+    background: #fff; border: none; color: #1a1a1a;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   }
-  #keyBtn {
-    width: 100%; padding: 14px; border-radius: 12px;
-    background: linear-gradient(135deg, #00c896, #00a07a);
-    border: none; color: #fff; font-size: 14px; font-weight: 600;
-    cursor: pointer; font-family: 'DM Sans', sans-serif;
-  }
-  #keyNote { font-size: 11px; color: rgba(255,255,255,0.2); text-align: center; }
+  #googleBtn:hover { transform: translateY(-1px); }
+  #googleBtn img { width: 20px; height: 20px; }
+  .login-note { font-size: 11px; color: rgba(255,255,255,0.2); text-align: center; }
 
-  /* CHAT SCREEN */
+  #loadingScreen { display: none; flex-direction: column; align-items: center; gap: 16px; }
+  .spinner { width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgba(0,200,150,0.2); border-top-color: #00c896; animation: spin 0.8s linear infinite; }
+  .loading-text { font-size: 13px; color: rgba(0,200,150,0.7); font-family: 'Space Mono', monospace; }
+
   #chatScreen {
     display: none; width: 100%; max-width: 480px;
     height: 88vh; max-height: 800px;
@@ -69,115 +60,65 @@
     border-radius: 24px; flex-direction: column; overflow: hidden;
     box-shadow: 0 0 60px rgba(0,200,150,0.05), 0 30px 80px rgba(0,0,0,0.6);
   }
-  .header {
-    padding: 18px 22px; border-bottom: 1px solid rgba(0,200,150,0.1);
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(0,200,150,0.03);
-  }
-  .header-left { display: flex; align-items: center; gap: 12px; }
-  .logo {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: linear-gradient(135deg, rgba(0,200,150,0.2), rgba(0,120,255,0.2));
-    border: 1px solid rgba(0,200,150,0.3);
-    display: flex; align-items: center; justify-content: center; font-size: 18px;
-  }
-  .header-title { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #e0fff8; }
-  .header-sub { font-size: 10px; color: rgba(0,200,150,0.7); margin-top: 2px; }
-  .status-dot {
-    width: 9px; height: 9px; border-radius: 50%;
-    background: #00c896; box-shadow: 0 0 10px #00c896;
-    animation: pulse 2s infinite;
-  }
-  #messages {
-    flex: 1; overflow-y: auto; padding: 16px 14px;
-    display: flex; flex-direction: column; gap: 10px;
-    scrollbar-width: thin; scrollbar-color: rgba(0,200,150,0.2) transparent;
-  }
+  .header { padding: 14px 18px; border-bottom: 1px solid rgba(0,200,150,0.1); display: flex; align-items: center; justify-content: space-between; background: rgba(0,200,150,0.03); }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .logo { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg, rgba(0,200,150,0.2), rgba(0,120,255,0.2)); border: 1px solid rgba(0,200,150,0.3); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .header-title { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #e0fff8; }
+  .header-sub { font-size: 10px; color: rgba(0,200,150,0.7); margin-top: 1px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  #userAvatar { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(0,200,150,0.3); object-fit: cover; display: none; }
+  #logoutBtn { background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.2); border-radius: 8px; padding: 4px 10px; font-size: 10px; color: rgba(255,120,120,0.8); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  #messages { flex: 1; overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; scrollbar-width: thin; scrollbar-color: rgba(0,200,150,0.2) transparent; }
   .msg-row { display: flex; align-items: flex-end; gap: 8px; animation: fadeIn 0.3s ease; }
   .msg-row.user { justify-content: flex-end; }
-  .msg-row.bot { justify-content: flex-start; }
-  .avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; flex-shrink: 0;
-  }
-  .bot-bubble {
-    max-width: 82%; background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(0,200,150,0.1);
-    border-radius: 16px 16px 16px 4px; padding: 11px 14px;
-    font-size: 12.5px; line-height: 1.65; color: #c8e8e0;
-    white-space: pre-wrap;
-  }
-  .user-bubble {
-    max-width: 75%;
-    background: linear-gradient(135deg, rgba(0,200,150,0.22), rgba(0,150,120,0.18));
-    border: 1px solid rgba(0,200,150,0.25);
-    border-radius: 16px 16px 4px 16px; padding: 11px 14px;
-    font-size: 12.5px; line-height: 1.65; color: #e0fff8;
-  }
+  .avatar { width: 26px; height: 26px; border-radius: 50%; background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .bot-bubble { max-width: 82%; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,200,150,0.1); border-radius: 16px 16px 16px 4px; padding: 10px 13px; font-size: 12.5px; line-height: 1.65; color: #c8e8e0; white-space: pre-wrap; }
+  .user-bubble { max-width: 75%; background: linear-gradient(135deg, rgba(0,200,150,0.22), rgba(0,150,120,0.18)); border: 1px solid rgba(0,200,150,0.25); border-radius: 16px 16px 4px 16px; padding: 10px 13px; font-size: 12.5px; line-height: 1.65; color: #e0fff8; }
   .typing { display: flex; gap: 5px; align-items: center; height: 16px; }
-  .dot {
-    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-    background: #00c896; animation: bounce 1.2s infinite;
-  }
-  #suggestions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 6px; }
-  .sugg-btn {
-    background: rgba(0,200,150,0.07); border: 1px solid rgba(0,200,150,0.18);
-    border-radius: 20px; padding: 6px 12px; font-size: 11px;
-    color: rgba(0,200,150,0.85); cursor: pointer;
-    font-family: 'DM Sans', sans-serif; line-height: 1.3;
-  }
-  .input-area {
-    padding: 10px 14px; border-top: 1px solid rgba(0,200,150,0.1);
-    display: flex; gap: 9px; align-items: flex-end;
-    background: rgba(0,200,150,0.02);
-  }
-  #msgInput {
-    flex: 1; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(0,200,150,0.18); border-radius: 14px;
-    padding: 11px 14px; font-size: 13px; color: #e0fff8;
-    resize: none; font-family: 'DM Sans', sans-serif;
-    line-height: 1.5; max-height: 90px; overflow-y: auto; outline: none;
-  }
-  #sendBtn {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: linear-gradient(135deg, #00c896, #00a07a);
-    border: none; color: #fff; font-size: 15px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .disclaimer {
-    text-align: center; font-size: 9.5px; color: rgba(255,255,255,0.18);
-    padding: 6px 14px 10px; font-family: 'Space Mono', monospace;
-  }
+  .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #00c896; animation: bounce 1.2s infinite; }
+  #suggestions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+  .sugg-btn { background: rgba(0,200,150,0.07); border: 1px solid rgba(0,200,150,0.18); border-radius: 20px; padding: 6px 11px; font-size: 11px; color: rgba(0,200,150,0.85); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .input-area { padding: 10px 12px; border-top: 1px solid rgba(0,200,150,0.1); display: flex; gap: 8px; align-items: flex-end; background: rgba(0,200,150,0.02); }
+  #msgInput { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(0,200,150,0.18); border-radius: 14px; padding: 10px 13px; font-size: 13px; color: #e0fff8; resize: none; font-family: 'DM Sans', sans-serif; line-height: 1.5; max-height: 90px; overflow-y: auto; outline: none; }
+  #sendBtn { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #00c896, #00a07a); border: none; color: #fff; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #sendBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .disclaimer { text-align: center; font-size: 9px; color: rgba(255,255,255,0.15); padding: 5px 12px 9px; font-family: 'Space Mono', monospace; }
+  .limit-banner { background: rgba(255,150,0,0.08); border: 1px solid rgba(255,150,0,0.2); border-radius: 12px; padding: 12px 16px; margin: 8px 12px; font-size: 12px; color: rgba(255,180,80,0.9); text-align: center; line-height: 1.5; }
 </style>
 </head>
 <body>
 <div class="glow1"></div>
 <div class="glow2"></div>
 
-<!-- KEY SCREEN -->
-<div id="keyScreen">
-  <div class="icon">🧬</div>
-  <h1>PeptidBot</h1>
-  <p>Gib deinen kostenlosen <strong style="color:#00c896">Groq API Key</strong> ein.<br>
-  Kostenlos holen auf <a href="https://console.groq.com" target="_blank">console.groq.com</a></p>
-  <input id="keyInput" type="password" placeholder="gsk_xxxxxxxxxxxxxxxx" />
-  <button id="keyBtn" onclick="startBot()">Bot starten →</button>
-  <div id="keyNote">Der Key wird nur in deinem Browser gespeichert.</div>
+<div id="loginScreen">
+  <div class="login-icon">🧬</div>
+  <div class="login-title">PeptidBot</div>
+  <div class="login-sub">Dein persönlicher Research Peptide Berater.<br>Melde dich an um loszulegen.</div>
+  <button id="googleBtn" onclick="signInWithGoogle()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+    Mit Google anmelden
+  </button>
+  <div class="login-note">20 Nachrichten pro Tag · Kostenlos · Keine Kreditkarte</div>
 </div>
 
-<!-- CHAT SCREEN -->
+<div id="loadingScreen">
+  <div class="spinner"></div>
+  <div class="loading-text">Wird geladen...</div>
+</div>
+
 <div id="chatScreen">
   <div class="header">
     <div class="header-left">
       <div class="logo">🧬</div>
       <div>
         <div class="header-title">PeptidBot</div>
-        <div class="header-sub">Llama 3 · Groq · Online</div>
+        <div class="header-sub" id="rateInfo">20 Nachrichten heute verfügbar</div>
       </div>
     </div>
-    <div class="status-dot"></div>
+    <div class="header-right">
+      <img id="userAvatar" src="" alt="">
+      <button id="logoutBtn" onclick="doSignOut()">Abmelden</button>
+    </div>
   </div>
   <div id="messages">
     <div class="msg-row bot">
@@ -189,12 +130,12 @@ Ich bin dein direkter Ansprechpartner für Research Peptides – Dosierungen, Pr
 Was möchtest du wissen?</div>
     </div>
     <div id="suggestions">
-      <button class="sugg-btn" onclick="sendMsg('BPC-157 Dosierung für Sehnenriss?')">BPC-157 Dosierung für Sehnenriss?</button>
-      <button class="sugg-btn" onclick="sendMsg('Semaglutid Titrationsplan?')">Semaglutid Titrationsplan?</button>
+      <button class="sugg-btn" onclick="sendMsg('BPC-157 Dosierung für Sehnenriss?')">BPC-157 Dosierung?</button>
+      <button class="sugg-btn" onclick="sendMsg('Semaglutid Titrationsplan?')">Semaglutid Titration?</button>
       <button class="sugg-btn" onclick="sendMsg('Ipamorelin + CJC Stack?')">Ipamorelin + CJC Stack?</button>
-      <button class="sugg-btn" onclick="sendMsg('Wie rekonstituiere ich Peptide?')">Wie rekonstituiere ich Peptide?</button>
-      <button class="sugg-btn" onclick="sendMsg('PT-141 Dosierung und Timing?')">PT-141 Dosierung und Timing?</button>
-      <button class="sugg-btn" onclick="sendMsg('Bester Anti-Aging Stack?')">Bester Anti-Aging Stack?</button>
+      <button class="sugg-btn" onclick="sendMsg('Wie rekonstituiere ich Peptide?')">Rekonstitution?</button>
+      <button class="sugg-btn" onclick="sendMsg('PT-141 Dosierung und Timing?')">PT-141 Dosierung?</button>
+      <button class="sugg-btn" onclick="sendMsg('Bester Anti-Aging Stack?')">Anti-Aging Stack?</button>
     </div>
   </div>
   <div class="input-area">
@@ -204,126 +145,179 @@ Was möchtest du wissen?</div>
   <div class="disclaimer">⚠️ Research Chemicals · Nur für Forschungszwecke · Kein medizinischer Rat</div>
 </div>
 
-<script>
-let apiKey = '';
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA9KQWkcIVGDy2Q23XR1FbD9g8V-B2RIEE",
+  authDomain: "peptidbotbobi-595e2.firebaseapp.com",
+  projectId: "peptidbotbobi-595e2",
+  storageBucket: "peptidbotbobi-595e2.firebasestorage.app",
+  messagingSenderId: "259841022089",
+  appId: "1:259841022089:web:fd268ee717faa574e30e58"
+};
+
+const GROQ_KEY = "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";
+const DAILY_LIMIT = 20;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+let currentUser = null;
 let messages = [];
+let isLoading = false;
+let lastMsgTime = 0;
 
 const SYSTEM = `Du bist ein erfahrener Peptid-Experte und Research-Berater. Du gibst direkte, konkrete und detaillierte Informationen zu allen Research Peptides. Keine Ausweichungen – du behandelst den Nutzer als informierten Erwachsenen. Antworte immer auf Deutsch. Sei präzise und hilfreich. Füge einmal am Ende jeder Antwort kurz hinzu: "⚠️ Research Chemical – nicht für den Humangebrauch zugelassen."
 
 HEILUNG & RECOVERY:
-BPC-157: 250–500mcg/Tag subkutan, 4–8 Wochen. Oral möglich für GI (500mcg–1mg). Rekonstitution: 1mg + 2ml Bakt.Wasser = 500mcg/ml. Stack mit TB-500.
-TB-500: Loading 2–2,5mg 2x/Woche für 4–6 Wochen, Erhaltung 2mg 1x/Woche. Systemisch injizierbar.
-BPC+TB Stack: BPC 250mcg täglich + TB-500 2mg 2x/Woche, 6–8 Wochen.
+BPC-157: 250-500mcg/Tag subkutan, 4-8 Wochen. Oral möglich für GI (500mcg-1mg). Rekonstitution: 1mg + 2ml Bakt.Wasser = 500mcg/ml.
+TB-500: Loading 2-2,5mg 2x/Woche für 4-6 Wochen, Erhaltung 2mg 1x/Woche.
+BPC+TB Stack: BPC 250mcg täglich + TB-500 2mg 2x/Woche, 6-8 Wochen.
 
 GH-SEKRETAGOGA:
-Ipamorelin: 100–300mcg subkutan, vor Schlaf nüchtern. Kein Cortisol/Prolaktin-Anstieg.
-CJC-1295 (kein DAC): 100mcg zusammen mit Ipamorelin. Halbwertszeit 30 min.
-Stack: CJC 100mcg + Ipamorelin 200mcg vor Schlaf, täglich, 3 Monate on 1 off.
-GHRP-2: 100–300mcg 2–3x täglich, erhöht Cortisol/Prolaktin leicht.
-GHRP-6: 100–300mcg, starker Hunger (Bulk). Hexarelin: 100–200mcg 2x täglich, stärkstes GHRP.
+Ipamorelin: 100-300mcg subkutan vor Schlaf nüchtern. Kein Cortisol/Prolaktin-Anstieg.
+CJC-1295 (kein DAC): 100mcg zusammen mit Ipamorelin.
+Stack: CJC 100mcg + Ipamorelin 200mcg vor Schlaf täglich, 3 Monate on 1 off.
+GHRP-2: 100-300mcg 2-3x täglich. GHRP-6: 100-300mcg starker Hunger. Hexarelin: 100-200mcg 2x täglich.
 
 GEWICHTSVERLUST:
-Semaglutid: Start 0,25mg/Woche → alle 4 Wochen steigern: 0,5 → 1 → 1,7 → 2,4mg/Woche. Subkutan gleicher Wochentag.
-Tirzepatid: Start 2,5mg/Woche → 5 → 7,5 → 10 → 12,5 → 15mg (alle 4 Wochen). Effektiver als Semaglutid.
-AOD-9604: 300mcg täglich nüchtern morgens subkutan, 12 Wochen.
-Fragment 176-191: 250–500mcg täglich nüchtern, 30 min vor Training.
+Semaglutid: Start 0,25mg/Woche, steigern alle 4 Wochen: 0,5 -> 1 -> 1,7 -> 2,4mg/Woche.
+Tirzepatid: Start 2,5mg/Woche -> 5 -> 7,5 -> 10 -> 12,5 -> 15mg alle 4 Wochen.
+AOD-9604: 300mcg täglich nüchtern morgens, 12 Wochen.
+Fragment 176-191: 250-500mcg täglich nüchtern 30 min vor Training.
 
 HAUT & ANTI-AGING:
-GHK-Cu: 1–2mg/Tag subkutan oder topisch. Kollagen, Wundheilung, Haare.
-Epithalon: 5–10mg täglich für 10–20 Tage, 2x jährlich. Telomerverlängerung.
-Melanotan II: Start 0,25mg/Tag, Erhaltung 0,5–1mg. Bräunung, Libido, Appetitreduktion.
+GHK-Cu: 1-2mg/Tag subkutan oder topisch. Kollagen, Wundheilung, Haare.
+Epithalon: 5-10mg täglich für 10-20 Tage, 2x jährlich. Telomerverlängerung.
+Melanotan II: Start 0,25mg/Tag, Erhaltung 0,5-1mg. Bräunung, Libido, Appetitreduktion.
 
 LIBIDO:
-PT-141: 1–2mg subkutan oder 1mg intranasal, 1–2h vorher. Max 1x alle 3 Tage.
-Kisspeptin-10: 50–100mcg subkutan, LH-Ausschüttung, Testosteron-Stimulation.
+PT-141: 1-2mg subkutan oder 1mg intranasal, 1-2h vorher. Max 1x alle 3 Tage.
+Kisspeptin-10: 50-100mcg subkutan, LH/Testosteron-Stimulation.
 
 SCHLAF & KOGNITION:
-DSIP: 100–200mcg vor Schlaf subkutan. Tiefschlaf, GH-Ausschüttung.
-Selank: 250–500mcg subkutan oder intranasal. Angstlösend, kognitiv, kein Suchtpotenzial.
-Semax: 200–600mcg intranasal täglich. BDNF, Fokus, Gedächtnis. 2 Wochen on/off.
+DSIP: 100-200mcg vor Schlaf subkutan. Tiefschlaf, GH-Ausschüttung.
+Selank: 250-500mcg subkutan oder intranasal. Angstlösend, kognitiv.
+Semax: 200-600mcg intranasal täglich. BDNF, Fokus, Gedächtnis. 2 Wochen on/off.
 
-REKONSTITUTION: Immer Bakteriostatisches Wasser verwenden. Sanft schwenken, nicht schütteln. Im Kühlschrank lagern (4–6 Wochen haltbar nach Rekonstitution).
-DOSIERUNGSBERECHNUNG: (mcg gewünscht ÷ mcg/ml Konzentration) × 100 = Einheiten auf U100 Insulinspritze.`;
+REKONSTITUTION: Immer Bakteriostatisches Wasser. Sanft schwenken nicht schütteln. Kühlschrank 4-6 Wochen haltbar.
+DOSIERUNGSBERECHNUNG: (mcg gewünscht / mcg/ml) x 100 = Einheiten auf U100 Spritze.`;
 
-function startBot() {
-  const k = document.getElementById('keyInput').value.trim();
-  if (!k) return;
-  apiKey = k;
-  document.getElementById('keyScreen').style.display = 'none';
-  document.getElementById('chatScreen').style.display = 'flex';
-  document.getElementById('msgInput').focus();
+window.signInWithGoogle = async () => {
+  try {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('loadingScreen').style.display = 'flex';
+    await signInWithPopup(auth, provider);
+  } catch(e) {
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+};
+
+window.doSignOut = async () => { await fbSignOut(auth); };
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('chatScreen').style.display = 'flex';
+    if (user.photoURL) { const av = document.getElementById('userAvatar'); av.src = user.photoURL; av.style.display = 'block'; }
+    await updateRateDisplay();
+  } else {
+    currentUser = null;
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('chatScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+});
+
+async function getUserData() {
+  const today = new Date().toISOString().split('T')[0];
+  const ref = doc(db, 'users', currentUser.uid);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) { await setDoc(ref, { date: today, count: 0, email: currentUser.email }); return { date: today, count: 0 }; }
+  const data = snap.data();
+  if (data.date !== today) { await updateDoc(ref, { date: today, count: 0 }); return { date: today, count: 0 }; }
+  return data;
 }
 
-document.getElementById('keyInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') startBot();
-});
+async function updateRateDisplay() {
+  try {
+    const data = await getUserData();
+    const rem = DAILY_LIMIT - (data.count || 0);
+    document.getElementById('rateInfo').textContent = rem > 0 ? `${rem} Nachrichten heute verfügbar` : '⚠️ Tageslimit erreicht';
+  } catch(e) {}
+}
 
-document.getElementById('msgInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
-});
-
-async function sendMsg(text) {
+window.sendMsg = async (text) => {
+  if (isLoading) return;
+  const now = Date.now();
+  if (now - lastMsgTime < 2000) return;
+  lastMsgTime = now;
   const input = document.getElementById('msgInput');
   const userText = text || input.value.trim();
   if (!userText) return;
-
+  const userData = await getUserData();
+  if ((userData.count || 0) >= DAILY_LIMIT) {
+    const existing = document.querySelector('.limit-banner');
+    if (!existing) { const b = document.createElement('div'); b.className = 'limit-banner'; b.textContent = '⚠️ Du hast dein Tageslimit von 20 Nachrichten erreicht. Komm morgen wieder!'; document.getElementById('messages').appendChild(b); document.getElementById('messages').scrollTop = 999999; }
+    return;
+  }
   const sugg = document.getElementById('suggestions');
   if (sugg) sugg.remove();
-
   messages.push({ role: 'user', content: userText });
   input.value = '';
   appendMsg('user', userText);
-
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
   const typing = appendTyping();
-
   try {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        max_tokens: 1000,
-        messages: [{ role: 'system', content: SYSTEM }, ...messages]
-      })
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_KEY}` },
+      body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 1000, messages: [{ role: 'system', content: SYSTEM }, ...messages] })
     });
     const data = await res.json();
     const reply = data.choices?.[0]?.message?.content || 'Fehler beim Laden.';
     messages.push({ role: 'assistant', content: reply });
     typing.remove();
     appendMsg('bot', reply);
+    await updateDoc(doc(db, 'users', currentUser.uid), { count: increment(1) });
+    await updateRateDisplay();
   } catch(e) {
     typing.remove();
-    appendMsg('bot', '⚠️ Verbindungsfehler. Bitte überprüfe deinen API Key.');
+    appendMsg('bot', '⚠️ Verbindungsfehler. Bitte versuche es erneut.');
+  } finally {
+    isLoading = false;
+    document.getElementById('sendBtn').disabled = false;
   }
-}
+};
 
 function appendMsg(role, text) {
-  const container = document.getElementById('messages');
+  const c = document.getElementById('messages');
   const row = document.createElement('div');
   row.className = `msg-row ${role}`;
-  if (role === 'bot') {
-    row.innerHTML = `<div class="avatar">🧬</div><div class="bot-bubble">${escHtml(text)}</div>`;
-  } else {
-    row.innerHTML = `<div class="user-bubble">${escHtml(text)}</div>`;
-  }
-  container.appendChild(row);
-  container.scrollTop = container.scrollHeight;
-  return row;
+  row.innerHTML = role === 'bot'
+    ? `<div class="avatar">🧬</div><div class="bot-bubble">${esc(text)}</div>`
+    : `<div class="user-bubble">${esc(text)}</div>`;
+  c.appendChild(row); c.scrollTop = c.scrollHeight; return row;
 }
 
 function appendTyping() {
-  const container = document.getElementById('messages');
+  const c = document.getElementById('messages');
   const row = document.createElement('div');
   row.className = 'msg-row bot';
   row.innerHTML = `<div class="avatar">🧬</div><div class="bot-bubble"><div class="typing"><span class="dot" style="animation-delay:0s"></span><span class="dot" style="animation-delay:0.2s"></span><span class="dot" style="animation-delay:0.4s"></span></div></div>`;
-  container.appendChild(row);
-  container.scrollTop = container.scrollHeight;
-  return row;
+  c.appendChild(row); c.scrollTop = c.scrollHeight; return row;
 }
 
-function escHtml(text) {
-  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-}
+function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+
+document.getElementById('msgInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.sendMsg(); } });
 </script>
 </body>
 </html>
