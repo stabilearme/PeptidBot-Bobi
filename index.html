@@ -150,7 +150,7 @@ Jetzt stell mir deine Fragen!</div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -209,16 +209,28 @@ Semax: 200-600mcg intranasal täglich. BDNF, Fokus, Gedächtnis. 2 Wochen on/off
 REKONSTITUTION: Immer Bakteriostatisches Wasser. Sanft schwenken nicht schütteln. Kühlschrank 4-6 Wochen haltbar.
 DOSIERUNGSBERECHNUNG: (mcg gewünscht / mcg/ml) x 100 = Einheiten auf U100 Spritze.`;
 
+function isInAppBrowser() {
+  const ua = navigator.userAgent || '';
+  return /Instagram|FBAN|FBAV|WhatsApp|Line|Twitter|Snapchat/i.test(ua);
+}
+
 window.signInWithGoogle = async () => {
   try {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('loadingScreen').style.display = 'flex';
-    await signInWithPopup(auth, provider);
+    if (isInAppBrowser()) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
   } catch(e) {
     document.getElementById('loadingScreen').style.display = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
   }
 };
+
+// Handle redirect result on page load
+getRedirectResult(auth).catch(() => {});
 
 window.doSignOut = async () => { await fbSignOut(auth); };
 
