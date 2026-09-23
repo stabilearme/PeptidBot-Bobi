@@ -239,7 +239,37 @@
 /* ---------- Early Access / Newsletter ---------- */
 .alp-rich .alp-ea-hero { position: relative; margin: 0 0 clamp(2.5rem, 2rem + 2vw, 4rem); }
 .alp-rich .alp-ea-hero > p:empty { display: none; }
-.alp-rich .alp-ea-hero img { display: block; width: 100%; height: clamp(220px, 18vw + 120px, 400px); object-fit: cover; border-radius: var(--alp-r-xl); box-shadow: 0 20px 50px -30px rgba(26, 31, 46, 0.45); }
+/* Statt Foto: gestalteter Banner (Navy, Mint-Leuchten, Laborraster) mit schwebendem Rabatt-Gutschein */
+.alp-rich .alp-ea-hero img { display: none; }
+.alp-rich .alp-ea-hero::before {
+	content: ""; display: block; height: clamp(250px, 16vw + 150px, 360px); border-radius: var(--alp-r-xl);
+	background:
+		radial-gradient(40% 70% at 18% 20%, rgba(110, 218, 180, 0.35), transparent 70%),
+		radial-gradient(35% 60% at 85% 85%, rgba(46, 139, 110, 0.45), transparent 70%),
+		linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px) 0 0 / 32px 32px,
+		linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px) 0 0 / 32px 32px,
+		linear-gradient(160deg, #17324A 0%, var(--alp-dark-deep) 60%, #081420 100%);
+	box-shadow: 0 24px 60px -30px rgba(11, 26, 38, 0.6);
+}
+.alp-rich .alp-ea-hero::after {
+	content: "15 %"; position: absolute; left: 50%; top: clamp(1.75rem, 1rem + 2.5vw, 3.25rem);
+	box-sizing: border-box; width: clamp(230px, 10vw + 190px, 300px); height: clamp(96px, 3vw + 84px, 120px);
+	display: flex; align-items: center; justify-content: center; padding-left: clamp(69px, 3vw + 57px, 90px);
+	font-family: var(--alp-font-display); font-size: clamp(2.6rem, 1.9rem + 2vw, 3.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--alp-ink); white-space: nowrap;
+	background:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E8B6E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='8' width='17' height='4' rx='1'/%3E%3Cpath d='M5 12v7.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V12M12 8v13M12 8S10.5 3.5 8 3.5a2.2 2.2 0 0 0 0 4.5h4M12 8s1.5-4.5 4-4.5a2.2 2.2 0 0 1 0 4.5h-4'/%3E%3C/svg%3E") center left 11% / 30px 30px no-repeat,
+		repeating-linear-gradient(180deg, #9ED9C2 0 5px, transparent 5px 10px) left 30% top 0 / 2px 100% no-repeat,
+		linear-gradient(135deg, #FFFFFF 0%, #E9FAF3 55%, #BFEEDC 100%);
+	border-radius: 14px;
+	-webkit-mask: radial-gradient(circle 10px at 30% 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 10px at 30% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+	mask: radial-gradient(circle 10px at 30% 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 10px at 30% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+	transform: translateX(-50%) rotate(-5deg);
+	filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
+}
+@media (prefers-reduced-motion: no-preference) {
+	.alp-rich .alp-ea-hero::after { animation: alp-ticket 5s ease-in-out infinite; }
+	@keyframes alp-ticket { 50% { transform: translateX(-50%) translateY(-6px) rotate(-3deg); } }
+}
 .alp-rich .alp-ea-inner {
 	position: relative;
 	z-index: 1;
