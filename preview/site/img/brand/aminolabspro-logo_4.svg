@@ -1,0 +1,23 @@
+<svg width="260" height="60" viewBox="0 0 260 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kugelstab Symbol -->
+  <line x1="8" y1="30" x2="72" y2="30" stroke="#6EDAB4" stroke-width="1.8"/>
+  <line x1="22" y1="30" x2="22" y2="14" stroke="#6EDAB4" stroke-width="1.8"/>
+  <line x1="40" y1="30" x2="40" y2="46" stroke="#6EDAB4" stroke-width="1.8"/>
+  <line x1="58" y1="30" x2="58" y2="14" stroke="#6EDAB4" stroke-width="1.8"/>
+  <circle cx="8" cy="30" r="6" fill="#3BAD87"/>
+  <circle cx="22" cy="30" r="4.5" fill="#F7F8F6" stroke="#6EDAB4" stroke-width="1.8"/>
+  <circle cx="22" cy="14" r="5.5" fill="#6EDAB4"/>
+  <circle cx="40" cy="30" r="4.5" fill="#F7F8F6" stroke="#6EDAB4" stroke-width="1.8"/>
+  <circle cx="40" cy="46" r="5.5" fill="#3BAD87"/>
+  <circle cx="58" cy="30" r="4.5" fill="#F7F8F6" stroke="#6EDAB4" stroke-width="1.8"/>
+  <circle cx="58" cy="14" r="5.5" fill="#6EDAB4"/>
+  <circle cx="72" cy="30" r="6" fill="#3BAD87"/>
+
+  <!-- Text kompakt ohne Lücken -->
+  <text font-family="Inter, sans-serif" font-size="22" font-weight="500" fill="#1a1a1a">
+    <tspan x="88" y="35">amino</tspan><tspan fill="#3BAD87">labs</tspan><tspan font-weight="400" fill="#888888" font-size="19">pro</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="88" y="50" font-family="Inter, sans-serif" font-size="9" font-weight="500" letter-spacing="1.2" fill="#aaaaaa">PEPTIDE RESEARCH</text>
+</svg>

@@ -1,0 +1,152 @@
+/* ==========================================================================
+   COA-CENTER (page-coa.php) + Chargen-Box auf Produktseiten
+   ========================================================================== */
+
+.alp .alp-coa-page { padding: 0; }
+
+.alp-coa-hero { padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem); }
+.alp-coa-hero__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(2rem, 1rem + 4vw, 5rem);
+	align-items: end;
+}
+.alp .alp-coa-hero .alp-h1 { color: #fff; }
+
+/* Leiste über dem Raster */
+.alp-coa-grid-bar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+.alp-coa-grid-count { margin: 0; color: var(--alp-muted); }
+.alp-coa-grid-filter {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0;
+	padding-left: 0.8rem;
+	border: 1.5px solid var(--alp-line-2);
+	border-radius: var(--alp-r-md);
+	min-width: min(320px, 100%);
+	color: var(--alp-muted);
+}
+.alp-coa-grid-filter:focus-within { border-color: var(--alp-brand); box-shadow: 0 0 0 4px var(--alp-brand-soft); }
+.alp .alp-coa-grid-filter input { border: 0 !important; box-shadow: none !important; margin: 0; padding: 0 0.5rem 0 0; flex: 1; background: transparent; }
+
+.alp-coa-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+}
+.alp-coa-grid-empty { margin: 1.5rem 0 0; color: var(--alp-muted); }
+
+/* Karte */
+.alp-coa-card {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1.25rem;
+	background: var(--alp-surface);
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	scroll-margin-top: 120px;
+	transition: border-color var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp-coa-card:hover { border-color: var(--alp-line-2); box-shadow: var(--alp-shadow-md); }
+.alp-coa-card.is-highlight { border-color: var(--alp-brand); box-shadow: 0 0 0 4px var(--alp-brand-soft); }
+.alp-coa-card.is-pending { background: var(--alp-paper); }
+.alp-coa-card__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+.alp .alp-coa-card__title { font-size: 1.125rem; margin: 0; letter-spacing: -0.01em; }
+.alp-coa-card__batch { margin: 0.15rem 0 0; font-family: var(--alp-font-mono); font-size: 0.8125rem; color: var(--alp-muted); }
+.alp-coa-card__figures {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+	padding: 0.9rem 1rem;
+	border-radius: var(--alp-r-md);
+	background: var(--alp-paper);
+}
+.alp-coa-card__k { display: block; font-size: 0.75rem; color: var(--alp-muted); }
+.alp-coa-card__v { display: block; font-weight: 700; color: var(--alp-ink); font-variant-numeric: tabular-nums; font-size: 1.05rem; margin-top: 0.15rem; }
+.alp-coa-card__v--big { font-family: var(--alp-font-display); font-size: 1.9rem; line-height: 1; color: var(--alp-brand); letter-spacing: -0.02em; }
+.alp-coa-card__v--big small { font-size: 0.55em; color: var(--alp-muted); }
+.alp-coa-card__pending { margin: 0; color: var(--alp-muted); font-size: var(--alp-fs-sm); flex: 1; }
+.alp-coa-card__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: auto; }
+
+/* Erklärung unten */
+.alp-coa-explain { max-width: 980px; }
+.alp-coa-explain__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 0 0 1.5rem; }
+.alp-coa-explain__list dt { font-weight: 700; color: var(--alp-ink); margin-bottom: 0.35rem; }
+.alp-coa-explain__list dd { margin: 0; color: var(--alp-muted); font-size: 0.9375rem; }
+
+/* ---------- Chargen-Box auf Produktseite ---------- */
+.alp-pcoa {
+	margin: 1.25rem 0 1rem;
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	background: linear-gradient(180deg, #FBFDFC 0%, var(--alp-surface) 100%);
+	overflow: hidden;
+}
+.alp-pcoa__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.8rem 1.1rem;
+	border-bottom: 1px dashed var(--alp-line-2);
+}
+.alp-pcoa__eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-family: var(--alp-font-mono);
+	font-size: var(--alp-fs-xs);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--alp-brand);
+}
+.alp-pcoa__body {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 1.25rem;
+	align-items: center;
+	padding: 1rem 1.1rem;
+}
+.alp-pcoa__figure { display: flex; flex-direction: column; align-items: flex-start; padding-right: 1.25rem; border-right: 1px solid var(--alp-line); }
+.alp-pcoa__num {
+	font-family: var(--alp-font-display);
+	font-size: 2.6rem;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--alp-brand);
+	letter-spacing: -0.03em;
+	font-variant-numeric: tabular-nums;
+}
+.alp-pcoa__num small { font-size: 0.5em; margin-left: 0.1em; color: var(--alp-muted); }
+.alp-pcoa__cap { font-size: 0.75rem; color: var(--alp-muted); margin-top: 0.35rem; }
+.alp-pcoa .alp-specs > div { padding: 0.35rem 0; font-size: 0.8125rem; }
+.alp-pcoa__foot {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.8rem 1.1rem;
+	background: var(--alp-paper);
+	border-top: 1px solid var(--alp-line);
+}
+.alp-pcoa__text { margin: 0; padding: 1rem 1.1rem; font-size: var(--alp-fs-sm); color: var(--alp-muted); }
+.alp-pcoa.is-pending { background: var(--alp-paper); }
+
+@media (max-width: 849px) {
+	.alp-coa-hero__grid { grid-template-columns: 1fr; }
+	.alp-coa-explain__list { grid-template-columns: 1fr; }
+}
+@media (max-width: 400px) {
+	.alp-pcoa__body { grid-template-columns: 1fr; }
+	.alp-pcoa__figure { border-right: 0; padding-right: 0; flex-direction: row; align-items: baseline; gap: 0.6rem; }
+}

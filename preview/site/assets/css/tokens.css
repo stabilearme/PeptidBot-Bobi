@@ -1,0 +1,120 @@
+/* ==========================================================================
+   DESIGN-TOKENS
+   Alle Farben, Schriften, Abstände und Radien an EINER Stelle.
+   Farbe ändern = hier den Wert ändern, der Rest des Themes folgt automatisch.
+   ========================================================================== */
+
+@font-face {
+	font-family: "Bricolage Grotesque";
+	src: url("../fonts/bricolage-grotesque-var.woff2") format("woff2");
+	font-weight: 200 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Hanken Grotesk";
+	src: url("../fonts/hanken-grotesk-var.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Hanken Grotesk";
+	src: url("../fonts/hanken-grotesk-var-italic.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "JetBrains Mono";
+	src: url("../fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+	font-weight: 400;
+	font-display: swap;
+}
+@font-face {
+	font-family: "JetBrains Mono";
+	src: url("../fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");
+	font-weight: 500;
+	font-display: swap;
+}
+
+:root {
+	/* --- Farben: hell --- */
+	--alp-ink: #0E1A22;          /* Haupttext, Überschriften */
+	--alp-ink-2: #34464F;        /* Fließtext */
+	--alp-muted: #647781;        /* Nebentext, Labels */
+	--alp-line: #E0E8E5;         /* Linien, Rahmen */
+	--alp-line-2: #CBD7D3;       /* stärkere Rahmen, Eingabefelder */
+	--alp-paper: #F3F7F5;        /* getönte Abschnitte */
+	--alp-surface: #FFFFFF;      /* Karten, Seite */
+
+	/* --- Markenfarben --- */
+	--alp-brand: #13795B;        /* Buttons, Links, Akzente (AA-Kontrast auf Weiß) */
+	--alp-brand-hover: #0C5F47;
+	--alp-brand-soft: #E3F4EC;   /* Hintergrund für Chips & Hinweise */
+	--alp-mint: #6EDAB4;         /* Leuchtakzent auf dunklem Grund (bisherige Markenfarbe) */
+
+	/* --- Dunkle Abschnitte --- */
+	--alp-dark: #0B151C;
+	--alp-dark-2: #122029;
+	--alp-dark-line: #213440;
+	--alp-dark-text: #DCE7E4;
+	--alp-dark-muted: #8FA6A6;
+
+	/* --- Status --- */
+	--alp-ok: #13795B;
+	--alp-ok-soft: #E3F4EC;
+	--alp-warn: #93600A;
+	--alp-warn-soft: #FBF1DC;
+	--alp-error: #B03A2E;
+	--alp-error-soft: #FBE8E5;
+
+	/* --- Schriften --- */
+	--alp-font-display: "Bricolage Grotesque", "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+	--alp-font-body: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--alp-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+	/* --- Schriftgrößen (fließend zwischen Handy und Desktop) --- */
+	--alp-fs-xs: 0.75rem;
+	--alp-fs-sm: 0.875rem;
+	--alp-fs-base: 1rem;
+	--alp-fs-md: 1.125rem;
+	--alp-fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+	--alp-fs-xl: clamp(1.6rem, 1.3rem + 1.2vw, 2.25rem);
+	--alp-fs-2xl: clamp(2rem, 1.5rem + 2.2vw, 3.25rem);
+	--alp-fs-3xl: clamp(2.4rem, 1.6rem + 3.6vw, 4.5rem);
+
+	/* --- Abstände --- */
+	--alp-space-1: 0.25rem;
+	--alp-space-2: 0.5rem;
+	--alp-space-3: 0.75rem;
+	--alp-space-4: 1rem;
+	--alp-space-5: 1.5rem;
+	--alp-space-6: 2rem;
+	--alp-space-7: 3rem;
+	--alp-space-8: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);   /* Abstand zwischen Abschnitten */
+	--alp-gutter: clamp(1rem, 0.6rem + 2vw, 2rem);        /* Seitenrand */
+	--alp-container: 1280px;
+
+	/* --- Radien (nach Rolle) --- */
+	--alp-r-sm: 6px;     /* Chips, kleine Buttons */
+	--alp-r-md: 10px;    /* Buttons, Eingabefelder */
+	--alp-r-lg: 16px;    /* Karten */
+	--alp-r-xl: 24px;    /* große Flächen, Hero-Zertifikat */
+
+	/* --- Schatten --- */
+	--alp-shadow-sm: 0 1px 2px rgba(14, 26, 34, 0.06);
+	--alp-shadow-md: 0 6px 24px -8px rgba(14, 26, 34, 0.14);
+	--alp-shadow-lg: 0 24px 60px -20px rgba(14, 26, 34, 0.28);
+
+	/* --- Bewegung --- */
+	--alp-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--alp-dur: 180ms;
+
+	/* --- Höhen fester Leisten --- */
+	--alp-bottom-nav-h: 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root { --alp-dur: 0ms; }
+}

@@ -1,0 +1,239 @@
+<?php
+/**
+ * ============================================================
+ *  ZENTRALE EINSTELLUNGEN & TEXTE
+ * ============================================================
+ *  Fast alle sichtbaren Texte, Links und Schalter des Themes
+ *  stehen hier. Nach dem Ändern: Datei speichern, fertig.
+ *
+ *  Links:  '/pfad/'  → Seite deiner Website
+ *          'shop' | 'cart' | 'checkout' | 'myaccount' → WooCommerce-Seiten
+ *          'https://…' → externer Link
+ *
+ *  Chargen / COAs  → /data/coa-batches.php
+ *  FAQ             → /data/faq.php
+ * ============================================================
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+return array(
+
+	/* ---------- Marke ---------- */
+	'brand' => array(
+		'name'    => 'AminoLabs Pro',
+		'tagline' => 'Forschungspeptide in Research-Grade-Qualität',
+		'email'   => 'support@aminolabspro.com',
+		'country' => 'Versand aus Deutschland',
+	),
+
+	/* ---------- Schalter ---------- */
+	'features' => array(
+		'announcement_bar'   => true,  // Laufleiste ganz oben
+		'custom_footer'      => true,  // Eigener Footer statt Flatsome-Footer
+		'mobile_bottom_nav'  => true,  // App-artige Leiste unten auf dem Handy
+		'sticky_add_to_cart' => true,  // Kaufleiste auf Produktseiten beim Scrollen
+		'product_coa_box'    => true,  // Chargen-Box auf Produktseiten
+		'clean_descriptions' => true,  // Einheitliches Design für Produktbeschreibungen
+		'checkout_steps'     => true,  // Fortschrittsanzeige Warenkorb → Kasse
+		'category_pills'     => true,  // Kategorie-Filter über dem Shop
+		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
+	),
+
+	/* Versandkostenfrei ab (in €). 0 = Fortschrittsbalken im Warenkorb ausblenden. */
+	'free_shipping_threshold' => 0,
+
+	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
+	'shipping_cutoff_hour' => 14,
+
+	/* ---------- Laufleiste oben ---------- */
+	'announcement' => array(
+		array( 'icon' => 'clock', 'text' => 'Bestellung bis 14 Uhr – Versand am selben Werktag' ),
+		array( 'icon' => 'flask', 'text' => 'Jede Charge unabhängig per HPLC geprüft' ),
+		array( 'icon' => 'truck', 'text' => 'Versand aus Deutschland · diskret verpackt' ),
+	),
+
+	/* ---------- Startseite: Hero ---------- */
+	'hero' => array(
+		'eyebrow'   => 'Research-Grade · Drittlabor-geprüft',
+		'title'     => 'Forschungspeptide mit <em>belegter</em> Reinheit.',
+		'text'      => 'Jede Charge wird von einem unabhängigen Labor per HPLC analysiert. Das Zertifikat ist öffentlich einsehbar – über die Chargennummer auf deinem Vial.',
+		'primary'   => array( 'label' => 'Peptide entdecken', 'url' => 'shop' ),
+		'secondary' => array( 'label' => 'Laborergebnisse ansehen', 'url' => '/coa/' ),
+		'stats'     => array(
+			array( 'value' => '≥ 98 %', 'label' => 'Reinheit (HPLC)' ),
+			array( 'value' => '100 %', 'label' => 'chargengetestet' ),
+			array( 'value' => '48 h', 'label' => 'Versand DE/AT/CH' ),
+		),
+		/* Welche Charge im Hero-Zertifikat gezeigt wird (Chargennummer aus /data/coa-batches.php). */
+		'featured_batch' => 'BPC-0726-01',
+	),
+
+	/* ---------- Startseite: Vertrauensleiste ---------- */
+	'trust' => array(
+		array( 'icon' => 'flask',  'title' => 'Unabhängiges Labor',  'text' => 'HPLC-Analyse jeder Charge durch ein Drittlabor' ),
+		array( 'icon' => 'doc',    'title' => 'Öffentliche COAs',    'text' => 'Zertifikat per Chargennummer abrufbar' ),
+		array( 'icon' => 'truck',  'title' => 'Versand aus DE',      'text' => 'Schnell und diskret verpackt' ),
+		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Verschlüsselt per Karte oder SEPA-Überweisung' ),
+	),
+
+	/* ---------- Startseite: Abschnitte ---------- */
+	'sections' => array(
+		'categories' => array(
+			'eyebrow' => 'Sortiment',
+			'title'   => 'Nach Forschungsgebiet sortiert',
+			'text'    => 'Finde Peptide nach ihrem Forschungsschwerpunkt – jede Kategorie mit dokumentierten Chargen.',
+			/* Kategorien, die nicht angezeigt werden (Slugs). */
+			'exclude' => array( 'unkategorisiert', 'uncategorized' ),
+		),
+		'products' => array(
+			'eyebrow' => 'Meistgekauft',
+			'title'   => 'Beliebt in der Forschung',
+			'limit'   => 8,
+			'orderby' => 'popularity', // popularity | date | price | rand | menu_order
+			'cta'     => array( 'label' => 'Alle Produkte', 'url' => 'shop' ),
+		),
+		'coa' => array(
+			'eyebrow' => 'Transparenz',
+			'title'   => 'Prüf deine Charge in Sekunden.',
+			'text'    => 'Gib die Chargennummer von deinem Etikett ein und sieh das vollständige Analysezertifikat: gemessener Wirkstoffgehalt, HPLC-Reinheit, Prüflabor und Datum.',
+			'cta'     => array( 'label' => 'Alle Laborergebnisse', 'url' => '/coa/' ),
+		),
+		'process' => array(
+			'eyebrow' => 'Ablauf',
+			'title'   => 'Von der Synthese bis zu dir',
+			'steps'   => array(
+				array( 'title' => 'Synthese & Lyophilisierung', 'text' => 'Research-Grade-Peptide, gefriergetrocknet für maximale Stabilität.' ),
+				array( 'title' => 'Unabhängige Laborprüfung', 'text' => 'Jede Charge wird per HPLC auf Reinheit und Wirkstoffgehalt analysiert.' ),
+				array( 'title' => 'Zertifikat veröffentlicht', 'text' => 'Das COA wird der Chargennummer zugeordnet und öffentlich gestellt.' ),
+				array( 'title' => 'Versand aus Deutschland', 'text' => 'Bis 14 Uhr bestellt, am selben Werktag verschickt – diskret verpackt.' ),
+			),
+		),
+		'knowledge' => array(
+			'eyebrow' => 'Wissen',
+			'title'   => 'Fundiert statt Hörensagen',
+			'items'   => array(
+				array( 'icon' => 'doc',  'title' => 'COAs richtig lesen', 'text' => 'Was HPLC, Massenspektrometrie und Wirkstoffgehalt wirklich aussagen.', 'url' => '/coas-richtig-lesen-verstehen/' ),
+				array( 'icon' => 'calc', 'title' => 'Rekonstitutionsrechner', 'text' => 'Konzentration und Volumen für dein Laborprotokoll exakt berechnen.', 'url' => '/dosierungsrechner/' ),
+				array( 'icon' => 'book', 'title' => 'Wissensdatenbank', 'text' => 'Lagerung, Rekonstitution, Analytik und Grundlagen der Peptidforschung.', 'url' => '/wissen/' ),
+			),
+		),
+		'faq' => array(
+			'eyebrow' => 'FAQ',
+			'title'   => 'Häufige Fragen',
+		),
+		'newsletter' => array(
+			'title' => '15 % auf deine erste Bestellung.',
+			'text'  => 'Trag dich für den Newsletter ein: neue Chargen, Laborergebnisse und exklusive Angebote. Abmeldung jederzeit.',
+			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/early-access/' ),
+		),
+	),
+
+	/* ---------- Produktseite ---------- */
+	'product' => array(
+		/* Kleine Merkmale unter dem Produkttitel. */
+		'chips'  => array( '≥ 98 % Reinheit', 'HPLC-verifiziert', 'Research Use Only' ),
+		/* Liste unter dem Warenkorb-Button. */
+		'trust'  => array(
+			array( 'icon' => 'truck', 'text' => 'Versand aus Deutschland, diskret verpackt' ),
+			array( 'icon' => 'doc',   'text' => 'Chargenzertifikat öffentlich einsehbar' ),
+			array( 'icon' => 'snow',  'text' => 'Spezifikation & Lagerhinweise je Charge' ),
+			array( 'icon' => 'lock',  'text' => 'Verschlüsselte, sichere Zahlung' ),
+		),
+		/* Produkte ohne Chargen-Box (Artikelnummern), z. B. Zubehör. */
+		'coa_exclude_skus' => array( 'ALP-BAC-10ML' ),
+		'ruo_notice' => 'Ausschließlich für wissenschaftliche Forschungszwecke. Nicht für den menschlichen oder tierischen Verzehr, die Diagnose oder Behandlung bestimmt.',
+	),
+
+	/* ---------- Footer ---------- */
+	'footer' => array(
+		'about'   => 'Research-Grade-Peptide mit öffentlich einsehbaren Laborzertifikaten. Jede Charge unabhängig geprüft, Versand aus Deutschland.',
+		'columns' => array(
+			'Shop' => array(
+				'Alle Produkte'        => 'shop',
+				'Laborergebnisse & COAs' => '/coa/',
+				'Kundenwünsche'        => '/kundenwuensche/',
+				'Mein Konto'           => 'myaccount',
+			),
+			'Wissen' => array(
+				'Wissensdatenbank'     => '/wissen/',
+				'COAs richtig lesen'   => '/coas-richtig-lesen-verstehen/',
+				'Rekonstitutionsrechner' => '/dosierungsrechner/',
+				'Echtheit von Bewertungen' => '/echtheit-von-bewertungen/',
+			),
+			'Service' => array(
+				'Kontakt'              => '/contakt/',
+				'Versand & Zahlung'    => '/versandarten/',
+				'Partnerprogramm'      => '/affiliate-dashboard/',
+				'Newsletter'           => '/early-access/',
+			),
+		),
+		'legal' => array(
+			'Impressum'          => '/impressum/',
+			'Datenschutz'        => '/datenschutzerklaerung/',
+			'AGB'                => '/agb/',
+			'Widerrufsbelehrung' => '/widerrufsbelehrung/',
+		),
+		'payments'   => array( 'Kreditkarte', 'SEPA-Überweisung', 'Echtzeit-Überweisung' ), // an deine aktiven Zahlarten anpassen
+		'disclaimer' => 'Alle Produkte sind ausschließlich für Forschungs- und Laborzwecke bestimmt. Sie sind keine Arzneimittel, Lebensmittel oder Kosmetika und nicht zur Anwendung am Menschen oder Tier vorgesehen. Abgabe nur an Personen ab 18 Jahren.',
+	),
+
+	/* ---------- Mobile-Navigation (unten) ---------- */
+	'mobile_nav' => array(
+		array( 'icon' => 'home',   'label' => 'Start',   'url' => '/' ),
+		array( 'icon' => 'grid',   'label' => 'Shop',    'url' => 'shop' ),
+		array( 'icon' => 'search', 'label' => 'Suche',   'url' => '#alp-search' ),
+		array( 'icon' => 'doc',    'label' => 'COAs',    'url' => '/coa/' ),
+		array( 'icon' => 'cart',   'label' => 'Korb',    'url' => 'cart' ),
+	),
+
+	/* Icons für Kategorien (Slug → Icon-Name aus inc/helpers.php). */
+	'category_icons' => array(
+		'regeneration'            => 'pulse',
+		'anti-aging'              => 'leaf',
+		'glp-1-gip-glukagon'      => 'layers',
+		'fettfreisetzung'         => 'bolt',
+		'hungerunterdrueckung'    => 'drop',
+		'mitochondriale-funktion' => 'atom',
+		'performance'             => 'spark',
+		'skin'                    => 'sun',
+		'stimulierend'            => 'bolt',
+		'reconstitution'          => 'flask',
+		'hair-anti-aging'         => 'leaf',
+	),
+
+	/*
+	 * Flatsome-Einstellungen, die beim Aktivieren des Themes gesetzt werden
+	 * (einmalig, zusätzlich zu deinen übernommenen alten Einstellungen).
+	 * Leer lassen = nichts überschreiben.
+	 */
+	'flatsome_mods' => array(
+		'color_primary'             => '#13795B',
+		'color_secondary'           => '#0E1A22',
+		'color_success'             => '#13795B',
+		'logo_position'             => 'left',
+		'logo_width'                => '200',
+		'header_height'             => '76',
+		'header_height_mobile'      => '60',
+		'header_elements_left'      => array( 'nav' ),
+		'header_elements_right'     => array( 'search', 'account', 'cart' ),
+		'header_mobile_elements_left'  => array( 'menu-icon' ),
+		'header_mobile_elements_right' => array( 'cart' ),
+		'nav_uppercase'             => false,
+		'nav_size'                  => 'default',
+		'nav_spacing'               => 'large',
+		'header_bg'                 => 'rgba(255,255,255,0.88)',
+		'header_search_style'       => 'dropdown',
+		'site_width'                => '1280',
+		'product_layout'            => 'no-sidebar',
+		'category_sidebar'          => 'none',
+		'category_row_count'        => '4',
+		'category_row_count_tablet' => '3',
+		'category_row_count_mobile' => '2',
+		'add_to_cart_style'         => 'flat',
+		'short_description_in_grid' => false,
+		'product_zoom'              => false,
+		'breadcrumb_size'           => 'small',
+		'back_to_top_mobile'        => false,
+	),
+);

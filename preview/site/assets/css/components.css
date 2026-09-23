@@ -1,0 +1,222 @@
+/* ==========================================================================
+   BAUSTEINE: Container, Abschnitte, Chips, Status, Datenlisten, Pills,
+   Chargen-Prüfer, Chromatogramm
+   ========================================================================== */
+
+.alp-container {
+	width: 100%;
+	max-width: calc(var(--alp-container) + 2 * var(--alp-gutter));
+	margin-inline: auto;
+	padding-inline: var(--alp-gutter);
+}
+
+/* ---------- Abschnitte ---------- */
+.alp-section { padding-block: var(--alp-space-8); }
+.alp-section--tight { padding-block: var(--alp-space-7); }
+.alp-section--tint { background: var(--alp-paper); }
+.alp-section--dark {
+	background: var(--alp-dark);
+	color: var(--alp-dark-text);
+	position: relative;
+	overflow: hidden;
+}
+.alp-section--dark::before {
+	/* feines Messraster wie auf Laborpapier */
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(var(--alp-dark-line) 1px, transparent 1px),
+		linear-gradient(90deg, var(--alp-dark-line) 1px, transparent 1px);
+	background-size: 48px 48px;
+	opacity: 0.35;
+	mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%);
+	-webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%);
+	pointer-events: none;
+}
+.alp-section--dark > * { position: relative; }
+.alp .alp-section--dark h1, .alp .alp-section--dark h2, .alp .alp-section--dark h3 { color: #fff; }
+.alp .alp-section--dark .alp-lead { color: var(--alp-dark-text); }
+
+.alp-section__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem 3rem;
+	margin-bottom: clamp(1.75rem, 1rem + 2vw, 2.75rem);
+}
+.alp-section__text { max-width: 46ch; margin: 0; color: var(--alp-muted); }
+
+/* ---------- Chips ---------- */
+.alp .alp-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	list-style: none;
+	margin: 0 0 1rem;
+	padding: 0;
+}
+.alp .alp-chip {
+	display: inline-flex;
+	align-items: center;
+	margin: 0;
+	padding: 0.3rem 0.65rem;
+	border-radius: var(--alp-r-sm);
+	background: var(--alp-brand-soft);
+	color: var(--alp-brand-hover);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+/* ---------- Status-Plakette ---------- */
+.alp-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.25rem 0.6rem;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+.alp-status--ok { background: var(--alp-ok-soft); color: var(--alp-ok); }
+.alp-status--pending { background: var(--alp-warn-soft); color: var(--alp-warn); }
+
+/* ---------- Datenliste (Label / Wert) ---------- */
+.alp .alp-specs { margin: 0; display: grid; }
+.alp .alp-specs > div {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.55rem 0;
+	border-bottom: 1px solid var(--alp-line);
+	font-size: var(--alp-fs-sm);
+}
+.alp .alp-specs > div:last-child { border-bottom: 0; }
+.alp .alp-specs dt { color: var(--alp-muted); font-weight: 500; margin: 0; }
+.alp .alp-specs dd { margin: 0; color: var(--alp-ink); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- Pills (Kategorie-Filter) ---------- */
+.alp-pills, .alp-cat-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.alp .alp-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-height: 38px;
+	padding: 0 0.9rem;
+	border: 1.5px solid var(--alp-line-2);
+	border-radius: 999px;
+	background: var(--alp-surface);
+	color: var(--alp-ink-2);
+	font-size: var(--alp-fs-sm);
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: all var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-pill:hover { border-color: var(--alp-ink); color: var(--alp-ink); }
+.alp .alp-pill.is-active { background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
+.alp-pill__count { font-family: var(--alp-font-mono); font-size: 0.75rem; opacity: 0.6; font-weight: 500; }
+
+/* ---------- Chargen-Prüfer ---------- */
+.alp-lookup { max-width: 560px; }
+.alp .alp-lookup__label {
+	display: block;
+	font-family: var(--alp-font-mono);
+	font-size: var(--alp-fs-xs);
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+	color: var(--alp-muted);
+}
+.alp-lookup__row { display: flex; gap: 0.5rem; }
+.alp .alp-lookup__input {
+	flex: 1;
+	min-width: 0;
+	min-height: 54px;
+	font-family: var(--alp-font-mono);
+	font-size: 1.0625rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	margin: 0;
+}
+.alp-lookup__row .alp-btn { min-height: 54px; padding-inline: 1.5rem; }
+.alp-lookup__hint { margin: 0.65rem 0 0; font-size: var(--alp-fs-sm); color: var(--alp-muted); display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.alp .alp-lookup__example {
+	margin: 0;
+	padding: 0.15rem 0.5rem;
+	min-height: 0;
+	font-family: var(--alp-font-mono);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+	color: inherit;
+	background: transparent;
+	border: 1px dashed currentColor;
+	border-radius: var(--alp-r-sm);
+	cursor: pointer;
+	line-height: 1.6;
+}
+.alp .alp-lookup__example:hover { color: var(--alp-brand); }
+
+.alp-lookup__result:empty { display: none; }
+.alp-lookup__result { margin-top: 1rem; }
+.alp-lookup__card {
+	border-radius: var(--alp-r-lg);
+	padding: 1.1rem 1.25rem;
+	background: var(--alp-surface);
+	border: 1px solid var(--alp-line);
+	color: var(--alp-ink-2);
+	animation: alp-rise 260ms var(--alp-ease);
+}
+.alp-lookup__card p { margin: 0 0 0.4rem; }
+.alp-lookup__card.is-error { background: var(--alp-error-soft); border-color: #F1C4BD; }
+.alp-lookup__card.is-pending { background: var(--alp-warn-soft); border-color: #F0DDB4; }
+.alp-lookup__top { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+.alp-lookup__product { font-weight: 700; color: var(--alp-ink); margin: 0 !important; }
+.alp-lookup__product .alp-mono { font-weight: 500; color: var(--alp-muted); margin-left: 0.35rem; }
+.alp-lookup__data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem 1.25rem; margin: 0.75rem 0 1rem; }
+.alp-lookup__data dt { font-size: 0.75rem; color: var(--alp-muted); margin: 0; }
+.alp-lookup__data dd { margin: 0; font-weight: 650; color: var(--alp-ink); font-variant-numeric: tabular-nums; }
+.alp-lookup__data dd.is-accent { color: var(--alp-brand); font-size: 1.25rem; font-family: var(--alp-font-display); }
+.alp-lookup__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+
+/* dunkle Variante */
+.alp .alp-lookup--dark .alp-lookup__label { color: var(--alp-dark-muted); }
+.alp .alp-lookup--dark .alp-lookup__input {
+	background: var(--alp-dark-2);
+	border-color: var(--alp-dark-line);
+	color: #fff;
+}
+.alp .alp-lookup--dark .alp-lookup__input::placeholder { color: #5E7780; }
+.alp .alp-lookup--dark .alp-lookup__input:focus { border-color: var(--alp-mint); box-shadow: 0 0 0 4px rgba(110, 218, 180, 0.18); }
+.alp .alp-lookup--dark .alp-btn--primary { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
+.alp .alp-lookup--dark .alp-btn--primary:hover { background: #fff; border-color: #fff; }
+.alp .alp-lookup--dark .alp-lookup__hint { color: var(--alp-dark-muted); }
+.alp .alp-lookup--dark .alp-lookup__example:hover { color: var(--alp-mint); }
+
+/* ---------- Chromatogramm ---------- */
+.alp-chroma { display: block; width: 100%; height: auto; overflow: visible; }
+.alp-chroma__grid line { stroke: var(--alp-line); stroke-width: 1; }
+.alp-chroma__grid .alp-chroma__axis { stroke: var(--alp-line-2); }
+.alp-chroma__area { fill: var(--alp-brand-soft); }
+.alp-chroma__line { fill: none; stroke: var(--alp-brand); stroke-width: 1.6; stroke-linejoin: round; }
+.alp-chroma__label text { font-family: var(--alp-font-mono); font-size: 9px; fill: var(--alp-muted); }
+.alp-chroma__label .alp-chroma__value { fill: var(--alp-ink); font-weight: 500; font-size: 10px; }
+.alp-chroma__tick { font-family: var(--alp-font-mono); font-size: 8px; fill: var(--alp-muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+	.alp-chroma__line { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: alp-draw 1.6s var(--alp-ease) 200ms forwards; }
+}
+@keyframes alp-draw { to { stroke-dashoffset: 0; } }
+@keyframes alp-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 480px) {
+	.alp-lookup__row { flex-direction: column; }
+	.alp-lookup__row .alp-btn { width: 100%; }
+	.alp-lookup__data { grid-template-columns: 1fr 1fr; }
+}

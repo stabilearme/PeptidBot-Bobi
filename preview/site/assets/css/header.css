@@ -1,0 +1,173 @@
+/* ==========================================================================
+   HEADER: Laufleiste, Flatsome-Header, Navigation, Dropdowns, Mobile-Menü
+   Aufbau (Logo links, Menü, Suche/Konto/Warenkorb rechts) wird in
+   Design → Customizer → Header eingestellt. Hier nur das Aussehen.
+   ========================================================================== */
+
+/* ---------- Laufleiste ---------- */
+.alp-announce {
+	background: var(--alp-dark);
+	color: var(--alp-dark-text);
+	font-size: 0.8125rem;
+	font-weight: 500;
+}
+.alp-announce__track {
+	position: relative;
+	display: grid;
+	height: 38px;
+	max-width: var(--alp-container);
+	margin: 0 auto;
+	padding-inline: var(--alp-gutter);
+}
+.alp-announce__item {
+	grid-area: 1 / 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	margin: 0;
+	opacity: 0;
+	transform: translateY(6px);
+	transition: opacity 400ms var(--alp-ease), transform 400ms var(--alp-ease);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.alp-announce__item.is-active { opacity: 1; transform: none; }
+.alp-announce__item .alp-icon { color: var(--alp-mint); }
+
+@media (min-width: 1024px) {
+	/* Auf großen Bildschirmen alle Hinweise nebeneinander */
+	.alp-announce__track { display: flex; justify-content: center; gap: 2.5rem; }
+	.alp-announce__item { opacity: 1; transform: none; }
+}
+
+/* ---------- Header ---------- */
+.alp #header .header-main {
+	background-color: rgba(255, 255, 255, 0.9);
+	-webkit-backdrop-filter: saturate(160%) blur(14px);
+	backdrop-filter: saturate(160%) blur(14px);
+	border-bottom: 1px solid var(--alp-line);
+}
+.alp #header.has-sticky .stuck .header-main,
+.alp .header-wrapper.stuck .header-main { box-shadow: var(--alp-shadow-md); }
+.alp .header-bg-color, .alp .header-bottom { background-color: transparent; }
+.alp .header-top { display: none; }
+
+.alp #logo img { max-height: 44px; width: auto; }
+.alp #logo .logo-tagline { display: none; }
+
+/* Hauptnavigation */
+.alp .header-nav.nav > li > a,
+.alp .header-nav .nav-top-link {
+	font-family: var(--alp-font-body);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-transform: none;
+	color: var(--alp-ink-2);
+	padding-inline: 0.15rem;
+	position: relative;
+}
+.alp .header-nav.nav > li > a::after {
+	content: "";
+	position: absolute;
+	left: 0; right: 0; bottom: -4px;
+	height: 2px;
+	background: var(--alp-brand);
+	border-radius: 2px;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform var(--alp-dur) var(--alp-ease);
+}
+.alp .header-nav.nav > li > a:hover,
+.alp .header-nav.nav > li.active > a,
+.alp .header-nav.nav > li.current-menu-item > a { color: var(--alp-ink); }
+.alp .header-nav.nav > li > a:hover::after,
+.alp .header-nav.nav > li.active > a::after,
+.alp .header-nav.nav > li.current-menu-item > a::after { transform: scaleX(1); }
+
+/* Dropdowns */
+.alp .nav-dropdown {
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	box-shadow: var(--alp-shadow-lg);
+	padding: 0.5rem;
+	min-width: 240px;
+}
+.alp .nav-dropdown > li > a,
+.alp .nav-dropdown li a {
+	border-radius: var(--alp-r-sm);
+	padding: 0.6rem 0.8rem;
+	font-weight: 500;
+	font-size: 0.9375rem;
+	color: var(--alp-ink-2);
+	border: 0;
+}
+.alp .nav-dropdown li a:hover { background: var(--alp-paper); color: var(--alp-ink); }
+
+/* Icons rechts: Suche, Konto, Warenkorb */
+.alp .header-main .nav > li > a > i,
+.alp .header-main .icon-search,
+.alp .header-main .icon-user,
+.alp .header-main .icon-shopping-bag,
+.alp .header-main .icon-shopping-cart { color: var(--alp-ink); font-size: 1.15rem; }
+.alp .header-main .header-divider { display: none; }
+
+.alp .cart-icon strong {
+	border-color: var(--alp-ink);
+	color: var(--alp-ink);
+	border-radius: 6px;
+	font-family: var(--alp-font-body);
+}
+.alp .cart-icon strong::after { border-color: var(--alp-ink); }
+.alp .cart-icon:hover strong, .alp .current-dropdown .cart-icon strong {
+	background: var(--alp-brand);
+	border-color: var(--alp-brand);
+	color: #fff;
+}
+.alp .header-cart-title, .alp .cart-price { font-weight: 600; color: var(--alp-ink); text-transform: none; letter-spacing: 0; }
+
+/* Such-Dropdown im Header */
+.alp .header-search-form .search-field,
+.alp .searchform .search-field {
+	border-radius: var(--alp-r-md) 0 0 var(--alp-r-md);
+	min-height: 44px;
+}
+.alp .searchform .button.icon {
+	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
+	background: var(--alp-brand);
+	border-color: var(--alp-brand);
+	min-height: 44px;
+	color: #fff;
+}
+.alp .live-search-results {
+	border-radius: 0 0 var(--alp-r-lg) var(--alp-r-lg);
+	box-shadow: var(--alp-shadow-lg);
+}
+
+/* Mini-Warenkorb (Dropdown) */
+.alp .widget_shopping_cart .mini_cart_item { padding: 0.75rem 0; }
+.alp .woocommerce-mini-cart__total { border-top: 1px solid var(--alp-line); padding-top: 0.75rem; }
+.alp .woocommerce-mini-cart__buttons .button { width: 100%; margin-bottom: 0.5rem; }
+
+/* Mobiles Off-Canvas-Menü */
+.alp .off-canvas .sidebar-menu,
+.alp .mfp-content .off-canvas-left { background: var(--alp-surface); }
+.alp .off-canvas .nav-sidebar > li > a,
+.alp .off-canvas .nav-vertical > li > a {
+	font-family: var(--alp-font-display);
+	font-size: 1.125rem;
+	font-weight: 600;
+	text-transform: none;
+	letter-spacing: -0.01em;
+	color: var(--alp-ink);
+	padding-block: 0.85rem;
+}
+.alp .off-canvas .nav-sidebar li { border-color: var(--alp-line); }
+
+@media (max-width: 849px) {
+	.alp #logo img { max-height: 36px; }
+	.alp .alp-announce { font-size: 0.75rem; }
+	.alp .alp-announce__track { height: 34px; }
+}

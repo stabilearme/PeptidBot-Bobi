@@ -1,0 +1,238 @@
+/* ==========================================================================
+   BASIS: Typografie, Links, Buttons, Formulare, Standardseiten
+   Alles ist an die Klasse .alp am <body> gebunden, damit es Flatsome sauber überschreibt.
+   ========================================================================== */
+
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
+html.alp-lock { overflow: hidden; }
+
+body.alp {
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base);
+	line-height: 1.65;
+	color: var(--alp-ink-2);
+	background: var(--alp-surface);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "ss01", "cv11";
+}
+
+.alp h1, .alp h2, .alp h3, .alp h4, .alp h5, .alp h6,
+.alp .heading-font, .alp .product-title, .alp .entry-title {
+	font-family: var(--alp-font-display);
+	color: var(--alp-ink);
+	font-weight: 650;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+	text-wrap: balance;
+}
+.alp .alt-font { font-family: var(--alp-font-body); }
+
+.alp p { text-wrap: pretty; }
+.alp strong, .alp b { color: var(--alp-ink); font-weight: 650; }
+
+.alp a { color: var(--alp-brand); transition: color var(--alp-dur) var(--alp-ease); }
+.alp a:hover { color: var(--alp-brand-hover); }
+
+.alp :focus-visible {
+	outline: 2px solid var(--alp-brand);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.alp ::selection { background: var(--alp-mint); color: var(--alp-ink); }
+
+/* Überschriften-Stufen für eigene Templates */
+.alp .alp-h1 { font-size: var(--alp-fs-2xl); margin: 0 0 var(--alp-space-4); }
+.alp .alp-h2 { font-size: var(--alp-fs-xl); margin: 0; }
+.alp .alp-h3 { font-size: var(--alp-fs-lg); margin: 0 0 var(--alp-space-4); }
+.alp .alp-h4 { font-size: var(--alp-fs-md); margin: 0 0 var(--alp-space-2); letter-spacing: -0.01em; }
+.alp .alp-lead { font-size: var(--alp-fs-md); line-height: 1.6; max-width: 58ch; }
+.alp .alp-mono, .alp .is-mono { font-family: var(--alp-font-mono); font-size: 0.92em; letter-spacing: 0; }
+
+/* Eyebrow: kleine Überzeile in Monospace (Labor-Anmutung) */
+.alp .alp-eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--alp-space-2);
+	font-family: var(--alp-font-mono);
+	font-size: var(--alp-fs-xs);
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--alp-brand);
+	margin: 0 0 var(--alp-space-3);
+}
+.alp .alp-eyebrow--light { color: var(--alp-mint); }
+.alp .alp-dot {
+	width: 7px; height: 7px; border-radius: 50%;
+	background: var(--alp-brand);
+	box-shadow: 0 0 0 4px var(--alp-brand-soft);
+}
+
+/* ---------- Buttons ---------- */
+.alp .alp-btn,
+.alp .button,
+.alp button.button,
+.alp input[type="submit"].button,
+.alp .single_add_to_cart_button,
+.alp .checkout-button,
+.alp #place_order {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--alp-space-2);
+	min-height: 46px;
+	padding: 0 1.25rem;
+	margin: 0;
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base);
+	font-weight: 650;
+	letter-spacing: 0;
+	text-transform: none;
+	line-height: 1.1;
+	border-radius: var(--alp-r-md);
+	border: 1.5px solid transparent;
+	box-shadow: none;
+	cursor: pointer;
+	transition: background-color var(--alp-dur) var(--alp-ease), color var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease);
+	text-decoration: none;
+}
+.alp .alp-btn:active, .alp .button:active { transform: translateY(1px); }
+
+.alp .alp-btn--primary,
+.alp .button.primary,
+.alp .button.alt,
+.alp .single_add_to_cart_button,
+.alp .checkout-button,
+.alp #place_order,
+.alp .button.checkout,
+.alp .woocommerce-mini-cart__buttons .checkout {
+	background: var(--alp-brand);
+	color: #fff;
+	border-color: var(--alp-brand);
+}
+.alp .alp-btn--primary:hover,
+.alp .button.primary:hover,
+.alp .button.alt:hover,
+.alp .single_add_to_cart_button:hover,
+.alp .checkout-button:hover,
+.alp #place_order:hover {
+	background: var(--alp-brand-hover);
+	border-color: var(--alp-brand-hover);
+	color: #fff;
+}
+
+.alp .alp-btn--ghost,
+.alp .button.is-outline,
+.alp .button.secondary.is-outline {
+	background: transparent;
+	color: var(--alp-ink);
+	border-color: var(--alp-line-2);
+}
+.alp .alp-btn--ghost:hover,
+.alp .button.is-outline:hover {
+	background: var(--alp-ink);
+	border-color: var(--alp-ink);
+	color: #fff;
+}
+
+.alp .alp-btn--light { background: #fff; color: var(--alp-ink); border-color: #fff; }
+.alp .alp-btn--light:hover { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
+
+.alp .alp-btn--lg { min-height: 54px; padding: 0 1.6rem; font-size: var(--alp-fs-md); }
+.alp .alp-btn--sm { min-height: 38px; padding: 0 0.9rem; font-size: var(--alp-fs-sm); }
+
+.alp .button.disabled, .alp .button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Textlink mit Pfeil */
+.alp .alp-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-weight: 650;
+	color: var(--alp-brand);
+	text-decoration: none;
+}
+.alp .alp-link .alp-icon { transition: transform var(--alp-dur) var(--alp-ease); }
+.alp .alp-link:hover .alp-icon, .alp a:hover > .alp-link .alp-icon { transform: translateX(3px); }
+.alp .alp-link--light { color: var(--alp-mint); }
+.alp .alp-link--light:hover { color: #fff; }
+
+/* ---------- Formulare ---------- */
+.alp input[type="text"], .alp input[type="email"], .alp input[type="tel"], .alp input[type="number"],
+.alp input[type="password"], .alp input[type="search"], .alp input[type="url"], .alp textarea, .alp select {
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base); /* 16px: verhindert Auto-Zoom auf iPhone */
+	color: var(--alp-ink);
+	background-color: var(--alp-surface);
+	border: 1.5px solid var(--alp-line-2);
+	border-radius: var(--alp-r-md);
+	box-shadow: none;
+	min-height: 48px;
+	padding: 0 0.9rem;
+	transition: border-color var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp textarea { padding: 0.75rem 0.9rem; min-height: 120px; }
+.alp input:focus, .alp textarea:focus, .alp select:focus {
+	border-color: var(--alp-brand);
+	box-shadow: 0 0 0 4px var(--alp-brand-soft);
+	outline: none;
+}
+.alp label { font-weight: 600; color: var(--alp-ink); font-size: var(--alp-fs-sm); }
+.alp ::placeholder { color: #93A3AA; opacity: 1; }
+
+/* ---------- Standardseiten (Impressum, Wissen, Versand …) ---------- */
+.alp .page-wrapper { padding-top: var(--alp-space-7); padding-bottom: var(--alp-space-8); }
+.alp .entry-content,
+.alp .alp-prose {
+	font-size: 1.0625rem;
+	line-height: 1.75;
+}
+.alp .entry-content > *,
+.alp .alp-prose > * { max-width: 72ch; }
+.alp .entry-content h2, .alp .alp-prose h2 { font-size: var(--alp-fs-lg); margin: 2.2em 0 0.6em; }
+.alp .entry-content h3, .alp .alp-prose h3 { font-size: var(--alp-fs-md); margin: 1.8em 0 0.5em; }
+.alp .entry-content ul, .alp .entry-content ol { padding-left: 1.2em; }
+.alp .entry-content li { margin-bottom: 0.4em; }
+.alp .entry-content table { width: 100%; border-collapse: collapse; font-size: var(--alp-fs-sm); }
+.alp .entry-content th, .alp .entry-content td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--alp-line); text-align: left; }
+.alp .entry-content blockquote {
+	margin: 1.5em 0; padding: 1rem 1.25rem;
+	border-left: 3px solid var(--alp-brand);
+	background: var(--alp-paper);
+	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
+}
+.alp .page-title, .alp .entry-header .entry-title { font-size: var(--alp-fs-2xl); }
+
+/* Breadcrumbs */
+.alp .breadcrumbs, .alp .woocommerce-breadcrumb, .alp .rank-math-breadcrumb {
+	font-size: var(--alp-fs-sm);
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--alp-muted);
+}
+.alp .breadcrumbs a, .alp .rank-math-breadcrumb a { color: var(--alp-muted); }
+.alp .breadcrumbs a:hover { color: var(--alp-brand); }
+.alp .breadcrumbs .divider { opacity: 0.5; margin: 0 0.35em; }
+
+/* WooCommerce-Hinweise */
+.alp .woocommerce-message, .alp .woocommerce-info, .alp .woocommerce-error, .alp .message-container {
+	border-radius: var(--alp-r-md);
+	border: 1px solid var(--alp-line);
+	background: var(--alp-paper);
+	color: var(--alp-ink-2);
+	font-size: var(--alp-fs-sm);
+}
+.alp .woocommerce-message { background: var(--alp-ok-soft); border-color: #BFE3D2; }
+.alp .woocommerce-error { background: var(--alp-error-soft); border-color: #F1C4BD; }
+
+/* Bildschirmleser-Text */
+.alp .screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px; padding: 0; margin: -1px;
+	overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.alp-icon { flex: none; display: inline-block; vertical-align: middle; }

@@ -1,0 +1,180 @@
+/* ==========================================================================
+   SHOP: Shopseite, Kategorien, Produktkacheln (auch Startseite & „Ähnliche Produkte“)
+   ========================================================================== */
+
+/* Seitenkopf Shop/Kategorie */
+.alp .shop-page-title,
+.alp .category-page-title { background: var(--alp-paper); border-bottom: 1px solid var(--alp-line); }
+.alp .shop-page-title .page-title-inner { padding-block: 1.75rem; }
+.alp .shop-page-title h1, .alp .category-page-title h1 {
+	font-size: var(--alp-fs-xl);
+	text-transform: none;
+	letter-spacing: -0.02em;
+}
+.alp .woocommerce-result-count { font-size: var(--alp-fs-sm); color: var(--alp-muted); }
+.alp .woocommerce-ordering select { min-height: 42px; font-size: var(--alp-fs-sm); font-weight: 600; }
+.alp .term-description { max-width: 70ch; color: var(--alp-muted); }
+
+.alp .alp-cat-pills {
+	margin: 0 0 1.75rem;
+	padding-bottom: 0.25rem;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+	mask-image: linear-gradient(90deg, #000 90%, transparent);
+	-webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+}
+.alp .alp-cat-pills::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) {
+	.alp .alp-cat-pills { flex-wrap: wrap; mask-image: none; -webkit-mask-image: none; }
+}
+
+/* ---------- Produktkachel ---------- */
+.alp .products .product-small.col { padding-bottom: 1rem; }
+.alp .product-small.box,
+.alp .product-small .box {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: var(--alp-surface);
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	overflow: hidden;
+	transition: border-color var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease);
+}
+.alp .product-small .box:hover {
+	border-color: var(--alp-line-2);
+	box-shadow: var(--alp-shadow-md);
+	transform: translateY(-3px);
+}
+.alp .product-small .box-image {
+	background: var(--alp-dark);   /* passt zu den dunklen Produktfotos */
+	border-radius: 0;
+}
+.alp .product-small .box-image img { transition: transform 400ms var(--alp-ease); }
+.alp .product-small .box:hover .box-image img { transform: scale(1.035); }
+
+.alp .product-small .box-text {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 0.9rem 1rem 1rem;
+	text-align: left;
+}
+.alp .product-small .box-text .category,
+.alp .product-small p.category {
+	order: -1;
+	margin: 0 0 0.25rem;
+	font-family: var(--alp-font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--alp-brand);
+	opacity: 1;
+}
+.alp .product-small .product-title,
+.alp .product-small .name.product-title a {
+	font-family: var(--alp-font-display);
+	font-size: 1.0625rem;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	line-height: 1.25;
+	color: var(--alp-ink);
+	margin-bottom: 0.35rem;
+}
+.alp .product-small .price-wrapper { margin-top: auto; }
+.alp .product-small .price {
+	font-family: var(--alp-font-body);
+	font-size: 1.0625rem;
+	font-weight: 700;
+	color: var(--alp-ink);
+	font-variant-numeric: tabular-nums;
+}
+.alp .product-small .price del { color: var(--alp-muted); font-weight: 500; font-size: 0.875rem; opacity: 1; }
+.alp .product-small .price ins { text-decoration: none; color: var(--alp-ink); }
+
+/* Germanized-Hinweise (MwSt., Versand) klein und dezent */
+.alp .product-small .wc-gzd-additional-info,
+.alp .product-small .price-unit,
+.alp .product-small .shipping-costs-info,
+.alp .product-small .tax-info { font-size: 0.6875rem; color: var(--alp-muted); line-height: 1.35; }
+
+/* Laborhinweis in der Kachel */
+.alp .alp-card-lab {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	margin: 0 0 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--alp-ok);
+}
+.alp .alp-card-lab.is-pending { color: var(--alp-warn); }
+
+/* Kaufen-Button in der Kachel */
+.alp .product-small .add-to-cart-button { margin-top: 0.75rem; }
+.alp .product-small .add-to-cart-button .button,
+.alp .product-small .add_to_cart_button {
+	width: 100%;
+	min-height: 40px;
+	font-size: var(--alp-fs-sm);
+	background: var(--alp-ink);
+	border-color: var(--alp-ink);
+	color: #fff;
+	margin: 0;
+}
+.alp .product-small .add_to_cart_button:hover { background: var(--alp-brand); border-color: var(--alp-brand); }
+.alp .product-small .added_to_cart { font-size: 0.8125rem; font-weight: 600; display: block; margin-top: 0.4rem; }
+
+/* Angebots-Plakette */
+.alp .badge-container { margin: 0.75rem; }
+.alp .badge .badge-inner,
+.alp .badge-circle .badge-inner,
+.alp .onsale {
+	border-radius: var(--alp-r-sm);
+	background: var(--alp-ink);
+	color: #fff;
+	font-family: var(--alp-font-body);
+	font-weight: 700;
+	font-size: 0.75rem;
+	text-transform: none;
+	letter-spacing: 0;
+	padding: 0.3rem 0.55rem;
+	height: auto;
+	width: auto;
+	min-height: 0;
+	line-height: 1.2;
+}
+.alp .badge { height: auto; width: auto; }
+.alp .badge-circle, .alp .badge-circle-inside { border-radius: var(--alp-r-sm); }
+
+/* Schnellansicht-Knopf von Flatsome */
+.alp .quick-view { background: rgba(14, 26, 34, 0.86); font-weight: 600; letter-spacing: 0; text-transform: none; }
+
+/* Seitennavigation */
+.alp .woocommerce-pagination .page-numbers li > *,
+.alp .page-numbers.button,
+.alp .nav-pagination > li > a,
+.alp .nav-pagination > li > span {
+	border-radius: var(--alp-r-md);
+	border: 1.5px solid var(--alp-line-2);
+	min-width: 42px;
+	height: 42px;
+	line-height: 38px;
+	font-weight: 600;
+	color: var(--alp-ink);
+}
+.alp .nav-pagination > li > .current,
+.alp .nav-pagination > li > a:hover { background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
+
+@media (max-width: 549px) {
+	.alp .products.row { margin-inline: -6px; }
+	.alp .products .product-small.col { padding-inline: 6px; padding-bottom: 12px; }
+	.alp .product-small .box-text { padding: 0.7rem 0.75rem 0.8rem; }
+	.alp .product-small .product-title, .alp .product-small .name.product-title a { font-size: 0.9375rem; }
+	.alp .product-small .price { font-size: 0.9375rem; }
+	.alp .alp-card-lab { font-size: 0.6875rem; }
+	.alp .product-small .add_to_cart_button { font-size: 0.8125rem; padding: 0 0.5rem; white-space: nowrap; min-height: 38px; }
+}
