@@ -159,6 +159,19 @@ function alp_on_activate( $old_name, $old_theme = null ) {
 }
 
 /**
+ * Logo-Fallback: Ist in Flatsome kein Logo gewählt, das Logo aus config.php (brand.logo) nehmen.
+ * Flatsome akzeptiert statt einer Bild-ID auch eine URL (nötig für SVG-Logos).
+ */
+add_filter( 'theme_mod_site_logo', 'alp_default_logo' );
+function alp_default_logo( $logo ) {
+	if ( ! empty( $logo ) ) {
+		return $logo;
+	}
+	$fallback = alp_config( 'brand.logo' );
+	return $fallback ? alp_link( $fallback ) : $logo;
+}
+
+/**
  * Bildgrößen für Produktkacheln (quadratisch, scharf auf Retina).
  */
 add_action( 'after_setup_theme', 'alp_theme_setup', 20 );

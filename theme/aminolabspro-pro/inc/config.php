@@ -25,6 +25,9 @@ return array(
 		'tagline' => 'Forschungspeptide in Research-Grade-Qualität',
 		'email'   => 'support@aminolabspro.com',
 		'country' => 'Versand aus Deutschland',
+		// Logo im Header, falls im Customizer (Flatsome → Header → Logo) keins gewählt ist.
+		// Pfad aus der Mediathek oder volle URL. '' = nur das Customizer-Logo verwenden.
+		'logo'    => '/wp-content/uploads/2026/09/aminolabspro-logo_4.svg',
 	),
 
 	/* ---------- Schalter ---------- */
