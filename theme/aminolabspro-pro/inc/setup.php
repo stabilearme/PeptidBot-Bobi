@@ -69,6 +69,12 @@ function alp_enqueue_assets() {
 		$deps = array( $handle );
 	}
 
+	// Banner-Bild der Early-Access-/Newsletter-Seite (Klasse alp-ea-has-image über alp_ea_body_class) (ersetzt das Foto aus dem Seiteninhalt).
+	$ea_image = alp_config( 'early_access_image' );
+	if ( $ea_image && wp_style_is( 'alp-pages', 'enqueued' ) ) {
+		wp_add_inline_style( 'alp-pages', '.alp-rich .alp-ea-hero{--alp-ea-image:url("' . esc_url( alp_link( $ea_image ) ) . '")}' );
+	}
+
 	wp_enqueue_script( 'alp-theme', ALP_URI . '/assets/js/theme.js', array(), alp_asset_version( '/assets/js/theme.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 
 	if ( alp_style_needed( 'coa' ) ) {
@@ -180,4 +186,12 @@ add_action( 'after_setup_theme', 'alp_theme_setup', 20 );
 function alp_theme_setup() {
 	add_theme_support( 'responsive-embeds' );
 	add_image_size( 'alp-card', 640, 640, true );
+}
+
+add_filter( 'body_class', 'alp_ea_body_class' );
+function alp_ea_body_class( $classes ) {
+	if ( alp_config( 'early_access_image' ) ) {
+		$classes[] = 'alp-ea-has-image';
+	}
+	return $classes;
 }

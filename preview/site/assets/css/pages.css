@@ -266,6 +266,12 @@
 	transform: translateX(-50%) rotate(-5deg);
 	filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
 }
+/* Mit Banner-Bild (config 'early_access_image'): Foto statt Grafik, Gutschein aus */
+.alp-ea-has-image .alp-rich .alp-ea-hero::before {
+	height: clamp(260px, 22vw + 120px, 460px);
+	background: linear-gradient(180deg, rgba(11, 26, 38, 0) 45%, rgba(11, 26, 38, 0.45) 100%), var(--alp-ea-image) center 40% / cover no-repeat, var(--alp-dark-deep);
+}
+.alp-ea-has-image .alp-rich .alp-ea-hero::after { content: none; }
 @media (prefers-reduced-motion: no-preference) {
 	.alp-rich .alp-ea-hero::after { animation: alp-ticket 5s ease-in-out infinite; }
 	@keyframes alp-ticket { 50% { transform: translateX(-50%) translateY(-6px) rotate(-3deg); } }

@@ -59,6 +59,12 @@ return array(
 	/* Aussehen der Karten auf der COA-Seite: 'certificate' (Urkunde mit Stempel) oder 'report' (kompakter Laborbefund). */
 	'coa_card_style' => 'certificate',
 
+	/*
+	 * Banner-Bild der Early-Access-/Newsletter-Seite (Pfad aus der Mediathek oder volle URL).
+	 * '' = gestalteter Navy-Banner mit 15-%-Gutschein statt Foto.
+	 */
+	'early_access_image' => '/wp-content/uploads/2026/09/hf_20260923_200208_fba7d7cf-88eb-481b-bbf8-ba504115d06f-1536x860.png',
+
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
 
