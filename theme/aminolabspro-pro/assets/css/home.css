@@ -677,3 +677,48 @@
 	.alp-section__pills { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
 	.alp-section__pills .alp-pill { flex: none; }
 }
+
+/* ---------- Handy: Kästen über die volle Breite, Abschnitte ohne Lücken ---------- */
+@media (max-width: 767px) {
+	/* randlose Module: bis an den Bildschirmrand, ohne Rundung */
+	.alp-stats__panel, .alp-check-card, .alp-soon, .alp-cta, .alp-hero__photo {
+		margin-inline: calc(-1 * var(--alp-gutter)) !important;
+		border-radius: 0 !important;
+		border-left: 0; border-right: 0;
+	}
+	.alp-hero__visual { margin-inline: 0; }
+	.alp-hero--split { padding-bottom: 0; }
+	.alp-hero__photo { box-shadow: none; }
+	.alp-hero__photo img { border-radius: 0; }
+
+	/* Kennzahlen direkt unter dem Hero, Chargen-Prüfer direkt darunter */
+	.alp-stats { background: var(--alp-dark-deep); }
+	.alp-stats__panel { box-shadow: none; border-top: 0; border-bottom: 0; }
+	#charge-pruefen { padding-block: 0; background: var(--alp-dark); }
+	.alp-check-card { padding: 1.75rem var(--alp-gutter); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+
+	/* Neu & demnächst / Newsletter-Kasten randlos */
+	#neu .alp-soon { margin-top: 0; }
+	.alp-section--tight { padding-block: 0; }
+	.alp-cta { border-left: 0; border-right: 0; padding: 1.75rem var(--alp-gutter) !important; }
+
+	/* Produkt- und Artikelraster: engere Abstände */
+	#produkte .products { --alp-grid-gap: 0.5rem; }
+	.alp-section__head { margin-bottom: 1.1rem; }
+	.alp-hero { padding-top: 1.5rem; }
+
+	/* Ablauf: randlose Liste statt schwebender Karten */
+	.alp-process { gap: 0 !important; margin-inline: calc(-1 * var(--alp-gutter)); }
+	.alp-process__step { display: grid; grid-template-columns: 2.25rem 1fr; column-gap: 0.5rem; padding: 1rem var(--alp-gutter); border: 0; border-top: 1px solid var(--alp-line); border-radius: 0; }
+	.alp-process__step:last-child { border-bottom: 1px solid var(--alp-line); }
+	.alp-process__n { grid-row: 1 / 3; margin: 0.15rem 0 0; }
+	.alp-process__step .alp-h4 { margin: 0 0 0.2rem; }
+
+	/* Wissen: kompakte Liste mit kleinem Bild links */
+	.alp-articles { gap: 0 !important; margin-inline: calc(-1 * var(--alp-gutter)); }
+	.alp .alp-article { display: grid; grid-template-columns: 104px 1fr; align-items: center; border: 0; border-top: 1px solid var(--alp-line); border-radius: 0; box-shadow: none; }
+	.alp-articles li:last-child .alp-article { border-bottom: 1px solid var(--alp-line); }
+	.alp-article__img { aspect-ratio: 1 / 1; height: 100%; }
+	.alp-article__body { padding: 0.85rem var(--alp-gutter) 0.85rem 0.9rem; gap: 0.25rem; }
+	.alp-article__title { font-size: 1rem; }
+}

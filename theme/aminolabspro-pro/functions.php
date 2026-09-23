@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALP_VERSION', '2.3.0' );
+define( 'ALP_VERSION', '2.3.1' );
 define( 'ALP_DIR', get_stylesheet_directory() );
 define( 'ALP_URI', get_stylesheet_directory_uri() );
 

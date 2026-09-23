@@ -221,3 +221,13 @@
 	.alp .alp-ptrust { grid-template-columns: 1fr; }
 	.alp .alp-desc { font-size: 1rem; }
 }
+
+/* ---------- Handy: schmaler Seitenrand, Produktbild bis an den Rand ---------- */
+@media (max-width: 767px) {
+	.alp .product-main > .row { padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; max-width: none; }
+	.alp .product-main > .row > .col { padding-left: var(--alp-gutter); padding-right: var(--alp-gutter); }
+	.alp .product-main > .row > .col.product-gallery { padding-left: 0; padding-right: 0; }
+	.alp .product-main .product-gallery :is(.product-images, .woocommerce-product-gallery__wrapper, .woocommerce-product-gallery__image, .woocommerce-product-gallery__image a, .woocommerce-product-gallery__image img) { border-radius: 0; }
+	.alp .product-main .product-gallery .product-thumbnails { box-sizing: border-box; max-width: 100%; padding-inline: var(--alp-gutter); }
+	.alp .product-footer .container, .alp .product-footer > .row > .col { padding-left: var(--alp-gutter); padding-right: var(--alp-gutter); }
+}

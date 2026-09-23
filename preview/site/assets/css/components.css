@@ -256,3 +256,15 @@
 	.alp-icon3d, .alp-icon3d svg { transition: none; }
 	:is(li, a, div):hover > * > .alp-icon3d, :is(li, a, div):hover > .alp-icon3d, :is(li, a, div):hover .alp-icon3d svg { transform: none; }
 }
+
+/* ---------- Handy: kompakter („rausgezoomt“), schmaler Seitenrand, weniger Abstand zwischen Abschnitten ---------- */
+@media (max-width: 767px) {
+	html { font-size: 93.75%; } /* 15px statt 16px – alle rem-Größen schrumpfen mit */
+	:root {
+		--alp-gutter: 0.875rem;
+		--alp-space-8: 2.25rem;
+		--alp-space-7: 1.75rem;
+		--alp-fs-2xl: 1.75rem;
+		--alp-fs-xl: 1.45rem;
+	}
+}
