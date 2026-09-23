@@ -34,9 +34,11 @@ return array(
 		'mobile_bottom_nav'  => true,  // App-artige Leiste unten auf dem Handy
 		'sticky_add_to_cart' => true,  // Kaufleiste auf Produktseiten beim Scrollen
 		'product_coa_box'    => true,  // Chargen-Box auf Produktseiten
+		'product_coa_tab'    => true,  // Tab „Laborbericht“ mit Zertifikat auf Produktseiten
 		'clean_descriptions' => true,  // Einheitliches Design für Produktbeschreibungen
 		'clean_pages'        => true,  // Einheitliches Design für Seiten & Beiträge (alte Inline-Styles entfernen)
 		'checkout_steps'     => true,  // Fortschrittsanzeige Warenkorb → Kasse
+		'shop_intro'         => true,  // Einleitung + Vorteile über der Produktliste
 		'category_pills'     => true,  // Kategorie-Filter über dem Shop
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
 	),
@@ -134,6 +136,18 @@ return array(
 			'title' => '15 % auf deine erste Bestellung.',
 			'text'  => 'Trag dich für den Newsletter ein: neue Chargen, Laborergebnisse und exklusive Angebote. Abmeldung jederzeit.',
 			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/early-access/' ),
+		),
+	),
+
+	/* ---------- Shop & Kategorien ---------- */
+	'shop' => array(
+		/* Text über der Produktliste (Kategorien zeigen stattdessen ihre Beschreibung aus WooCommerce). */
+		'intro' => 'Research-Grade-Peptide, lyophilisiert und einzeln chargengeprüft. Zu jeder Charge gibt es ein öffentliches Laborzertifikat.',
+		/* Vorteile als kleine Chips. „Versandkostenfrei ab …“ kommt automatisch aus free_shipping_threshold. */
+		'chips' => array(
+			array( 'icon' => 'flask', 'text' => 'HPLC-geprüft, ≥ 98 %' ),
+			array( 'icon' => 'doc',   'text' => 'COA zu jeder Charge' ),
+			array( 'icon' => 'truck', 'text' => 'Versand aus DE, 2–4 Werktage' ),
 		),
 	),
 

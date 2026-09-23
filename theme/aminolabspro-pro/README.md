@@ -41,6 +41,9 @@ Premium-Design für aminolabspro.com: neue Startseite, COA-Center mit Chargen-Pr
 | Aussehen der Startseite                         | `assets/css/home.css`                    |
 | Aussehen Shop / Produktkacheln                  | `assets/css/shop.css`                    |
 | Aussehen Produktseite                           | `assets/css/product.css`                 |
+| Formatierung Beschreibungen, Seiten, Beiträge   | `assets/css/content.css`                 |
+| Aussehen Inhaltsseiten (Wissen, Kontakt, Versand, Rechtliches …) | `assets/css/pages.css`  |
+| Shop-Einleitung & Vorteils-Chips                | `inc/config.php` → `shop`                |
 | Aussehen Warenkorb / Kasse / Konto              | `assets/css/checkout.css`                |
 | Aussehen COA-Seite & Chargen-Box                | `assets/css/coa.css`                     |
 | Header / Navigation                             | `assets/css/header.css` (Aufbau: Customizer → Header) |
@@ -78,10 +81,12 @@ Der Editor-Inhalt der Seite „Home“ wird nicht mehr angezeigt; SEO-Titel/Besc
 
 **COA-Seite** (`page-coa.php`, greift automatisch für die Seite mit dem Slug `coa`) – Chargen-Prüfer, filterbare Zertifikatsübersicht aus `data/coa-batches.php`, Erklärung zum Lesen eines COAs.
 
-**Produktseite** – Merkmal-Chips, „Versand heute“-Countdown (Mo–Fr, Bestellschluss in `config.php`), Chargen-Box mit Reinheit/Gehalt/Labor/Zertifikat, Vertrauensliste, Research-Use-Only-Hinweis, Sticky-Kaufleiste beim Scrollen.
+**Produktseite** – Merkmal-Chips, „Versand heute“-Countdown (Mo–Fr, Bestellschluss in `config.php`), Chargen-Box mit Reinheit/Gehalt/Labor/Zertifikat, Tab „Laborbericht“ mit dem Zertifikat als Bild (Schalter `product_coa_tab`), Vertrauensliste, Research-Use-Only-Hinweis, Sticky-Kaufleiste beim Scrollen.
 Die vorhandenen Produktbeschreibungen werden **beim Anzeigen** einheitlich gestaltet (Inline-Styles entfernt). In der Datenbank wird nichts verändert; Schalter `clean_descriptions` in `config.php`.
 
-**Shop** – Kategorie-Leiste, neu gestaltete Produktkacheln mit COA-Hinweis, 2 Spalten auf dem Handy.
+**Shop** – Einleitung mit Vorteils-Chips, Kategorie-Leiste, neu gestaltete Produktkacheln mit COA-Hinweis, 2 Spalten auf dem Handy.
+
+**Inhaltsseiten & Beiträge** – Wissen, Kontakt, Versand & Zahlung, Rechner, Rechtstexte, Leitfäden und Wissensartikel erscheinen im Theme-Design. Alte `<style>`-Blöcke und Inline-Styles aus dem früheren Design werden **beim Anzeigen** entfernt und in Theme-Klassen übersetzt (`inc/content.php`). In der Datenbank wird nichts verändert; Schalter `clean_pages` in `config.php`.
 
 **Warenkorb & Kasse** – Fortschrittsanzeige, aufgeräumte Formulare, Zahlarten als Karten, Vertrauenshinweise. Optional Balken „Noch X € bis versandkostenfrei“ (`free_shipping_threshold`).
 
@@ -121,7 +126,8 @@ aminolabspro-pro/
 │   ├── setup.php             Assets, Schriften, Aktivierung
 │   ├── flatsome.php          Laufleiste, Footer, Mobile-Navigation
 │   ├── coa.php               Chargen-Logik, Shortcodes
-│   ├── description.php       Bereinigung der Produktbeschreibungen
+│   ├── description.php       Bereinigung der Produktbeschreibungen (Normalizer)
+│   ├── content.php           Bereinigung von Seiten & Beiträgen
 │   ├── woocommerce.php       Shop, Produkt, Warenkorb, Kasse
 │   └── schema.php            FAQ-Rich-Snippet
 ├── data/
@@ -129,7 +135,7 @@ aminolabspro-pro/
 │   └── faq.php               ★ FAQ
 ├── template-parts/           HTML-Bausteine (home, coa, product, shop, footer, global)
 └── assets/
-    ├── css/                  tokens, base, header, footer, components, shop, product, checkout, home, coa, legacy
+    ├── css/                  tokens, base, header, footer, components, shop, content, product, pages, checkout, home, coa, legacy
     ├── js/                   theme.js, coa.js
     └── fonts/                lokale Schriften
 ```

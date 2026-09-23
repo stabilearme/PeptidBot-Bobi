@@ -23,6 +23,14 @@ function alp_category_pills() {
 	}
 }
 
+/* Einleitung + Vorteile über der Produktliste */
+add_action( 'woocommerce_before_shop_loop', 'alp_shop_intro', 3 );
+function alp_shop_intro() {
+	if ( alp_config( 'features.shop_intro' ) && ( is_shop() || is_product_category() ) ) {
+		alp_part( 'shop/intro' );
+	}
+}
+
 /* Kleiner Laborhinweis in jeder Produktkachel */
 add_action( 'woocommerce_after_shop_loop_item_title', 'alp_loop_lab_badge', 4 );
 function alp_loop_lab_badge() {

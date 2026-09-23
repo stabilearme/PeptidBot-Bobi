@@ -167,6 +167,10 @@
 .alp .accordion-inner { padding: 0 0 1.5rem; }
 
 /* Beschreibung: Formatierung in assets/css/content.css (gilt auch für Seiten & Beiträge) */
+.alp.single-product .product-footer .woocommerce-tabs { max-width: 900px; margin-inline: auto; }
+.alp.single-product .alp-desc { margin-inline: auto; }
+/* Die Merkmal-Chips stehen schon neben dem Preis */
+.alp.single-product .alp-desc .alp-chips { display: none; }
 
 /* ---------- Ähnliche Produkte ---------- */
 .alp .related-products-wrapper,

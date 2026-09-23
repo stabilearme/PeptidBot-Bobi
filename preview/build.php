@@ -47,7 +47,7 @@ function pv_card( WC_Product $p ) {
 	$cat                = html_entity_decode( $p->data['categories'][0]['name'] ?? '' );
 	ob_start();
 	?>
-	<div class="product-small col has-hover product" data-cats="<?php echo esc_attr( implode( ' ', array_map( fn( $c ) => 'kategorie-' . $c['slug'], $p->data['categories'] ) ) ); ?>">
+	<div class="product-small col has-hover product" data-cats="<?php echo esc_attr( implode( ' ', array_map( fn( $c ) => 'kategorie-' . $c['slug'], $p->data['categories'] ) ) ); ?>" data-price="<?php echo esc_attr( $p->data['price'] ); ?>" data-sales="<?php echo (int) $p->data['total_sales']; ?>" data-id="<?php echo (int) $p->get_id(); ?>">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -92,6 +92,43 @@ function pv_bestsellers( $limit ) {
 	return array_slice( $list, 0, $limit );
 }
 
+function pv_menu_icon() {
+	return '<svg class="alp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
+}
+
+/** Mobiles Menü (in Flatsome: Off-Canvas-Menü aus Design → Menüs). */
+function pv_mobile_menu() {
+	ob_start();
+	?>
+	<div id="main-menu" class="mobile-sidebar off-canvas pv-offcanvas" hidden>
+		<div class="pv-offcanvas__backdrop" data-pv-menu-close></div>
+		<div class="sidebar-menu" role="dialog" aria-label="Menü">
+			<div class="pv-offcanvas__head">
+				<img src="img/brand/aminolabspro-logo_4.svg" alt="AminoLabs Pro" width="150" height="35">
+				<button type="button" class="pv-offcanvas__close" data-pv-menu-close aria-label="Menü schließen"><?php echo alp_icon( 'close', 22 ); ?></button>
+			</div>
+			<ul class="nav nav-sidebar nav-vertical">
+				<li><a href="index.html">Startseite</a></li>
+				<li><a href="shop.html">Shop</a>
+					<ul class="children">
+						<?php foreach ( get_terms() as $t ) : ?>
+							<li><a href="<?php echo esc_url( get_term_link( $t ) ); ?>" data-pv-menu-close><?php echo esc_html( html_entity_decode( $t->name ) ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</li>
+				<li><a href="coa.html">Laborergebnisse</a></li>
+				<li><a href="wissen.html">Wissen</a></li>
+				<li><a href="dosierungsrechner.html">Rekonstitutionsrechner</a></li>
+				<li><a href="versandarten.html">Versand &amp; Zahlung</a></li>
+				<li><a href="contakt.html">Kontakt</a></li>
+				<li><a href="mein-konto.html">Mein Konto</a></li>
+			</ul>
+		</div>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
 function pv_header() {
 	$nav = array(
 		'Shop'           => 'shop.html',
@@ -113,7 +150,7 @@ function pv_header() {
 				<div class="header-inner flex-row container logo-left">
 					<div class="flex-col show-for-medium flex-left">
 						<ul class="mobile-nav nav nav-left">
-							<li class="nav-icon"><a href="#alp-search" data-alp-open-search aria-label="Menü"><?php echo alp_icon( 'grid', 22 ); ?></a></li>
+							<li class="nav-icon"><a href="#main-menu" data-pv-menu aria-label="Menü" aria-controls="main-menu"><?php echo pv_menu_icon(); ?></a></li>
 						</ul>
 					</div>
 					<div id="logo" class="flex-col logo">
@@ -123,7 +160,19 @@ function pv_header() {
 						<ul class="header-nav header-nav-main nav nav-left">
 							<?php foreach ( $nav as $label => $href ) : ?>
 								<?php $active = ( 'shop.html' === $href && in_array( $page, array( 'shop', 'product' ), true ) ) || ( 'coa.html' === $href && 'coa' === $page ) || ( $slug && $slug . '.html' === $href ) || ( 'wissen.html' === $href && 'post' === $page ); ?>
-								<li class="menu-item<?php echo $active ? ' active' : ''; ?>"><a href="<?php echo esc_url( $href ); ?>" class="nav-top-link"><?php echo esc_html( $label ); ?></a></li>
+								<?php if ( 'shop.html' === $href ) : ?>
+									<li class="menu-item has-dropdown<?php echo $active ? ' active' : ''; ?>">
+										<a href="shop.html" class="nav-top-link" aria-haspopup="true"><?php echo esc_html( $label ); ?> <?php echo alp_icon( 'arrow', 12, 'pv-caret' ); ?></a>
+										<ul class="sub-menu nav-dropdown">
+											<li><a href="shop.html"><strong>Alle Produkte</strong></a></li>
+											<?php foreach ( get_terms() as $t ) : ?>
+												<li><a href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( html_entity_decode( $t->name ) ); ?> <span class="pv-count"><?php echo (int) $t->count; ?></span></a></li>
+											<?php endforeach; ?>
+										</ul>
+									</li>
+								<?php else : ?>
+									<li class="menu-item<?php echo $active ? ' active' : ''; ?>"><a href="<?php echo esc_url( $href ); ?>" class="nav-top-link"><?php echo esc_html( $label ); ?></a></li>
+								<?php endif; ?>
 							<?php endforeach; ?>
 						</ul>
 					</div>
@@ -220,7 +269,7 @@ function pv_page( $file, $page, $title, $body_class, $content, $product = null, 
 ' . $footer . '
 </footer>
 </div>
-' . $after . $scripts . '</body>
+' . pv_mobile_menu() . $after . $scripts . '</body>
 </html>
 ';
 
@@ -275,15 +324,27 @@ function pv_render_shop() {
 		<div class="page-title-inner flex-row medium-flex-wrap container">
 			<div class="flex-col flex-grow medium-text-center">
 				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="index.html">Startseite</a> <span class="divider">/</span> Shop</nav>
-				<h1 class="shop-page-title is-xlarge">Shop</h1>
+				<h1 class="shop-page-title is-xlarge" data-pv-shop-title>Alle Produkte</h1>
 			</div>
-			<div class="flex-col medium-text-center"><p class="woocommerce-result-count"><?php echo count( $products ); ?> Ergebnisse</p></div>
+			<div class="flex-col medium-text-center shop-title-tools">
+				<p class="woocommerce-result-count"><?php echo count( $products ); ?> Ergebnisse</p>
+				<form class="woocommerce-ordering" method="get" action="shop.html">
+					<label class="screen-reader-text" for="orderby">Shop-Bestellung</label>
+					<select name="orderby" class="orderby" id="orderby" aria-label="Shop-Bestellung" data-pv-orderby>
+						<option value="popularity" selected>Nach Beliebtheit sortiert</option>
+						<option value="date">Nach Neuheit sortiert</option>
+						<option value="price">Nach Preis sortiert: niedrig nach hoch</option>
+						<option value="price-desc">Nach Preis sortiert: hoch nach niedrig</option>
+					</select>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="row category-page-row">
 		<div class="col large-12">
 			<div class="shop-container">
-				<?php alp_part( 'shop/category-pills' ); ?>
+				<?php alp_shop_intro(); ?>
+				<?php alp_category_pills(); ?>
 				<div data-pv-shop>
 					<?php echo pv_grid( $products ); ?>
 				</div>
@@ -369,13 +430,28 @@ function pv_render_product( WC_Product $p ) {
 				<div class="product-footer">
 					<div class="container">
 						<div class="woocommerce-tabs wc-tabs-wrapper container tabbed-content">
+							<?php
+							// Tabs wie in WooCommerce: Beschreibung + alles, was das Theme per Filter ergänzt.
+							$tabs = alp_product_coa_tab( array( 'description' => array( 'title' => 'Beschreibung', 'priority' => 10 ) ) );
+							uasort( $tabs, fn( $a, $b ) => $a['priority'] <=> $b['priority'] );
+							?>
 							<ul class="tabs wc-tabs product-tabs small-nav-collapse nav nav-line nav-left" role="tablist">
-								<li class="description_tab active"><a href="#tab-description">Beschreibung</a></li>
+								<?php $first = true; foreach ( $tabs as $key => $tab ) : ?>
+									<li class="<?php echo esc_attr( $key ); ?>_tab<?php echo $first ? ' active' : ''; ?>" role="presentation"><a href="#tab-<?php echo esc_attr( $key ); ?>" role="tab" data-pv-tab><?php echo esc_html( $tab['title'] ); ?></a></li>
+								<?php $first = false; endforeach; ?>
 							</ul>
 							<div class="tab-panels">
-								<div class="woocommerce-Tabs-panel panel entry-content active" id="tab-description">
-									<?php echo alp_clean_product_description( $p->data['description'] ); ?>
-								</div>
+								<?php $first = true; foreach ( $tabs as $key => $tab ) : ?>
+									<div class="woocommerce-Tabs-panel panel entry-content<?php echo $first ? ' active' : ''; ?>" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel"<?php echo $first ? '' : ' hidden'; ?>>
+										<?php
+										if ( 'description' === $key ) {
+											echo alp_clean_product_description( $p->data['description'] );
+										} else {
+											call_user_func( $tab['callback'] );
+										}
+										?>
+									</div>
+								<?php $first = false; endforeach; ?>
 							</div>
 						</div>
 						<div class="related related-products-wrapper product-section">

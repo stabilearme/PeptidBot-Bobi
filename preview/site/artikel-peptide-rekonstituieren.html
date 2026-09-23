@@ -42,7 +42,7 @@
 				<div class="header-inner flex-row container logo-left">
 					<div class="flex-col show-for-medium flex-left">
 						<ul class="mobile-nav nav nav-left">
-							<li class="nav-icon"><a href="#alp-search" data-alp-open-search aria-label="Menü"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></a></li>
+							<li class="nav-icon"><a href="#main-menu" data-pv-menu aria-label="Menü" aria-controls="main-menu"><svg class="alp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></a></li>
 						</ul>
 					</div>
 					<div id="logo" class="flex-col logo">
@@ -50,12 +50,27 @@
 					</div>
 					<div class="flex-col hide-for-medium flex-left flex-grow">
 						<ul class="header-nav header-nav-main nav nav-left">
-																							<li class="menu-item"><a href="shop.html" class="nav-top-link">Shop</a></li>
-																							<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
-																							<li class="menu-item active"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
-																							<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
-																							<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
-													</ul>
+																																<li class="menu-item has-dropdown">
+										<a href="shop.html" class="nav-top-link" aria-haspopup="true">Shop <svg class="alp-icon pv-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+										<ul class="sub-menu nav-dropdown">
+											<li><a href="shop.html"><strong>Alle Produkte</strong></a></li>
+																							<li><a href="shop.html#kategorie-regeneration">Regeneration <span class="pv-count">6</span></a></li>
+																							<li><a href="shop.html#kategorie-performance">Performance <span class="pv-count">5</span></a></li>
+																							<li><a href="shop.html#kategorie-anti-aging">Anti-Aging <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-fettfreisetzung">Fettfreisetzung <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-glp-1-gip-glukagon">GLP-1 &amp; Triagonisten <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-mitochondriale-funktion">Mitochondriale Funktion <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-skin">Skin <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-stimulierend">Stimulierend <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-hungerunterdrueckung">Hungerunterdrückung <span class="pv-count">1</span></a></li>
+																							<li><a href="shop.html#kategorie-reconstitution">Reconstitution <span class="pv-count">1</span></a></li>
+																					</ul>
+									</li>
+																																								<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
+																																								<li class="menu-item active"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
+																																								<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
+																																								<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
+																					</ul>
 					</div>
 					<div class="flex-col hide-for-medium flex-right">
 						<ul class="header-nav header-nav-main nav nav-right">
@@ -293,7 +308,39 @@
 
 </footer>
 </div>
-<nav class="alp-bottom-nav" aria-label="Schnellnavigation">
+	<div id="main-menu" class="mobile-sidebar off-canvas pv-offcanvas" hidden>
+		<div class="pv-offcanvas__backdrop" data-pv-menu-close></div>
+		<div class="sidebar-menu" role="dialog" aria-label="Menü">
+			<div class="pv-offcanvas__head">
+				<img src="img/brand/aminolabspro-logo_4.svg" alt="AminoLabs Pro" width="150" height="35">
+				<button type="button" class="pv-offcanvas__close" data-pv-menu-close aria-label="Menü schließen"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+			</div>
+			<ul class="nav nav-sidebar nav-vertical">
+				<li><a href="index.html">Startseite</a></li>
+				<li><a href="shop.html">Shop</a>
+					<ul class="children">
+													<li><a href="shop.html#kategorie-regeneration" data-pv-menu-close>Regeneration</a></li>
+													<li><a href="shop.html#kategorie-performance" data-pv-menu-close>Performance</a></li>
+													<li><a href="shop.html#kategorie-anti-aging" data-pv-menu-close>Anti-Aging</a></li>
+													<li><a href="shop.html#kategorie-fettfreisetzung" data-pv-menu-close>Fettfreisetzung</a></li>
+													<li><a href="shop.html#kategorie-glp-1-gip-glukagon" data-pv-menu-close>GLP-1 &amp; Triagonisten</a></li>
+													<li><a href="shop.html#kategorie-mitochondriale-funktion" data-pv-menu-close>Mitochondriale Funktion</a></li>
+													<li><a href="shop.html#kategorie-skin" data-pv-menu-close>Skin</a></li>
+													<li><a href="shop.html#kategorie-stimulierend" data-pv-menu-close>Stimulierend</a></li>
+													<li><a href="shop.html#kategorie-hungerunterdrueckung" data-pv-menu-close>Hungerunterdrückung</a></li>
+													<li><a href="shop.html#kategorie-reconstitution" data-pv-menu-close>Reconstitution</a></li>
+											</ul>
+				</li>
+				<li><a href="coa.html">Laborergebnisse</a></li>
+				<li><a href="wissen.html">Wissen</a></li>
+				<li><a href="dosierungsrechner.html">Rekonstitutionsrechner</a></li>
+				<li><a href="versandarten.html">Versand &amp; Zahlung</a></li>
+				<li><a href="contakt.html">Kontakt</a></li>
+				<li><a href="mein-konto.html">Mein Konto</a></li>
+			</ul>
+		</div>
+	</div>
+	<nav class="alp-bottom-nav" aria-label="Schnellnavigation">
 			<a class="alp-bottom-nav__item" href="index.html">
 			<span class="alp-bottom-nav__icon">
 				<svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 11 8-7 8 7v8.5a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H5.5A1.5 1.5 0 0 1 4 19.5V11Z"/></svg>							</span>

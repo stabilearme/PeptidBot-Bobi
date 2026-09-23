@@ -41,7 +41,7 @@
 				<div class="header-inner flex-row container logo-left">
 					<div class="flex-col show-for-medium flex-left">
 						<ul class="mobile-nav nav nav-left">
-							<li class="nav-icon"><a href="#alp-search" data-alp-open-search aria-label="Menü"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></a></li>
+							<li class="nav-icon"><a href="#main-menu" data-pv-menu aria-label="Menü" aria-controls="main-menu"><svg class="alp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></a></li>
 						</ul>
 					</div>
 					<div id="logo" class="flex-col logo">
@@ -49,12 +49,27 @@
 					</div>
 					<div class="flex-col hide-for-medium flex-left flex-grow">
 						<ul class="header-nav header-nav-main nav nav-left">
-																							<li class="menu-item active"><a href="shop.html" class="nav-top-link">Shop</a></li>
-																							<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
-																							<li class="menu-item"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
-																							<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
-																							<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
-													</ul>
+																																<li class="menu-item has-dropdown active">
+										<a href="shop.html" class="nav-top-link" aria-haspopup="true">Shop <svg class="alp-icon pv-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+										<ul class="sub-menu nav-dropdown">
+											<li><a href="shop.html"><strong>Alle Produkte</strong></a></li>
+																							<li><a href="shop.html#kategorie-regeneration">Regeneration <span class="pv-count">6</span></a></li>
+																							<li><a href="shop.html#kategorie-performance">Performance <span class="pv-count">5</span></a></li>
+																							<li><a href="shop.html#kategorie-anti-aging">Anti-Aging <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-fettfreisetzung">Fettfreisetzung <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-glp-1-gip-glukagon">GLP-1 &amp; Triagonisten <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-mitochondriale-funktion">Mitochondriale Funktion <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-skin">Skin <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-stimulierend">Stimulierend <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-hungerunterdrueckung">Hungerunterdrückung <span class="pv-count">1</span></a></li>
+																							<li><a href="shop.html#kategorie-reconstitution">Reconstitution <span class="pv-count">1</span></a></li>
+																					</ul>
+									</li>
+																																								<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
+																																								<li class="menu-item"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
+																																								<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
+																																								<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
+																					</ul>
 					</div>
 					<div class="flex-col hide-for-medium flex-right">
 						<ul class="header-nav header-nav-main nav nav-right">
@@ -78,14 +93,34 @@
 		<div class="page-title-inner flex-row medium-flex-wrap container">
 			<div class="flex-col flex-grow medium-text-center">
 				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="index.html">Startseite</a> <span class="divider">/</span> Shop</nav>
-				<h1 class="shop-page-title is-xlarge">Shop</h1>
+				<h1 class="shop-page-title is-xlarge" data-pv-shop-title>Alle Produkte</h1>
 			</div>
-			<div class="flex-col medium-text-center"><p class="woocommerce-result-count">26 Ergebnisse</p></div>
+			<div class="flex-col medium-text-center shop-title-tools">
+				<p class="woocommerce-result-count">26 Ergebnisse</p>
+				<form class="woocommerce-ordering" method="get" action="shop.html">
+					<label class="screen-reader-text" for="orderby">Shop-Bestellung</label>
+					<select name="orderby" class="orderby" id="orderby" aria-label="Shop-Bestellung" data-pv-orderby>
+						<option value="popularity" selected>Nach Beliebtheit sortiert</option>
+						<option value="date">Nach Neuheit sortiert</option>
+						<option value="price">Nach Preis sortiert: niedrig nach hoch</option>
+						<option value="price-desc">Nach Preis sortiert: hoch nach niedrig</option>
+					</select>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="row category-page-row">
 		<div class="col large-12">
 			<div class="shop-container">
+				<div class="alp-shop-intro">
+			<p class="alp-shop-intro__text">Research-Grade-Peptide, lyophilisiert und einzeln chargengeprüft. Zu jeder Charge gibt es ein öffentliches Laborzertifikat.</p>
+				<ul class="alp-shop-intro__usps">
+							<li><svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6M10 3v6.2L4.6 18.1A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.9L14 9.2V3"/><path d="M7.5 15h9"/></svg><span>HPLC-geprüft, ≥ 98 %</span></li>
+							<li><svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>COA zu jeder Charge</span></li>
+							<li><svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg><span>Versand aus DE, 2–4 Werktage</span></li>
+							<li><svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg><span>Versandkostenfrei ab 99 €</span></li>
+					</ul>
+	</div>
 				<nav class="alp-cat-pills" aria-label="Kategorien">
 	<a class="alp-pill is-active" href="shop.html" aria-current="page">Alle</a>
 			<a class="alp-pill" href="shop.html#kategorie-regeneration">
@@ -120,7 +155,7 @@
 		</a>
 	</nav>
 				<div data-pv-shop>
-					<div class="woocommerce columns-4"><div class="products row row-small large-columns-4 medium-columns-3 small-columns-2">	<div class="product-small col has-hover product" data-cats="kategorie-reconstitution">
+					<div class="woocommerce columns-4"><div class="products row row-small large-columns-4 medium-columns-3 small-columns-2">	<div class="product-small col has-hover product" data-cats="kategorie-reconstitution" data-price="8.99" data-sales="98" data-id="111">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -141,7 +176,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon">
+		<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon" data-price="54.90" data-sales="90" data-id="107">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -162,7 +197,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon">
+		<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon" data-price="134.90" data-sales="52" data-id="110">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -183,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="34.90" data-sales="34" data-id="112">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -204,7 +239,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging">
+		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging" data-price="49.95" data-sales="27" data-id="280">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -225,7 +260,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="34.90" data-sales="21" data-id="114">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -246,7 +281,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-performance">
+		<div class="product-small col has-hover product" data-cats="kategorie-performance" data-price="24.95" data-sales="14" data-id="229">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -267,7 +302,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-performance">
+		<div class="product-small col has-hover product" data-cats="kategorie-performance" data-price="24.95" data-sales="13" data-id="227">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -288,7 +323,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-skin">
+		<div class="product-small col has-hover product" data-cats="kategorie-skin" data-price="29.95" data-sales="11" data-id="225">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -309,7 +344,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-hungerunterdrueckung">
+		<div class="product-small col has-hover product" data-cats="kategorie-hungerunterdrueckung" data-price="54.95" data-sales="6" data-id="234">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -330,7 +365,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-mitochondriale-funktion">
+		<div class="product-small col has-hover product" data-cats="kategorie-mitochondriale-funktion" data-price="104.95" data-sales="6" data-id="232">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -351,7 +386,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging">
+		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging" data-price="34.90" data-sales="5" data-id="115">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -372,7 +407,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="39.95" data-sales="2" data-id="2077">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -393,7 +428,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung">
+		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung" data-price="64.95" data-sales="2" data-id="1130">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -414,7 +449,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging kategorie-regeneration" data-price="114.95" data-sales="2" data-id="1129">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -435,7 +470,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-mitochondriale-funktion">
+		<div class="product-small col has-hover product" data-cats="kategorie-mitochondriale-funktion" data-price="34.95" data-sales="2" data-id="223">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -456,7 +491,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung">
+		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung" data-price="49.95" data-sales="1" data-id="2076">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -477,7 +512,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-skin">
+		<div class="product-small col has-hover product" data-cats="kategorie-skin" data-price="29.95" data-sales="1" data-id="2070">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -498,7 +533,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung">
+		<div class="product-small col has-hover product" data-cats="kategorie-fettfreisetzung" data-price="39.95" data-sales="0" data-id="2075">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -519,7 +554,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-performance">
+		<div class="product-small col has-hover product" data-cats="kategorie-performance" data-price="44.95" data-sales="0" data-id="2074">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -540,7 +575,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="49.95" data-sales="0" data-id="2073">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -561,7 +596,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-stimulierend">
+		<div class="product-small col has-hover product" data-cats="kategorie-stimulierend" data-price="49.95" data-sales="0" data-id="2072">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -582,7 +617,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-performance">
+		<div class="product-small col has-hover product" data-cats="kategorie-performance" data-price="79.95" data-sales="0" data-id="2071">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -603,7 +638,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-performance">
+		<div class="product-small col has-hover product" data-cats="kategorie-performance" data-price="79.90" data-sales="0" data-id="2069">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -624,7 +659,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-stimulierend">
+		<div class="product-small col has-hover product" data-cats="kategorie-stimulierend" data-price="30.95" data-sales="0" data-id="1942">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -645,7 +680,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="104.95" data-sales="0" data-id="1128">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -735,7 +770,39 @@
 
 </footer>
 </div>
-<nav class="alp-bottom-nav" aria-label="Schnellnavigation">
+	<div id="main-menu" class="mobile-sidebar off-canvas pv-offcanvas" hidden>
+		<div class="pv-offcanvas__backdrop" data-pv-menu-close></div>
+		<div class="sidebar-menu" role="dialog" aria-label="Menü">
+			<div class="pv-offcanvas__head">
+				<img src="img/brand/aminolabspro-logo_4.svg" alt="AminoLabs Pro" width="150" height="35">
+				<button type="button" class="pv-offcanvas__close" data-pv-menu-close aria-label="Menü schließen"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+			</div>
+			<ul class="nav nav-sidebar nav-vertical">
+				<li><a href="index.html">Startseite</a></li>
+				<li><a href="shop.html">Shop</a>
+					<ul class="children">
+													<li><a href="shop.html#kategorie-regeneration" data-pv-menu-close>Regeneration</a></li>
+													<li><a href="shop.html#kategorie-performance" data-pv-menu-close>Performance</a></li>
+													<li><a href="shop.html#kategorie-anti-aging" data-pv-menu-close>Anti-Aging</a></li>
+													<li><a href="shop.html#kategorie-fettfreisetzung" data-pv-menu-close>Fettfreisetzung</a></li>
+													<li><a href="shop.html#kategorie-glp-1-gip-glukagon" data-pv-menu-close>GLP-1 &amp; Triagonisten</a></li>
+													<li><a href="shop.html#kategorie-mitochondriale-funktion" data-pv-menu-close>Mitochondriale Funktion</a></li>
+													<li><a href="shop.html#kategorie-skin" data-pv-menu-close>Skin</a></li>
+													<li><a href="shop.html#kategorie-stimulierend" data-pv-menu-close>Stimulierend</a></li>
+													<li><a href="shop.html#kategorie-hungerunterdrueckung" data-pv-menu-close>Hungerunterdrückung</a></li>
+													<li><a href="shop.html#kategorie-reconstitution" data-pv-menu-close>Reconstitution</a></li>
+											</ul>
+				</li>
+				<li><a href="coa.html">Laborergebnisse</a></li>
+				<li><a href="wissen.html">Wissen</a></li>
+				<li><a href="dosierungsrechner.html">Rekonstitutionsrechner</a></li>
+				<li><a href="versandarten.html">Versand &amp; Zahlung</a></li>
+				<li><a href="contakt.html">Kontakt</a></li>
+				<li><a href="mein-konto.html">Mein Konto</a></li>
+			</ul>
+		</div>
+	</div>
+	<nav class="alp-bottom-nav" aria-label="Schnellnavigation">
 			<a class="alp-bottom-nav__item" href="index.html">
 			<span class="alp-bottom-nav__icon">
 				<svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 11 8-7 8 7v8.5a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H5.5A1.5 1.5 0 0 1 4 19.5V11Z"/></svg>							</span>

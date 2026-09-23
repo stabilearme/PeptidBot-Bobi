@@ -15,6 +15,20 @@
 .alp .woocommerce-ordering select { min-height: 42px; font-size: var(--alp-fs-sm); font-weight: 600; }
 .alp .term-description { max-width: 70ch; color: var(--alp-muted); }
 
+/* Einleitung über der Produktliste */
+.alp .alp-shop-intro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; margin: 0 0 1.25rem; }
+.alp .alp-shop-intro__text { margin: 0; max-width: 62ch; color: var(--alp-ink-2); }
+.alp .alp-shop-intro__usps { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+.alp .alp-shop-intro__usps li {
+	display: inline-flex; align-items: center; gap: 0.35rem; margin: 0;
+	padding: 0.35rem 0.7rem; border-radius: 999px;
+	background: var(--alp-brand-soft); color: var(--alp-brand-hover);
+	font-size: 0.8125rem; font-weight: 600; white-space: nowrap;
+}
+@media (max-width: 549px) {
+	.alp .alp-shop-intro__usps { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--alp-gutter) * -1); padding-inline: var(--alp-gutter); }
+}
+
 .alp .alp-cat-pills {
 	margin: 0 0 1.75rem;
 	padding-bottom: 0.25rem;

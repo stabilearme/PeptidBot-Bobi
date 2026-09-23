@@ -48,6 +48,7 @@ function alp_normalize_description_html( $html ) {
 
 		if ( 'alp-chip' === $class ) {
 			alp_desc_add_class( $el->parentNode, 'alp-chips' );
+			alp_desc_remove_class( $el->parentNode, 'alp-desc__row' );
 		}
 		if ( $class ) {
 			alp_desc_add_class( $el, $class );
@@ -161,4 +162,10 @@ function alp_desc_add_class( $el, $class ) {
 		$classes[] = $class;
 	}
 	$el->setAttribute( 'class', trim( implode( ' ', $classes ) ) );
+}
+
+function alp_desc_remove_class( $el, $class ) {
+	if ( $el instanceof DOMElement ) {
+		$el->setAttribute( 'class', trim( implode( ' ', array_diff( preg_split( '/\s+/', $el->getAttribute( 'class' ) ), array( $class ) ) ) ) );
+	}
 }

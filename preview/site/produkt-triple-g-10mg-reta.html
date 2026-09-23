@@ -44,7 +44,7 @@
 				<div class="header-inner flex-row container logo-left">
 					<div class="flex-col show-for-medium flex-left">
 						<ul class="mobile-nav nav nav-left">
-							<li class="nav-icon"><a href="#alp-search" data-alp-open-search aria-label="Menü"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></a></li>
+							<li class="nav-icon"><a href="#main-menu" data-pv-menu aria-label="Menü" aria-controls="main-menu"><svg class="alp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></a></li>
 						</ul>
 					</div>
 					<div id="logo" class="flex-col logo">
@@ -52,12 +52,27 @@
 					</div>
 					<div class="flex-col hide-for-medium flex-left flex-grow">
 						<ul class="header-nav header-nav-main nav nav-left">
-																							<li class="menu-item active"><a href="shop.html" class="nav-top-link">Shop</a></li>
-																							<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
-																							<li class="menu-item"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
-																							<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
-																							<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
-													</ul>
+																																<li class="menu-item has-dropdown active">
+										<a href="shop.html" class="nav-top-link" aria-haspopup="true">Shop <svg class="alp-icon pv-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+										<ul class="sub-menu nav-dropdown">
+											<li><a href="shop.html"><strong>Alle Produkte</strong></a></li>
+																							<li><a href="shop.html#kategorie-regeneration">Regeneration <span class="pv-count">6</span></a></li>
+																							<li><a href="shop.html#kategorie-performance">Performance <span class="pv-count">5</span></a></li>
+																							<li><a href="shop.html#kategorie-anti-aging">Anti-Aging <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-fettfreisetzung">Fettfreisetzung <span class="pv-count">3</span></a></li>
+																							<li><a href="shop.html#kategorie-glp-1-gip-glukagon">GLP-1 &amp; Triagonisten <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-mitochondriale-funktion">Mitochondriale Funktion <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-skin">Skin <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-stimulierend">Stimulierend <span class="pv-count">2</span></a></li>
+																							<li><a href="shop.html#kategorie-hungerunterdrueckung">Hungerunterdrückung <span class="pv-count">1</span></a></li>
+																							<li><a href="shop.html#kategorie-reconstitution">Reconstitution <span class="pv-count">1</span></a></li>
+																					</ul>
+									</li>
+																																								<li class="menu-item"><a href="coa.html" class="nav-top-link">Laborergebnisse</a></li>
+																																								<li class="menu-item"><a href="wissen.html" class="nav-top-link">Wissen</a></li>
+																																								<li class="menu-item"><a href="dosierungsrechner.html" class="nav-top-link">Rechner</a></li>
+																																								<li class="menu-item"><a href="contakt.html" class="nav-top-link">Kontakt</a></li>
+																					</ul>
 					</div>
 					<div class="flex-col hide-for-medium flex-right">
 						<ul class="header-nav header-nav-main nav nav-right">
@@ -150,15 +165,16 @@
 				<div class="product-footer">
 					<div class="container">
 						<div class="woocommerce-tabs wc-tabs-wrapper container tabbed-content">
-							<ul class="tabs wc-tabs product-tabs small-nav-collapse nav nav-line nav-left" role="tablist">
-								<li class="description_tab active"><a href="#tab-description">Beschreibung</a></li>
-							</ul>
+														<ul class="tabs wc-tabs product-tabs small-nav-collapse nav nav-line nav-left" role="tablist">
+																	<li class="description_tab active" role="presentation"><a href="#tab-description" role="tab" data-pv-tab>Beschreibung</a></li>
+																	<li class="alp_coa_tab" role="presentation"><a href="#tab-alp_coa" role="tab" data-pv-tab>Laborbericht</a></li>
+															</ul>
 							<div class="tab-panels">
-								<div class="woocommerce-Tabs-panel panel entry-content active" id="tab-description">
-									<div class="alp-desc">
+																	<div class="woocommerce-Tabs-panel panel entry-content active" id="tab-description" role="tabpanel">
+										<div class="alp-desc">
 <div>
 
-<div class="alp-desc__row alp-chips"><span class="alp-chip">≥98 % Reinheit</span>
+<div class="alp-chips"><span class="alp-chip">≥98 % Reinheit</span>
 <span class="alp-chip">HPLC verifiziert</span>
 <span class="alp-chip">Batch-COA inklusive</span>
 <span class="alp-chip">Research Use Only</span></div>
@@ -278,12 +294,40 @@ Versand aus Deutschland — diskret, temperatursicher, mit Tracking</div>
 
 <div class="alp-desc__legal"><strong>Rechtlicher Hinweis:</strong> Dieses Produkt ist ausschließlich für wissenschaftliche Forschungszwecke bestimmt. Es ist nicht für den menschlichen Verzehr, die Diagnose, Behandlung oder Prävention von Krankheiten vorgesehen. Nur für den Einsatz durch qualifizierte Forscher.</div>
 </div>
-</div>								</div>
-							</div>
+</div>									</div>
+																	<div class="woocommerce-Tabs-panel panel entry-content" id="tab-alp_coa" role="tabpanel" hidden>
+										<div class="alp-ptab-coa">
+						<figure class="alp-ptab-coa__doc">
+				<a class="lightbox" href="img/coa/COA-5T89J2NA-scaled.webp" target="_blank" rel="noopener" aria-label="Vollständiges Zertifikat öffnen">
+					<img src="img/coa/coa-result-5T89J2NA.webp" alt="Analysezertifikat Retatrutide 10 mg, Charge R10-0726-01" loading="lazy" width="900" height="1273">
+				</a>
+				<figcaption><svg class="alp-icon " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg> Antippen für das vollständige Zertifikat</figcaption>
+			</figure>
+				<div class="alp-ptab-coa__info">
+			<p class="alp-eyebrow">Charge R10-0726-01</p>
+			<h3 class="alp-h3">Unabhängig geprüft von Analiza Białek</h3>
+			<div class="alp-ptab-coa__figures">
+				<div><span>Reinheit (HPLC)</span><strong>99 %</strong></div>
+				<div><span>Wirkstoffgehalt</span><strong>10,78 mg</strong></div>
+			</div>
+			<dl class="alp-specs alp-specs--compact">
+				<div><dt>Getestet</dt><dd>21.–29.07.2026</dd></div>
+									<div><dt>Zertifikat-Nr.</dt><dd class="is-mono">100016428</dd></div>
+													<div><dt>Report-ID</dt><dd class="is-mono">5T89J2NA</dd></div>
+							</dl>
+			<p class="alp-ptab-coa__text">Die Chargennummer steht auf deinem Vial. Mit der Report-ID lässt sich das Zertifikat direkt beim Labor verifizieren.</p>
+			<div class="alp-ptab-coa__actions">
+									<a class="alp-btn alp-btn--primary alp-btn--sm lightbox" href="img/coa/COA-5T89J2NA-scaled.webp" target="_blank" rel="noopener"><svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg> Zertifikat öffnen</a>
+								<a class="alp-link" href="coa.html#charge-r10-0726-01">Alle Laborergebnisse <svg class="alp-icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+			</div>
+		</div>
+	</div>
+									</div>
+															</div>
 						</div>
 						<div class="related related-products-wrapper product-section">
 							<h3 class="product-section-title container-width product-section-title-related">Ähnliche Produkte</h3>
-							<div class="woocommerce columns-4"><div class="products row row-small large-columns-4 medium-columns-3 small-columns-2">	<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon">
+							<div class="woocommerce columns-4"><div class="products row row-small large-columns-4 medium-columns-3 small-columns-2">	<div class="product-small col has-hover product" data-cats="kategorie-glp-1-gip-glukagon" data-price="134.90" data-sales="52" data-id="110">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -304,7 +348,7 @@ Versand aus Deutschland — diskret, temperatursicher, mit Tracking</div>
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-reconstitution">
+		<div class="product-small col has-hover product" data-cats="kategorie-reconstitution" data-price="8.99" data-sales="98" data-id="111">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -325,7 +369,7 @@ Versand aus Deutschland — diskret, temperatursicher, mit Tracking</div>
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-regeneration">
+		<div class="product-small col has-hover product" data-cats="kategorie-regeneration" data-price="34.90" data-sales="34" data-id="112">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -346,7 +390,7 @@ Versand aus Deutschland — diskret, temperatursicher, mit Tracking</div>
 			</div>
 		</div>
 	</div>
-		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging">
+		<div class="product-small col has-hover product" data-cats="kategorie-anti-aging" data-price="49.95" data-sales="27" data-id="280">
 		<div class="col-inner">
 			<div class="product-small box">
 				<div class="box-image">
@@ -438,7 +482,39 @@ Versand aus Deutschland — diskret, temperatursicher, mit Tracking</div>
 
 </footer>
 </div>
-<div class="alp-buybar" data-alp-buybar aria-hidden="true">
+	<div id="main-menu" class="mobile-sidebar off-canvas pv-offcanvas" hidden>
+		<div class="pv-offcanvas__backdrop" data-pv-menu-close></div>
+		<div class="sidebar-menu" role="dialog" aria-label="Menü">
+			<div class="pv-offcanvas__head">
+				<img src="img/brand/aminolabspro-logo_4.svg" alt="AminoLabs Pro" width="150" height="35">
+				<button type="button" class="pv-offcanvas__close" data-pv-menu-close aria-label="Menü schließen"><svg class="alp-icon " width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+			</div>
+			<ul class="nav nav-sidebar nav-vertical">
+				<li><a href="index.html">Startseite</a></li>
+				<li><a href="shop.html">Shop</a>
+					<ul class="children">
+													<li><a href="shop.html#kategorie-regeneration" data-pv-menu-close>Regeneration</a></li>
+													<li><a href="shop.html#kategorie-performance" data-pv-menu-close>Performance</a></li>
+													<li><a href="shop.html#kategorie-anti-aging" data-pv-menu-close>Anti-Aging</a></li>
+													<li><a href="shop.html#kategorie-fettfreisetzung" data-pv-menu-close>Fettfreisetzung</a></li>
+													<li><a href="shop.html#kategorie-glp-1-gip-glukagon" data-pv-menu-close>GLP-1 &amp; Triagonisten</a></li>
+													<li><a href="shop.html#kategorie-mitochondriale-funktion" data-pv-menu-close>Mitochondriale Funktion</a></li>
+													<li><a href="shop.html#kategorie-skin" data-pv-menu-close>Skin</a></li>
+													<li><a href="shop.html#kategorie-stimulierend" data-pv-menu-close>Stimulierend</a></li>
+													<li><a href="shop.html#kategorie-hungerunterdrueckung" data-pv-menu-close>Hungerunterdrückung</a></li>
+													<li><a href="shop.html#kategorie-reconstitution" data-pv-menu-close>Reconstitution</a></li>
+											</ul>
+				</li>
+				<li><a href="coa.html">Laborergebnisse</a></li>
+				<li><a href="wissen.html">Wissen</a></li>
+				<li><a href="dosierungsrechner.html">Rekonstitutionsrechner</a></li>
+				<li><a href="versandarten.html">Versand &amp; Zahlung</a></li>
+				<li><a href="contakt.html">Kontakt</a></li>
+				<li><a href="mein-konto.html">Mein Konto</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="alp-buybar" data-alp-buybar aria-hidden="true">
 	<div class="alp-buybar__inner">
 					<span class="alp-buybar__thumb"><img src="img/products/triple-g-10mg-768x768.webp" alt="" loading="lazy" width="150" height="150"></span>
 				<div class="alp-buybar__info">

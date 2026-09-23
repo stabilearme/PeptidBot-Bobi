@@ -60,6 +60,13 @@
 			e.preventDefault();
 			toast('Vorschau – der Warenkorb ist nur im Live-Shop aktiv.');
 		}
+		var tab = e.target.closest('[data-pv-tab]');
+		if (tab) {
+			e.preventDefault();
+			var id = tab.getAttribute('href').slice(1);
+			document.querySelectorAll('.product-tabs li').forEach(function (li) { li.classList.toggle('active', li.contains(tab)); });
+			document.querySelectorAll('.tab-panels > .panel').forEach(function (p) { p.hidden = p.id !== id; p.classList.toggle('active', p.id === id); });
+		}
 		var thumb = e.target.closest('[data-pv-thumb]');
 		if (thumb) {
 			e.preventDefault();
@@ -90,6 +97,16 @@
 		});
 	}
 
+	/* Mobiles Menü */
+	var menu = document.getElementById('main-menu');
+	if (menu) {
+		document.addEventListener('click', function (e) {
+			if (e.target.closest('[data-pv-menu]')) { e.preventDefault(); menu.hidden = false; document.documentElement.classList.add('alp-lock'); }
+			else if (e.target.closest('[data-pv-menu-close]')) { menu.hidden = true; document.documentElement.classList.remove('alp-lock'); }
+		});
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { menu.hidden = true; document.documentElement.classList.remove('alp-lock'); } });
+	}
+
 	/* Shop: Kategorie-Leiste filtert per #kategorie-slug */
 	var shop = document.querySelector('[data-pv-shop]');
 	if (shop) {
@@ -110,7 +127,27 @@
 				if (on) p.setAttribute('aria-current', 'page'); else p.removeAttribute('aria-current');
 			});
 			if (count) count.textContent = n + (n === 1 ? ' Ergebnis' : ' Ergebnisse');
+			var title = document.querySelector('[data-pv-shop-title]');
+			var activePill = document.querySelector('.alp-cat-pills .alp-pill.is-active');
+			if (title) title.textContent = cat && activePill ? activePill.firstChild.textContent.trim() : 'Alle Produkte';
+			var crumb = document.querySelector('.shop-page-title .breadcrumbs');
+			if (crumb) crumb.innerHTML = '<a href="index.html">Startseite</a> <span class="divider">/</span> ' + (cat ? '<a href="shop.html">Shop</a> <span class="divider">/</span> ' + title.textContent : 'Shop');
 		};
+		var order = document.querySelector('[data-pv-orderby]');
+		var grid = shop.querySelector('.products');
+		if (order && grid) {
+			order.addEventListener('change', function () {
+				var cards = Array.prototype.slice.call(grid.children);
+				var key = order.value;
+				cards.sort(function (a, b) {
+					if (key === 'price') return a.dataset.price - b.dataset.price;
+					if (key === 'price-desc') return b.dataset.price - a.dataset.price;
+					if (key === 'date') return b.dataset.id - a.dataset.id;
+					return b.dataset.sales - a.dataset.sales;
+				});
+				cards.forEach(function (c) { grid.appendChild(c); });
+			});
+		}
 		pills.forEach(function (p) {
 			if (p.getAttribute('href') === 'shop.html') {
 				p.addEventListener('click', function (e) { e.preventDefault(); history.pushState(null, '', 'shop.html'); applyFilter(); });

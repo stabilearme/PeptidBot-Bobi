@@ -145,6 +145,29 @@ function alp_product_coa_box() {
 	alp_part( 'product/coa-box', array( 'batch' => alp_coa_for_sku( $product->get_sku() ) ) );
 }
 
+/* Tab „Laborbericht“ neben der Beschreibung */
+add_filter( 'woocommerce_product_tabs', 'alp_product_coa_tab' );
+function alp_product_coa_tab( $tabs ) {
+	global $product;
+	if ( ! alp_config( 'features.product_coa_tab' ) || ! $product instanceof WC_Product ) {
+		return $tabs;
+	}
+	if ( in_array( $product->get_sku(), (array) alp_config( 'product.coa_exclude_skus', array() ), true ) || ! alp_coa_for_sku( $product->get_sku() ) ) {
+		return $tabs;
+	}
+	$tabs['alp_coa'] = array(
+		'title'    => 'Laborbericht',
+		'priority' => 15,
+		'callback' => 'alp_product_coa_tab_content',
+	);
+	return $tabs;
+}
+
+function alp_product_coa_tab_content() {
+	global $product;
+	alp_part( 'product/coa-tab', array( 'batch' => alp_coa_for_sku( $product->get_sku() ) ) );
+}
+
 /**
  * Chromatogramm-Grafik (SVG) – stilisierte HPLC-Kurve mit Hauptpeak.
  * Rein illustrativ; die echten Werte stehen im verlinkten Zertifikat.

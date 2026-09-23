@@ -28,6 +28,7 @@ function is_page( $slug = '' ) {
 function is_woocommerce() { return in_array( $GLOBALS['alp_ctx']['page'], array( 'product', 'shop' ), true ); }
 function is_shop() { return 'shop' === $GLOBALS['alp_ctx']['page']; }
 function is_product_category() { return false; }
+function term_description() { return ''; }
 function is_cart() { return 'warenkorb' === alp_preview_slug(); }
 function is_checkout() { return 'kasse' === alp_preview_slug(); }
 function is_account_page() { return 'mein-konto' === alp_preview_slug(); }
