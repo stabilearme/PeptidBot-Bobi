@@ -16,6 +16,10 @@ define( 'ALP_PREVIEW_OUT', __DIR__ . '/site' );
 
 require __DIR__ . '/lib/wp-stubs.php';
 require ALP_PREVIEW_THEME . '/functions.php';
+require __DIR__ . '/lib/pages.php';
+
+/* Kleinunternehmer (Impressum/AGB): keine Umsatzsteuer – so zeigt Germanized es an Preisen. */
+const PV_TAX_NOTE = 'Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.';
 
 /* Produkt, auf das „Produktseite“ in der Vorschau-Leiste verlinkt (Slug). */
 const ALP_PREVIEW_FEATURED = 'bpc-157-10mg';
@@ -25,7 +29,7 @@ const ALP_PREVIEW_FEATURED = 'bpc-157-10mg';
  * ------------------------------------------------------------------- */
 
 function pv_price_extra() {
-	return '<p class="wc-gzd-additional-info tax-info">inkl. MwSt.</p><p class="wc-gzd-additional-info shipping-costs-info">zzgl. <a href="https://aminolabspro.com/versandarten/">Versandkosten</a></p>';
+	return '<p class="wc-gzd-additional-info tax-info">' . PV_TAX_NOTE . '</p><p class="wc-gzd-additional-info shipping-costs-info">zzgl. <a href="versandarten.html">Versandkosten</a></p>';
 }
 
 function pv_sale_badge( WC_Product $p ) {
@@ -92,11 +96,14 @@ function pv_header() {
 	$nav = array(
 		'Shop'           => 'shop.html',
 		'Laborergebnisse' => 'coa.html',
-		'Wissen'         => 'https://aminolabspro.com/wissen/',
-		'Rechner'        => 'https://aminolabspro.com/dosierungsrechner/',
-		'Kontakt'        => 'https://aminolabspro.com/contakt/',
+		'Wissen'         => 'wissen.html',
+		'Rechner'        => 'dosierungsrechner.html',
+		'Kontakt'        => 'contakt.html',
 	);
-	$page = $GLOBALS['alp_ctx']['page'];
+	$page  = $GLOBALS['alp_ctx']['page'];
+	$slug  = $GLOBALS['alp_ctx']['slug'] ?? '';
+	$count = WC()->cart->get_cart_contents_count();
+	$total = wc_price( WC()->cart->get_displayed_subtotal() );
 	ob_start();
 	?>
 	<header id="header" class="header has-sticky sticky-jump">
@@ -115,7 +122,7 @@ function pv_header() {
 					<div class="flex-col hide-for-medium flex-left flex-grow">
 						<ul class="header-nav header-nav-main nav nav-left">
 							<?php foreach ( $nav as $label => $href ) : ?>
-								<?php $active = ( 'shop.html' === $href && in_array( $page, array( 'shop', 'product' ), true ) ) || ( 'coa.html' === $href && 'coa' === $page ); ?>
+								<?php $active = ( 'shop.html' === $href && in_array( $page, array( 'shop', 'product' ), true ) ) || ( 'coa.html' === $href && 'coa' === $page ) || ( $slug && $slug . '.html' === $href ) || ( 'wissen.html' === $href && 'post' === $page ); ?>
 								<li class="menu-item<?php echo $active ? ' active' : ''; ?>"><a href="<?php echo esc_url( $href ); ?>" class="nav-top-link"><?php echo esc_html( $label ); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
@@ -123,13 +130,13 @@ function pv_header() {
 					<div class="flex-col hide-for-medium flex-right">
 						<ul class="header-nav header-nav-main nav nav-right">
 							<li class="header-search"><a href="#alp-search" data-alp-open-search aria-label="Suche"><?php echo alp_icon( 'search', 21 ); ?></a></li>
-							<li class="account-item"><a href="https://aminolabspro.com/mein-konto/" aria-label="Mein Konto"><?php echo alp_icon( 'user', 21 ); ?></a></li>
-							<li class="cart-item"><a href="#" class="header-cart-link" data-pv-cart aria-label="Warenkorb"><span class="header-cart-title">0,00&nbsp;€</span> <span class="cart-icon image-icon"><strong>0</strong></span></a></li>
+							<li class="account-item"><a href="mein-konto.html" aria-label="Mein Konto"><?php echo alp_icon( 'user', 21 ); ?></a></li>
+							<li class="cart-item"><a href="warenkorb.html" class="header-cart-link" aria-label="Warenkorb"><span class="header-cart-title"><?php echo $total; ?></span> <span class="cart-icon image-icon"><strong><?php echo (int) $count; ?></strong></span></a></li>
 						</ul>
 					</div>
 					<div class="flex-col show-for-medium flex-right">
 						<ul class="mobile-nav nav nav-right">
-							<li class="cart-item"><a href="#" data-pv-cart aria-label="Warenkorb"><span class="cart-icon image-icon"><strong>0</strong></span></a></li>
+							<li class="cart-item"><a href="warenkorb.html" aria-label="Warenkorb"><span class="cart-icon image-icon"><strong><?php echo (int) $count; ?></strong></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -146,6 +153,7 @@ function pv_preview_bar( $page ) {
 		'shop'    => array( 'Shop', 'shop.html' ),
 		'product' => array( 'Produktseite', 'produkt-' . ALP_PREVIEW_FEATURED . '.html' ),
 		'coa'     => array( 'COA-Seite', 'coa.html' ),
+		'seiten'  => array( 'Alle Seiten', 'seiten.html' ),
 	);
 	$out = '<nav class="pv-bar" aria-label="Vorschau-Seiten"><span class="pv-bar__tag">Theme-Vorschau</span>';
 	foreach ( $links as $key => $l ) {
@@ -154,8 +162,8 @@ function pv_preview_bar( $page ) {
 	return $out . '</nav>';
 }
 
-function pv_page( $file, $page, $title, $body_class, $content, $product = null ) {
-	alp_preview_ctx( $page, $product );
+function pv_page( $file, $page, $title, $body_class, $content, $product = null, $slug = '' ) {
+	alp_preview_ctx( $page, $product, $slug );
 
 	$styles = '<link rel="stylesheet" href="flatsome-shim.css">' . "\n";
 	foreach ( alp_styles() as $name => $when ) {
@@ -216,8 +224,10 @@ function pv_page( $file, $page, $title, $body_class, $content, $product = null )
 </html>
 ';
 
+	$html = alp_preview_localize( $html );
+
 	// Aktiven Punkt der Mobile-Navigation markieren (in WordPress über die aktuelle URL).
-	$current = array( 'home' => 'index.html', 'shop' => 'shop.html', 'coa' => 'coa.html' )[ $page ] ?? null;
+	$current = array( 'home' => 'index.html', 'shop' => 'shop.html', 'coa' => 'coa.html' )[ $page ] ?? ( 'warenkorb' === $slug ? 'warenkorb.html' : null );
 	if ( $current ) {
 		$html = str_replace( 'class="alp-bottom-nav__item" href="' . $current . '"', 'class="alp-bottom-nav__item is-current" href="' . $current . '" aria-current="page"', $html );
 	}
@@ -336,7 +346,7 @@ function pv_render_product( WC_Product $p ) {
 							<div class="is-divider small"></div>
 							<?php alp_product_chips(); ?>
 							<div class="price-wrapper"><p class="price product-page-price<?php echo $p->is_on_sale() ? ' price-on-sale' : ''; ?>"><?php echo $p->get_price_html(); ?></p></div>
-							<div class="legal-price-info"><p class="wc-gzd-additional-info"><span class="wc-gzd-additional-info tax-info">inkl. 19 % MwSt.</span> <span class="wc-gzd-additional-info shipping-costs-info">zzgl. <a href="https://aminolabspro.com/versandarten/">Versandkosten</a></span></p></div>
+							<div class="legal-price-info"><p class="wc-gzd-additional-info"><span class="wc-gzd-additional-info tax-info"><?php echo esc_html( PV_TAX_NOTE ); ?></span> <span class="wc-gzd-additional-info shipping-costs-info">zzgl. <a href="versandarten.html">Versandkosten</a></span></p></div>
 							<?php if ( trim( strip_tags( $p->data['short_description'] ) ) ) : ?>
 								<div class="product-short-description"><?php echo $p->data['short_description']; ?></div>
 							<?php endif; ?>
@@ -421,6 +431,12 @@ echo "Vorschau wird gebaut:\n";
 pv_render_home();
 pv_render_shop();
 pv_render_coa();
+pv_render_content_pages();
+pv_render_posts();
+pv_render_cart();
+pv_render_checkout();
+pv_render_account();
+pv_render_sitemap();
 foreach ( alp_preview_products() as $p ) {
 	pv_render_product( $p );
 }

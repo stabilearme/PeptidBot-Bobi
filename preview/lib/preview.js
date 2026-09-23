@@ -69,6 +69,15 @@
 		}
 	});
 
+	/* Formulare (Kontakt, Newsletter, Login, Kasse …) werden in der Vorschau nicht abgeschickt */
+	document.addEventListener('submit', function (e) {
+		if (e.defaultPrevented) return; // z. B. Chargen-Prüfer, eigene Seitenskripte
+		e.preventDefault();
+		toast(e.target.hasAttribute('data-pv-checkout')
+			? 'Vorschau – im Live-Shop wird die Bestellung jetzt abgeschickt.'
+			: 'Vorschau – das Formular wird nur im Live-Shop gesendet.');
+	});
+
 	/* Produktseite: Menge +/- und „In den Warenkorb“ */
 	var form = document.querySelector('[data-pv-cart-form]');
 	if (form) {

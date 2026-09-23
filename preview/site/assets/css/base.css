@@ -189,8 +189,9 @@ body.alp {
 	font-size: 1.0625rem;
 	line-height: 1.75;
 }
-.alp .entry-content > *,
-.alp .alp-prose > * { max-width: 72ch; }
+/* Lesebreite nur für Fließtext – eigene Layouts (Raster, Karten) im Seiteninhalt behalten ihre Breite */
+.alp .entry-content > :is(p, ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, pre),
+.alp .alp-prose > :is(p, ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, pre) { max-width: 72ch; }
 .alp .entry-content h2, .alp .alp-prose h2 { font-size: var(--alp-fs-lg); margin: 2.2em 0 0.6em; }
 .alp .entry-content h3, .alp .alp-prose h3 { font-size: var(--alp-fs-md); margin: 1.8em 0 0.5em; }
 .alp .entry-content ul, .alp .entry-content ol { padding-left: 1.2em; }

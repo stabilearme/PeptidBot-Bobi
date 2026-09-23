@@ -10,20 +10,27 @@ define( 'ABSPATH', __DIR__ . '/' );
 /* ---------- Seitenkontext (wird vom Build pro Seite gesetzt) ---------- */
 $GLOBALS['alp_ctx'] = array( 'page' => 'home', 'product' => null );
 
-function alp_preview_ctx( $page, $product = null ) {
-	$GLOBALS['alp_ctx'] = array( 'page' => $page, 'product' => $product );
+function alp_preview_ctx( $page, $product = null, $slug = '' ) {
+	$GLOBALS['alp_ctx'] = array( 'page' => $page, 'product' => $product, 'slug' => $slug );
 	$GLOBALS['product'] = $product;
 }
 
 function is_front_page() { return 'home' === $GLOBALS['alp_ctx']['page']; }
 function is_product() { return 'product' === $GLOBALS['alp_ctx']['page']; }
-function is_page( $slug = '' ) { return 'coa' === $GLOBALS['alp_ctx']['page'] && ( ! $slug || 'coa' === $slug ); }
+function alp_preview_slug() { return $GLOBALS['alp_ctx']['slug'] ?? ''; }
+function is_page( $slug = '' ) {
+	$page = $GLOBALS['alp_ctx']['page'];
+	if ( 'coa' === $page ) {
+		return ! $slug || 'coa' === $slug;
+	}
+	return 'page' === $page && ( ! $slug || alp_preview_slug() === $slug );
+}
 function is_woocommerce() { return in_array( $GLOBALS['alp_ctx']['page'], array( 'product', 'shop' ), true ); }
 function is_shop() { return 'shop' === $GLOBALS['alp_ctx']['page']; }
 function is_product_category() { return false; }
-function is_cart() { return false; }
-function is_checkout() { return false; }
-function is_account_page() { return false; }
+function is_cart() { return 'warenkorb' === alp_preview_slug(); }
+function is_checkout() { return 'kasse' === alp_preview_slug(); }
+function is_account_page() { return 'mein-konto' === alp_preview_slug(); }
 function in_the_loop() { return true; }
 function have_posts() { return false; }
 function the_post() {}
@@ -82,30 +89,130 @@ function get_template_part( $slug, $name = null, $args = array() ) {
 }
 
 /* ---------- Links: statische Vorschau-Seiten statt WordPress-URLs ---------- */
-function home_url( $path = '/' ) {
-	$path = '/' . ltrim( (string) $path, '/' );
-	if ( '/' === $path ) {
-		return 'index.html';
+
+/** Seiten, die es in der Vorschau gibt (Slug → Datei). */
+function alp_preview_pages() {
+	static $pages = null;
+	if ( null === $pages ) {
+		$pages = array(
+			'coa'        => 'coa.html',
+			'shop'       => 'shop.html',
+			'warenkorb'  => 'warenkorb.html',
+			'kasse'      => 'kasse.html',
+			'mein-konto' => 'mein-konto.html',
+		);
+		foreach ( glob( ALP_PREVIEW_DATA . '/pages/*.json' ) as $f ) {
+			$pages[ basename( $f, '.json' ) ] = basename( $f, '.json' ) . '.html';
+		}
 	}
-	if ( '/coa/' === $path || '/coa' === $path ) {
-		return 'coa.html';
+	return $pages;
+}
+
+function home_url( $path = '/' ) {
+	$full  = '/' . ltrim( (string) $path, '/' );
+	$hash  = '';
+	if ( false !== ( $i = strpos( $full, '#' ) ) ) {
+		$hash = substr( $full, $i );
+		$full = substr( $full, 0, $i );
+	}
+	$path = strtok( $full, '?' );
+	if ( '/' === $path ) {
+		return 'index.html' . $hash;
 	}
 	if ( 0 === strpos( $path, '/wp-content/uploads/' ) ) {
-		// Zertifikate liegen in img/coa/, alle anderen Mediathek-Bilder (z. B. Hero) in img/media/.
-		return ( 0 === stripos( basename( $path ), 'coa' ) ? 'img/coa/' : 'img/media/' ) . basename( $path );
+		$file = basename( $path );
+		foreach ( array( 'coa', 'products', 'media' ) as $dir ) {
+			if ( file_exists( ALP_PREVIEW_OUT . "/img/$dir/$file" ) ) {
+				return "img/$dir/$file";
+			}
+		}
+		return 'https://aminolabspro.com' . $full;
 	}
-	// Alle anderen Seiten existieren nur im Live-Shop.
-	return 'https://aminolabspro.com' . $path;
+	$parts = array_values( array_filter( explode( '/', $path ) ) );
+	$pages = alp_preview_pages();
+	if ( 1 === count( $parts ) && isset( $pages[ $parts[0] ] ) ) {
+		return $pages[ $parts[0] ] . $hash;
+	}
+	// Artikel, die ohne Datum verlinkt sind (WordPress leitet /slug/ auf den Beitrag weiter).
+	if ( 1 === count( $parts ) && file_exists( ALP_PREVIEW_DATA . '/posts/' . $parts[0] . '.json' ) ) {
+		return 'artikel-' . $parts[0] . '.html' . $hash;
+	}
+	if ( 2 === count( $parts ) && 'produkt' === $parts[0] && file_exists( ALP_PREVIEW_DATA . '/products.json' ) ) {
+		foreach ( alp_preview_products() as $p ) {
+			if ( $p->get_slug() === $parts[1] ) {
+				return $p->get_permalink() . $hash;
+			}
+		}
+	}
+	if ( 2 === count( $parts ) && 'produkt-kategorie' === $parts[0] ) {
+		return 'shop.html#kategorie-' . $parts[1];
+	}
+	// Blogartikel: /2026/09/10/slug/
+	if ( 4 === count( $parts ) && ctype_digit( $parts[0] ) && file_exists( ALP_PREVIEW_DATA . '/posts/' . $parts[3] . '.json' ) ) {
+		return 'artikel-' . $parts[3] . '.html' . $hash;
+	}
+	// Alles andere gibt es nur im Live-Shop.
+	return 'https://aminolabspro.com' . $full . $hash;
+}
+
+/** Schreibt Links auf aminolabspro.com (absolut oder ab „/“) auf die Vorschau-Seiten um. */
+function alp_preview_localize( $html ) {
+	$html = preg_replace( '/\s(?:srcset|sizes)="[^"]*"/', '', $html );
+	return preg_replace_callback(
+		'#(\s(?:href|src|action)=)(["\'])(?:https?://(?:www\.)?aminolabspro\.com)?(/[^"\'\s]*)?\2#',
+		function ( $m ) {
+			if ( ! isset( $m[3] ) || '' === $m[3] ) {
+				return $m[0] === $m[1] . $m[2] . $m[2] ? $m[0] : $m[1] . $m[2] . 'index.html' . $m[2];
+			}
+			if ( 0 === strpos( $m[3], '//' ) ) {
+				return $m[0];
+			}
+			return $m[1] . $m[2] . home_url( $m[3] ) . $m[2];
+		},
+		$html
+	);
 }
 
 function wc_get_page_permalink( $page ) {
 	$map = array(
 		'shop'      => 'shop.html',
-		'cart'      => 'https://aminolabspro.com/warenkorb/',
-		'checkout'  => 'https://aminolabspro.com/kasse/',
-		'myaccount' => 'https://aminolabspro.com/mein-konto/',
+		'cart'      => 'warenkorb.html',
+		'checkout'  => 'kasse.html',
+		'myaccount' => 'mein-konto.html',
 	);
 	return $map[ $page ] ?? 'index.html';
+}
+function wc_get_cart_url() { return 'warenkorb.html'; }
+function wc_get_checkout_url() { return 'kasse.html'; }
+
+function wc_price( $amount ) {
+	return '<span class="woocommerce-Price-amount amount"><bdi>' . number_format_i18n( $amount, 2 ) . '&nbsp;<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>';
+}
+
+/* ---------- Beispiel-Warenkorb (nur Vorschau) ---------- */
+function alp_preview_cart_items() {
+	return array( array( 'ALP-BPC157-10', 1 ), array( 'ALP-BAC-10ML', 1 ) );
+}
+
+class ALP_Preview_Cart {
+	public function lines() {
+		$out = array();
+		foreach ( alp_preview_cart_items() as $row ) {
+			$p     = alp_preview_products()[ wc_get_product_id_by_sku( $row[0] ) ];
+			$out[] = array( $p, $row[1], (float) $p->data['price'] * $row[1] );
+		}
+		return $out;
+	}
+	public function get_cart_contents_count() { return array_sum( array_column( alp_preview_cart_items(), 1 ) ); }
+	public function get_displayed_subtotal() { return array_sum( array_column( $this->lines(), 2 ) ); }
+}
+
+function WC() {
+	static $wc = null;
+	if ( null === $wc ) {
+		$wc = (object) array( 'cart' => new ALP_Preview_Cart() );
+	}
+	return $wc;
 }
 
 /* ---------- Produkte & Kategorien aus products.json ---------- */

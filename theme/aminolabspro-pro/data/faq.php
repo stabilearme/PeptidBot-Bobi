@@ -33,6 +33,6 @@ return array(
 	),
 	array(
 		'q' => 'Welche Zahlungsarten gibt es?',
-		'a' => 'Alle aktuell verfügbaren Zahlungsarten werden dir an der Kasse angezeigt. Die Übertragung ist durchgehend verschlüsselt.',
+		'a' => 'Wir akzeptieren ausschließlich Vorkasse per Banküberweisung. Nach der Bestellung erhältst du eine E-Mail mit den Bankdaten; versendet wird nach Zahlungseingang. Details unter <a href="/versandarten/">Versand &amp; Zahlung</a>.',
 	),
 );

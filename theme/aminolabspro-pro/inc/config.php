@@ -41,7 +41,7 @@ return array(
 	),
 
 	/* Versandkostenfrei ab (in €). 0 = Fortschrittsbalken im Warenkorb ausblenden. */
-	'free_shipping_threshold' => 0,
+	'free_shipping_threshold' => 99, // laut Seite „Versand & Zahlung“: kostenloser Versand ab 99 €
 
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
@@ -63,7 +63,7 @@ return array(
 		'stats'     => array(
 			array( 'value' => '≥ 98 %', 'label' => 'Reinheit (HPLC)' ),
 			array( 'value' => '100 %', 'label' => 'chargengetestet' ),
-			array( 'value' => '48 h', 'label' => 'Versand DE/AT/CH' ),
+			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in DE' ),
 		),
 		/*
 		 * Hero-Bild (Vials + Zertifikat) aus der Mediathek. Pfad ab /wp-content/ oder volle URL.
@@ -81,7 +81,7 @@ return array(
 		array( 'icon' => 'flask',  'title' => 'Unabhängiges Labor',  'text' => 'HPLC-Analyse jeder Charge durch ein Drittlabor' ),
 		array( 'icon' => 'doc',    'title' => 'Öffentliche COAs',    'text' => 'Zertifikat per Chargennummer abrufbar' ),
 		array( 'icon' => 'truck',  'title' => 'Versand aus DE',      'text' => 'Schnell und diskret verpackt' ),
-		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Verschlüsselt per Karte oder SEPA-Überweisung' ),
+		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Vorkasse per Banküberweisung, verschlüsselt übertragen' ),
 	),
 
 	/* ---------- Startseite: Abschnitte ---------- */
@@ -181,7 +181,7 @@ return array(
 			'AGB'                => '/agb/',
 			'Widerrufsbelehrung' => '/widerrufsbelehrung/',
 		),
-		'payments'   => array( 'Kreditkarte', 'SEPA-Überweisung', 'Echtzeit-Überweisung' ), // an deine aktiven Zahlarten anpassen
+		'payments'   => array( 'Vorkasse', 'Banküberweisung' ), // laut Seite „Versand & Zahlung“: nur Vorkasse per Banküberweisung
 		'disclaimer' => 'Alle Produkte sind ausschließlich für Forschungs- und Laborzwecke bestimmt. Sie sind keine Arzneimittel, Lebensmittel oder Kosmetika und nicht zur Anwendung am Menschen oder Tier vorgesehen. Abgabe nur an Personen ab 18 Jahren.',
 	),
 
