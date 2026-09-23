@@ -104,6 +104,29 @@ return array(
 			'orderby' => 'popularity', // popularity | date | price | rand | menu_order
 			'cta'     => array( 'label' => 'Alle Produkte', 'url' => 'shop' ),
 		),
+		/*
+		 * Neu & demnächst: Teaser für eine kommende Neuheit + umschaltbare Listen
+		 * „Neu im Shop“ (neueste Produkte) und „Angebote“ (reduzierte Produkte).
+		 * Teaser ausblenden: 'teaser' => array(). Erscheint das Produkt, bei 'cta' den Produktlink eintragen.
+		 */
+		'news' => array(
+			'eyebrow' => 'Neu & demnächst',
+			'title'   => 'Frisch im Labor',
+			'teaser'  => array(
+				'badge'    => 'Demnächst',
+				'title'    => 'Transportabler Vial-Kühlschrank',
+				'text'     => 'Kompakte Kühlbox für deine Vials – mit Akku, per USB aufladbar und mit konstanter Kühltemperatur. Ideal für Transport und Laborwechsel.',
+				'image'    => '/wp-content/uploads/2026/09/Mobiler-Vial-Kuehlschrank-im-Studio-1024x683.png',
+				'features' => array( 'Akkubetrieb 4–6 Stunden', 'USB-Aufladung', 'Kompakt & transportabel', 'Konstante Kühltemperatur' ),
+				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/early-access/' ),
+				'note'     => 'Wir informieren dich per E-Mail, sobald er verfügbar ist.',
+			),
+			'limit'   => 4,
+			'tabs'    => array(
+				'new'  => 'Neu im Shop',
+				'sale' => 'Angebote',
+			),
+		),
 		'coa' => array(
 			'eyebrow' => 'Transparenz',
 			'title'   => 'Prüf deine Charge in Sekunden.',

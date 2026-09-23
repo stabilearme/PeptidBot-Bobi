@@ -20,6 +20,7 @@ get_header();
 		'home/trust',
 		'home/categories',
 		'home/products',
+		'home/news',
 		'home/coa',
 		'home/process',
 		'home/knowledge',

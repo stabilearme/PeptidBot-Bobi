@@ -293,12 +293,24 @@ function pv_render_home() {
 	alp_preview_ctx( 'home' );
 	ob_start();
 	echo '<div id="alp-home" class="alp-home">';
-	foreach ( array( 'home/hero', 'home/trust', 'home/categories', 'home/products', 'home/coa', 'home/process', 'home/knowledge', 'home/faq', 'home/newsletter' ) as $section ) {
+	foreach ( array( 'home/hero', 'home/trust', 'home/categories', 'home/products', 'home/news', 'home/coa', 'home/process', 'home/knowledge', 'home/faq', 'home/newsletter' ) as $section ) {
 		if ( 'home/products' === $section ) {
 			// Wie im Theme – nur dass der [products]-Shortcode hier durch nachgebaute Flatsome-Kacheln ersetzt wird.
 			$cfg  = (array) alp_config( 'sections.products', array() );
 			$html = alp_capture( 'home/products' );
 			$html = preg_replace( '#(<div class="alp-products">)\s*(</div>)#', '$1' . pv_grid( pv_bestsellers( (int) ( $cfg['limit'] ?? 8 ) ) ) . '$2', $html );
+			echo $html;
+			continue;
+		}
+		if ( 'home/news' === $section ) {
+			// [products]-Shortcodes ersetzen: neueste Produkte (höchste ID = zuletzt angelegt) und Angebote.
+			$limit = (int) alp_config( 'sections.news.limit', 4 );
+			$all   = array_values( alp_preview_products() );
+			usort( $all, fn( $a, $b ) => $b->get_id() <=> $a->get_id() );
+			$sale  = array_values( array_filter( pv_bestsellers( 99 ), fn( $p ) => $p->is_on_sale() ) );
+			$html  = alp_capture( 'home/news' );
+			$html  = str_replace( '<div class="alp-products" data-alp-list="new"></div>', '<div class="alp-products" data-alp-list="new">' . pv_grid( array_slice( $all, 0, $limit ) ) . '</div>', $html );
+			$html  = str_replace( '<div class="alp-products" data-alp-list="sale"></div>', '<div class="alp-products" data-alp-list="sale">' . pv_grid( array_slice( $sale, 0, $limit ) ) . '</div>', $html );
 			echo $html;
 			continue;
 		}

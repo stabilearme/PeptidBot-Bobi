@@ -5,6 +5,7 @@
  *  3. Sticky-Kaufleiste auf Produktseiten
  *  4. „Versand heute“-Countdown
  *  5. Bewegung: Einblenden beim Scrollen, hochzählende Laborwerte, Chromatogramm
+ *  6. Umschalter „Neu im Shop“ / „Angebote“ auf der Startseite
  */
 (function () {
 	'use strict';
@@ -133,7 +134,7 @@
 	var REVEAL = [
 		'.alp-section__head', '.alp-trust__item', '.alp-cat', '.products .product-small',
 		'.alp-coa-teaser__copy', '.alp-coa-teaser__list', '.alp-process__step', '.alp-know__card',
-		'.alp-faq__head', '.alp-faq__item', '.alp-cta', '.alp-coa-card', '.alp-coa-explain',
+		'.alp-faq__head', '.alp-faq__item', '.alp-cta', '.alp-soon', '.alp-coa-card', '.alp-coa-explain',
 		'.alp-pcoa', '.alp-ptab-coa__doc', '.alp-ptab-coa__info', '.alp-shop-intro',
 		'.wis-card', '.box-blog-post', '.gl-card', '.ship-card', '.recon-card', '.alp-usp-card',
 		'#alp-scope .alp-card', '#alp-scope .alp-section', '.alp3-flag-col',
@@ -197,6 +198,25 @@
 		document.querySelectorAll('.alp-chroma').forEach(function (el) { io.observe(el); });
 	}
 
+	/* 6. Umschalter (Tabs) --------------------------------------------------- */
+	function initTabs() {
+		document.addEventListener('click', function (e) {
+			var tab = e.target.closest('[data-alp-tab]');
+			if (!tab) return;
+			var group = tab.parentElement;
+			group.querySelectorAll('[data-alp-tab]').forEach(function (t) {
+				var on = t === tab;
+				t.classList.toggle('is-active', on);
+				t.setAttribute('aria-selected', on ? 'true' : 'false');
+				var panel = document.getElementById(t.getAttribute('data-alp-tab'));
+				if (panel) panel.hidden = !on;
+			});
+			// Kacheln im neu gezeigten Bereich sofort einblenden
+			var shown = document.getElementById(tab.getAttribute('data-alp-tab'));
+			if (shown) shown.querySelectorAll('.alp-reveal').forEach(function (el) { el.classList.add('is-in'); });
+		});
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') fn();
 		else document.addEventListener('DOMContentLoaded', fn);
@@ -208,5 +228,6 @@
 		initBuyBar();
 		initShipping();
 		initMotion();
+		initTabs();
 	});
 })();

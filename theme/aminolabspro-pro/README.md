@@ -44,6 +44,7 @@ Premium-Design für aminolabspro.com: neue Startseite, COA-Center mit Chargen-Pr
 | Formatierung Beschreibungen, Seiten, Beiträge   | `assets/css/content.css`                 |
 | Aussehen Inhaltsseiten (Wissen, Kontakt, Versand, Rechtliches …) | `assets/css/pages.css`  |
 | Shop-Einleitung & Vorteils-Chips                | `inc/config.php` → `shop`                |
+| „Neu & demnächst“ (Teaser, Neu im Shop, Angebote) | `inc/config.php` → `sections.news`     |
 | Aussehen Warenkorb / Kasse / Konto              | `assets/css/checkout.css`                |
 | Aussehen COA-Seite & Chargen-Box                | `assets/css/coa.css`                     |
 | Header / Navigation                             | `assets/css/header.css` (Aufbau: Customizer → Header) |
@@ -76,7 +77,7 @@ Die Chargennummer ist danach sofort im **Chargen-Prüfer** (Startseite + COA-Sei
 
 ## 4. Was das Theme macht
 
-**Startseite** (`front-page.php`) – Hero mit Live-Zertifikat, Vertrauensleiste, Kategorien (automatisch aus WooCommerce), Bestseller, Chargen-Prüfer, Ablauf, Wissen/Tools, FAQ (mit Google-Rich-Snippet), Newsletter-Aufruf (führt zu `/early-access/`).
+**Startseite** (`front-page.php`) – Hero mit Live-Zertifikat, Vertrauensleiste, Kategorien (automatisch aus WooCommerce), Bestseller, „Neu & demnächst“ (Teaser für kommende Neuheiten + umschaltbar „Neu im Shop“ / „Angebote“), Chargen-Prüfer, Ablauf, Wissen/Tools, FAQ (mit Google-Rich-Snippet), Newsletter-Aufruf (führt zu `/early-access/`).
 Der Editor-Inhalt der Seite „Home“ wird nicht mehr angezeigt; SEO-Titel/Beschreibung aus Rank Math bleiben aktiv.
 
 **COA-Seite** (`page-coa.php`, greift automatisch für die Seite mit dem Slug `coa`) – Chargen-Prüfer, filterbare Zertifikatsübersicht aus `data/coa-batches.php`, Erklärung zum Lesen eines COAs.
