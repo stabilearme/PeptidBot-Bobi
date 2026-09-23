@@ -164,7 +164,9 @@ function alp_on_activate( $old_name, $old_theme = null ) {
  */
 add_filter( 'theme_mod_site_logo', 'alp_default_logo' );
 function alp_default_logo( $logo ) {
-	if ( ! empty( $logo ) ) {
+	// Flatsome liefert ohne gewähltes Logo sein eigenes Platzhalter-Logo (…/flatsome/assets/img/logo.png).
+	$is_placeholder = is_string( $logo ) && ! is_numeric( $logo ) && false !== strpos( $logo, '/assets/img/logo' ) && false !== strpos( $logo, get_template_directory_uri() );
+	if ( ! empty( $logo ) && ! $is_placeholder ) {
 		return $logo;
 	}
 	$fallback = alp_config( 'brand.logo' );
