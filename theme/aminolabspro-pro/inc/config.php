@@ -75,12 +75,16 @@ return array(
 		'secondary' => array( 'label' => 'Charge prüfen', 'url' => '/#charge-pruefen' ),
 		/* Kurze Häkchen-Zeile unter den Buttons. */
 		'checks'    => array( 'Öffentliche COAs', 'Versand aus DE', 'Vorkasse per Überweisung' ),
-		/* Kennzahlen: mit Hero-Bild als Mint-Leiste darunter, sonst im Hero. {coa} = Zahl der veröffentlichten Zertifikate. */
+		/*
+		 * Kennzahlen: mit Hero-Bild als schwebende „Labor-Anzeige“ unter dem Hero, sonst im Hero.
+		 * {coa} = Zahl der veröffentlichten Zertifikate.
+		 * 'visual': meter (Balken bis 'fill' %), ring (Kreis bis 'fill' %), docs (ein Kästchen je COA), timeline (Schritte aus 'steps').
+		 */
 		'stats'     => array(
-			array( 'value' => '≥ 98 %', 'label' => 'Reinheit laut HPLC' ),
-			array( 'value' => '100 %', 'label' => 'der Chargen getestet' ),
-			array( 'value' => '{coa} COAs', 'label' => 'öffentlich einsehbar' ),
-			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in Deutschland' ),
+			array( 'value' => '≥ 98 %', 'label' => 'Reinheit laut HPLC', 'icon' => 'flask', 'visual' => 'meter', 'fill' => 98 ),
+			array( 'value' => '100 %', 'label' => 'der Chargen getestet', 'icon' => 'shield', 'visual' => 'ring', 'fill' => 100 ),
+			array( 'value' => '{coa} COAs', 'label' => 'öffentlich einsehbar', 'icon' => 'doc', 'visual' => 'docs' ),
+			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in Deutschland', 'icon' => 'truck', 'visual' => 'timeline', 'steps' => array( 'Bestellt', 'Versendet', 'Da' ) ),
 		),
 		/*
 		 * Hero-Bild (Vials + Zertifikat) aus der Mediathek. Pfad ab /wp-content/ oder volle URL.

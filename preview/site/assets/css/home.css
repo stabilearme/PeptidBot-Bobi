@@ -459,7 +459,7 @@
 
 /* ---------- Hero: Text links, Foto rechts ---------- */
 .alp-hero--split {
-	padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem) clamp(3rem, 2rem + 3.5vw, 6rem);
+	padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem) clamp(2rem, 1.25rem + 2.5vw, 4rem);
 	background: var(--alp-surface);
 }
 .alp-hero--split::before {
@@ -509,13 +509,64 @@
 .alp-hero__proof-foot { display: flex; justify-content: space-between; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--alp-line); font-size: 0.8125rem; color: var(--alp-muted); }
 .alp-hero__proof-foot .alp-mono { color: var(--alp-ink); font-weight: 500; white-space: nowrap; }
 
-/* ---------- Kennzahlen (Mint-Leiste) ---------- */
-.alp-stats { background: var(--alp-action); color: var(--alp-on-action); }
-.alp-stats__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-block: 0; }
-.alp-stats__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.25rem; padding: 1.75rem 0 1.75rem 2rem; border-left: 1px solid rgba(26, 31, 46, 0.15); }
-.alp-stats__item:first-child { padding-left: 0; border-left: 0; }
-.alp-stats__item dd { margin: 0; font-family: var(--alp-font-display); font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.125rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.alp-stats__item dt { margin: 0; font-size: var(--alp-fs-sm); font-weight: 500; }
+/* ---------- Kennzahlen: schwebende Labor-Anzeige zwischen Hero und Chargen-Prüfer ---------- */
+.alp-stats { position: relative; z-index: 2; background: linear-gradient(180deg, var(--alp-surface) 50%, var(--alp-paper) 50%); }
+.alp-stats__panel {
+	display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+	margin: 0; padding: 0; list-style: none;
+	border: 1px solid var(--alp-line); border-radius: var(--alp-r-lg);
+	background: var(--alp-surface); box-shadow: 0 18px 50px rgba(26, 31, 46, 0.08);
+	overflow: hidden;
+}
+.alp-stats__panel::before { content: ""; grid-column: 1 / -1; height: 3px; background: linear-gradient(90deg, var(--alp-action), var(--alp-brand) 60%, var(--alp-action)); }
+.alp-stats__item { display: flex; flex-direction: column; gap: 1rem; margin: 0; padding: 1.5rem 1.5rem 1.4rem; border-left: 1px solid var(--alp-line); }
+.alp-stats__item:first-child { border-left: 0; }
+.alp-stats__top { display: flex; align-items: flex-start; gap: 0.85rem; }
+.alp-stats__icon { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--alp-r-md); background: var(--alp-brand-soft); color: var(--alp-brand); }
+.alp-stats__text { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; flex: 1; }
+.alp-stats__value { font-family: var(--alp-font-display); font-size: clamp(1.5rem, 1.15rem + 1vw, 2rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--alp-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.alp-stats__label { font-size: var(--alp-fs-sm); color: var(--alp-muted); }
+
+/* Messbalken (Reinheit) */
+.alp-stats__meter { position: relative; height: 8px; margin-top: auto; border-radius: 999px; background: var(--alp-paper-2); overflow: hidden; }
+.alp-stats__meter-bar { position: absolute; inset: 0 auto 0 0; width: calc((var(--alp-fill) - 90%) * 10); max-width: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--alp-action), var(--alp-brand)); }
+.alp-stats__meter-mark { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(26, 31, 46, 0.18); }
+.alp-stats__scale { display: flex; justify-content: space-between; margin-top: -0.55rem; font-family: var(--alp-font-mono); font-size: 0.6875rem; color: var(--alp-muted); }
+
+/* Ring (getestet) */
+.alp-stats__ring { flex: none; width: 44px; height: 44px; margin-left: auto; transform: rotate(-90deg); }
+.alp-stats__ring circle { fill: none; stroke: var(--alp-paper-2); stroke-width: 4; }
+.alp-stats__ring .is-bar { stroke: var(--alp-action); stroke-linecap: round; stroke-dasharray: var(--alp-ring, 100) 100; }
+.alp-stats__ring path { fill: none; stroke: var(--alp-brand); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transform: rotate(90deg); transform-origin: 22px 22px; }
+.alp-stats__item--ring { --alp-ring: 100; }
+
+/* Live-Zeile (letzte Prüfung) */
+.alp-stats__note { display: flex; align-items: center; gap: 0.5rem; margin: auto 0 0; padding: 0.45rem 0.7rem; border-radius: var(--alp-r-sm); background: var(--alp-paper); font-size: 0.75rem; color: var(--alp-muted); }
+.alp-stats__note .alp-mono { color: var(--alp-ink); font-weight: 500; }
+
+/* Zertifikat-Kästchen (COAs) */
+.alp-stats__docs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.alp-stats__docs span { width: 14px; height: 18px; border-radius: 3px; background: var(--alp-brand-soft); border: 1px solid var(--alp-brand-line); position: relative; }
+.alp-stats__docs span::after { content: ""; position: absolute; left: 3px; right: 3px; top: 5px; height: 1.5px; background: var(--alp-brand); box-shadow: 0 3px 0 var(--alp-brand), 0 6px 0 var(--alp-brand-line); }
+
+/* Zeitleiste (Lieferung) */
+.alp-stats__timeline { display: flex; justify-content: space-between; position: relative; margin: auto 0 0; padding: 0; list-style: none; font-size: 0.75rem; font-weight: 600; color: var(--alp-ink); }
+.alp-stats__timeline::before { content: ""; position: absolute; top: 5px; left: 5px; right: 5px; height: 2px; background: linear-gradient(90deg, var(--alp-action), var(--alp-brand)); }
+.alp-stats__timeline li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.35rem; margin: 0; padding-top: 0; }
+.alp-stats__timeline li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--alp-surface); border: 2.5px solid var(--alp-brand); box-sizing: border-box; }
+.alp-stats__timeline li:first-child { align-items: flex-start; }
+.alp-stats__timeline li:last-child { align-items: flex-end; }
+.alp-stats__timeline li:last-child::before { background: var(--alp-action); border-color: var(--alp-action); }
+
+/* Aufbau-Animation beim Einblenden */
+.alp-motion .alp-stats__panel.alp-reveal .alp-stats__meter-bar { transform: scaleX(0); transform-origin: left; transition: transform 1100ms var(--alp-ease) 250ms; }
+.alp-motion .alp-stats__panel.alp-reveal.is-in .alp-stats__meter-bar { transform: none; }
+.alp-motion .alp-stats__panel.alp-reveal .alp-stats__ring .is-bar { stroke-dasharray: 0 100; transition: stroke-dasharray 1100ms var(--alp-ease) 350ms; }
+.alp-motion .alp-stats__panel.alp-reveal.is-in .alp-stats__ring .is-bar { stroke-dasharray: var(--alp-ring, 100) 100; }
+.alp-motion .alp-stats__panel.alp-reveal .alp-stats__docs span { opacity: 0.25; transition: opacity 300ms var(--alp-ease) calc(400ms + var(--i) * 70ms); }
+.alp-motion .alp-stats__panel.alp-reveal.is-in .alp-stats__docs span { opacity: 1; }
+.alp-motion .alp-stats__panel.alp-reveal .alp-stats__timeline li::before { transform: scale(0.4); opacity: 0.3; transition: transform 400ms var(--alp-ease) calc(450ms + var(--i) * 220ms), opacity 400ms var(--alp-ease) calc(450ms + var(--i) * 220ms); }
+.alp-motion .alp-stats__panel.alp-reveal.is-in .alp-stats__timeline li::before { transform: none; opacity: 1; }
 
 /* ---------- Chargen-Prüfer als dunkle Karte ---------- */
 .alp-section--snug { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); }
@@ -576,15 +627,17 @@
 	.alp-hero--split .alp-hero__grid, .alp-check-card { grid-template-columns: 1fr; }
 	.alp-hero__visual { padding-left: 0; }
 	.alp .alp-hero__proof { left: 16px; bottom: 16px; }
-	.alp-stats__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	.alp-stats__item { padding: 1.25rem 0 1.25rem 1.25rem; }
-	.alp-stats__item:nth-child(odd) { padding-left: 0; border-left: 0; }
-	.alp-stats__item:nth-child(n+3) { border-top: 1px solid rgba(26, 31, 46, 0.15); }
+	.alp-stats__panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.alp-stats__item:nth-child(odd) { border-left: 0; }
+	.alp-stats__item:nth-child(n+3) { border-top: 1px solid var(--alp-line); }
 	.alp-soon--full { grid-template-columns: 1fr; }
 	.alp-soon--full .alp-soon__media::after { content: none; }
 	.alp-articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 767px) {
+	.alp-stats__item { padding: 1.1rem; gap: 0.8rem; }
+	.alp-stats__icon { display: none; }
+	.alp-stats__ring { width: 34px; height: 34px; }
 	.alp-hero__photo { height: 260px; }
 	.alp .alp-hero__proof { width: auto; right: auto; padding: 0.75rem 1rem; gap: 0.35rem; }
 	.alp-hero__proof-head, .alp-hero__proof-foot { display: none; }
