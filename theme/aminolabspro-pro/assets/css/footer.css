@@ -96,7 +96,7 @@
 		grid-auto-columns: 1fr;
 		height: calc(var(--alp-bottom-nav-h) + env(safe-area-inset-bottom, 0px));
 		padding-bottom: env(safe-area-inset-bottom, 0px);
-		background: rgba(255, 255, 255, 0.94);
+		background: rgba(var(--alp-surface-rgb), 0.94);
 		-webkit-backdrop-filter: saturate(160%) blur(16px);
 		backdrop-filter: saturate(160%) blur(16px);
 		border-top: 1px solid var(--alp-line);

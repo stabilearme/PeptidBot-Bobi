@@ -77,7 +77,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(90deg, var(--alp-surface) 0%, rgba(255, 255, 255, 0.6) 18%, rgba(255, 255, 255, 0) 42%);
+	background: linear-gradient(90deg, var(--alp-surface) 0%, rgba(var(--alp-surface-rgb), 0.6) 18%, rgba(var(--alp-surface-rgb), 0) 42%);
 }
 .alp-hero--image .alp-hero__grid { position: relative; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); min-height: clamp(460px, 34vw, 600px); }
 .alp-hero--image .alp-hero__stats { border-top-color: rgba(26, 31, 46, 0.12); }
@@ -106,7 +106,7 @@
 	padding: 0.75rem 0.5rem 0.25rem;
 	border: 1px dashed var(--alp-line-2);
 	border-radius: var(--alp-r-md);
-	background: linear-gradient(180deg, #FBFDFC, #fff);
+	background: linear-gradient(180deg, var(--alp-paper), var(--alp-surface));
 }
 .alp-cert__data {
 	display: grid;
@@ -391,11 +391,11 @@
 .alp-soon__features li { display: flex; align-items: center; gap: 0.45rem; margin: 0; font-size: 0.9375rem; color: #fff; }
 .alp-soon__features .alp-icon { color: var(--alp-mint); }
 .alp .alp-soon .alp-btn--primary { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
-.alp .alp-soon .alp-btn--primary:hover { background: #fff; border-color: #fff; color: var(--alp-ink); }
+.alp .alp-soon .alp-btn--primary:hover { background: var(--alp-surface); border-color: var(--alp-surface); color: var(--alp-ink); }
 .alp-soon__note { margin: 0.75rem 0 0 !important; font-size: 0.8125rem; color: var(--alp-dark-muted); }
 
 /* Helle Variante: Produktbild mit eingebauten Angaben wird vollständig gezeigt (Querformat, kein Zuschnitt) */
-.alp-soon--light { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); background: #fff; color: var(--alp-ink-2); border: 1px solid var(--alp-line); box-shadow: var(--alp-shadow-card); }
+.alp-soon--light { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); background: var(--alp-surface); color: var(--alp-ink-2); border: 1px solid var(--alp-line); box-shadow: var(--alp-shadow-card); }
 .alp-soon--light .alp-soon__media { aspect-ratio: 3 / 2; max-height: none; background: var(--alp-paper); }
 .alp-soon--light .alp-soon__media img { object-fit: cover; object-position: 50% 50%; transform: none; }
 .alp-soon--light .alp-soon__media::after { content: none; }
@@ -410,7 +410,7 @@
 	.alp-hero--image { padding-top: 0; }
 	.alp-hero__media { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 10; max-height: 520px; margin-bottom: 1.25rem; }
 	.alp-hero__media img { object-position: 88% 50%; }
-	.alp-hero__media::after { background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, var(--alp-surface) 100%); }
+	.alp-hero__media::after { background: linear-gradient(180deg, rgba(var(--alp-surface-rgb), 0) 70%, var(--alp-surface) 100%); }
 	.alp-hero--image .alp-hero__grid { grid-template-columns: 1fr; min-height: 0; }
 }
 @media (max-width: 1023px) {

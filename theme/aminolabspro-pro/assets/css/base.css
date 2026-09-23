@@ -17,6 +17,13 @@ body.alp {
 	font-feature-settings: "ss01", "cv11";
 }
 
+/* Flatsome färbt diese Flächen weiß – hier auf den Creme-Ton der Seite */
+.alp #wrapper, .alp #main, .alp .page-wrapper, .alp .shop-container, .alp .product-main,
+.alp .product-footer, .alp .off-canvas .mfp-content, .alp .off-canvas-left .mfp-content,
+.alp .mfp-content .lightbox-content, .alp .nav-dropdown, .alp .flickity-slider > .col,
+.alp .woocommerce-tabs .panel, .alp .box-text, .alp .searchform .live-search-results { background-color: var(--alp-surface); }
+.alp .nav-dropdown { background-color: var(--alp-surface) !important; }
+
 .alp h1, .alp h2, .alp h3, .alp h4, .alp h5, .alp h6,
 .alp .heading-font, .alp .product-title, .alp .entry-title {
 	font-family: var(--alp-font-display);
@@ -138,7 +145,7 @@ body.alp {
 	color: #fff;
 }
 
-.alp .alp-btn--light { background: #fff; color: var(--alp-ink); border-color: #fff; }
+.alp .alp-btn--light { background: var(--alp-surface); color: var(--alp-ink); border-color: var(--alp-surface); }
 .alp .alp-btn--light:hover { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
 
 .alp .alp-btn--lg { min-height: 54px; padding: 0 1.6rem; font-size: var(--alp-fs-md); }
@@ -166,7 +173,7 @@ body.alp {
 	font-family: var(--alp-font-body);
 	font-size: var(--alp-fs-base); /* 16px: verhindert Auto-Zoom auf iPhone */
 	color: var(--alp-ink);
-	background-color: var(--alp-surface);
+	background-color: var(--alp-field);
 	border: 1.5px solid var(--alp-line-2);
 	border-radius: var(--alp-r-md);
 	box-shadow: none;

@@ -47,7 +47,7 @@ a { text-decoration: none; }
 
 /* ---------- Header ---------- */
 #header { position: sticky; top: 0; z-index: 30; }
-.header-main { background: rgba(255,255,255,.88); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--alp-line); }
+.header-main { background: rgba(var(--alp-surface-rgb),.9); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--alp-line); }
 .header-inner { display: flex; align-items: center; gap: 1.5rem; height: 76px; }
 .flex-row { display: flex; align-items: center; }
 .flex-col { display: flex; align-items: center; }

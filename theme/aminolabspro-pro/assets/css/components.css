@@ -195,7 +195,7 @@
 .alp .alp-lookup--dark .alp-lookup__input::placeholder { color: #5E7780; }
 .alp .alp-lookup--dark .alp-lookup__input:focus { border-color: var(--alp-mint); box-shadow: 0 0 0 4px rgba(110, 218, 180, 0.18); }
 .alp .alp-lookup--dark .alp-btn--primary { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
-.alp .alp-lookup--dark .alp-btn--primary:hover { background: #fff; border-color: #fff; }
+.alp .alp-lookup--dark .alp-btn--primary:hover { background: var(--alp-surface); border-color: var(--alp-surface); }
 .alp .alp-lookup--dark .alp-lookup__hint { color: var(--alp-dark-muted); }
 .alp .alp-lookup--dark .alp-lookup__example:hover { color: var(--alp-mint); }
 
