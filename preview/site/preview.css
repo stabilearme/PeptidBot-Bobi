@@ -9,6 +9,7 @@
 .pv-bar__tag { margin-right: .5rem; font-family: var(--alp-font-mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase; color: #6b5a12; white-space: nowrap; }
 .pv-bar a { color: #3d3409; padding: .3rem .65rem; border-radius: 99px; white-space: nowrap; }
 .pv-bar a:hover { background: rgba(0,0,0,.06); color: #000; }
+.pv-bar a.pv-bar__switch { margin-right: .35rem; border: 1.5px solid #3d3409; }
 .pv-bar a.is-current { background: #3d3409; color: #fff3c4; }
 
 .pv-lightbox {

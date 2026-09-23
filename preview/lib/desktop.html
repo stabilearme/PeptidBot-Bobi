@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Desktop-Ansicht – AminoLabs Pro (Vorschau)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/brand/aminolabspro-logo_4.svg" type="image/svg+xml">
+<style>
+	/* Nur Vorschau: zeigt die Seiten in Desktop-Breite, verkleinert auf den Bildschirm. */
+	:root { --w: 1366px; }
+	html, body { margin: 0; height: 100%; background: #0B151C; overflow: hidden; }
+	body { display: flex; flex-direction: column; font: 600 13px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif; }
+	.bar {
+		display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none;
+		padding: 8px 12px; background: #fff3c4; color: #3d3409; border-bottom: 1px solid #e8d78f;
+	}
+	.bar span { margin-right: 4px; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; }
+	.bar a { color: #3d3409; padding: 6px 8px; border-radius: 99px; text-decoration: none; white-space: nowrap; }
+	.bar a.is-current { background: #3d3409; color: #fff3c4; }
+	.bar a.back { margin-left: auto; border: 1.5px solid #3d3409; }
+	.stage { position: relative; flex: 1; overflow: hidden; }
+	iframe {
+		position: absolute; top: 0; left: 0; border: 0; background: #fff;
+		width: var(--w); transform-origin: 0 0;
+	}
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="Vorschau-Seiten">
+	<span>Desktop</span>
+	<a href="#index.html" data-page="index.html">Start</a>
+	<a href="#shop.html" data-page="shop.html">Shop</a>
+	<a href="#produkt-bpc-157-10mg.html" data-page="produkt-bpc-157-10mg.html">Produkt</a>
+	<a href="#coa.html" data-page="coa.html">COA</a>
+	<a id="back" class="back" href="index.html" aria-label="Zurück zur Handy-Ansicht">Handy</a>
+</nav>
+<div class="stage" id="stage"><iframe id="frame" title="Vorschau in Desktop-Breite"></iframe></div>
+<script>
+	window.PV_DESKTOP = true;
+	(function () {
+		var W = 1366;
+		var stage = document.getElementById('stage');
+		var frame = document.getElementById('frame');
+		var back = document.getElementById('back');
+		var page = /^#[\w.~-]+\.html$/.test(location.hash) ? location.hash.slice(1) : 'index.html';
+
+		function fit() {
+			var s = Math.min(1, stage.clientWidth / W);
+			frame.style.transform = 'scale(' + s + ')';
+			frame.style.height = (stage.clientHeight / s) + 'px';
+		}
+		frame.addEventListener('load', function () {
+			try {
+				var file = frame.contentWindow.location.pathname.split('/').pop() || 'index.html';
+				back.href = file;
+				history.replaceState(null, '', '#' + file);
+				mark(file);
+			} catch (e) {}
+		});
+		function mark(file) {
+			document.querySelectorAll('[data-page]').forEach(function (a) {
+				a.classList.toggle('is-current', a.getAttribute('data-page') === file);
+			});
+		}
+		document.querySelectorAll('[data-page]').forEach(function (a) {
+			a.addEventListener('click', function (e) {
+				e.preventDefault();
+				frame.src = a.getAttribute('data-page');
+			});
+		});
+		window.addEventListener('resize', fit);
+		frame.src = page;
+		fit();
+	})();
+</script>
+</body>
+</html>

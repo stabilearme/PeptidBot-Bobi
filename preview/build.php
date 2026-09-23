@@ -409,11 +409,11 @@ function pv_copy_dir( $from, $to ) {
 }
 
 @mkdir( ALP_PREVIEW_OUT, 0777, true );
-foreach ( glob( ALP_PREVIEW_OUT . '/*.html' ) as $old ) {
+foreach ( glob( ALP_PREVIEW_OUT . '/*.html' ) as $old ) { // inkl. desktop.html, wird unten neu kopiert
 	unlink( $old );
 }
 pv_copy_dir( ALP_PREVIEW_THEME . '/assets', ALP_PREVIEW_OUT . '/assets' );
-foreach ( array( 'flatsome-shim.css', 'preview.css', 'preview.js' ) as $f ) {
+foreach ( array( 'flatsome-shim.css', 'preview.css', 'preview.js', 'desktop.html' ) as $f ) {
 	copy( __DIR__ . '/lib/' . $f, ALP_PREVIEW_OUT . '/' . $f );
 }
 

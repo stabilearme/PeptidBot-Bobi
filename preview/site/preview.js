@@ -16,6 +16,26 @@
 		t._h = setTimeout(function () { t.classList.remove('is-on'); }, 2600);
 	}
 
+	/* Umschalter Handy-/Desktop-Ansicht in der Vorschau-Leiste */
+	var bar = document.querySelector('.pv-bar');
+	if (bar) {
+		var file = location.pathname.split('/').pop() || 'index.html';
+		if (!/\.html$/.test(file)) file = 'index.html';
+		var inDesktop = false;
+		try { inDesktop = window.parent !== window && window.parent.PV_DESKTOP === true; } catch (e) {}
+		var sw = document.createElement('a');
+		sw.className = 'pv-bar__switch';
+		if (inDesktop) {
+			// Die Desktop-Ansicht hat ihre eigene, gut lesbare Leiste.
+			bar.hidden = true;
+		} else {
+			sw.textContent = 'Desktop-Ansicht';
+			sw.href = 'desktop.html#' + file;
+		}
+		var tag = bar.querySelector('.pv-bar__tag');
+		bar.insertBefore(sw, tag ? tag.nextSibling : bar.firstChild);
+	}
+
 	/* Lightbox für Zertifikate & Produktbilder (im Shop: Flatsome-Lightbox) */
 	function openLightbox(src) {
 		var box = document.createElement('div');
