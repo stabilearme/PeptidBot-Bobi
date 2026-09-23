@@ -359,7 +359,7 @@
 .alp-cta__copy p { margin: 0; }
 
 /* ---------- Neu & demnächst ---------- */
-.alp-news__tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.alp-news__tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.1rem; }
 .alp-news__tabs .alp-pill { cursor: pointer; font: inherit; font-size: var(--alp-fs-sm); font-weight: 600; }
 .alp-news { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
 .alp-soon {

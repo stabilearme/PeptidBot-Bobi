@@ -29,13 +29,6 @@ if ( ! $teaser && ! $tabs ) {
 				<p class="alp-eyebrow"><?php echo esc_html( $cfg['eyebrow'] ?? '' ); ?></p>
 				<h2 class="alp-h2"><?php echo esc_html( $cfg['title'] ?? '' ); ?></h2>
 			</div>
-			<?php if ( count( $tabs ) > 1 ) : ?>
-				<div class="alp-news__tabs" role="tablist" aria-label="Produktauswahl">
-					<?php $first = true; foreach ( $tabs as $key => $label ) : ?>
-						<button type="button" class="alp-pill<?php echo $first ? ' is-active' : ''; ?>" role="tab" aria-selected="<?php echo $first ? 'true' : 'false'; ?>" aria-controls="alp-news-<?php echo esc_attr( $key ); ?>" data-alp-tab="alp-news-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></button>
-					<?php $first = false; endforeach; ?>
-				</div>
-			<?php endif; ?>
 		</header>
 
 		<div class="alp-news<?php echo $teaser ? '' : ' alp-news--no-teaser'; ?>">
@@ -78,6 +71,13 @@ if ( ! $teaser && ! $tabs ) {
 
 			<?php if ( $tabs ) : ?>
 				<div class="alp-news__lists">
+					<?php if ( count( $tabs ) > 1 ) : ?>
+						<div class="alp-news__tabs" role="tablist" aria-label="Produktauswahl">
+							<?php $first = true; foreach ( $tabs as $key => $label ) : ?>
+								<button type="button" class="alp-pill<?php echo $first ? ' is-active' : ''; ?>" role="tab" aria-selected="<?php echo $first ? 'true' : 'false'; ?>" aria-controls="alp-news-<?php echo esc_attr( $key ); ?>" data-alp-tab="alp-news-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></button>
+							<?php $first = false; endforeach; ?>
+						</div>
+					<?php endif; ?>
 					<?php $first = true; foreach ( $tabs as $key => $label ) : ?>
 						<div class="alp-news__panel" id="alp-news-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-label="<?php echo esc_attr( $label ); ?>"<?php echo $first ? '' : ' hidden'; ?>>
 							<div class="alp-products" data-alp-list="<?php echo esc_attr( $key ); ?>"><?php echo do_shortcode( $shortcodes[ $key ] ?? '' ); // phpcs:ignore ?></div>

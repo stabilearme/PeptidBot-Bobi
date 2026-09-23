@@ -1,0 +1,154 @@
+/* ==========================================================================
+   EINHEITLICHE BUTTONS & AUSWAHLFELDER
+   Lädt nach allen Seiten-Stylesheets, damit auch WooCommerce- und Flatsome-
+   Buttons (Warenkorb, Kasse, Konto, Produktkacheln) denselben plastischen
+   Stil wie die Startseite bekommen.
+   ========================================================================== */
+
+.alp {
+	--alp-btn3d-primary: linear-gradient(180deg, #8BE6C6 0%, var(--alp-action) 45%, #52C99E 100%);
+	--alp-btn3d-primary-hover: linear-gradient(180deg, #7DE0BD 0%, #5ED0A7 45%, #45BD92 100%);
+	--alp-btn3d-primary-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.12), 0 1px 2px rgba(26, 31, 46, 0.1), 0 8px 20px -6px rgba(46, 160, 120, 0.55);
+	--alp-btn3d-primary-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.14), 0 2px 4px rgba(26, 31, 46, 0.1), 0 14px 28px -8px rgba(46, 160, 120, 0.65);
+	--alp-btn3d-ghost: linear-gradient(180deg, #FFFFFF, #F4F8FA);
+	--alp-btn3d-ghost-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(26, 31, 46, 0.06), 0 6px 16px -8px rgba(26, 31, 46, 0.2);
+	--alp-btn3d-ghost-shadow-hover: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(26, 31, 46, 0.06), 0 12px 24px -10px rgba(46, 160, 120, 0.45);
+}
+
+/* ---------- Hauptaktionen: Mint, plastisch ---------- */
+.alp :is(
+	.alp-btn--primary,
+	.button.alt, .button.primary:not(.is-outline), .button.checkout,
+	.single_add_to_cart_button, .checkout-button, #place_order,
+	.product-small .add_to_cart_button, .product-small .add-to-cart-button .button,
+	.add_to_cart_button, .ajax_add_to_cart,
+	.woocommerce-mini-cart__buttons .checkout,
+	.woocommerce-form-login__submit, .woocommerce-form-register__submit,
+	.woocommerce-MyAccount-content .button:not(.wc-forward):not(.view),
+	.woocommerce-Button, .wpcf7-submit
+) {
+	background: var(--alp-btn3d-primary);
+	border: 1px solid #4DC49A;
+	color: var(--alp-on-action);
+	font-family: var(--alp-font-body);
+	font-weight: 700;
+	letter-spacing: 0;
+	text-transform: none;
+	text-shadow: none;
+	border-radius: var(--alp-r-md);
+	box-shadow: var(--alp-btn3d-primary-shadow);
+	transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), background var(--alp-dur) var(--alp-ease);
+}
+.alp :is(
+	.alp-btn--primary,
+	.button.alt, .button.primary:not(.is-outline), .button.checkout,
+	.single_add_to_cart_button, .checkout-button, #place_order,
+	.product-small .add_to_cart_button, .product-small .add-to-cart-button .button,
+	.add_to_cart_button, .ajax_add_to_cart,
+	.woocommerce-mini-cart__buttons .checkout,
+	.woocommerce-form-login__submit, .woocommerce-form-register__submit,
+	.woocommerce-MyAccount-content .button:not(.wc-forward):not(.view),
+	.woocommerce-Button, .wpcf7-submit
+):hover {
+	background: var(--alp-btn3d-primary-hover);
+	border-color: #45BD92;
+	color: var(--alp-on-action);
+	transform: translateY(-2px);
+	box-shadow: var(--alp-btn3d-primary-shadow-hover);
+}
+.alp :is(.alp-btn--primary, .button.alt, .single_add_to_cart_button, .checkout-button, #place_order, .add_to_cart_button, .wpcf7-submit):active {
+	transform: translateY(0);
+	box-shadow: inset 0 2px 4px rgba(26, 31, 46, 0.18);
+}
+/* Deaktiviert (z. B. Variante noch nicht gewählt) */
+.alp :is(.single_add_to_cart_button, #place_order, .button.alt).disabled,
+.alp :is(.single_add_to_cart_button, #place_order, .button.alt):disabled {
+	opacity: 0.55; transform: none; box-shadow: none; cursor: not-allowed;
+}
+/* Große Abschluss-Buttons im Warenkorb & an der Kasse */
+.alp :is(.checkout-button, #place_order) { min-height: 56px; font-size: 1.0625rem; }
+
+/* ---------- Nebenaktionen: weiß, plastisch, Mint-Rand beim Überfahren ---------- */
+.alp :is(
+	.alp-btn--ghost,
+	.button.is-outline, .button.secondary.is-outline, .button-continue-shopping,
+	.coupon .button, button[name="apply_coupon"], button[name="update_cart"],
+	.continue-shopping .button, .return-to-shop .button, .wc-backward,
+	.woocommerce-MyAccount-content .button.view, .woocommerce-orders-table .button,
+	.woocommerce-mini-cart__buttons .wc-forward:not(.checkout)
+) {
+	background: var(--alp-btn3d-ghost);
+	border: 1px solid var(--alp-line-2);
+	color: var(--alp-ink);
+	font-family: var(--alp-font-body);
+	font-weight: 650;
+	letter-spacing: 0;
+	text-transform: none;
+	text-shadow: none;
+	border-radius: var(--alp-r-md);
+	box-shadow: var(--alp-btn3d-ghost-shadow);
+	transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease);
+}
+.alp :is(
+	.alp-btn--ghost,
+	.button.is-outline, .button.secondary.is-outline, .button-continue-shopping,
+	.coupon .button, button[name="apply_coupon"], button[name="update_cart"],
+	.continue-shopping .button, .return-to-shop .button, .wc-backward,
+	.woocommerce-MyAccount-content .button.view, .woocommerce-orders-table .button,
+	.woocommerce-mini-cart__buttons .wc-forward:not(.checkout)
+):hover {
+	background: var(--alp-btn3d-ghost);
+	border-color: var(--alp-action);
+	color: var(--alp-ink);
+	transform: translateY(-2px);
+	box-shadow: var(--alp-btn3d-ghost-shadow-hover);
+}
+.alp button[name="update_cart"]:disabled { opacity: 0.5; transform: none; box-shadow: none; }
+
+/* ---------- Mengenwähler: ein zusammenhängendes Bauteil (Produktseite & Warenkorb) ---------- */
+.alp .quantity {
+	display: inline-flex; align-items: stretch; margin: 0; opacity: 1;
+	border: 1px solid var(--alp-line-2); border-radius: var(--alp-r-md); overflow: hidden;
+	background: var(--alp-surface); box-shadow: inset 0 1px 2px rgba(26, 31, 46, 0.05);
+}
+.alp .quantity :is(.button.minus, .button.plus, input.minus, input.plus) {
+	width: 38px; min-height: 42px; margin: 0; padding: 0;
+	border: 0; border-radius: 0; box-shadow: none; text-shadow: none;
+	background: transparent; color: var(--alp-ink); font-size: 1.1rem; font-weight: 600;
+	transform: none;
+}
+.alp .quantity :is(.button.minus, .button.plus, input.minus, input.plus):hover { background: #F2FBF7; color: #2E8B6E; transform: none; box-shadow: none; }
+.alp .quantity input.qty {
+	width: 44px; min-height: 42px; margin: 0; padding: 0;
+	border: 0; border-inline: 1px solid var(--alp-line); border-radius: 0; box-shadow: none;
+	background: var(--alp-surface); text-align: center; font-family: var(--alp-font-body); font-weight: 700;
+}
+.alp form.cart .quantity :is(.button.minus, .button.plus, input.minus, input.plus, input.qty) { min-height: 52px; }
+
+/* ---------- Auswahlfelder in Markenfarbe statt Browser-Blau ---------- */
+.alp :is(input[type="radio"], input[type="checkbox"]) { accent-color: #2E8B6E; }
+.alp .wc_payment_methods input[type="radio"],
+.alp .woocommerce-form__input-checkbox,
+.alp #terms { width: 18px; height: 18px; vertical-align: -3px; }
+
+/* ---------- Einheitliche Schrift in Shop-Tabellen & Formularen ---------- */
+.alp :is(.shop_table, .cart_totals, .woocommerce-checkout-review-order, .woocommerce-MyAccount-navigation, .woocommerce-form, .woocommerce-billing-fields, .woocommerce-shipping-fields, .woocommerce-additional-fields) {
+	font-family: var(--alp-font-body);
+}
+.alp .shop_table th, .alp .cart_totals th {
+	font-family: var(--alp-font-body);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	color: var(--alp-muted);
+}
+.alp :is(.cart_totals, .woocommerce-checkout-review-order) :is(h2, h3) { font-family: var(--alp-font-display); letter-spacing: -0.01em; }
+.alp :is(.woocommerce-billing-fields, .woocommerce-additional-fields, .woocommerce-shipping-fields) :is(h3) { font-family: var(--alp-font-display); letter-spacing: -0.01em; }
+.alp .woocommerce form .form-row label, .alp .woocommerce-form label { font-family: var(--alp-font-body); font-weight: 600; }
+
+/* ---------- Kleinere Buttons in Produktkacheln ---------- */
+.alp .product-small :is(.add_to_cart_button, .add-to-cart-button .button) { min-height: 40px; font-size: var(--alp-fs-sm); }
+
+@media (prefers-reduced-motion: reduce) {
+	.alp :is(.alp-btn, .button, .single_add_to_cart_button, .checkout-button, #place_order, .add_to_cart_button, .wpcf7-submit):hover { transform: none; }
+}

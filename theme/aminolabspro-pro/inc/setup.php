@@ -23,6 +23,7 @@ function alp_styles() {
 		'checkout'   => 'checkout',   // Warenkorb, Kasse, Konto
 		'home'       => 'home',       // Startseite
 		'coa'        => 'coa',        // COA-Center + Chargen-Prüfer
+		'buttons'    => 'all',        // Einheitliche Buttons & Auswahlfelder (auch WooCommerce/Flatsome) – nach allen anderen
 		'motion'     => 'all',        // Animationen (Schalter: features.animations)
 		'legacy'     => 'all',        // Platz für Übernahmen aus altem Zusatz-CSS
 	);
