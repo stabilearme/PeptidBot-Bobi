@@ -344,9 +344,12 @@
 	@keyframes alp-wa-pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); } 70%, 100% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); } }
 }
 @media (max-width: 849px) {
-	.alp-wa-float { right: 14px; bottom: calc(76px + env(safe-area-inset-bottom)); width: 56px; height: 56px; padding: 0; justify-content: center; }
+	/* über der unteren Leiste (z-index 990) und mit Abstand zu ihr */
+	.alp .alp-wa-float { z-index: 995; right: 14px; bottom: calc(var(--alp-bottom-nav-h, 64px) + 14px + env(safe-area-inset-bottom, 0px)); width: 56px; height: 56px; padding: 0; justify-content: center; }
 	.alp-wa-float__label { display: none; }
-	.alp-buybar-on .alp-wa-float { bottom: calc(150px + env(safe-area-inset-bottom)); }
+	.alp.alp-buybar-on .alp-wa-float { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+	/* Flatsome-„Nach oben“-Pfeil nach links, damit er den WhatsApp-Button nicht verdeckt */
+	.alp.alp-has-bottom-nav .back-to-top { right: auto !important; left: 14px !important; }
 }
 
 /* Sprachumschalter (TranslatePress / GTranslate) im Menü */
