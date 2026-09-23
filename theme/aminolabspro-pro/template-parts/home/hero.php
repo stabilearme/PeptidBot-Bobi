@@ -21,16 +21,16 @@ if ( ! $batch || ! $batch['done'] ) {
 			<p class="alp-hero__text"><?php echo esc_html( $hero['text'] ?? '' ); ?></p>
 			<div class="alp-hero__actions">
 				<?php if ( ! empty( $hero['primary'] ) ) : ?>
-					<a class="alp-btn alp-btn--primary alp-btn--lg" href="<?php echo esc_url( alp_link( $hero['primary']['url'] ) ); ?>"><?php echo esc_html( $hero['primary']['label'] ); ?> <?php echo alp_icon( 'arrow', 18 ); // phpcs:ignore ?></a>
+					<a class="alp-btn alp-btn--primary alp-btn--lg" href="<?php echo esc_url( alp_link( $hero['primary']['url'] ) ); ?>"><?php echo esc_html( $hero['primary']['label'] ); ?> <span class="alp-btn__orb"><?php echo alp_icon( 'arrow', 16 ); // phpcs:ignore ?></span></a>
 				<?php endif; ?>
 				<?php if ( ! empty( $hero['secondary'] ) ) : ?>
-					<a class="alp-btn alp-btn--ghost alp-btn--lg" href="<?php echo esc_url( alp_link( $hero['secondary']['url'] ) ); ?>"><?php echo esc_html( $hero['secondary']['label'] ); ?></a>
+					<a class="alp-btn alp-btn--ghost alp-btn--lg" href="<?php echo esc_url( alp_link( $hero['secondary']['url'] ) ); ?>"><span class="alp-btn__chip"><?php echo alp_icon( 'shield', 16 ); // phpcs:ignore ?></span><?php echo esc_html( $hero['secondary']['label'] ); ?></a>
 				<?php endif; ?>
 			</div>
 			<?php if ( ! empty( $hero['checks'] ) ) : ?>
 				<ul class="alp-hero__checks">
 					<?php foreach ( (array) $hero['checks'] as $check ) : ?>
-						<li><?php echo alp_icon( 'check', 16 ); // phpcs:ignore ?><?php echo esc_html( $check ); ?></li>
+						<li><span class="alp-hero__tick"><?php echo alp_icon( 'check', 12 ); // phpcs:ignore ?></span><?php echo esc_html( $check ); ?></li>
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>

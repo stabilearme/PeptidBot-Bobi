@@ -147,6 +147,42 @@ body.alp {
 	color: #fff;
 }
 
+/* Plastische Buttons: Verlauf, Lichtkante oben, dunklere Unterkante, farbiger Schatten */
+.alp .alp-btn--primary {
+	background: linear-gradient(180deg, #8BE6C6 0%, var(--alp-action) 45%, #52C99E 100%);
+	border-color: #4DC49A;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.12), 0 1px 2px rgba(26, 31, 46, 0.1), 0 8px 20px -6px rgba(46, 160, 120, 0.55);
+	transition: background-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-btn--primary:hover {
+	background: linear-gradient(180deg, #7DE0BD 0%, #5ED0A7 45%, #45BD92 100%);
+	transform: translateY(-2px);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.14), 0 2px 4px rgba(26, 31, 46, 0.1), 0 14px 28px -8px rgba(46, 160, 120, 0.65);
+}
+.alp .alp-btn--primary:active { transform: translateY(0); box-shadow: inset 0 2px 4px rgba(26, 31, 46, 0.18); }
+.alp .alp-btn--ghost {
+	background: linear-gradient(180deg, #FFFFFF, #F4F8FA);
+	box-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(26, 31, 46, 0.06), 0 6px 16px -8px rgba(26, 31, 46, 0.2);
+	transition: color var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-btn--ghost:hover {
+	background: linear-gradient(180deg, #FFFFFF, #F4F8FA);
+	color: var(--alp-ink);
+	border-color: var(--alp-action);
+	transform: translateY(-2px);
+	box-shadow: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(26, 31, 46, 0.06), 0 12px 24px -10px rgba(46, 160, 120, 0.45);
+}
+/* Pfeil in dunkler Kugel / Icon in Mint-Kachel */
+.alp-btn__orb { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: -0.6rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #3A4458, var(--alp-ink) 70%); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 3px 8px -2px rgba(26, 31, 46, 0.45); transition: transform var(--alp-dur) var(--alp-ease); }
+.alp-btn:hover .alp-btn__orb { transform: translateX(3px); }
+.alp-btn__chip { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: -0.5rem; border-radius: 8px; background: linear-gradient(160deg, #F2FBF7, #CDEEDF); color: #2E8B6E; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(46, 139, 110, 0.4); transition: transform var(--alp-dur) var(--alp-ease); }
+.alp-btn__chip .alp-icon { stroke-width: 2; }
+.alp-btn:hover .alp-btn__chip { transform: rotate(-8deg) scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+	.alp .alp-btn--primary:hover, .alp .alp-btn--ghost:hover { transform: none; }
+	.alp-btn:hover .alp-btn__orb, .alp-btn:hover .alp-btn__chip { transform: none; }
+}
+
 .alp .alp-btn--light { background: var(--alp-surface); color: var(--alp-ink); border-color: var(--alp-surface); }
 .alp .alp-btn--light:hover { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
 
