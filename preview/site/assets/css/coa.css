@@ -127,6 +127,71 @@
 	@keyframes alp-stripes { to { background-position: 22.6px 0; } }
 }
 
+/* Karte im Urkunden-Stil ('coa_card_style' => 'certificate') */
+.alp-coa-grid--cert { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.alp-coa-card.alp-cert-card {
+	padding: 7px;
+	border: 1px solid #D9D4C4;
+	border-radius: 6px;
+	background:
+		repeating-radial-gradient(circle at 100% 0%, rgba(46, 139, 110, 0.035) 0 1px, transparent 1px 7px),
+		repeating-radial-gradient(circle at 0% 100%, rgba(46, 139, 110, 0.03) 0 1px, transparent 1px 7px),
+		linear-gradient(180deg, #FFFEFA, #FAF8F1);
+	box-shadow: 0 1px 1px rgba(26, 31, 46, 0.05), 0 12px 30px -18px rgba(26, 31, 46, 0.35);
+	overflow: visible;
+}
+.alp-cert-card::before { content: none; }
+.alp-cert-card:hover { border-color: #C9C2AC; box-shadow: 0 2px 2px rgba(26, 31, 46, 0.05), 0 24px 44px -22px rgba(26, 31, 46, 0.4); transform: translateY(-2px); }
+.alp-cert-card.is-highlight { border-color: var(--alp-brand); box-shadow: 0 0 0 4px var(--alp-brand-soft), 0 24px 44px -22px rgba(26, 31, 46, 0.4); }
+.alp-cert-card__frame { position: relative; display: flex; flex-direction: column; height: 100%; padding: 1.1rem 1.25rem 0; border: 1px solid #D9D4C4; outline: 3px double rgba(46, 139, 110, 0.35); outline-offset: -6px; border-radius: 3px; }
+/* Eckverzierungen */
+.alp-cert-card__frame::before, .alp-cert-card__frame::after { content: ""; position: absolute; width: 14px; height: 14px; border: 2px solid #2E8B6E; pointer-events: none; }
+.alp-cert-card__frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.alp-cert-card__frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+.alp-cert-card__head { text-align: center; padding-top: 0.3rem; }
+.alp-cert-card__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.9rem; }
+.alp-cert-card__brand { font-family: var(--alp-font-display); font-size: 0.8125rem; font-weight: 500; color: var(--alp-ink); letter-spacing: -0.01em; }
+.alp-cert-card__brand b { font-weight: 700; color: #2E8B6E; }
+.alp-cert-card__no { font-family: var(--alp-font-mono); font-size: 0.6875rem; color: var(--alp-muted); letter-spacing: 0.04em; }
+.alp-cert-card__kicker { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 0.75rem; font-style: italic; letter-spacing: 0.08em; color: #2E8B6E; }
+.alp .alp-cert-card__title { margin: 0.25rem 0 0; font-family: var(--alp-font-display); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; color: var(--alp-ink); }
+.alp-cert-card__batch { margin: 0.35rem 0 0; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--alp-muted); }
+.alp-cert-card__batch span { margin-left: 0.3rem; font-family: var(--alp-font-mono); font-weight: 500; letter-spacing: 0.04em; color: var(--alp-ink); }
+.alp-cert-card__rule { position: relative; display: block; height: 1px; margin: 1rem 0 0.2rem; background: linear-gradient(90deg, transparent, #CFC8B3 20%, #CFC8B3 80%, transparent); }
+.alp-cert-card__rule i { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; background: #2E8B6E; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 4px #FDFCF7; }
+
+/* Prüftabelle */
+.alp .alp-cert-card__table { width: 100%; margin: 0.6rem 0 0; border-collapse: collapse; font-size: 0.8125rem; }
+.alp .alp-cert-card__table th, .alp .alp-cert-card__table td { padding: 0.55rem 0; border: 0; border-bottom: 1px solid #E6E1D2; text-align: left; vertical-align: middle; background: none; }
+.alp .alp-cert-card__table thead th { padding-top: 0.3rem; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--alp-muted); border-bottom: 1.5px solid #CFC8B3; }
+.alp .alp-cert-card__table tbody th { font-weight: 600; color: var(--alp-ink); text-transform: none; letter-spacing: 0; }
+.alp .alp-cert-card__table tbody th small { display: block; font-size: 0.6875rem; font-weight: 500; color: var(--alp-muted); }
+.alp .alp-cert-card__table td { color: var(--alp-muted); font-family: var(--alp-font-mono); font-size: 0.75rem; }
+.alp .alp-cert-card__table td:last-child, .alp .alp-cert-card__table th:last-child { text-align: right; white-space: nowrap; }
+.alp .alp-cert-card__table .alp-coa-card__v { display: inline; font-family: var(--alp-font-display); font-size: 1.05rem; font-weight: 700; color: var(--alp-ink); letter-spacing: -0.01em; }
+.alp .alp-cert-card__table tbody tr:first-child .alp-coa-card__v { color: #1F7A5C; }
+.alp-cert-card__ok { display: inline-grid; place-items: center; width: 16px; height: 16px; margin-left: 0.45rem; vertical-align: -2px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9AF0CF, #3FB488 75%); color: #fff; }
+.alp-cert-card__ok .alp-icon { stroke-width: 3.2; }
+.alp-cert-card__pending { margin: 0.8rem 0 0; font-size: var(--alp-fs-sm); color: var(--alp-muted); text-align: center; }
+
+/* Prüfdaten + Stempel */
+.alp-cert-card__sign { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin: 0.9rem 0 1rem; flex: 1; }
+.alp .alp-cert-card__meta { display: grid; gap: 0.3rem; margin: 0; }
+.alp .alp-cert-card__meta > div { display: flex; gap: 0.5rem; align-items: baseline; }
+.alp .alp-cert-card__meta dt { min-width: 5.6rem; margin: 0; font-size: 0.6875rem; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--alp-muted); }
+.alp .alp-cert-card__meta dd { margin: 0; font-size: 0.75rem; font-weight: 600; color: var(--alp-ink); }
+.alp .alp-cert-card__meta dd.is-mono { font-family: var(--alp-font-mono); font-weight: 500; letter-spacing: 0.04em; }
+.alp-cert-stamp { flex: none; width: 84px; height: 84px; margin-right: -0.2rem; transform: rotate(-14deg); color: #2E8B6E; opacity: 0.88; mix-blend-mode: multiply; }
+.alp-cert-stamp .is-ring { fill: none; stroke: currentColor; stroke-width: 2.4; }
+.alp-cert-stamp .is-thin { stroke-width: 1.2; }
+.alp-cert-stamp .is-text { fill: currentColor; font-family: var(--alp-font-body); font-size: 8.6px; font-weight: 800; letter-spacing: 0.5px; }
+.alp-cert-stamp .is-mark { fill: none; stroke: currentColor; stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.alp-cert-card.is-pending .alp-cert-stamp { color: #C98A1B; transform: rotate(8deg); }
+
+.alp-cert-card__foot { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin: 0 -1.25rem; padding: 0.8rem 1.25rem; border-top: 1px dashed #D9D4C4; background: rgba(247, 244, 234, 0.7); }
+@media (prefers-reduced-motion: reduce) { .alp-cert-card:hover { transform: none; } }
+
 /* Erklärung unten */
 .alp-coa-explain { max-width: 980px; }
 .alp-coa-explain__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 0 0 1.5rem; }

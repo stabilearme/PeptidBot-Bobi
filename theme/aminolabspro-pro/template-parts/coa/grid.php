@@ -16,10 +16,11 @@ $done    = count( array_filter( $batches, fn( $b ) => $b['done'] ) );
 			<input type="search" placeholder="Produkt filtern …" data-alp-filter-input>
 		</label>
 	</div>
-	<div class="alp-coa-grid">
+	<div class="alp-coa-grid<?php echo 'report' === alp_config( 'coa_card_style' ) ? '' : ' alp-coa-grid--cert'; ?>">
 		<?php
+		$card = 'report' === alp_config( 'coa_card_style' ) ? 'coa/card' : 'coa/card-cert';
 		foreach ( $batches as $batch ) {
-			alp_part( 'coa/card', array( 'batch' => $batch ) );
+			alp_part( $card, array( 'batch' => $batch ) );
 		}
 		?>
 	</div>

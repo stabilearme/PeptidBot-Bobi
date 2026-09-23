@@ -56,6 +56,9 @@ return array(
 	 */
 	'media_fallback_host' => 'https://aminolabspro.com',
 
+	/* Aussehen der Karten auf der COA-Seite: 'certificate' (Urkunde mit Stempel) oder 'report' (kompakter Laborbefund). */
+	'coa_card_style' => 'certificate',
+
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
 
