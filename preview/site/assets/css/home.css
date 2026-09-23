@@ -565,6 +565,22 @@
 .alp-stats__timeline li:last-child { align-items: flex-end; }
 .alp-stats__timeline li:last-child::before { background: var(--alp-action); border-color: var(--alp-action); }
 
+/* Dunkle Labor-Anzeige: helle 3D-Icons leuchten auf Navy */
+.alp-stats__panel { background: radial-gradient(120% 140% at 0% 0%, #17324A 0%, var(--alp-dark-deep) 55%, #081420 100%); border-color: #1E3346; box-shadow: 0 24px 60px rgba(11, 26, 38, 0.35); }
+.alp-stats__item { border-color: rgba(255, 255, 255, 0.08); }
+.alp .alp-stats__value { color: #FFFFFF; }
+.alp-stats__label, .alp-stats__scale { color: #9FB3C4; }
+.alp-stats .alp-icon3d { box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -3px 6px rgba(46, 139, 110, 0.2), 0 10px 24px -6px rgba(95, 211, 169, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06); }
+.alp-stats__meter { background: rgba(255, 255, 255, 0.1); }
+.alp-stats__meter-mark { background: rgba(255, 255, 255, 0.3); }
+.alp-stats__ring circle { stroke: rgba(255, 255, 255, 0.12); }
+.alp-stats__ring path { stroke: var(--alp-action); }
+.alp-stats__note { background: rgba(255, 255, 255, 0.06); color: #9FB3C4; }
+.alp .alp-stats__note .alp-mono { color: #FFFFFF; }
+.alp-stats__docs span { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.5); }
+.alp-stats__timeline { color: #E6EEF4; }
+.alp-stats__timeline li::before { background: var(--alp-dark-deep); border-color: var(--alp-action); }
+
 /* Aufbau-Animation beim Einblenden */
 .alp-motion .alp-stats__panel.alp-reveal .alp-stats__meter-bar { transform: scaleX(0); transform-origin: left; transition: transform 1100ms var(--alp-ease) 250ms; }
 .alp-motion .alp-stats__panel.alp-reveal.is-in .alp-stats__meter-bar { transform: none; }
@@ -636,7 +652,7 @@
 	.alp .alp-hero__proof { left: 16px; bottom: 16px; }
 	.alp-stats__panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.alp-stats__item:nth-child(odd) { border-left: 0; }
-	.alp-stats__item:nth-child(n+3) { border-top: 1px solid var(--alp-line); }
+	.alp-stats__item:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, 0.08); }
 	.alp-soon--full { grid-template-columns: 1fr; }
 	.alp-soon--full .alp-soon__media::after { content: none; }
 	.alp-articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
