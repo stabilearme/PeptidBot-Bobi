@@ -48,14 +48,14 @@
 	--alp-ink: #1A1F2E;          /* ink – Überschriften, Text, Footer, dunkle Flächen */
 	--alp-ink-2: #565F78;        /* ink-soft – Fließtext */
 	--alp-muted: #5A6478;        /* mid – Nebentext, Labels (5,95:1 auf Weiß) */
-	/* Helle Flächen in hellem Vanille statt Weiß */
-	--alp-line: #F0E8D8;         /* Linien, Rahmen (warm) */
-	--alp-line-2: #E3D9C5;       /* etwas kräftiger für Eingabefelder */
-	--alp-paper: #FCF6E9;        /* getönte Abschnitte (Vanille, etwas satter) */
-	--alp-paper-2: #F7EFDD;      /* Bildgründe, noch etwas dunkler */
-	--alp-surface: #FFFCF4;      /* Seite, Karten (helles Vanille) */
-	--alp-surface-rgb: 255, 252, 244; /* dasselbe als RGB für halbtransparente Flächen */
-	--alp-field: #FFFEFA;        /* Eingabefelder: einen Hauch heller als die Seite */
+	/* Helle Flächen: warme Palette aus dem Design System (Wissen-Seiten) */
+	--alp-line: #E5E2D6;         /* line-warm – Linien, Rahmen */
+	--alp-line-2: #D8D4C5;       /* etwas kräftiger für Eingabefelder (aus line-warm abgeleitet) */
+	--alp-paper: #F6F1E4;        /* gold-bg – getönte Abschnitte (Sand) */
+	--alp-paper-2: #EDE9DD;      /* Bildgründe, noch etwas dunkler (aus paper abgeleitet) */
+	--alp-surface: #F5F4EF;      /* paper – Seite, Karten, Header */
+	--alp-surface-rgb: 245, 244, 239; /* dasselbe als RGB für halbtransparente Flächen */
+	--alp-field: #FBFAF6;        /* Eingabefelder: einen Hauch heller als die Seite */
 
 	/* --- Markenfarben --- */
 	--alp-action: #6EDAB4;       /* mint – Buttons, aktive Zustände, Badges, Balken */
