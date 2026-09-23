@@ -12,6 +12,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/* ---------- Einstellungen: als WordPress-Option (Customizer + REST-API /wp/v2/settings) ---------- */
+add_action( 'init', 'alp_contact_register_settings' );
+function alp_contact_register_settings() {
+	register_setting( 'general', 'alp_whatsapp_number', array( 'type' => 'string', 'default' => '', 'sanitize_callback' => 'alp_sanitize_phone', 'show_in_rest' => true, 'description' => 'WhatsApp-Business-Nummer mit Ländervorwahl' ) );
+	register_setting( 'general', 'alp_whatsapp_message', array( 'type' => 'string', 'default' => '', 'sanitize_callback' => 'sanitize_text_field', 'show_in_rest' => true, 'description' => 'Vorausgefüllte WhatsApp-Nachricht' ) );
+}
+
 /* ---------- Customizer-Felder ---------- */
 add_action( 'customize_register', 'alp_contact_customizer' );
 function alp_contact_customizer( $wp_customize ) {
@@ -23,9 +30,9 @@ function alp_contact_customizer( $wp_customize ) {
 			'priority'    => 30,
 		)
 	);
-	$wp_customize->add_setting( 'alp_whatsapp_number', array( 'default' => '', 'sanitize_callback' => 'alp_sanitize_phone' ) );
+	$wp_customize->add_setting( 'alp_whatsapp_number', array( 'type' => 'option', 'default' => '', 'sanitize_callback' => 'alp_sanitize_phone' ) );
 	$wp_customize->add_control( 'alp_whatsapp_number', array( 'label' => 'WhatsApp-Nummer', 'section' => 'alp_contact', 'type' => 'text' ) );
-	$wp_customize->add_setting( 'alp_whatsapp_message', array( 'default' => alp_config( 'whatsapp.message', '' ), 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_setting( 'alp_whatsapp_message', array( 'type' => 'option', 'default' => alp_config( 'whatsapp.message', '' ), 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'alp_whatsapp_message', array( 'label' => 'Vorausgefüllte Nachricht', 'section' => 'alp_contact', 'type' => 'text' ) );
 }
 
@@ -37,7 +44,7 @@ function alp_sanitize_phone( $value ) {
  * Link zum WhatsApp-Chat (wa.me) oder '' ohne hinterlegte Nummer.
  */
 function alp_whatsapp_url() {
-	$number = (string) ( get_theme_mod( 'alp_whatsapp_number', '' ) ?: '' );
+	$number = (string) ( get_option( 'alp_whatsapp_number', '' ) ?: get_theme_mod( 'alp_whatsapp_number', '' ) ?: '' );
 	if ( '' === trim( $number ) ) {
 		$number = (string) alp_config( 'whatsapp.number', '' );
 	}
@@ -53,7 +60,7 @@ function alp_whatsapp_url() {
 	} elseif ( 0 === strpos( $digits, '0' ) ) {
 		$digits = '49' . substr( $digits, 1 ); // deutsche Nummer ohne Ländervorwahl
 	}
-	$message = (string) ( get_theme_mod( 'alp_whatsapp_message', '' ) ?: '' );
+	$message = (string) ( get_option( 'alp_whatsapp_message', '' ) ?: get_theme_mod( 'alp_whatsapp_message', '' ) ?: '' );
 	if ( '' === $message ) {
 		$message = (string) alp_config( 'whatsapp.message', '' );
 	}
