@@ -71,7 +71,7 @@ return array(
 	 * (Design → Customizer → „AminoLabs Pro: Kontakt“); 'number' hier ist nur die Reserve.
 	 */
 	'whatsapp' => array(
-		'number'  => '',
+		'number'  => '015124193155', // WhatsApp Business (wird zu +49 151 24193155)
 		'message' => 'Hallo aminolabspro, ich habe eine Frage:',
 		'title'   => 'Fragen? Schreib uns direkt auf WhatsApp.',
 		'text'    => 'Persönliche Antwort vom Team zu Produkten, Chargen, Bestellung und Versand – schnell und unkompliziert.',
