@@ -233,7 +233,6 @@ return array(
 			'Shop' => array(
 				'Alle Produkte'        => 'shop',
 				'Laborergebnisse & COAs' => '/coa/',
-				'Kundenwünsche'        => '/kundenwuensche/',
 				'Mein Konto'           => 'myaccount',
 			),
 			'Wissen' => array(

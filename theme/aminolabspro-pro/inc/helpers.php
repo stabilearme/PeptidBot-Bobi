@@ -250,3 +250,16 @@ function alp_icon3d( $name, $size = 40 ) {
 		$body
 	);
 }
+
+/**
+ * Shortcodes aus dem alten Child-Theme, deren Funktionen bewusst weggefallen sind
+ * (Glücksrad, Kundenwünsche). Sie geben nichts aus, statt als Rohtext „[alp_…]“ auf der Seite zu stehen.
+ */
+add_action( 'init', 'alp_retired_shortcodes', 20 );
+function alp_retired_shortcodes() {
+	foreach ( array( 'alp_gluecksrad', 'alp_wunsch_formular', 'alp_wunschliste' ) as $tag ) {
+		if ( ! shortcode_exists( $tag ) ) {
+			add_shortcode( $tag, '__return_empty_string' );
+		}
+	}
+}
