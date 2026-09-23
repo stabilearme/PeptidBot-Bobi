@@ -38,36 +38,31 @@ function alp_normalize_description_html( $html ) {
 	foreach ( $xpath->query( '//comment()' ) as $comment ) {
 		$comment->parentNode->removeChild( $comment );
 	}
-	foreach ( $xpath->query( '//p[not(normalize-space()) and not(*)]' ) as $p ) {
+	foreach ( $xpath->query( '//p[not(normalize-space()) and not(*) and not(@id) and not(@class)]' ) as $p ) {
 		$p->parentNode->removeChild( $p );
 	}
 
 	foreach ( $xpath->query( '//*[@style]' ) as $el ) {
 		$style = strtolower( preg_replace( '/\s+/', '', $el->getAttribute( 'style' ) ) );
-		$tag   = strtolower( $el->nodeName );
-		$class = '';
+		$class = alp_desc_class_for( strtolower( $el->nodeName ), $style, $el->parentNode instanceof DOMElement ? $el->parentNode->getAttribute( 'class' ) : '' );
 
-		if ( 'span' === $tag && false !== strpos( $style, 'border-radius:20px' ) ) {
-			$class = 'alp-chip';
+		if ( 'alp-chip' === $class ) {
 			alp_desc_add_class( $el->parentNode, 'alp-chips' );
-		} elseif ( in_array( $tag, array( 'h2', 'h3', 'div' ), true ) && false !== strpos( $style, 'text-transform:uppercase' ) ) {
-			$class = 'alp-desc__eyebrow';
-		} elseif ( 'div' === $tag && false !== strpos( $style, 'border-left:3px' ) ) {
-			$class = 'alp-desc__legal';
-		} elseif ( 'div' === $tag && false !== strpos( $style, 'grid-template-columns' ) ) {
-			$class = 'alp-desc__tiles';
-		} elseif ( 'div' === $tag && false !== strpos( $style, 'text-align:center' ) && $el->parentNode instanceof DOMElement && false !== strpos( $el->parentNode->getAttribute( 'class' ), 'alp-desc__tiles' ) ) {
-			$class = 'alp-desc__tile';
-		} elseif ( 'div' === $tag && preg_match( '/background:#(f7fafb|f0fbf7|fff)/', $style ) ) {
-			$class = 'alp-desc__panel';
-		} elseif ( 'table' === $tag ) {
-			$class = 'alp-desc__table';
 		}
-
 		if ( $class ) {
 			alp_desc_add_class( $el, $class );
 		}
-		$el->removeAttribute( 'style' );
+		// Ausgeblendete Elemente (z. B. Rechner-Ergebnis) bleiben ausgeblendet – Skripte blenden sie ein.
+		if ( preg_match( '/(^|;)display:none/', $style ) ) {
+			$el->setAttribute( 'style', 'display:none' );
+		} else {
+			$el->removeAttribute( 'style' );
+		}
+	}
+
+	// Leere Boxen des alten Designs (nur Abstandshalter/Trennlinien) entfernen.
+	foreach ( $xpath->query( '//div[not(@id) and ( not(@class) or starts-with(@class, "alp-desc__") ) and not(normalize-space()) and not(.//img or .//svg or .//input or .//select or .//textarea or .//button or .//iframe or .//video or .//canvas)]' ) as $div ) {
+		$div->parentNode->removeChild( $div );
 	}
 
 	foreach ( $xpath->query( '//*[contains(concat(" ",@class," ")," alp-chips ")]/br' ) as $br ) {
@@ -82,14 +77,79 @@ function alp_normalize_description_html( $html ) {
 		$wrap->appendChild( $table );
 	}
 
-	$root = $doc->getElementById( 'alp-root' );
-	$out  = '';
-	if ( $root ) {
-		foreach ( $root->childNodes as $child ) {
-			$out .= $doc->saveHTML( $child );
+	// Ausgabe: Inhalt des Hilfs-Containers – plus alles, was durch ein überzähliges </div> im
+	// Seiteninhalt dahinter gelandet ist (sonst ginge dieser Teil verloren).
+	$out = '';
+	foreach ( $doc->childNodes as $node ) {
+		if ( $node instanceof DOMElement && 'alp-root' === $node->getAttribute( 'id' ) ) {
+			foreach ( $node->childNodes as $child ) {
+				$out .= $doc->saveHTML( $child );
+			}
+		} elseif ( XML_PI_NODE !== $node->nodeType ) {
+			$out .= $doc->saveHTML( $node );
 		}
 	}
 	return $out ?: $html;
+}
+
+/**
+ * Ordnet einem Element anhand seines alten Inline-Styles eine Theme-Klasse zu.
+ * Die Muster stammen aus den Produktbeschreibungen, Seiten und Wissensartikeln.
+ */
+function alp_desc_class_for( $tag, $style, $parent_class = '' ) {
+	$has  = static fn( $needle ) => false !== strpos( $style, $needle );
+	$dark = (bool) preg_match( '/background:(#(1a1f2e|0e1a22|0b151c|122029|111|000)\b|linear-gradient\([^;]*#(1a1f2e|0e1a22|0b151c))/', $style );
+	$box  = (bool) preg_match( '/(^|;)(min-)?width:\d{2}px/', $style ) && $has( 'border-radius' );
+
+	if ( 'span' === $tag ) {
+		if ( $has( 'border-radius:20px' ) ) {
+			return 'alp-chip';
+		}
+		if ( $has( 'position:absolute' ) ) {
+			return 'alp-desc__deco';
+		}
+		if ( $has( 'text-transform:uppercase' ) ) {
+			return 'alp-desc__eyebrow';
+		}
+		return $box ? 'alp-desc__badge' : '';
+	}
+	if ( in_array( $tag, array( 'h2', 'h3' ), true ) ) {
+		if ( $has( 'text-transform:uppercase' ) ) {
+			return 'alp-desc__eyebrow';
+		}
+		return $has( 'display:flex' ) ? 'alp-desc__numhead' : '';
+	}
+	if ( 'table' === $tag ) {
+		return 'alp-desc__table';
+	}
+	if ( 'div' !== $tag ) {
+		return '';
+	}
+	if ( $has( 'text-transform:uppercase' ) ) {
+		return 'alp-desc__eyebrow';
+	}
+	if ( preg_match( '/border-left:[34]px/', $style ) ) {
+		return 'alp-desc__legal';
+	}
+	if ( $has( 'grid-template-columns' ) ) {
+		return 'alp-desc__tiles';
+	}
+	if ( $dark ) {
+		return 'alp-desc__dark';
+	}
+	if ( $box && $has( 'display:flex' ) ) {
+		return 'alp-desc__icon';
+	}
+	if ( $has( 'text-align:center' ) && false !== strpos( $parent_class, 'alp-desc__tiles' ) ) {
+		return 'alp-desc__tile';
+	}
+	if ( $has( 'border-radius' ) && $has( 'background' ) ) {
+		return $has( 'text-align:center' ) ? 'alp-desc__tile' : 'alp-desc__panel';
+	}
+	if ( $has( 'display:flex' ) ) {
+		return 'alp-desc__row';
+	}
+	return '';
 }
 
 function alp_desc_add_class( $el, $class ) {

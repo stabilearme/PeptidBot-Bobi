@@ -18,6 +18,7 @@ $alp_modules = array(
 	'flatsome',     // Header-Leiste, eigener Footer, Mobile-Navigation
 	'coa',          // Chargen-/COA-Daten, Chargen-Prüfer, COA-Box am Produkt
 	'description',  // Einheitliche Darstellung der Produktbeschreibungen
+	'content',      // Einheitliche Darstellung von Seiten und Beiträgen
 	'woocommerce',  // Shop, Produktseite, Warenkorb, Kasse
 	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math
 );

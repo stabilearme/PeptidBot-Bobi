@@ -166,75 +166,7 @@
 .alp .accordion-title .toggle { right: 0; left: auto; color: var(--alp-brand); }
 .alp .accordion-inner { padding: 0 0 1.5rem; }
 
-/* ---------- Beschreibung (bereinigt durch inc/description.php) ---------- */
-.alp .alp-desc { max-width: 820px; font-size: 1.0625rem; line-height: 1.75; color: var(--alp-ink-2); }
-.alp .alp-desc > div { max-width: none !important; }
-.alp .alp-desc h2 { font-size: var(--alp-fs-lg); margin: 2.25rem 0 0.75rem; }
-.alp .alp-desc h3 { font-size: 1.0625rem; margin: 1.25rem 0 0.35rem; }
-.alp .alp-desc p { margin: 0 0 1.1rem; }
-.alp .alp-desc a { font-weight: 650; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.alp .alp-desc ul { margin: 0 0 1.25rem; padding-left: 1.2rem; }
-.alp .alp-desc li { margin-bottom: 0.4rem; }
-
-.alp .alp-desc .alp-chips { margin: 0 0 1.75rem; }
-
-.alp .alp-desc .alp-desc__eyebrow {
-	font-family: var(--alp-font-mono);
-	font-size: var(--alp-fs-xs);
-	font-weight: 500;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--alp-brand);
-	margin: 0 0 1rem;
-}
-.alp .alp-desc .alp-desc__panel {
-	margin: 0 0 1.75rem;
-	padding: 1.25rem 1.4rem;
-	border: 1px solid var(--alp-line);
-	border-radius: var(--alp-r-lg);
-	background: var(--alp-paper);
-}
-.alp .alp-desc .alp-desc__panel > :last-child { margin-bottom: 0; }
-.alp .alp-desc .alp-desc__panel ul { list-style: none; padding: 0; }
-
-.alp .alp-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.alp .alp-desc table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; margin: 0; }
-.alp .alp-desc td, .alp .alp-desc th {
-	padding: 0.65rem 0;
-	border-bottom: 1px solid var(--alp-line);
-	vertical-align: top;
-	text-align: left;
-}
-.alp .alp-desc tr:last-child td { border-bottom: 0; }
-.alp .alp-desc td:first-child { color: var(--alp-muted); width: 42%; padding-right: 1rem; }
-.alp .alp-desc td:last-child { color: var(--alp-ink); font-weight: 600; }
-
-.alp .alp-desc .alp-desc__tiles {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-	gap: 0.75rem;
-}
-.alp .alp-desc .alp-desc__tile {
-	padding: 1rem 1.1rem;
-	border: 1px solid var(--alp-line);
-	border-radius: var(--alp-r-md);
-	background: var(--alp-surface);
-	text-align: left;
-	font-size: 0.875rem;
-	line-height: 1.5;
-	color: var(--alp-muted);
-}
-.alp .alp-desc .alp-desc__tile > div:first-child { font-weight: 700; color: var(--alp-ink); margin-bottom: 0.25rem; font-size: 0.9375rem; }
-
-.alp .alp-desc .alp-desc__legal {
-	margin-top: 2rem;
-	padding: 1rem 1.2rem;
-	border-left: 3px solid var(--alp-line-2);
-	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
-	background: var(--alp-paper);
-	font-size: 0.8125rem;
-	color: var(--alp-muted);
-}
+/* Beschreibung: Formatierung in assets/css/content.css (gilt auch für Seiten & Beiträge) */
 
 /* ---------- Ähnliche Produkte ---------- */
 .alp .related-products-wrapper,

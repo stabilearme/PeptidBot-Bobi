@@ -36,6 +36,9 @@ function have_posts() { return false; }
 function the_post() {}
 function get_the_title() { return 'Laborergebnisse & COAs'; }
 function get_queried_object_id() { return 0; }
+function is_single() { return 'post' === $GLOBALS['alp_ctx']['page']; }
+function get_the_ID() { return 0; }
+function get_post_field( $field, $id = 0 ) { return 'post_name' === $field ? preg_replace( '/^artikel-/', '', alp_preview_slug() ) : ''; }
 
 /* ---------- Hooks: No-ops (die Vorschau ruft die Theme-Funktionen direkt auf) ---------- */
 function add_action() {}

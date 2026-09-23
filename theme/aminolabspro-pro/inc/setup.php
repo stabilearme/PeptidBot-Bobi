@@ -17,7 +17,9 @@ function alp_styles() {
 		'footer'     => 'all',        // Fußbereich, Mobile-Navigation
 		'components' => 'all',        // Wiederverwendbare Bausteine (Karten, Chips, Sektionen)
 		'shop'       => 'shop',       // Shop, Kategorien, Produktkacheln
+		'content'    => 'content',    // Formatierte Inhalte: Produktbeschreibungen, Seiten, Beiträge
 		'product'    => 'product',    // Einzelne Produktseite
+		'pages'      => 'pages',      // Inhaltsseiten & Beiträge (Wissen, Kontakt, Versand, Rechtliches …)
 		'checkout'   => 'checkout',   // Warenkorb, Kasse, Konto
 		'home'       => 'home',       // Startseite
 		'coa'        => 'coa',        // COA-Center + Chargen-Prüfer
@@ -40,6 +42,10 @@ function alp_style_needed( $when ) {
 			return $is_wc && ( is_woocommerce() || is_front_page() || is_product() || is_cart() );
 		case 'checkout':
 			return $is_wc && ( is_cart() || is_checkout() || is_account_page() );
+		case 'content':
+			return ( $is_wc && is_product() ) || alp_style_needed( 'pages' );
+		case 'pages':
+			return ( is_page() && ! is_front_page() && ! is_page( 'coa' ) && ! ( $is_wc && ( is_cart() || is_checkout() || is_account_page() ) ) ) || ( is_single() && ! ( $is_wc && is_product() ) );
 		case 'coa':
 			return is_front_page() || is_page( 'coa' ) || ( $is_wc && is_product() );
 	}

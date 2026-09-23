@@ -35,6 +35,7 @@ return array(
 		'sticky_add_to_cart' => true,  // Kaufleiste auf Produktseiten beim Scrollen
 		'product_coa_box'    => true,  // Chargen-Box auf Produktseiten
 		'clean_descriptions' => true,  // Einheitliches Design für Produktbeschreibungen
+		'clean_pages'        => true,  // Einheitliches Design für Seiten & Beiträge (alte Inline-Styles entfernen)
 		'checkout_steps'     => true,  // Fortschrittsanzeige Warenkorb → Kasse
 		'category_pills'     => true,  // Kategorie-Filter über dem Shop
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite

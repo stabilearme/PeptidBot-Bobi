@@ -1,0 +1,165 @@
+/* ==========================================================================
+   FORMATIERTE INHALTE
+   Produktbeschreibungen, Seiten und Beiträge. Die alten Inline-Styles werden von
+   inc/description.php bzw. inc/content.php in diese Klassen übersetzt.
+   ========================================================================== */
+
+.alp .alp-desc { max-width: 820px; font-size: 1.0625rem; line-height: 1.75; color: var(--alp-ink-2); }
+.alp .alp-desc > div { max-width: none !important; }
+.alp .alp-desc h2 { font-size: var(--alp-fs-lg); margin: 2.5rem 0 0.75rem; }
+.alp .alp-desc h3 { font-size: 1.0625rem; margin: 1.5rem 0 0.4rem; }
+.alp .alp-desc h4 { font-size: 1rem; margin: 0 0 0.35rem; }
+.alp .alp-desc :is(h2, h3, h4):first-child { margin-top: 0; }
+.alp .alp-desc p { margin: 0 0 1.1rem; }
+.alp .alp-desc a { font-weight: 650; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.alp .alp-desc ul, .alp .alp-desc ol { margin: 0 0 1.25rem; padding-left: 1.2rem; }
+.alp .alp-desc li { margin-bottom: 0.4rem; }
+.alp .alp-desc li::marker { color: var(--alp-brand); }
+.alp .alp-desc hr { border: 0; border-top: 1px solid var(--alp-line); margin: 2.5rem 0; }
+.alp .alp-desc img { border-radius: var(--alp-r-md); }
+
+/* Merkmal-Chips */
+.alp .alp-desc .alp-chips { margin: 0 0 2rem; }
+
+/* Kleine Überzeile in Monospace */
+.alp .alp-desc .alp-desc__eyebrow {
+	display: block;
+	font-family: var(--alp-font-mono);
+	font-size: var(--alp-fs-xs);
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--alp-brand);
+	margin: 2.5rem 0 0.9rem;
+}
+.alp .alp-desc .alp-desc__eyebrow br { display: none; }
+.alp .alp-desc .alp-desc__eyebrow:first-child,
+.alp .alp-desc :is(.alp-desc__panel, .alp-desc__dark, .alp-desc__tile) .alp-desc__eyebrow { margin-top: 0; }
+
+/* Getönte Box */
+.alp .alp-desc .alp-desc__panel {
+	margin: 0 0 1.75rem;
+	padding: 1.25rem 1.4rem;
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	background: var(--alp-paper);
+}
+.alp .alp-desc .alp-desc__panel > :last-child { margin-bottom: 0; }
+.alp .alp-desc .alp-desc__panel ul { list-style: none; padding: 0; }
+
+/* Dunkle Intro-Box („Kurz gesagt …“) */
+.alp .alp-desc .alp-desc__dark {
+	margin: 0 0 2rem;
+	padding: 1.5rem 1.6rem;
+	border-radius: var(--alp-r-lg);
+	background:
+		radial-gradient(ellipse 70% 90% at 100% 0%, rgba(110, 218, 180, 0.16), transparent 70%),
+		var(--alp-dark);
+	color: var(--alp-dark-text);
+}
+.alp .alp-desc .alp-desc__dark :is(h2, h3, h4, strong, b) { color: #fff; }
+.alp .alp-desc .alp-desc__dark a { color: var(--alp-mint); }
+.alp .alp-desc .alp-desc__dark .alp-desc__eyebrow { color: var(--alp-mint); }
+.alp .alp-desc .alp-desc__dark > :last-child { margin-bottom: 0; }
+
+/* Tabellen */
+.alp .alp-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 1.5rem; }
+.alp .alp-desc table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; margin: 0; }
+.alp .alp-desc td, .alp .alp-desc th {
+	padding: 0.65rem 0.75rem 0.65rem 0;
+	border-bottom: 1px solid var(--alp-line);
+	vertical-align: top;
+	text-align: left;
+}
+.alp .alp-desc th { font-family: var(--alp-font-mono); font-size: var(--alp-fs-xs); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--alp-muted); }
+.alp .alp-desc tr:last-child td { border-bottom: 0; }
+.alp .alp-desc td:first-child { color: var(--alp-muted); width: 42%; padding-right: 1rem; }
+.alp .alp-desc td:last-child { color: var(--alp-ink); font-weight: 600; }
+.alp .alp-desc .alp-desc__panel .alp-table-scroll { margin-bottom: 0; }
+
+/* Kachel-Raster */
+.alp .alp-desc .alp-desc__tiles {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 0.75rem;
+	margin: 0 0 1.75rem;
+}
+.alp .alp-desc .alp-desc__tile {
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-md);
+	background: var(--alp-surface);
+	text-align: left;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: var(--alp-muted);
+}
+.alp .alp-desc .alp-desc__tile > div:first-child { font-weight: 700; color: var(--alp-ink); margin-bottom: 0.25rem; font-size: 0.9375rem; }
+.alp .alp-desc .alp-desc__tile > :last-child { margin-bottom: 0; }
+.alp .alp-desc .alp-desc__tile .alp-desc__badge { margin-bottom: 0.6rem; }
+
+/* Hinweis mit Randlinie (Rechtliches, Tipps) */
+.alp .alp-desc .alp-desc__legal {
+	margin: 2rem 0;
+	padding: 1rem 1.2rem;
+	border-left: 3px solid var(--alp-brand);
+	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
+	background: var(--alp-paper);
+	font-size: 0.9375rem;
+	color: var(--alp-ink-2);
+}
+.alp .alp-desc .alp-desc__legal > :last-child { margin-bottom: 0; }
+
+/* Zeile: Icon + Text, oder mehrere Spalten nebeneinander */
+.alp .alp-desc .alp-desc__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.9rem; margin: 0 0 1rem; }
+.alp .alp-desc .alp-desc__row > :not(.alp-desc__icon) { flex: 1 1 260px; min-width: 0; }
+.alp .alp-desc .alp-desc__row:has(> .alp-desc__icon) > :not(.alp-desc__icon) { flex-basis: 0; }
+.alp .alp-desc .alp-desc__row:not(:has(> .alp-desc__icon)) { align-items: flex-start; gap: 1.5rem; }
+.alp .alp-desc .alp-desc__row > :last-child { margin-bottom: 0; }
+.alp .alp-desc .alp-desc__row > div > div:first-child:not(:only-child) { font-weight: 700; color: var(--alp-ink); }
+.alp .alp-desc .alp-desc__tile > .alp-desc__row { font-weight: 400; margin-bottom: 0.6rem; }
+.alp .alp-desc .alp-desc__tile + .alp-desc__tile,
+.alp .alp-desc .alp-desc__tile + .alp-desc__legal { margin-top: 0.75rem; }
+
+/* Icon-Kästchen */
+.alp .alp-desc .alp-desc__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	width: 44px;
+	height: 44px;
+	border-radius: var(--alp-r-md);
+	background: var(--alp-brand-soft);
+	color: var(--alp-brand);
+}
+.alp .alp-desc .alp-desc__icon svg { width: 22px; height: 22px; stroke: currentColor; }
+
+/* Nummer / Plakette */
+.alp .alp-desc .alp-desc__badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	min-width: 30px;
+	height: 30px;
+	padding: 0 0.4rem;
+	border-radius: 999px;
+	background: var(--alp-brand-soft);
+	color: var(--alp-brand);
+	font-family: var(--alp-font-mono);
+	font-size: 0.8125rem;
+	font-weight: 500;
+}
+
+/* Überschrift mit Nummer (AGB) */
+.alp .alp-desc .alp-desc__numhead { display: flex; align-items: center; gap: 0.75rem; }
+.alp .alp-desc .alp-desc__numhead br { display: none; }
+
+/* Rein dekorative Elemente des alten Designs */
+.alp .alp-desc .alp-desc__deco { display: none; }
+
+@media (max-width: 549px) {
+	.alp .alp-desc { font-size: 1rem; }
+	.alp .alp-desc .alp-desc__dark, .alp .alp-desc .alp-desc__panel { padding: 1.1rem 1.15rem; }
+}

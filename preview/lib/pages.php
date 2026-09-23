@@ -16,30 +16,6 @@ function pv_page_data( $dir ) {
 	return $out;
 }
 
-/** Fehler im Seiteninhalt, die auch im Live-Shop sichtbar sind, als Hinweis anzeigen. */
-function pv_content_warnings( $content ) {
-	$notes = array();
-	if ( substr_count( $content, '<style' ) > substr_count( $content, '</style>' ) ) {
-		$notes[] = 'Im Seiteninhalt ist ein <code>&lt;style&gt;</code>-Block nicht geschlossen. Im Live-Shop verschwinden dadurch alles danach, also Footer, Navigation und Skripte. Die Vorschau schließt den Block, damit die Seite bedienbar bleibt.';
-	}
-	foreach ( (array) preg_match_all( '#<style[^>]*>(.*?)(?:</style>|$)#s', $content, $m ) ? $m[1] : array() as $css ) {
-		if ( false !== strpos( $css, '<br' ) || false !== strpos( $css, '<p>' ) ) {
-			$notes[] = 'WordPress hat <code>&lt;br&gt;</code>/<code>&lt;p&gt;</code>-Tags in das CSS dieser Seite eingefügt. Einige Gestaltungsregeln greifen deshalb nicht, auch im Live-Shop.';
-			break;
-		}
-	}
-	return $notes ? '<div class="pv-note"><strong>Hinweis zur Seite auf aminolabspro.com:</strong><ul><li>' . implode( '</li><li>', $notes ) . '</li></ul></div>' : '';
-}
-
-/** Offene <style>/<script>-Blöcke schließen, damit der Rest der Seite erhalten bleibt (nur Vorschau). */
-function pv_close_raw_tags( $content ) {
-	foreach ( array( 'style', 'script' ) as $tag ) {
-		$missing = substr_count( $content, '<' . $tag ) - substr_count( $content, '</' . $tag . '>' );
-		$content .= str_repeat( '</' . $tag . '>', max( 0, $missing ) );
-	}
-	return $content;
-}
-
 function pv_page_shell( $inner, $title = '' ) {
 	$head = $title ? '<header class="entry-header"><h1 class="entry-title">' . esc_html( $title ) . '</h1></header>' : '';
 	return '<div id="content" class="content-area page-wrapper" role="main"><div class="row row-main"><div class="large-12 col"><div class="col-inner">'
@@ -54,14 +30,13 @@ function pv_render_content_pages() {
 		if ( $empty ) {
 			$inner .= '<div class="pv-note"><strong>Diese Seite ist auf aminolabspro.com derzeit leer.</strong> Im WordPress-Editor ist für „' . esc_html( $d['title'] ) . '“ kein Inhalt hinterlegt. Die Vorschau zeigt deshalb nur den Titel.</div>';
 		}
-		$inner  .= pv_content_warnings( $content );
-		$content = pv_close_raw_tags( $content );
-		$inner  .= '<div class="entry-content">' . $content . '</div>';
-		$title  = preg_match( '/<h1[\s>]/i', $content ) ? '' : $d['title'];
+		$title = preg_match( '/<h1[\s>]/i', $content ) ? '' : $d['title'];
 		if ( preg_match( '/<h2[^>]*>\s*' . preg_quote( $d['title'], '/' ) . '\s*<\/h2>/iu', $content ) ) {
 			$title = '';
 		}
-		alp_preview_ctx( 'page' );
+		// Wie in WordPress: the_content-Filter des Themes (inc/content.php) bereinigt den Inhalt.
+		alp_preview_ctx( 'page', null, $slug );
+		$inner .= '<div class="entry-content">' . alp_clean_page_content( $content ) . '</div>';
 		pv_page( $slug . '.html', 'page', $d['title'], array( 'page', 'page-id-' . $d['id'], 'alp-page-' . $slug ), pv_page_shell( $inner, $title ), null, $slug );
 	}
 }
@@ -86,7 +61,7 @@ function pv_render_posts() {
 									<div class="entry-meta uppercase is-xsmall">Veröffentlicht am <time datetime="<?php echo esc_attr( $d['date'] ); ?>"><?php echo esc_html( $date ); ?></time></div>
 								</div>
 							</header>
-							<div class="entry-content single-page"><?php echo $d['content']; ?></div>
+							<div class="entry-content single-page"><?php alp_preview_ctx( 'post', null, 'artikel-' . $slug ); echo alp_clean_page_content( $d['content'] ); ?></div>
 							<footer class="entry-meta"><a class="alp-link" href="wissen.html">← Zurück zur Wissensübersicht</a></footer>
 						</div>
 					</article>
