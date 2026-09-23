@@ -127,8 +127,8 @@
 		min-width: 18px; height: 18px;
 		padding: 0 5px;
 		border-radius: 9px;
-		background: var(--alp-brand);
-		color: #fff;
+		background: var(--alp-action);
+		color: var(--alp-on-action);
 		font-size: 0.6875rem;
 		font-weight: 700;
 		line-height: 18px;

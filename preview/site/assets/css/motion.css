@@ -57,7 +57,7 @@
 @keyframes alp-hero-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes alp-hero-zoom { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
 @keyframes alp-pulse {
-	0% { box-shadow: 0 0 0 0 rgba(19, 121, 91, 0.45); }
-	70% { box-shadow: 0 0 0 9px rgba(19, 121, 91, 0); }
-	100% { box-shadow: 0 0 0 0 rgba(19, 121, 91, 0); }
+	0% { box-shadow: 0 0 0 0 rgba(110, 218, 180, 0.45); }
+	70% { box-shadow: 0 0 0 9px rgba(110, 218, 180, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(110, 218, 180, 0); }
 }

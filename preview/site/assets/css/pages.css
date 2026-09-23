@@ -162,9 +162,9 @@
 .alp .alp-rich .recon-btn {
 	display: inline-flex; align-items: center; justify-content: center; width: 100%;
 	min-height: 52px; border: 0; border-radius: var(--alp-r-md);
-	background: var(--alp-brand); color: #fff; font: 650 var(--alp-fs-md) / 1 var(--alp-font-body); cursor: pointer;
+	background: var(--alp-action); color: var(--alp-on-action); font: 650 var(--alp-fs-md) / 1 var(--alp-font-body); cursor: pointer;
 }
-.alp .alp-rich .recon-btn:hover { background: var(--alp-brand-hover); }
+.alp .alp-rich .recon-btn:hover { background: var(--alp-action-hover); box-shadow: var(--alp-shadow-mint); }
 .alp-rich .recon-result {
 	padding: 1.4rem 1.5rem;
 	border-radius: var(--alp-r-lg);
@@ -231,9 +231,9 @@
 .alp-rich .wpcf7 input[type="checkbox"] { margin-top: 0.3rem; accent-color: var(--alp-brand); }
 .alp .alp-rich .wpcf7 input[type="submit"] {
 	min-height: 50px; padding: 0 1.5rem; border: 0; border-radius: var(--alp-r-md);
-	background: var(--alp-brand); color: #fff; font: 650 var(--alp-fs-base) / 1 var(--alp-font-body); cursor: pointer;
+	background: var(--alp-action); color: var(--alp-on-action); font: 650 var(--alp-fs-base) / 1 var(--alp-font-body); cursor: pointer;
 }
-.alp .alp-rich .wpcf7 input[type="submit"]:hover { background: var(--alp-brand-hover); }
+.alp .alp-rich .wpcf7 input[type="submit"]:hover { background: var(--alp-action-hover); box-shadow: var(--alp-shadow-mint); }
 .alp-rich .wpcf7-response-output:empty { display: none; }
 
 /* ---------- Early Access ---------- */

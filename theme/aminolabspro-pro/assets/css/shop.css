@@ -139,7 +139,7 @@
 	color: #fff;
 	margin: 0;
 }
-.alp .product-small .add_to_cart_button:hover { background: var(--alp-brand); border-color: var(--alp-brand); }
+.alp .product-small .add_to_cart_button:hover { background: var(--alp-action); border-color: var(--alp-action); color: var(--alp-on-action); box-shadow: var(--alp-shadow-mint); }
 .alp .product-small .added_to_cart { font-size: 0.8125rem; font-weight: 600; display: block; margin-top: 0.4rem; }
 
 /* Angebots-Plakette */
@@ -165,7 +165,7 @@
 .alp .badge-circle, .alp .badge-circle-inside { border-radius: var(--alp-r-sm); }
 
 /* Schnellansicht-Knopf von Flatsome */
-.alp .quick-view { background: rgba(14, 26, 34, 0.86); font-weight: 600; letter-spacing: 0; text-transform: none; }
+.alp .quick-view { background: rgba(26, 31, 46, 0.86); font-weight: 600; letter-spacing: 0; text-transform: none; }
 
 /* Seitennavigation */
 .alp .woocommerce-pagination .page-numbers li > *,

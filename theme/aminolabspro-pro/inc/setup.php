@@ -97,7 +97,7 @@ function alp_preload_fonts() {
 	foreach ( array( 'hanken-grotesk-var.woff2', 'bricolage-grotesque-var.woff2' ) as $font ) {
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( ALP_URI . '/assets/fonts/' . $font ) );
 	}
-	echo '<meta name="theme-color" content="#0E1A22">' . "\n";
+	echo '<meta name="theme-color" content="#1A1F2E">' . "\n";
 }
 
 /**

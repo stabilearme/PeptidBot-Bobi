@@ -39,35 +39,47 @@
 }
 
 :root {
+	/*
+	 * Farben aus dem Design System „aminolabspro“ (Tokens in Klammern).
+	 * Regel der Marke: Mint ist die eine Aktionsfarbe – Text darauf immer Ink, nie Weiß.
+	 */
+
 	/* --- Farben: hell --- */
-	--alp-ink: #0E1A22;          /* Haupttext, Überschriften */
-	--alp-ink-2: #34464F;        /* Fließtext */
-	--alp-muted: #647781;        /* Nebentext, Labels */
-	--alp-line: #E0E8E5;         /* Linien, Rahmen */
-	--alp-line-2: #CBD7D3;       /* stärkere Rahmen, Eingabefelder */
-	--alp-paper: #F3F7F5;        /* getönte Abschnitte */
-	--alp-surface: #FFFFFF;      /* Karten, Seite */
+	--alp-ink: #1A1F2E;          /* ink – Überschriften, Text, Footer, dunkle Flächen */
+	--alp-ink-2: #565F78;        /* ink-soft – Fließtext */
+	--alp-muted: #5A6478;        /* mid – Nebentext, Labels (5,95:1 auf Weiß) */
+	--alp-line: #E4EBF0;         /* line – Linien, Rahmen */
+	--alp-line-2: #D3DCE4;       /* etwas kräftiger für Eingabefelder (aus line abgeleitet) */
+	--alp-paper: #F7FAFB;        /* bg2 – getönte Abschnitte */
+	--alp-paper-2: #EEF3F7;      /* bg3 – Bildgründe, noch etwas dunkler */
+	--alp-surface: #FFFFFF;      /* bg – Karten, Seite */
 
 	/* --- Markenfarben --- */
-	--alp-brand: #13795B;        /* Buttons, Links, Akzente (AA-Kontrast auf Weiß) */
-	--alp-brand-hover: #0C5F47;
-	--alp-brand-soft: #E3F4EC;   /* Hintergrund für Chips & Hinweise */
-	--alp-mint: #6EDAB4;         /* Leuchtakzent auf dunklem Grund (bisherige Markenfarbe) */
+	--alp-action: #6EDAB4;       /* mint – Buttons, aktive Zustände, Badges, Balken */
+	--alp-action-hover: #4DC49A; /* mint-dark – Hover von Mint-Flächen */
+	--alp-on-action: #1A1F2E;    /* on-mint – Text & Icons auf Mint */
+	--alp-brand: #2E8B6E;        /* mint-deep – grüne Schrift, Links, Icons, Linien */
+	--alp-brand-hover: #1A1F2E;  /* Links beim Überfahren: ink */
+	--alp-brand-soft: #F0FBF7;   /* mint-bg – Kacheln, Chips, Hinweise */
+	--alp-brand-line: #D4F3E8;   /* mint-mid – Rand von Mint-Kacheln */
+	--alp-mint: #6EDAB4;         /* mint – Leuchtakzent auf dunklem Grund */
 
-	/* --- Dunkle Abschnitte --- */
-	--alp-dark: #0B151C;
-	--alp-dark-2: #122029;
-	--alp-dark-line: #213440;
-	--alp-dark-text: #DCE7E4;
-	--alp-dark-muted: #8FA6A6;
+	/* --- Dunkle Abschnitte (Ink/Navy) --- */
+	--alp-dark: #1A1F2E;         /* ink – Footer, dunkle Sektionen */
+	--alp-dark-2: #232A3D;       /* navy-soft – erhobene Flächen auf Navy */
+	--alp-dark-line: #323B52;    /* navy-line – Linien auf Navy */
+	--alp-dark-text: #DDE2EC;    /* Text auf Navy */
+	--alp-dark-muted: #8891A5;   /* text-muted (dunkel) */
+	--alp-dark-deep: #0B1A26;    /* navy-deep – hinter dunklen Produktfotos */
 
 	/* --- Status --- */
-	--alp-ok: #13795B;
-	--alp-ok-soft: #E3F4EC;
-	--alp-warn: #93600A;
-	--alp-warn-soft: #FBF1DC;
-	--alp-error: #B03A2E;
-	--alp-error-soft: #FBE8E5;
+	--alp-ok: #2E8B6E;
+	--alp-ok-soft: #F0FBF7;
+	--alp-warn: #8A6F2E;         /* gold-ink */
+	--alp-warn-soft: #FBF2E2;    /* amber-bg */
+	--alp-warn-line: #E8A94D;    /* amber – nur als Linie */
+	--alp-error: #B23A3A;
+	--alp-error-soft: #FDEEEE;
 
 	/* --- Schriften --- */
 	--alp-font-display: "Bricolage Grotesque", "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -97,15 +109,17 @@
 	--alp-container: 1280px;
 
 	/* --- Radien (nach Rolle) --- */
-	--alp-r-sm: 6px;     /* Chips, kleine Buttons */
-	--alp-r-md: 10px;    /* Buttons, Eingabefelder */
+	--alp-r-sm: 6px;     /* radius-xs – Chips, Tags */
+	--alp-r-md: 8px;     /* radius-sm – Buttons, Eingabefelder */
 	--alp-r-lg: 16px;    /* Karten */
 	--alp-r-xl: 24px;    /* große Flächen, Hero-Zertifikat */
 
 	/* --- Schatten --- */
-	--alp-shadow-sm: 0 1px 2px rgba(14, 26, 34, 0.06);
-	--alp-shadow-md: 0 6px 24px -8px rgba(14, 26, 34, 0.14);
-	--alp-shadow-lg: 0 24px 60px -20px rgba(14, 26, 34, 0.28);
+	--alp-shadow-sm: 0 1px 2px rgba(26, 31, 46, 0.05);
+	--alp-shadow-md: 0 2px 16px rgba(26, 31, 46, 0.07);        /* shadow */
+	--alp-shadow-lg: 0 8px 40px rgba(26, 31, 46, 0.11);        /* shadow-lg */
+	--alp-shadow-mint: 0 6px 24px rgba(110, 218, 180, 0.35);   /* shadow-mint – Primär-Button beim Überfahren */
+	--alp-shadow-card: 0 6px 32px rgba(110, 218, 180, 0.15);   /* shadow-card-hover */
 
 	/* --- Bewegung --- */
 	--alp-ease: cubic-bezier(0.2, 0.7, 0.2, 1);

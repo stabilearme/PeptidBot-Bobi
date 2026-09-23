@@ -74,7 +74,7 @@
 	position: absolute;
 	left: 0; right: 0; bottom: -4px;
 	height: 2px;
-	background: var(--alp-brand);
+	background: var(--alp-action);
 	border-radius: 2px;
 	transform: scaleX(0);
 	transform-origin: left;
@@ -122,9 +122,9 @@
 }
 .alp .cart-icon strong::after { border-color: var(--alp-ink); }
 .alp .cart-icon:hover strong, .alp .current-dropdown .cart-icon strong {
-	background: var(--alp-brand);
-	border-color: var(--alp-brand);
-	color: #fff;
+	background: var(--alp-action);
+	border-color: var(--alp-ink);
+	color: var(--alp-on-action);
 }
 .alp .header-cart-title, .alp .cart-price { font-weight: 600; color: var(--alp-ink); text-transform: none; letter-spacing: 0; }
 
@@ -136,10 +136,10 @@
 }
 .alp .searchform .button.icon {
 	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
-	background: var(--alp-brand);
-	border-color: var(--alp-brand);
+	background: var(--alp-action);
+	border-color: var(--alp-action);
 	min-height: 44px;
-	color: #fff;
+	color: var(--alp-on-action);
 }
 .alp .live-search-results {
 	border-radius: 0 0 var(--alp-r-lg) var(--alp-r-lg);

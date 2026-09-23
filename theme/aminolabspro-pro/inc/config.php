@@ -254,9 +254,9 @@ return array(
 	 * Leer lassen = nichts überschreiben.
 	 */
 	'flatsome_mods' => array(
-		'color_primary'             => '#13795B',
-		'color_secondary'           => '#0E1A22',
-		'color_success'             => '#13795B',
+		'color_primary'             => '#2E8B6E',
+		'color_secondary'           => '#1A1F2E',
+		'color_success'             => '#2E8B6E',
 		'logo_position'             => 'left',
 		'logo_width'                => '200',
 		'header_height'             => '76',

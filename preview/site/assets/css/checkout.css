@@ -29,7 +29,7 @@
 	border-radius: 2px;
 	margin-right: 0.5rem;
 }
-.alp .alp-steps__item.is-done::before, .alp .alp-steps__item.is-current::before { background: var(--alp-brand); }
+.alp .alp-steps__item.is-done::before, .alp .alp-steps__item.is-current::before { background: var(--alp-action); }
 .alp .alp-steps__item a { display: inline-flex; align-items: center; gap: 0.5rem; color: inherit; text-decoration: none; }
 .alp .alp-steps__n {
 	display: grid;
@@ -44,7 +44,7 @@
 .alp .alp-steps__item.is-current { color: var(--alp-ink); }
 .alp .alp-steps__item.is-current .alp-steps__n { background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
 .alp .alp-steps__item.is-done { color: var(--alp-brand); }
-.alp .alp-steps__item.is-done .alp-steps__n { background: var(--alp-brand); border-color: var(--alp-brand); color: #fff; }
+.alp .alp-steps__item.is-done .alp-steps__n { background: var(--alp-action); border-color: var(--alp-action); color: var(--alp-on-action); }
 @media (max-width: 480px) { .alp .alp-steps__label { display: none; } .alp .alp-steps__item.is-current .alp-steps__label { display: inline; } }
 
 /* Flatsome zeigt eigene Checkout-Breadcrumbs – durch unsere Schritte ersetzt */
@@ -104,7 +104,7 @@
 .alp .alp-freeship { margin: 0 0 1.25rem; padding: 0.9rem 1rem; border-radius: var(--alp-r-md); background: var(--alp-paper); }
 .alp .alp-freeship p { margin: 0 0 0.5rem; font-size: var(--alp-fs-sm); font-weight: 600; color: var(--alp-ink); }
 .alp .alp-freeship__bar { height: 6px; border-radius: 3px; background: var(--alp-line); overflow: hidden; }
-.alp .alp-freeship__bar span { display: block; height: 100%; background: var(--alp-brand); border-radius: 3px; transition: width 400ms var(--alp-ease); }
+.alp .alp-freeship__bar span { display: block; height: 100%; background: var(--alp-action); border-radius: 3px; transition: width 400ms var(--alp-ease); }
 
 /* Kasse: Formularfelder */
 .alp .woocommerce-billing-fields h3, .alp .woocommerce-shipping-fields h3, .alp .woocommerce-additional-fields h3 {

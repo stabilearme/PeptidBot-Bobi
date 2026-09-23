@@ -66,7 +66,7 @@ body.alp {
 .alp .alp-eyebrow--light { color: var(--alp-mint); }
 .alp .alp-dot {
 	width: 7px; height: 7px; border-radius: 50%;
-	background: var(--alp-brand);
+	background: var(--alp-action);
 	box-shadow: 0 0 0 4px var(--alp-brand-soft);
 }
 
@@ -108,9 +108,9 @@ body.alp {
 .alp #place_order,
 .alp .button.checkout,
 .alp .woocommerce-mini-cart__buttons .checkout {
-	background: var(--alp-brand);
-	color: #fff;
-	border-color: var(--alp-brand);
+	background: var(--alp-action);
+	color: var(--alp-on-action);
+	border-color: var(--alp-action);
 }
 .alp .alp-btn--primary:hover,
 .alp .button.primary:hover,
@@ -118,9 +118,10 @@ body.alp {
 .alp .single_add_to_cart_button:hover,
 .alp .checkout-button:hover,
 .alp #place_order:hover {
-	background: var(--alp-brand-hover);
-	border-color: var(--alp-brand-hover);
-	color: #fff;
+	background: var(--alp-action-hover);
+	border-color: var(--alp-action-hover);
+	color: var(--alp-on-action);
+	box-shadow: var(--alp-shadow-mint);
 }
 
 .alp .alp-btn--ghost,
