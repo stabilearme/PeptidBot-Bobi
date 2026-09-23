@@ -47,6 +47,12 @@ return array(
 	/* Versandkostenfrei ab (in €). 0 = Fortschrittsbalken im Warenkorb ausblenden. */
 	'free_shipping_threshold' => 99, // laut Seite „Versand & Zahlung“: kostenloser Versand ab 99 €
 
+	/*
+	 * Bilder, die noch nicht in der Mediathek dieser Seite liegen, werden von hier geladen
+	 * (z. B. nach dem Umzug von aminolabspro.com). '' = abschalten.
+	 */
+	'media_fallback_host' => 'https://aminolabspro.com',
+
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
 
@@ -116,7 +122,9 @@ return array(
 				'badge'    => 'Demnächst',
 				'title'    => 'Transportabler Vial-Kühlschrank',
 				'text'     => 'Kompakte Kühlbox für deine Vials – mit Akku, per USB aufladbar und mit konstanter Kühltemperatur. Ideal für Transport und Laborwechsel.',
-				'image'    => '/wp-content/uploads/2026/09/Mobiler-Vial-Kuehlschrank-im-Studio-1024x683.png',
+				// Helles Produktbild mit eingebauten Produktangaben → die Merkmal-Liste wird dann ausgeblendet.
+				'image'          => '/wp-content/uploads/2026/09/aminolabspro-kuehlbox-hero.webp',
+				'image_has_text' => true,
 				'features' => array( 'Akkubetrieb 4–6 Stunden', 'USB-Aufladung', 'Kompakt & transportabel', 'Konstante Kühltemperatur' ),
 				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/early-access/' ),
 				'note'     => 'Wir informieren dich per E-Mail, sobald er verfügbar ist.',

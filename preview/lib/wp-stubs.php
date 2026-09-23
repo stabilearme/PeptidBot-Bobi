@@ -296,5 +296,22 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) { define( 'HOUR_IN_SECONDS', 3600 ); }
 if ( ! defined( 'WEEK_IN_SECONDS' ) ) { define( 'WEEK_IN_SECONDS', 604800 ); }
 function wp_get_upload_dir() { return array( 'basedir' => ALP_PREVIEW_OUT . '/img', 'baseurl' => 'img' ); }
 function trailingslashit( $s ) { return rtrim( $s, '/\\' ) . '/'; }
-function get_transient( $key ) { return ''; }
+function get_transient( $key ) { return false; }
 function set_transient( $key, $value, $ttl = 0 ) { return true; }
+
+/** Mini-$wpdb: „Mediathek“ = die heruntergeladenen Bilder in site/img/{coa,products,media}. */
+class PV_WPDB {
+	public $postmeta = 'wp_postmeta';
+	public function esc_like( $s ) { return $s; }
+	public function prepare( $sql, $like ) { return $like; }
+	public function get_col( $like ) {
+		$out = array();
+		foreach ( array( 'coa', 'products', 'media' ) as $dir ) {
+			foreach ( (array) glob( ALP_PREVIEW_OUT . "/img/$dir/*" ) as $f ) {
+				$out[] = $dir . '/' . basename( $f );
+			}
+		}
+		return $out;
+	}
+}
+$GLOBALS['wpdb'] = new PV_WPDB();

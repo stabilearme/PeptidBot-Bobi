@@ -40,19 +40,23 @@ if ( ! $teaser && ! $tabs ) {
 
 		<div class="alp-news<?php echo $teaser ? '' : ' alp-news--no-teaser'; ?>">
 			<?php if ( $teaser ) : ?>
-				<article class="alp-soon">
+				<?php $has_text = ! empty( $teaser['image_has_text'] ); // Bild zeigt die Produktangaben selbst ?>
+				<article class="alp-soon<?php echo $has_text ? ' alp-soon--light' : ''; ?>">
 					<?php if ( ! empty( $teaser['image'] ) ) : ?>
 						<div class="alp-soon__media">
-							<img src="<?php echo esc_url( alp_link( $teaser['image'] ) ); ?>" alt="<?php echo esc_attr( $teaser['title'] ?? '' ); ?>" loading="lazy" width="1024" height="683">
-							<?php if ( ! empty( $teaser['badge'] ) ) : ?>
+							<img src="<?php echo esc_url( alp_link( $teaser['image'] ) ); ?>" alt="<?php echo esc_attr( $teaser['title'] ?? '' ); ?>" loading="lazy" width="1536" height="1024">
+							<?php if ( ! $has_text && ! empty( $teaser['badge'] ) ) : ?>
 								<span class="alp-soon__badge"><span class="alp-dot" aria-hidden="true"></span><?php echo esc_html( $teaser['badge'] ); ?></span>
 							<?php endif; ?>
 						</div>
 					<?php endif; ?>
 					<div class="alp-soon__body">
+						<?php if ( $has_text && ! empty( $teaser['badge'] ) ) : ?>
+							<span class="alp-soon__badge"><span class="alp-dot" aria-hidden="true"></span><?php echo esc_html( $teaser['badge'] ); ?></span>
+						<?php endif; ?>
 						<h3 class="alp-h3"><?php echo esc_html( $teaser['title'] ?? '' ); ?></h3>
 						<p><?php echo esc_html( $teaser['text'] ?? '' ); ?></p>
-						<?php if ( ! empty( $teaser['features'] ) ) : ?>
+						<?php if ( ! $has_text && ! empty( $teaser['features'] ) ) : ?>
 							<ul class="alp-soon__features">
 								<?php foreach ( (array) $teaser['features'] as $feature ) : ?>
 									<li><?php echo alp_icon( 'check', 16 ); // phpcs:ignore ?><?php echo esc_html( $feature ); ?></li>

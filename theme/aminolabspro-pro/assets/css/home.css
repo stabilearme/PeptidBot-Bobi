@@ -394,6 +394,16 @@
 .alp .alp-soon .alp-btn--primary:hover { background: #fff; border-color: #fff; color: var(--alp-ink); }
 .alp-soon__note { margin: 0.75rem 0 0 !important; font-size: 0.8125rem; color: var(--alp-dark-muted); }
 
+/* Helle Variante: Produktbild mit eingebauten Angaben wird vollständig gezeigt (Querformat, kein Zuschnitt) */
+.alp-soon--light { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); background: #fff; color: var(--alp-ink-2); border: 1px solid var(--alp-line); box-shadow: var(--alp-shadow-card); }
+.alp-soon--light .alp-soon__media { aspect-ratio: 3 / 2; max-height: none; background: var(--alp-paper); }
+.alp-soon--light .alp-soon__media img { object-fit: cover; object-position: 50% 50%; transform: none; }
+.alp-soon--light .alp-soon__media::after { content: none; }
+.alp-soon--light .alp-soon__badge { position: static; margin: 0 0 1rem; background: var(--alp-brand-soft); color: var(--alp-brand); backdrop-filter: none; }
+.alp .alp-soon--light .alp-soon__body .alp-h3 { color: var(--alp-ink); }
+.alp .alp-soon--light .alp-btn--primary:hover { background: var(--alp-action-hover); border-color: var(--alp-action-hover); }
+.alp-soon--light .alp-soon__note { color: var(--alp-muted); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1199px) {
 	/* Hero-Bild steht auf kleinen Laptops, Tablets & Handys über dem Text (sonst verdeckt der Text die Vials) */
@@ -411,6 +421,7 @@
 	.alp-trust__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.alp-trust__item { border-right: 0; border-bottom: 1px solid var(--alp-line); padding-left: 0; }
 	.alp-trust__item:nth-last-child(-n+2) { border-bottom: 0; }
+	.alp-soon--light { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
 	.alp-soon { grid-template-columns: 1fr; }

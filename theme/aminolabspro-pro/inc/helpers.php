@@ -101,6 +101,9 @@ function alp_upload_url( $path ) {
 		}
 		if ( $found ) {
 			$url = trailingslashit( $dir['baseurl'] ) . $found;
+		} elseif ( alp_config( 'media_fallback_host' ) ) {
+			// Noch nicht in dieser Mediathek (z. B. nach dem Umzug): Bild von der alten Seite laden.
+			$url = rtrim( alp_config( 'media_fallback_host' ), '/' ) . $path;
 		}
 	}
 	return $cache[ $path ] = $url;
