@@ -221,3 +221,38 @@
 	.alp-lookup__row .alp-btn { width: 100%; }
 	.alp-lookup__data { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---------------------------------------------------------------
+   Illustrierte Icons mit Tiefe (alp_icon3d): gewölbte Kachel,
+   Lichtkante oben, weicher Schatten, Anheben beim Überfahren.
+---------------------------------------------------------------- */
+.alp-icon3d {
+	--alp-i3d: 56px;
+	position: relative; flex: none; display: grid; place-items: center;
+	width: var(--alp-i3d); height: var(--alp-i3d); border-radius: 16px;
+	background:
+		radial-gradient(120% 90% at 30% 10%, #FFFFFF 0%, rgba(255, 255, 255, 0) 55%),
+		linear-gradient(160deg, #F2FBF7 0%, #DDF4EA 55%, #C9EBDD 100%);
+	box-shadow:
+		inset 0 1px 0 #FFFFFF,
+		inset 0 -3px 6px rgba(46, 139, 110, 0.14),
+		0 1px 1px rgba(26, 31, 46, 0.06),
+		0 8px 16px -6px rgba(46, 139, 110, 0.35),
+		0 14px 28px -14px rgba(26, 31, 46, 0.25);
+	transform: perspective(300px) rotateX(0) translateY(0);
+	transition: transform 350ms var(--alp-ease, ease), box-shadow 350ms var(--alp-ease, ease);
+}
+.alp-icon3d::after { /* Glanz oben links */
+	content: ""; position: absolute; inset: 3px 3px 55% 3px; border-radius: 13px 13px 40% 40%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+	pointer-events: none;
+}
+.alp-icon3d svg { position: relative; z-index: 1; overflow: visible; filter: drop-shadow(0 2px 1.5px rgba(26, 31, 46, 0.12)); transition: transform 350ms var(--alp-ease, ease); }
+:is(li, a, div):hover > * > .alp-icon3d,
+:is(li, a, div):hover > .alp-icon3d { transform: perspective(300px) rotateX(8deg) translateY(-3px); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -3px 6px rgba(46, 139, 110, 0.14), 0 2px 2px rgba(26, 31, 46, 0.05), 0 14px 22px -8px rgba(46, 139, 110, 0.45), 0 22px 36px -16px rgba(26, 31, 46, 0.3); }
+:is(li, a, div):hover > * > .alp-icon3d svg,
+:is(li, a, div):hover > .alp-icon3d svg { transform: translateY(-2px) scale(1.06); }
+@media (prefers-reduced-motion: reduce) {
+	.alp-icon3d, .alp-icon3d svg { transition: none; }
+	:is(li, a, div):hover > * > .alp-icon3d, :is(li, a, div):hover > .alp-icon3d, :is(li, a, div):hover .alp-icon3d svg { transform: none; }
+}

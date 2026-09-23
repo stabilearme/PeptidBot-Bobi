@@ -25,7 +25,8 @@ $latest    = $done[0] ?? null; // neueste Charge steht in coa-batches.php oben
 				<li class="alp-stats__item alp-stats__item--<?php echo esc_attr( $visual ?: 'plain' ); ?>" style="--alp-fill: <?php echo (int) $fill; ?>%;">
 					<div class="alp-stats__top">
 						<?php if ( ! empty( $stat['icon'] ) ) : ?>
-							<span class="alp-stats__icon"><?php echo alp_icon( $stat['icon'], 20 ); // phpcs:ignore ?></span>
+							<?php $alp3d = array( 'flask' => 'flask', 'shield' => 'shield', 'doc' => 'docs', 'truck' => 'truck' ); ?>
+							<?php echo isset( $alp3d[ $stat['icon'] ] ) ? alp_icon3d( $alp3d[ $stat['icon'] ] ) : '<span class="alp-stats__icon">' . alp_icon( $stat['icon'], 20 ) . '</span>'; // phpcs:ignore ?>
 						<?php endif; ?>
 						<div class="alp-stats__text">
 							<strong class="alp-stats__value"><?php echo esc_html( alp_stat_value( $stat['value'] ) ); ?></strong>

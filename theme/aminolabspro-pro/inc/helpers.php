@@ -181,3 +181,72 @@ function alp_stat_value( $value ) {
 	}
 	return $value;
 }
+
+/**
+ * Illustrierte Icons mit Tiefe (Verlauf, Lichtkante, Bodenschatten) für Kennzahlen & Hervorhebungen.
+ * Verfügbar: flask, shield, docs, truck. Kachel-Styles: components.css → .alp-icon3d
+ */
+function alp_icon3d( $name, $size = 40 ) {
+	static $n = 0;
+	$n++;
+	$m = 'alpi' . $n; // eindeutige Verlauf-IDs je Icon
+	$defs = '<defs>'
+		. '<linearGradient id="' . $m . 'm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9AF0CF"/><stop offset=".55" stop-color="#5FD3A9"/><stop offset="1" stop-color="#2E8B6E"/></linearGradient>'
+		. '<linearGradient id="' . $m . 'g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#DCEFE8" stop-opacity=".75"/></linearGradient>'
+		. '<linearGradient id="' . $m . 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6EDF2"/></linearGradient>'
+		. '</defs>';
+	$floor = '<ellipse cx="24" cy="44" rx="13" ry="2.4" fill="#1A1F2E" opacity=".13"/>';
+	$ink   = 'stroke="#1A1F2E" stroke-width="1.4" stroke-linejoin="round"';
+
+	switch ( $name ) {
+		case 'flask':
+			$body = $floor
+				. '<path d="M19 5.5h10" ' . $ink . ' stroke-linecap="round" fill="none"/>'
+				. '<path d="M20.5 6v11.2l-9 15a5 5 0 0 0 4.3 7.6h16.4a5 5 0 0 0 4.3-7.6l-9-15V6z" fill="url(#' . $m . 'g)" ' . $ink . '/>'
+				. '<path d="M14.9 29h18.2l2.6 4.3a3.6 3.6 0 0 1-3.1 5.4H15.4a3.6 3.6 0 0 1-3.1-5.4z" fill="url(#' . $m . 'm)"/>'
+				. '<ellipse cx="24" cy="29" rx="9.1" ry="1.3" fill="#C4F7E4"/>'
+				. '<circle cx="20.5" cy="34" r="1.4" fill="#fff" opacity=".85"/><circle cx="25.5" cy="32" r=".95" fill="#fff" opacity=".8"/><circle cx="28" cy="35.6" r="1.15" fill="#fff" opacity=".75"/>'
+				. '<path d="M22.8 9.5v8.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".95"/>'
+				. '<path d="M16.2 32.5l1.8-3" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>';
+			break;
+		case 'shield':
+			$body = $floor
+				. '<path d="M25.5 7.5l14 5v10c0 9.5-6 16.5-14 19.5-8-3-14-10-14-19.5v-10z" fill="#1F6B53" opacity=".28"/>'
+				. '<path d="M24 5l14 5v10c0 9.5-6 16.5-14 19.5C16 36.5 10 29.5 10 20V10z" fill="url(#' . $m . 'm)" ' . $ink . '/>'
+				. '<path d="M24 8.6l10.8 3.9V20c0 7.6-4.6 13.3-10.8 16z" fill="#fff" opacity=".22"/>'
+				. '<path d="M13.2 12.4 24 8.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".85"/>'
+				. '<path d="M17.8 22.6l4.3 4.3 8.6-9" stroke="#1A1F2E" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".22" transform="translate(.6 1)"/>'
+				. '<path d="M17.8 22.6l4.3 4.3 8.6-9" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+			break;
+		case 'docs':
+			$body = $floor
+				. '<rect x="15" y="5.5" width="21" height="28" rx="2.5" fill="#D4F3E8" ' . $ink . ' transform="rotate(9 25 20)"/>'
+				. '<rect x="13" y="6.5" width="21" height="28" rx="2.5" fill="#F0FBF7" ' . $ink . ' transform="rotate(-5 23 20)"/>'
+				. '<path d="M11 10.5A2.5 2.5 0 0 1 13.5 8H26l7 7v22.5a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 11 37.5z" fill="url(#' . $m . 'w)" ' . $ink . '/>'
+				. '<path d="M26 8v5a2 2 0 0 0 2 2h5z" fill="#D4F3E8" ' . $ink . '/>'
+				. '<path d="M15 19h9M15 23h13M15 27h7" stroke="#9AA9B8" stroke-width="1.5" stroke-linecap="round"/>'
+				. '<circle cx="29.5" cy="33" r="6.2" fill="url(#' . $m . 'm)" ' . $ink . '/>'
+				. '<path d="M26.9 33.1l1.8 1.8 3.5-3.7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+				. '<path d="M26.3 30.6a3.8 3.8 0 0 1 2.4-1.6" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".8"/>';
+			break;
+		case 'truck':
+			$body = $floor
+				. '<path d="M1.5 17h4M.5 21.5h5M2 26h3" stroke="#5FD3A9" stroke-width="1.8" stroke-linecap="round"/>'
+				. '<rect x="7" y="11" width="22" height="20" rx="2.5" fill="url(#' . $m . 'w)" ' . $ink . '/>'
+				. '<rect x="11" y="16" width="10" height="5.5" rx="1.2" fill="url(#' . $m . 'm)"/>'
+				. '<path d="M8.5 13.2h18" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>'
+				. '<path d="M29 17h7.6l5.4 6.5V31H29z" fill="url(#' . $m . 'm)" ' . $ink . '/>'
+				. '<path d="M31 19.2h4.6l3.5 4.3H31z" fill="#D8F8EC" stroke="#1A1F2E" stroke-width="1" stroke-linejoin="round"/>'
+				. '<circle cx="14" cy="32" r="4.3" fill="#1A1F2E"/><circle cx="14" cy="32" r="1.7" fill="#C9D3DC"/>'
+				. '<circle cx="35" cy="32" r="4.3" fill="#1A1F2E"/><circle cx="35" cy="32" r="1.7" fill="#C9D3DC"/>';
+			break;
+		default:
+			return alp_icon( $name, 22 );
+	}
+	return sprintf(
+		'<span class="alp-icon3d" aria-hidden="true"><svg width="%1$d" height="%1$d" viewBox="0 0 48 48" focusable="false">%2$s%3$s</svg></span>',
+		(int) $size,
+		$defs,
+		$body
+	);
+}
