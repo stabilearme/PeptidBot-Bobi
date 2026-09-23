@@ -4,6 +4,7 @@
  *  2. Such-Overlay
  *  3. Sticky-Kaufleiste auf Produktseiten
  *  4. „Versand heute“-Countdown
+ *  5. Bewegung: Einblenden beim Scrollen, hochzählende Laborwerte, Chromatogramm
  */
 (function () {
 	'use strict';
@@ -127,6 +128,75 @@
 		setInterval(render, 60000);
 	}
 
+	/* 5. Bewegung ---------------------------------------------------------- */
+	// Elemente, die beim Scrollen sanft erscheinen (Geschwister nacheinander).
+	var REVEAL = [
+		'.alp-section__head', '.alp-trust__item', '.alp-cat', '.products .product-small',
+		'.alp-coa-teaser__copy', '.alp-coa-teaser__list', '.alp-process__step', '.alp-know__card',
+		'.alp-faq__head', '.alp-faq__item', '.alp-cta', '.alp-coa-card', '.alp-coa-explain',
+		'.alp-pcoa', '.alp-ptab-coa__doc', '.alp-ptab-coa__info', '.alp-shop-intro',
+		'.wis-card', '.box-blog-post', '.gl-card', '.ship-card', '.recon-card', '.alp-usp-card',
+		'#alp-scope .alp-card', '#alp-scope .alp-section', '.alp3-flag-col',
+		'.alp-desc__tile', '.alp-desc__panel', '.alp-desc__dark', '.alp-desc__tiles'
+	].join(',');
+
+	// Laborwerte, die hochzählen (erste Zahl im Text, z. B. „≥ 98 %“, „10,44 mg“).
+	var COUNT = '.alp-hero__stats dd, .alp-pcoa__num, .alp-coa-card__v, .alp-ptab-coa__figures strong, .alp-coa-teaser__val, .alp-cert__data dd';
+
+	function countUp(el) {
+		var node = el.firstChild;
+		while (node && node.nodeType !== 3) node = node.nextSibling;
+		if (!node) return;
+		var m = node.nodeValue.match(/^(\D*?)(\d+(?:,\d+)?)(.*)$/);
+		if (!m || /^\s*[–-]\s*\d/.test(m[3])) return; // Bereiche wie „2–4 Tage“ bleiben stehen
+		var target = parseFloat(m[2].replace(',', '.'));
+		var decimals = (m[2].split(',')[1] || '').length;
+		var start = null;
+		var duration = 1100;
+		function frame(t) {
+			if (start === null) start = t;
+			var p = Math.min(1, (t - start) / duration);
+			var eased = 1 - Math.pow(1 - p, 3);
+			node.nodeValue = m[1] + (target * eased).toFixed(decimals).replace('.', ',') + m[3];
+			if (p < 1) requestAnimationFrame(frame);
+		}
+		node.nodeValue = m[1] + (0).toFixed(decimals).replace('.', ',') + m[3];
+		requestAnimationFrame(frame);
+	}
+
+	function initMotion() {
+		if (reduceMotion || !document.body.classList.contains('alp-motion') || !('IntersectionObserver' in window)) return;
+
+		var io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (!entry.isIntersecting) return;
+				var el = entry.target;
+				el.classList.add('is-in');
+				if (el.matches(COUNT)) {
+					countUp(el);
+				} else {
+					el.querySelectorAll(COUNT).forEach(function (c) {
+						if (!c.closest('.alp-reveal:not(.is-in)')) countUp(c);
+					});
+				}
+				io.unobserve(el);
+			});
+		}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+		document.querySelectorAll(REVEAL).forEach(function (el) {
+			if (el.parentElement && el.parentElement.closest('.alp-reveal')) return; // nicht doppelt verschachteln
+			var i = Array.prototype.indexOf.call(el.parentElement.children, el);
+			el.style.setProperty('--alp-delay', Math.min(i, 6) * 70 + 'ms');
+			el.classList.add('alp-reveal');
+			io.observe(el);
+		});
+		// Zahlen außerhalb von einblendenden Elementen (z. B. Hero) separat beobachten.
+		document.querySelectorAll(COUNT).forEach(function (el) {
+			if (!el.closest('.alp-reveal')) io.observe(el);
+		});
+		document.querySelectorAll('.alp-chroma').forEach(function (el) { io.observe(el); });
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') fn();
 		else document.addEventListener('DOMContentLoaded', fn);
@@ -137,5 +207,6 @@
 		initSearch();
 		initBuyBar();
 		initShipping();
+		initMotion();
 	});
 })();

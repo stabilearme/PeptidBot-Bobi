@@ -1,0 +1,63 @@
+/* ==========================================================================
+   BEWEGUNG
+   Dezente Animationen: Einblenden beim Scrollen, Hero-Auftritt, hochzählende
+   Laborwerte, Chromatogramm zeichnet sich. Logik: assets/js/theme.js (initMotion).
+   Aktiv nur mit Body-Klasse .alp-motion (config.php → features.animations) und
+   nur, wenn das Gerät nicht „Bewegung reduzieren“ eingestellt hat.
+   Ohne JavaScript bleibt alles sichtbar – ausgeblendet wird erst per .alp-reveal.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+	/* Einblenden beim Scrollen */
+	.alp-motion .alp-reveal {
+		opacity: 0;
+		transform: translateY(18px);
+		transition:
+			opacity 650ms var(--alp-ease) var(--alp-delay, 0ms),
+			transform 650ms var(--alp-ease) var(--alp-delay, 0ms);
+	}
+	.alp-motion .alp-reveal.is-in { opacity: 1; transform: none; }
+
+	/* Hero: Text gestaffelt, Bild mit leichtem Zoom */
+	.alp-motion .alp-hero__copy > * { animation: alp-hero-in 800ms var(--alp-ease) both; }
+	.alp-motion .alp-hero__copy > :nth-child(2) { animation-delay: 90ms; }
+	.alp-motion .alp-hero__copy > :nth-child(3) { animation-delay: 180ms; }
+	.alp-motion .alp-hero__copy > :nth-child(4) { animation-delay: 270ms; }
+	.alp-motion .alp-hero__copy > :nth-child(5) { animation-delay: 360ms; }
+	.alp-motion .alp-hero__media img { animation: alp-hero-zoom 1800ms var(--alp-ease) both; }
+	.alp-motion .alp-hero .alp-cert { animation: alp-hero-in 900ms var(--alp-ease) 250ms both; }
+
+	/* Pulsierender Punkt in der Überzeile */
+	.alp-motion .alp-dot { animation: alp-pulse 2.4s ease-out infinite; }
+
+	/* Chromatogramm zeichnet sich erst, wenn es sichtbar ist */
+	.alp-motion .alp-chroma .alp-chroma__line { animation-play-state: paused; }
+	.alp-motion .alp-chroma.is-in .alp-chroma__line { animation-play-state: running; }
+	.alp-motion .alp-chroma .alp-chroma__area { opacity: 0; transition: opacity 900ms var(--alp-ease) 900ms; }
+	.alp-motion .alp-chroma.is-in .alp-chroma__area { opacity: 1; }
+
+	/* Karten heben sich beim Überfahren leicht an */
+	.alp-motion :is(.alp-cat, .alp-know__card, .alp-coa-card) { transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease); }
+	.alp-motion :is(.alp-cat, .alp-know__card, .alp-coa-card):hover { transform: translateY(-3px); box-shadow: var(--alp-shadow-md); }
+
+	/* Hauptbutton: feiner Lichtschimmer beim Überfahren */
+	.alp-motion .alp-btn--primary { position: relative; overflow: hidden; }
+	.alp-motion .alp-btn--primary::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+		transform: translateX(-120%);
+		pointer-events: none;
+	}
+	.alp-motion .alp-btn--primary:hover::after { transform: translateX(120%); transition: transform 700ms var(--alp-ease); }
+}
+
+@keyframes alp-hero-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes alp-hero-zoom { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+@keyframes alp-pulse {
+	0% { box-shadow: 0 0 0 0 rgba(19, 121, 91, 0.45); }
+	70% { box-shadow: 0 0 0 9px rgba(19, 121, 91, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(19, 121, 91, 0); }
+}

@@ -23,6 +23,7 @@ function alp_styles() {
 		'checkout'   => 'checkout',   // Warenkorb, Kasse, Konto
 		'home'       => 'home',       // Startseite
 		'coa'        => 'coa',        // COA-Center + Chargen-Prüfer
+		'motion'     => 'all',        // Animationen (Schalter: features.animations)
 		'legacy'     => 'all',        // Platz für Übernahmen aus altem Zusatz-CSS
 	);
 }
@@ -110,6 +111,9 @@ function alp_body_class( $classes ) {
 	}
 	if ( alp_config( 'features.mobile_bottom_nav' ) ) {
 		$classes[] = 'alp-has-bottom-nav';
+	}
+	if ( alp_config( 'features.animations' ) ) {
+		$classes[] = 'alp-motion';
 	}
 	return $classes;
 }

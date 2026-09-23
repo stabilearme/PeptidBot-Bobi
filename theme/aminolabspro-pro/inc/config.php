@@ -41,6 +41,7 @@ return array(
 		'shop_intro'         => true,  // Einleitung + Vorteile über der Produktliste
 		'category_pills'     => true,  // Kategorie-Filter über dem Shop
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
+		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
 	),
 
 	/* Versandkostenfrei ab (in €). 0 = Fortschrittsbalken im Warenkorb ausblenden. */
