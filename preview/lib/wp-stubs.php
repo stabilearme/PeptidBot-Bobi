@@ -36,7 +36,7 @@ function is_account_page() { return 'mein-konto' === alp_preview_slug(); }
 function in_the_loop() { return true; }
 function have_posts() { return false; }
 function the_post() {}
-function get_the_title() { return 'Laborergebnisse & COAs'; }
+function get_the_title( $post = null ) { return is_object( $post ) ? $post->post_title : 'Laborergebnisse & COAs'; }
 function get_queried_object_id() { return 0; }
 function is_single() { return 'post' === $GLOBALS['alp_ctx']['page']; }
 function get_the_ID() { return 0; }
@@ -242,6 +242,9 @@ function wc_get_product_id_by_sku( $sku ) {
 }
 
 function get_permalink( $id ) {
+	if ( is_object( $id ) ) {
+		return 'artikel-' . $id->post_name . '.html';
+	}
 	$p = alp_preview_products()[ $id ] ?? null;
 	return $p ? $p->get_permalink() : '';
 }
@@ -315,3 +318,28 @@ class PV_WPDB {
 	}
 }
 $GLOBALS['wpdb'] = new PV_WPDB();
+
+
+// Neueste Artikel für die Startseite (Wissen): aus data/posts, neueste zuerst, mit lokalem Titelbild.
+function alp_preview_post_images() {
+	return array(
+		'u100-spritze-einheiten-umrechnen' => 'img/media/triple-g-10mg-hero-768x430.webp',
+		'peptide-versenden'                => 'img/media/ghk-cu-50mg-verpackung-768x430.webp',
+		'peptide-lagern-haltbarkeit'       => 'img/media/ghkcu50mghero-1-768x430.webp',
+		'was-sind-peptide'                 => 'img/media/bpc15710mghero-768x430.webp',
+		'peptide-rekonstituieren'          => 'img/media/bpc-157-10mg-rekonstitution-768x430.webp',
+	);
+}
+function get_posts( $args = array() ) {
+	$out = array();
+	foreach ( glob( ALP_PREVIEW_DATA . '/posts/*.json' ) as $f ) {
+		$d     = json_decode( file_get_contents( $f ), true );
+		$out[] = (object) array( 'ID' => $d['id'], 'post_name' => $d['slug'], 'post_title' => html_entity_decode( $d['title'] ), 'post_date' => $d['date'] );
+	}
+	usort( $out, fn( $a, $b ) => strcmp( $b->post_date, $a->post_date ) );
+	return array_slice( $out, 0, (int) ( $args['numberposts'] ?? 5 ) );
+}
+function get_the_post_thumbnail_url( $post, $size = 'post-thumbnail' ) {
+	return alp_preview_post_images()[ $post->post_name ] ?? false;
+}
+function get_the_category( $id = 0 ) { return array( (object) array( 'name' => 'Wissen' ) ); }

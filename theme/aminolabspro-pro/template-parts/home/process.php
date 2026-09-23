@@ -9,7 +9,7 @@ if ( empty( $cfg['steps'] ) ) {
 	return;
 }
 ?>
-<section class="alp-section" id="ablauf">
+<section class="alp-section alp-section--tint" id="ablauf">
 	<div class="alp-container">
 		<header class="alp-section__head">
 			<div>

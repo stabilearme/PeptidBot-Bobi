@@ -170,3 +170,14 @@ function alp_current_url() {
 	$host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : wp_parse_url( home_url(), PHP_URL_HOST );
 	return ( is_ssl() ? 'https://' : 'http://' ) . $host . $uri;
 }
+
+/**
+ * Kennzahl mit Platzhalter: {coa} = Anzahl veröffentlichter Laborzertifikate.
+ */
+function alp_stat_value( $value ) {
+	if ( false !== strpos( (string) $value, '{coa}' ) && function_exists( 'alp_coa_batches' ) ) {
+		$count = count( array_filter( alp_coa_batches(), fn( $b ) => $b['done'] ) );
+		$value = str_replace( '{coa}', (string) $count, $value );
+	}
+	return $value;
+}

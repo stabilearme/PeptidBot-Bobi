@@ -1,6 +1,7 @@
 <?php
 /**
- * Startseite – Hero mit Live-Zertifikat. Texte: config.php → 'hero'.
+ * Startseite – Hero: Text links, rechts Foto mit schwebender Zertifikats-Karte (echte Charge).
+ * Ohne Foto (hero.image leer): gezeichnetes Zertifikat. Texte: config.php → 'hero'.
  */
 defined( 'ABSPATH' ) || exit;
 
@@ -12,15 +13,10 @@ if ( ! $batch || ! $batch['done'] ) {
 	$batch = $done[0] ?? null;
 }
 ?>
-<section class="alp-hero<?php echo $image ? ' alp-hero--image' : ''; ?>">
-	<?php if ( $image ) : ?>
-		<div class="alp-hero__media">
-			<img src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $hero['image_alt'] ?? '' ); ?>" width="1671" height="941" fetchpriority="high" decoding="async">
-		</div>
-	<?php endif; ?>
+<section class="alp-hero<?php echo $image ? ' alp-hero--split' : ''; ?>">
 	<div class="alp-container alp-hero__grid">
 		<div class="alp-hero__copy">
-			<p class="alp-eyebrow"><span class="alp-dot" aria-hidden="true"></span><?php echo esc_html( $hero['eyebrow'] ?? '' ); ?></p>
+			<p class="alp-eyebrow"><?php echo esc_html( $hero['eyebrow'] ?? '' ); ?></p>
 			<h1 class="alp-hero__title"><?php echo wp_kses( $hero['title'] ?? '', array( 'em' => array(), 'br' => array() ) ); ?></h1>
 			<p class="alp-hero__text"><?php echo esc_html( $hero['text'] ?? '' ); ?></p>
 			<div class="alp-hero__actions">
@@ -31,14 +27,39 @@ if ( ! $batch || ! $batch['done'] ) {
 					<a class="alp-btn alp-btn--ghost alp-btn--lg" href="<?php echo esc_url( alp_link( $hero['secondary']['url'] ) ); ?>"><?php echo esc_html( $hero['secondary']['label'] ); ?></a>
 				<?php endif; ?>
 			</div>
-			<?php if ( ! empty( $hero['stats'] ) ) : ?>
+			<?php if ( ! empty( $hero['checks'] ) ) : ?>
+				<ul class="alp-hero__checks">
+					<?php foreach ( (array) $hero['checks'] as $check ) : ?>
+						<li><?php echo alp_icon( 'check', 16 ); // phpcs:ignore ?><?php echo esc_html( $check ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+			<?php if ( ! $image && ! empty( $hero['stats'] ) ) : ?>
 				<dl class="alp-hero__stats">
 					<?php foreach ( $hero['stats'] as $stat ) : ?>
-						<div><dt><?php echo esc_html( $stat['label'] ); ?></dt><dd><?php echo esc_html( $stat['value'] ); ?></dd></div>
+						<div><dt><?php echo esc_html( $stat['label'] ); ?></dt><dd><?php echo esc_html( alp_stat_value( $stat['value'] ) ); ?></dd></div>
 					<?php endforeach; ?>
 				</dl>
 			<?php endif; ?>
 		</div>
+
+		<?php if ( $image ) : ?>
+			<div class="alp-hero__visual">
+				<div class="alp-hero__photo">
+					<img src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $hero['image_alt'] ?? '' ); ?>" width="1671" height="941" fetchpriority="high" decoding="async">
+				</div>
+				<?php if ( $batch ) : ?>
+					<a class="alp-hero__proof" href="<?php echo esc_url( alp_link( '/coa/' ) . '#charge-' . strtolower( $batch['batch'] ) ); ?>" aria-label="Zertifikat der Charge <?php echo esc_attr( $batch['batch'] ); ?> ansehen">
+						<span class="alp-hero__proof-head">
+							<span class="alp-hero__proof-batch"><?php echo esc_html( $batch['batch'] ); ?></span>
+							<span class="alp-hero__proof-ok">Verifiziert</span>
+						</span>
+						<span class="alp-hero__proof-val"><strong><?php echo esc_html( alp_num( $batch['purity'], 0 ) ); ?></strong><span>%</span><small>Reinheit (HPLC)</small></span>
+						<span class="alp-hero__proof-foot"><span><?php echo esc_html( $batch['product'] ); ?> · gemessen</span><span class="alp-mono"><?php echo esc_html( alp_num( $batch['content'] ) ); ?> mg</span></span>
+					</a>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
 
 		<?php if ( ! $image && $batch ) : ?>
 			<figure class="alp-cert" aria-label="Beispiel eines veröffentlichten Laborzertifikats">

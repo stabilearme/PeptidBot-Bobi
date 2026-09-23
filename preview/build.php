@@ -293,7 +293,9 @@ function pv_render_home() {
 	alp_preview_ctx( 'home' );
 	ob_start();
 	echo '<div id="alp-home" class="alp-home">';
-	foreach ( array( 'home/hero', 'home/trust', 'home/categories', 'home/products', 'home/news', 'home/coa', 'home/process', 'home/knowledge', 'home/faq', 'home/newsletter' ) as $section ) {
+	// Abschnitte und Reihenfolge wie in front-page.php (auskommentierte Zeilen zählen nicht).
+	preg_match_all( "#^\\s*'(home/[a-z-]+)'#m", file_get_contents( ALP_PREVIEW_THEME . '/front-page.php' ), $alp_sections );
+	foreach ( $alp_sections[1] as $section ) {
 		if ( 'home/products' === $section ) {
 			// Wie im Theme – nur dass der [products]-Shortcode hier durch nachgebaute Flatsome-Kacheln ersetzt wird.
 			$cfg  = (array) alp_config( 'sections.products', array() );

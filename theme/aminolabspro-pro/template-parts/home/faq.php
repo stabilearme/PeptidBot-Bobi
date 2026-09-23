@@ -16,7 +16,7 @@ $allowed = array(
 	'br'     => array(),
 );
 ?>
-<section class="alp-section" id="faq">
+<section class="alp-section alp-section--tint" id="faq">
 	<div class="alp-container alp-faq">
 		<header class="alp-faq__head">
 			<p class="alp-eyebrow"><?php echo esc_html( $cfg['eyebrow'] ?? '' ); ?></p>

@@ -135,14 +135,14 @@
 		'.alp-section__head', '.alp-trust__item', '.alp-cat', '.products .product-small',
 		'.alp-coa-teaser__copy', '.alp-coa-teaser__list', '.alp-process__step', '.alp-know__card',
 		'.alp-faq__head', '.alp-faq__item', '.alp-cta', '.alp-soon', '.alp-coa-card', '.alp-coa-explain',
-		'.alp-pcoa', '.alp-ptab-coa__doc', '.alp-ptab-coa__info', '.alp-shop-intro',
+		'.alp-check-card', '.alp-article', '.alp-pcoa', '.alp-ptab-coa__doc', '.alp-ptab-coa__info', '.alp-shop-intro',
 		'.wis-card', '.box-blog-post', '.gl-card', '.ship-card', '.recon-card', '.alp-usp-card',
 		'#alp-scope .alp-card', '#alp-scope .alp-section', '.alp3-flag-col',
 		'.alp-desc__tile', '.alp-desc__panel', '.alp-desc__dark', '.alp-desc__tiles'
 	].join(',');
 
 	// Laborwerte, die hochzählen (erste Zahl im Text, z. B. „≥ 98 %“, „10,44 mg“).
-	var COUNT = '.alp-hero__stats dd, .alp-pcoa__num, .alp-coa-card__v, .alp-ptab-coa__figures strong, .alp-coa-teaser__val, .alp-cert__data dd';
+	var COUNT = '.alp-hero__stats dd, .alp-stats__item dd, .alp-hero__proof-val strong, .alp-pcoa__num, .alp-coa-card__v, .alp-ptab-coa__figures strong, .alp-coa-teaser__val, .alp-cert__data dd';
 
 	function countUp(el) {
 		var node = el.firstChild;

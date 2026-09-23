@@ -197,7 +197,8 @@
 .alp .alp-lookup--dark .alp-btn--primary { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
 .alp .alp-lookup--dark .alp-btn--primary:hover { background: var(--alp-surface); border-color: var(--alp-surface); }
 .alp .alp-lookup--dark .alp-lookup__hint { color: var(--alp-dark-muted); }
-.alp .alp-lookup--dark .alp-lookup__example:hover { color: var(--alp-mint); }
+.alp .alp-lookup--dark .alp-lookup__example { border: 1px solid var(--alp-dark-line); border-radius: 999px; padding: 0.2rem 0.7rem; color: #fff; }
+.alp .alp-lookup--dark .alp-lookup__example:hover { color: var(--alp-mint); border-color: var(--alp-mint); }
 
 /* ---------- Chromatogramm ---------- */
 .alp-chroma { display: block; width: 100%; height: auto; overflow: visible; }

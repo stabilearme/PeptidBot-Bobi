@@ -17,7 +17,8 @@ $logo_id = (int) get_theme_mod( 'site_logo_dark' ) ?: (int) get_theme_mod( 'site
 					if ( $logo_id && wp_attachment_is_image( $logo_id ) ) {
 						echo wp_get_attachment_image( $logo_id, 'medium', false, array( 'loading' => 'lazy', 'alt' => $brand['name'] ?? '' ) );
 					} else {
-						echo esc_html( $brand['name'] ?? get_bloginfo( 'name' ) );
+						// Wortmarke wie im Logo: amino·labs·pro
+						echo '<span class="alp-wordmark">amino<span>labs</span><em>pro</em></span>';
 					}
 					?>
 				</a>

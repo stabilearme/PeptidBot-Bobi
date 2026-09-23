@@ -40,8 +40,11 @@ if ( ! $teaser && ! $tabs ) {
 
 		<div class="alp-news<?php echo $teaser ? '' : ' alp-news--no-teaser'; ?>">
 			<?php if ( $teaser ) : ?>
-				<?php $has_text = ! empty( $teaser['image_has_text'] ); // Bild zeigt die Produktangaben selbst ?>
-				<article class="alp-soon<?php echo $has_text ? ' alp-soon--light' : ''; ?>">
+				<?php
+				$has_text = ! empty( $teaser['image_has_text'] ); // Bild zeigt die Produktangaben selbst
+				$light    = $has_text && 'dark' !== ( $teaser['tone'] ?? 'light' );
+				?>
+				<article class="alp-soon<?php echo $has_text ? ' alp-soon--full' : ''; ?><?php echo $light ? ' alp-soon--light' : ''; ?>">
 					<?php if ( ! empty( $teaser['image'] ) ) : ?>
 						<div class="alp-soon__media">
 							<img src="<?php echo esc_url( alp_link( $teaser['image'] ) ); ?>" alt="<?php echo esc_attr( $teaser['title'] ?? '' ); ?>" loading="lazy" width="1536" height="1024">

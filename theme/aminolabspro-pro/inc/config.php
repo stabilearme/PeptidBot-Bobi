@@ -68,24 +68,28 @@ return array(
 
 	/* ---------- Startseite: Hero ---------- */
 	'hero' => array(
-		'eyebrow'   => 'Research-Grade · Drittlabor-geprüft',
-		'title'     => 'Forschungspeptide mit <em>belegter</em> Reinheit.',
-		'text'      => 'Jede Charge wird von einem unabhängigen Labor per HPLC analysiert. Das Zertifikat ist öffentlich einsehbar – über die Chargennummer auf deinem Vial.',
+		'eyebrow'   => 'Research Grade · Drittlabor-geprüft',
+		'title'     => 'Reinheit, die du <em>nachprüfen</em> kannst.',
+		'text'      => 'Jede Charge wird von einem unabhängigen Labor per HPLC analysiert. Das vollständige Zertifikat findest du über die Chargennummer auf deinem Vial.',
 		'primary'   => array( 'label' => 'Peptide entdecken', 'url' => 'shop' ),
-		'secondary' => array( 'label' => 'Laborergebnisse ansehen', 'url' => '/coa/' ),
+		'secondary' => array( 'label' => 'Charge prüfen', 'url' => '/#charge-pruefen' ),
+		/* Kurze Häkchen-Zeile unter den Buttons. */
+		'checks'    => array( 'Öffentliche COAs', 'Versand aus DE', 'Vorkasse per Überweisung' ),
+		/* Kennzahlen: mit Hero-Bild als Mint-Leiste darunter, sonst im Hero. {coa} = Zahl der veröffentlichten Zertifikate. */
 		'stats'     => array(
-			array( 'value' => '≥ 98 %', 'label' => 'Reinheit (HPLC)' ),
-			array( 'value' => '100 %', 'label' => 'chargengetestet' ),
-			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in DE' ),
+			array( 'value' => '≥ 98 %', 'label' => 'Reinheit laut HPLC' ),
+			array( 'value' => '100 %', 'label' => 'der Chargen getestet' ),
+			array( 'value' => '{coa} COAs', 'label' => 'öffentlich einsehbar' ),
+			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in Deutschland' ),
 		),
 		/*
 		 * Hero-Bild (Vials + Zertifikat) aus der Mediathek. Pfad ab /wp-content/ oder volle URL.
 		 * Leer lassen ('') = stattdessen die gezeichnete Zertifikats-Karte anzeigen.
-		 * Das Bild sollte links hell auslaufen – dort steht der Text.
+		 * Das Foto steht rechts in einer Karte; darauf schwebt die Karte der Charge aus 'featured_batch'.
 		 */
 		'image'     => '/wp-content/uploads/2026/09/aminolabspro-hero-2.webp',
 		'image_alt' => 'Research-Peptide-Vials von aminolabspro mit Laborzertifikat von Analiza Białek',
-		/* Welche Charge in der Zertifikats-Karte gezeigt wird (nur ohne Hero-Bild, Chargennummer aus /data/coa-batches.php). */
+		/* Welche Charge in der Zertifikats-Karte gezeigt wird (Chargennummer aus /data/coa-batches.php). */
 		'featured_batch' => 'BPC-0726-01',
 	),
 
@@ -108,8 +112,10 @@ return array(
 		),
 		'products' => array(
 			'eyebrow' => 'Meistgekauft',
-			'title'   => 'Beliebt in der Forschung',
+			'title'   => 'Beliebt in der Forschung.',
 			'limit'   => 8,
+			/* Anzahl Kategorie-Filter über der Liste (0 = stattdessen Link „Alle Produkte“). */
+			'pills'   => 4,
 			'orderby' => 'popularity', // popularity | date | price | rand | menu_order
 			'cta'     => array( 'label' => 'Alle Produkte', 'url' => 'shop' ),
 		),
@@ -120,14 +126,16 @@ return array(
 		 */
 		'news' => array(
 			'eyebrow' => 'Neu & demnächst',
-			'title'   => 'Frisch im Labor',
+			'title'   => 'Frisch im Labor.',
 			'teaser'  => array(
 				'badge'    => 'Demnächst',
 				'title'    => 'Transportabler Vial-Kühlschrank',
 				'text'     => 'Kompakte Kühlbox für deine Vials – mit Akku, per USB aufladbar und mit konstanter Kühltemperatur. Ideal für Transport und Laborwechsel.',
-				// Helles Produktbild mit eingebauten Produktangaben → die Merkmal-Liste wird dann ausgeblendet.
-				'image'          => '/wp-content/uploads/2026/09/aminolabspro-kuehlbox-hero.webp',
+				// Produktbild mit eingebauten Produktangaben → die Merkmal-Liste wird ausgeblendet, das Bild ganz gezeigt.
+				// 'tone' => 'dark' (dunkle Karte) oder 'light' (helle Karte, z. B. für aminolabspro-kuehlbox-hero.webp).
+				'image'          => '/wp-content/uploads/2026/09/Mobiler-Vial-Kuehlschrank-im-Studio-1024x683.png',
 				'image_has_text' => true,
+				'tone'           => 'dark',
 				'features' => array( 'Akkubetrieb 4–6 Stunden', 'USB-Aufladung', 'Kompakt & transportabel', 'Konstante Kühltemperatur' ),
 				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/early-access/' ),
 				'note'     => 'Wir informieren dich per E-Mail, sobald er verfügbar ist.',
@@ -146,7 +154,7 @@ return array(
 		),
 		'process' => array(
 			'eyebrow' => 'Ablauf',
-			'title'   => 'Von der Synthese bis zu dir',
+			'title'   => 'Von der Synthese bis zu dir.',
 			'steps'   => array(
 				array( 'title' => 'Synthese & Lyophilisierung', 'text' => 'Research-Grade-Peptide, gefriergetrocknet für maximale Stabilität.' ),
 				array( 'title' => 'Unabhängige Laborprüfung', 'text' => 'Jede Charge wird per HPLC auf Reinheit und Wirkstoffgehalt analysiert.' ),
@@ -156,7 +164,10 @@ return array(
 		),
 		'knowledge' => array(
 			'eyebrow' => 'Wissen',
-			'title'   => 'Fundiert statt Hörensagen',
+			'title'   => 'Fundiert statt Hörensagen.',
+			/* Neueste Artikel mit Titelbild (0 = stattdessen die Kacheln unten). */
+			'posts'   => 3,
+			'cta'     => array( 'label' => 'Alle Artikel', 'url' => '/wissen/' ),
 			'items'   => array(
 				array( 'icon' => 'doc',  'title' => 'COAs richtig lesen', 'text' => 'Was HPLC, Massenspektrometrie und Wirkstoffgehalt wirklich aussagen.', 'url' => '/coas-richtig-lesen-verstehen/' ),
 				array( 'icon' => 'calc', 'title' => 'Rekonstitutionsrechner', 'text' => 'Konzentration und Volumen für dein Laborprotokoll exakt berechnen.', 'url' => '/dosierungsrechner/' ),
@@ -165,7 +176,7 @@ return array(
 		),
 		'faq' => array(
 			'eyebrow' => 'FAQ',
-			'title'   => 'Häufige Fragen',
+			'title'   => 'Häufige Fragen.',
 		),
 		'newsletter' => array(
 			'title' => '15 % auf deine erste Bestellung.',

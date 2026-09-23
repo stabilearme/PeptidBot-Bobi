@@ -1,3 +1,6 @@
+Enthaltene Schriften (alle SIL Open Font License 1.1): Space Grotesk (Florian Karsten), Inter (Rasmus Andersson), JetBrains Mono (JetBrains).
+Quelle: Fontsource-Pakete (latin, latin-ext).
+
 Copyright 2022 The Bricolage Grotesque Project Authors (https://github.com/ateliertriay/bricolage)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.

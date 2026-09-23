@@ -17,11 +17,12 @@ get_header();
 	<?php
 	$alp_home_sections = array(
 		'home/hero',
-		'home/trust',
-		'home/categories',
+		'home/stats',
+		'home/coa',
+		// 'home/trust',       // Vertrauensleiste (steckt jetzt in Hero-Häkchen + Kennzahlen)
+		// 'home/categories',  // Kategorie-Kacheln (jetzt als Filter über den Produkten)
 		'home/products',
 		'home/news',
-		'home/coa',
 		'home/process',
 		'home/knowledge',
 		'home/faq',
