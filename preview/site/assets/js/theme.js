@@ -166,7 +166,8 @@
 	}
 
 	function initMotion() {
-		if (reduceMotion || !document.body.classList.contains('alp-motion') || !('IntersectionObserver' in window)) return;
+		// Läuft auch bei „Bewegung reduzieren“: motion.css zeigt dann nur Überblendungen ohne Bewegung.
+		if (!document.body.classList.contains('alp-motion') || !('IntersectionObserver' in window)) return;
 
 		var io = new IntersectionObserver(function (entries) {
 			entries.forEach(function (entry) {
