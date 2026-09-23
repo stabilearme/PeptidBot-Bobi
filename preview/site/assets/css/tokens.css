@@ -48,14 +48,14 @@
 	--alp-ink: #1A1F2E;          /* ink – Überschriften, Text, Footer, dunkle Flächen */
 	--alp-ink-2: #565F78;        /* ink-soft – Fließtext */
 	--alp-muted: #5A6478;        /* mid – Nebentext, Labels (5,95:1 auf Weiß) */
-	/* Helle Flächen: warme Palette aus dem Design System (Wissen-Seiten) */
-	--alp-line: #E5E2D6;         /* line-warm – Linien, Rahmen */
-	--alp-line-2: #D8D4C5;       /* etwas kräftiger für Eingabefelder (aus line-warm abgeleitet) */
-	--alp-paper: #F6F1E4;        /* gold-bg – getönte Abschnitte (Sand) */
-	--alp-paper-2: #EDE9DD;      /* Bildgründe, noch etwas dunkler (aus paper abgeleitet) */
-	--alp-surface: #F5F4EF;      /* paper – Seite, Karten, Header */
-	--alp-surface-rgb: 245, 244, 239; /* dasselbe als RGB für halbtransparente Flächen */
-	--alp-field: #FBFAF6;        /* Eingabefelder: einen Hauch heller als die Seite */
+	/* Helle Flächen wie auf aminolabspro.com (Design System: bg, bg2, bg3, line) */
+	--alp-line: #E4EBF0;         /* line – Linien, Rahmen */
+	--alp-line-2: #D3DCE4;       /* etwas kräftiger für Eingabefelder (aus line abgeleitet) */
+	--alp-paper: #F7FAFB;        /* bg2 – getönte Abschnitte */
+	--alp-paper-2: #EEF3F7;      /* bg3 – Bildgründe, noch etwas dunkler */
+	--alp-surface: #FFFFFF;      /* bg – Seite, Karten, Header */
+	--alp-surface-rgb: 255, 255, 255; /* dasselbe als RGB für halbtransparente Flächen */
+	--alp-field: #FFFFFF;        /* Eingabefelder */
 
 	/* --- Markenfarben --- */
 	--alp-action: #6EDAB4;       /* mint – Buttons, aktive Zustände, Badges, Balken */
