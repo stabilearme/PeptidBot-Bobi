@@ -57,7 +57,53 @@ function alp_link( $target ) {
 	if ( in_array( $target, array( 'shop', 'cart', 'checkout', 'myaccount' ), true ) && function_exists( 'wc_get_page_permalink' ) ) {
 		return wc_get_page_permalink( $target );
 	}
+	if ( 0 === strpos( $target, '/wp-content/uploads/' ) ) {
+		return alp_upload_url( $target );
+	}
 	return home_url( $target );
+}
+
+/**
+ * URL einer Datei aus der Mediathek. Liegt sie nicht unter dem angegebenen Pfad
+ * (z. B. nach einem Umzug: anderer Monatsordner oder „-1“ am Dateinamen),
+ * wird sie in der Mediathek über den Dateinamen gesucht.
+ */
+function alp_upload_url( $path ) {
+	static $cache = array();
+	if ( isset( $cache[ $path ] ) ) {
+		return $cache[ $path ];
+	}
+	$dir = wp_get_upload_dir();
+	$rel = substr( $path, strlen( '/wp-content/uploads/' ) );
+	$url = home_url( $path );
+
+	if ( ! file_exists( trailingslashit( $dir['basedir'] ) . $rel ) ) {
+		$found = get_transient( 'alp_upl_' . md5( $rel ) );
+		if ( false === $found ) {
+			global $wpdb;
+			$info  = pathinfo( $rel );
+			$name  = $info['filename'];
+			$ext   = isset( $info['extension'] ) ? '.' . $info['extension'] : '';
+			$rows  = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND meta_value LIKE %s",
+					'%' . $wpdb->esc_like( $name ) . '%' . $wpdb->esc_like( $ext )
+				)
+			);
+			$found = '';
+			foreach ( $rows as $file ) {
+				if ( preg_match( '#(^|/)' . preg_quote( $name, '#' ) . '(-\d+)?' . preg_quote( $ext, '#' ) . '$#', $file ) ) {
+					$found = $file;
+					break;
+				}
+			}
+			set_transient( 'alp_upl_' . md5( $rel ), $found, $found ? WEEK_IN_SECONDS : HOUR_IN_SECONDS );
+		}
+		if ( $found ) {
+			$url = trailingslashit( $dir['baseurl'] ) . $found;
+		}
+	}
+	return $cache[ $path ] = $url;
 }
 
 /**

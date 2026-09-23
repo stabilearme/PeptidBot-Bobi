@@ -290,3 +290,11 @@ class WC_Product {
 	public function is_on_sale() { return (bool) $this->data['on_sale']; }
 	public function get_permalink() { return 'produkt-' . $this->data['slug'] . '.html'; }
 }
+
+// Mediathek-Fallback des Themes (alp_upload_url): in der Vorschau löst home_url() die Bilder auf.
+if ( ! defined( 'HOUR_IN_SECONDS' ) ) { define( 'HOUR_IN_SECONDS', 3600 ); }
+if ( ! defined( 'WEEK_IN_SECONDS' ) ) { define( 'WEEK_IN_SECONDS', 604800 ); }
+function wp_get_upload_dir() { return array( 'basedir' => ALP_PREVIEW_OUT . '/img', 'baseurl' => 'img' ); }
+function trailingslashit( $s ) { return rtrim( $s, '/\\' ) . '/'; }
+function get_transient( $key ) { return ''; }
+function set_transient( $key, $value, $ttl = 0 ) { return true; }
