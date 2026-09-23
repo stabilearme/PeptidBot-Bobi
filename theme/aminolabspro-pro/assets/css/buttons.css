@@ -15,6 +15,37 @@
 	--alp-btn3d-ghost-shadow-hover: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(26, 31, 46, 0.06), 0 12px 24px -10px rgba(46, 160, 120, 0.45);
 }
 
+/* ---------- Grundregel für alle übrigen WooCommerce-/Flatsome-Buttons ----------
+   Sonst färbt die Link-Farbe (.alp a) den Text grün auf grünem Grund – z. B.
+   „Produkte durchstöbern“ unter Konto → Downloads. */
+.alp :is(a.button, button.button, input.button, .wc-forward.button) {
+	background: var(--alp-btn3d-primary);
+	border: 1px solid #4DC49A;
+	color: var(--alp-on-action);
+	font-family: var(--alp-font-body);
+	font-weight: 700;
+	letter-spacing: 0;
+	text-transform: none;
+	text-shadow: none;
+	border-radius: var(--alp-r-md);
+	box-shadow: var(--alp-btn3d-primary-shadow);
+}
+.alp :is(a.button, button.button, input.button, .wc-forward.button):hover {
+	background: var(--alp-btn3d-primary-hover);
+	color: var(--alp-on-action);
+	box-shadow: var(--alp-btn3d-primary-shadow-hover);
+}
+
+/* WooCommerce-Hinweise mit Button (z. B. „Keine Downloads“, „Zum Warenkorb hinzugefügt“): Text links, Button rechts */
+.alp :is(.woocommerce-info, .woocommerce-message, .woocommerce-error, .wc-block-components-notice-banner):has(.button) {
+	padding: 0.75rem 0.75rem 0.75rem 1.1rem;
+	display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1rem;
+}
+.alp :is(.woocommerce-info, .woocommerce-message, .woocommerce-error, .wc-block-components-notice-banner) .button {
+	order: 2; float: none; margin: 0 0 0 auto; min-height: 40px; padding: 0 1.1rem; font-size: var(--alp-fs-sm);
+}
+.alp :is(.woocommerce-info, .woocommerce-message, .woocommerce-error)::before { position: static; margin-right: 0.25rem; }
+
 /* ---------- Hauptaktionen: Mint, plastisch ---------- */
 .alp :is(
 	.alp-btn--primary,

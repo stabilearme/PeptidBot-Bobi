@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALP_VERSION', '2.3.2' );
+define( 'ALP_VERSION', '2.3.3' );
 define( 'ALP_DIR', get_stylesheet_directory() );
 define( 'ALP_URI', get_stylesheet_directory_uri() );
 
@@ -20,6 +20,7 @@ $alp_modules = array(
 	'description',  // Einheitliche Darstellung der Produktbeschreibungen
 	'content',      // Einheitliche Darstellung von Seiten und Beiträgen
 	'woocommerce',  // Shop, Produktseite, Warenkorb, Kasse
+	'contact',      // WhatsApp-Buttons (Nummer im Customizer) und Sprachumschalter
 	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math
 );
 

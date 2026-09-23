@@ -44,6 +44,7 @@ return array(
 		'shop_intro'         => true,  // Einleitung + Vorteile über der Produktliste
 		'category_pills'     => true,  // Kategorie-Filter über dem Shop
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
+		'whatsapp_float'     => true,  // Runder WhatsApp-Button unten rechts (nur mit hinterlegter Nummer)
 		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
 	),
 
@@ -64,6 +65,18 @@ return array(
 	 * '' = gestalteter Navy-Banner mit 15-%-Gutschein statt Foto.
 	 */
 	'early_access_image' => '/wp-content/uploads/2026/09/hf_20260923_200208_fba7d7cf-88eb-481b-bbf8-ba504115d06f-1536x860.png',
+
+	/*
+	 * WhatsApp Business. Die Nummer am besten im Customizer eintragen
+	 * (Design → Customizer → „AminoLabs Pro: Kontakt“); 'number' hier ist nur die Reserve.
+	 */
+	'whatsapp' => array(
+		'number'  => '',
+		'message' => 'Hallo aminolabspro, ich habe eine Frage:',
+		'title'   => 'Fragen? Schreib uns direkt auf WhatsApp.',
+		'text'    => 'Persönliche Antwort vom Team zu Produkten, Chargen, Bestellung und Versand – schnell und unkompliziert.',
+		'button'  => 'Chat auf WhatsApp starten',
+	),
 
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,

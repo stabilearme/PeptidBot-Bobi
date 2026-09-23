@@ -174,6 +174,7 @@ function pv_header() {
 									<li class="menu-item<?php echo $active ? ' active' : ''; ?>"><a href="<?php echo esc_url( $href ); ?>" class="nav-top-link"><?php echo esc_html( $label ); ?></a></li>
 								<?php endif; ?>
 							<?php endforeach; ?>
+							<?php echo alp_whatsapp_menu_item( alp_whatsapp_url() ); ?>
 						</ul>
 					</div>
 					<div class="flex-col hide-for-medium flex-right">
@@ -240,6 +241,7 @@ function pv_page( $file, $page, $title, $body_class, $content, $product = null, 
 		alp_part( 'product/sticky-bar', array( 'product' => $product ) );
 	}
 	alp_render_mobile_nav();
+	alp_render_whatsapp_float();
 	$after = ob_get_clean();
 
 	$scripts = '<script src="assets/js/theme.js" defer></script>' . "\n";

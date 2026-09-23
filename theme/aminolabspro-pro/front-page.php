@@ -22,6 +22,7 @@ get_header();
 		// 'home/trust',       // Vertrauensleiste (steckt jetzt in Hero-Häkchen + Kennzahlen)
 		// 'home/categories',  // Kategorie-Kacheln (jetzt als Filter über den Produkten)
 		'home/products',
+		'home/whatsapp',     // WhatsApp-Kontakt (nur mit hinterlegter Nummer)
 		'home/news',
 		'home/process',
 		'home/knowledge',

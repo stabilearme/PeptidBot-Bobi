@@ -268,3 +268,87 @@
 		--alp-fs-xl: 1.45rem;
 	}
 }
+
+/* ==========================================================================
+   WhatsApp (Header-Button, Startseiten-Band, runder Button) & Sprachumschalter
+   ========================================================================== */
+.alp { --alp-wa: #25D366; --alp-wa-dark: #128C7E; --alp-wa-deep: #075E54; }
+
+/* Header: grüner Button am Ende des Menüs */
+.alp .alp-menu-wa { display: flex; align-items: center; margin-left: 0.5rem; }
+.alp .alp-wa-pill {
+	display: inline-flex; align-items: center; gap: 0.45rem;
+	padding: 0.5rem 1rem 0.5rem 0.75rem !important; border-radius: 999px;
+	background: linear-gradient(180deg, #3BE07A 0%, var(--alp-wa) 50%, #1EB858 100%);
+	color: #fff !important; font-weight: 700; font-size: 0.875rem; line-height: 1; text-decoration: none;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(7, 94, 84, 0.25), 0 6px 16px -6px rgba(37, 211, 102, 0.7);
+	transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-wa-pill:hover { color: #fff !important; transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(7, 94, 84, 0.25), 0 12px 24px -8px rgba(37, 211, 102, 0.8); }
+.alp .alp-wa-pill .alp-icon { flex: none; }
+.alp .nav > li.alp-menu-wa > a::after, .alp .nav > li.alp-menu-wa > a::before { display: none; }
+
+/* Startseite: auffälliges WhatsApp-Band */
+.alp-wa-band {
+	position: relative; overflow: hidden;
+	background:
+		radial-gradient(60% 120% at 0% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+		linear-gradient(120deg, #1EBE5D 0%, var(--alp-wa-dark) 55%, var(--alp-wa-deep) 100%);
+	color: #fff;
+}
+.alp-wa-band::after { /* Sprechblasen-Muster */
+	content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.08;
+	background: radial-gradient(circle at 20px 20px, #fff 0 3px, transparent 4px) 0 0 / 40px 40px;
+}
+.alp-wa-band__inner { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(1.25rem, 1rem + 2vw, 2.5rem); padding-block: clamp(2rem, 1.5rem + 2.5vw, 3.5rem); }
+.alp-wa-band__icon {
+	display: grid; place-items: center; width: 76px; height: 76px; border-radius: 24px; color: #fff;
+	background: linear-gradient(160deg, #4CE68A 0%, var(--alp-wa) 55%, #17A84E 100%);
+	box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45), inset 0 -4px 8px rgba(7, 94, 84, 0.35), 0 16px 30px -10px rgba(0, 0, 0, 0.45);
+	transform: rotate(-6deg);
+}
+.alp-wa-band__kicker { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 0.4rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
+.alp-wa-band__live { width: 8px; height: 8px; border-radius: 50%; background: #B8FFD0; box-shadow: 0 0 0 4px rgba(184, 255, 208, 0.3); }
+.alp .alp-wa-band__title { margin: 0 0 0.4rem; font-family: var(--alp-font-display); font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: #fff; }
+.alp-wa-band__text { margin: 0; max-width: 38rem; color: rgba(255, 255, 255, 0.88); }
+.alp .alp-wa-band__btn {
+	display: inline-flex; align-items: center; gap: 0.6rem; white-space: nowrap;
+	padding: 1rem 1.6rem; border-radius: var(--alp-r-md);
+	background: linear-gradient(180deg, #FFFFFF, #EAFBF1); color: var(--alp-wa-deep); font-weight: 800; font-size: 1.0625rem; text-decoration: none;
+	box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(7, 94, 84, 0.15), 0 14px 30px -10px rgba(0, 0, 0, 0.45);
+	transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-wa-band__btn .alp-icon { color: var(--alp-wa); }
+.alp .alp-wa-band__btn:hover { color: var(--alp-wa-deep); transform: translateY(-2px); box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(7, 94, 84, 0.15), 0 20px 36px -12px rgba(0, 0, 0, 0.5); }
+@media (max-width: 767px) {
+	.alp-wa-band__inner { grid-template-columns: auto 1fr; gap: 1rem; padding-block: 1.75rem; }
+	.alp-wa-band__icon { width: 58px; height: 58px; border-radius: 18px; align-self: start; }
+	.alp-wa-band__icon svg { width: 30px; height: 30px; }
+	.alp .alp-wa-band__btn { grid-column: 1 / -1; justify-content: center; width: 100%; }
+}
+
+/* Runder Button unten rechts */
+.alp .alp-wa-float {
+	position: fixed; right: 18px; bottom: 22px; z-index: 60;
+	display: inline-flex; align-items: center; gap: 0.6rem; height: 60px; padding: 0 15px;
+	border-radius: 999px; color: #fff; text-decoration: none;
+	background: linear-gradient(180deg, #3BE07A 0%, var(--alp-wa) 50%, #1EB858 100%);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 12px 28px -8px rgba(18, 140, 126, 0.75);
+	transition: transform var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-wa-float:hover { color: #fff; transform: translateY(-3px); }
+.alp-wa-float__label { font-weight: 700; font-size: 0.9375rem; white-space: nowrap; padding-right: 0.35rem; }
+.alp-wa-float::before { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+	.alp-wa-float::before { animation: alp-wa-pulse 2.4s ease-out infinite; }
+	@keyframes alp-wa-pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); } 70%, 100% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); } }
+}
+@media (max-width: 849px) {
+	.alp-wa-float { right: 14px; bottom: calc(76px + env(safe-area-inset-bottom)); width: 56px; height: 56px; padding: 0; justify-content: center; }
+	.alp-wa-float__label { display: none; }
+	.alp-buybar-on .alp-wa-float { bottom: calc(150px + env(safe-area-inset-bottom)); }
+}
+
+/* Sprachumschalter (TranslatePress / GTranslate) im Menü */
+.alp .alp-menu-lang { display: flex; align-items: center; margin-left: 0.25rem; }
+.alp .alp-menu-lang :is(.trp-language-switcher, .gtranslate_wrapper) { font-size: 0.8125rem; font-weight: 600; }
