@@ -65,7 +65,14 @@ return array(
 			array( 'value' => '100 %', 'label' => 'chargengetestet' ),
 			array( 'value' => '48 h', 'label' => 'Versand DE/AT/CH' ),
 		),
-		/* Welche Charge im Hero-Zertifikat gezeigt wird (Chargennummer aus /data/coa-batches.php). */
+		/*
+		 * Hero-Bild (Vials + Zertifikat) aus der Mediathek. Pfad ab /wp-content/ oder volle URL.
+		 * Leer lassen ('') = stattdessen die gezeichnete Zertifikats-Karte anzeigen.
+		 * Das Bild sollte links hell auslaufen – dort steht der Text.
+		 */
+		'image'     => '/wp-content/uploads/2026/09/aminolabspro-hero-2.webp',
+		'image_alt' => 'Research-Peptide-Vials von aminolabspro mit Laborzertifikat von Analiza Białek',
+		/* Welche Charge in der Zertifikats-Karte gezeigt wird (nur ohne Hero-Bild, Chargennummer aus /data/coa-batches.php). */
 		'featured_batch' => 'BPC-0726-01',
 	),
 

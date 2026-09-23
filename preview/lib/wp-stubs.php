@@ -91,7 +91,8 @@ function home_url( $path = '/' ) {
 		return 'coa.html';
 	}
 	if ( 0 === strpos( $path, '/wp-content/uploads/' ) ) {
-		return 'img/coa/' . basename( $path );
+		// Zertifikate liegen in img/coa/, alle anderen Mediathek-Bilder (z. B. Hero) in img/media/.
+		return ( 0 === stripos( basename( $path ), 'coa' ) ? 'img/coa/' : 'img/media/' ) . basename( $path );
 	}
 	// Alle anderen Seiten existieren nur im Live-Shop.
 	return 'https://aminolabspro.com' . $path;

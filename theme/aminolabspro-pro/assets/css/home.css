@@ -58,6 +58,30 @@
 	font-variant-numeric: tabular-nums;
 }
 
+/* Hero mit Bild (config.php → hero.image): Bild rechts, Text links auf dem hellen Bildrand */
+.alp-hero--image { background: var(--alp-surface); }
+.alp-hero__media {
+	position: absolute;
+	inset: 0 0 0 auto;
+	width: 62%;
+	pointer-events: none;
+}
+.alp-hero__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 92% 50%;
+}
+/* Weicher Übergang zum Textbereich */
+.alp-hero__media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, var(--alp-surface) 0%, rgba(255, 255, 255, 0.6) 18%, rgba(255, 255, 255, 0) 42%);
+}
+.alp-hero--image .alp-hero__grid { position: relative; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); min-height: clamp(460px, 34vw, 600px); }
+.alp-hero--image .alp-hero__stats { border-top-color: rgba(14, 26, 34, 0.12); }
+
 /* Zertifikats-Karte im Hero */
 .alp-cert {
 	margin: 0;
@@ -335,6 +359,14 @@
 .alp-cta__copy p { margin: 0; }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1199px) {
+	/* Hero-Bild steht auf kleinen Laptops, Tablets & Handys über dem Text (sonst verdeckt der Text die Vials) */
+	.alp-hero--image { padding-top: 0; }
+	.alp-hero__media { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 10; max-height: 520px; margin-bottom: 1.25rem; }
+	.alp-hero__media img { object-position: 88% 50%; }
+	.alp-hero__media::after { background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, var(--alp-surface) 100%); }
+	.alp-hero--image .alp-hero__grid { grid-template-columns: 1fr; min-height: 0; }
+}
 @media (max-width: 1023px) {
 	.alp-hero__grid, .alp-coa-teaser, .alp-faq { grid-template-columns: 1fr; }
 	.alp-cert { max-width: 520px; transform: none; }

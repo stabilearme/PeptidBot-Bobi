@@ -5,13 +5,19 @@
 defined( 'ABSPATH' ) || exit;
 
 $hero  = (array) alp_config( 'hero', array() );
+$image = ! empty( $hero['image'] ) ? alp_link( $hero['image'] ) : '';
 $batch = alp_coa_find( $hero['featured_batch'] ?? '' );
 if ( ! $batch || ! $batch['done'] ) {
 	$done  = array_values( array_filter( alp_coa_batches(), fn( $b ) => $b['done'] ) );
 	$batch = $done[0] ?? null;
 }
 ?>
-<section class="alp-hero">
+<section class="alp-hero<?php echo $image ? ' alp-hero--image' : ''; ?>">
+	<?php if ( $image ) : ?>
+		<div class="alp-hero__media">
+			<img src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $hero['image_alt'] ?? '' ); ?>" width="1671" height="941" fetchpriority="high" decoding="async">
+		</div>
+	<?php endif; ?>
 	<div class="alp-container alp-hero__grid">
 		<div class="alp-hero__copy">
 			<p class="alp-eyebrow"><span class="alp-dot" aria-hidden="true"></span><?php echo esc_html( $hero['eyebrow'] ?? '' ); ?></p>
@@ -34,7 +40,7 @@ if ( ! $batch || ! $batch['done'] ) {
 			<?php endif; ?>
 		</div>
 
-		<?php if ( $batch ) : ?>
+		<?php if ( ! $image && $batch ) : ?>
 			<figure class="alp-cert" aria-label="Beispiel eines veröffentlichten Laborzertifikats">
 				<div class="alp-cert__head">
 					<div>
