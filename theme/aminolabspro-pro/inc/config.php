@@ -496,5 +496,6 @@ return array(
 		'disable_reviews',
 		'product_buy_now',          // „Jetzt kaufen“-Button auf der Produktseite (wie bisher auf .com)
 		'product_buy_now_redirect',
+		'add_to_cart_icon',         // „In den Warenkorb“-Button in den Produktkacheln (wie auf .com)
 	),
 );
