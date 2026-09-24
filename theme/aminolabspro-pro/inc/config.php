@@ -427,6 +427,8 @@ return array(
 		'product_display'           => 'tabs',       // .com: Akkordeon → Reiter „Beschreibung / Laborbericht“
 		'product_info_align'        => 'left',
 		'product_tabs_align'        => 'left',
+		'category_title_style'      => 'normal',     // .com: „featured“ → grauer Balken mit weißem Titel-Kasten über dem Shop
+		'header_shop_bg_featured'   => false,
 	),
 	/* true = die Werte oben gelten immer (auch wenn im Customizer etwas anderes gespeichert ist). */
 	'force_flatsome_mods' => true,

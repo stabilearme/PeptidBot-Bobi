@@ -8,6 +8,7 @@
  *  6. Umschalter „Neu im Shop“ / „Angebote“ auf der Startseite
  *  7. Countdown (Aktionsprodukt)
  *  8. Newsletter-Anmeldung (Brevo)
+ *  9. Bilder-Absicherung (Platzhalter mit data-src)
  */
 (function () {
 	'use strict';
@@ -258,6 +259,23 @@
 		});
 	}
 
+	/* 9. Bilder-Absicherung ------------------------------------------------
+	 * Falls ein Plugin/Flatsome Bilder als Platzhalter mit data-src ausgibt und dessen
+	 * Nachlade-Skript nicht läuft, bleiben Produktbilder leer. Hier werden sie direkt
+	 * eingesetzt; der Browser lädt sie dank loading="lazy" trotzdem erst beim Scrollen. */
+	function initImageFallback() {
+		document.querySelectorAll('img[data-src]').forEach(function (img) {
+			var src = img.getAttribute('src') || '';
+			if (src && src.indexOf('data:') !== 0) return;
+			if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+			if (img.dataset.srcset) img.setAttribute('srcset', img.dataset.srcset);
+			if (img.dataset.sizes) img.setAttribute('sizes', img.dataset.sizes);
+			img.setAttribute('src', img.dataset.src);
+			img.classList.remove('lazy-load');
+			img.classList.add('lazy-load-active');
+		});
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') fn();
 		else document.addEventListener('DOMContentLoaded', fn);
@@ -272,5 +290,6 @@
 		initTabs();
 		initCountdown();
 		initNewsletter();
+		initImageFallback();
 	});
 })();

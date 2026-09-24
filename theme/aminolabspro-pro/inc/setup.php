@@ -236,7 +236,12 @@ function alp_force_flatsome_mods() {
 	if ( ! alp_config( 'force_flatsome_mods', false ) ) {
 		return;
 	}
-	foreach ( (array) alp_config( 'flatsome_mods', array() ) as $key => $value ) {
+	$forced = (array) alp_config( 'flatsome_mods', array() );
+	if ( ! alp_config( 'features.flatsome_lazy_load', false ) ) {
+		$forced['lazy_load_images'] = 0;
+	}
+	// 1) Einzelabfragen (get_theme_mod).
+	foreach ( $forced as $key => $value ) {
 		add_filter(
 			'theme_mod_' . $key,
 			function () use ( $value ) {
@@ -245,6 +250,12 @@ function alp_force_flatsome_mods() {
 			99
 		);
 	}
+	// 2) Gesamtliste (get_theme_mods) – Flatsome liest manche Werte direkt daraus.
+	$apply = function ( $mods ) use ( $forced ) {
+		return array_merge( is_array( $mods ) ? $mods : array(), $forced );
+	};
+	add_filter( 'option_theme_mods_' . get_stylesheet(), $apply, 99 );
+	add_filter( 'default_option_theme_mods_' . get_stylesheet(), $apply, 99 );
 }
 
 /**

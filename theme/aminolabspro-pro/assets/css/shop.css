@@ -208,3 +208,7 @@
 /* Germanized-Hinweise in der Kachel */
 .alp .product-small .box-text :is(.wc-gzd-additional-info, .price-unit, .tax-info, .shipping-costs-info, .delivery-time-info) { display: block; margin: 0.15rem 0 0; font-size: 0.6875rem; line-height: 1.35; color: var(--alp-muted); }
 .alp .product-small .box-text :is(.shipping-costs-info, .wc-gzd-additional-info) a { color: inherit; text-decoration: underline; }
+/* Produktbild im quadratischen Flatsome-Rahmen (image-cover) halten; COA-Rückbild nur bei Hover */
+.alp .product-small .image-cover { position: relative; overflow: hidden; }
+.alp .product-small .image-cover img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.alp .product-small img.lazy-load { opacity: 1; }
