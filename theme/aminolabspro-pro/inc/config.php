@@ -57,6 +57,9 @@ return array(
 	 */
 	'media_fallback_host' => 'https://aminolabspro.com',
 
+	/* Gesamt-Design: 'editorial' (Fraunces/Manrope, Haarlinien, ruhig) oder '' (bisheriger Look mit Mint-Verläufen). */
+	'design' => 'editorial',
+
 	/* Aussehen der Karten auf der COA-Seite: 'certificate' (Urkunde mit Stempel) oder 'report' (kompakter Laborbefund). */
 	'coa_card_style' => 'certificate',
 

@@ -26,6 +26,7 @@ function alp_styles() {
 		'polish'     => 'all',        // Politur: weiche Übergänge, breite Balken, einheitliche Tiefe
 		'buttons'    => 'all',        // Einheitliche Buttons & Auswahlfelder (auch WooCommerce/Flatsome) – nach allen anderen
 		'home-mobile' => 'home',      // Startseite am Handy: rausgezoomt, mehr nebeneinander
+		'editorial'  => 'editorial',  // Design „Editorial“ (config.php → 'design'), überschreibt die Optik
 		'motion'     => 'all',        // Animationen (Schalter: features.animations)
 		'legacy'     => 'all',        // Platz für Übernahmen aus altem Zusatz-CSS
 	);
@@ -37,6 +38,8 @@ function alp_style_needed( $when ) {
 	}
 	$is_wc = function_exists( 'is_woocommerce' );
 	switch ( $when ) {
+		case 'editorial':
+			return 'editorial' === alp_config( 'design' );
 		case 'home':
 			return is_front_page();
 		case 'product':
@@ -195,6 +198,14 @@ add_filter( 'body_class', 'alp_ea_body_class' );
 function alp_ea_body_class( $classes ) {
 	if ( alp_config( 'early_access_image' ) ) {
 		$classes[] = 'alp-ea-has-image';
+	}
+	return $classes;
+}
+
+add_filter( 'body_class', 'alp_design_body_class' );
+function alp_design_body_class( $classes ) {
+	if ( 'editorial' === alp_config( 'design' ) ) {
+		$classes[] = 'alp-ed';
 	}
 	return $classes;
 }

@@ -1,17 +1,15 @@
 /* ==========================================================================
-   EDITORIAL – ruhiges Agentur-Design: Serifen-Headlines, Haarlinien,
+   EDITORIAL – ruhiges Agentur-Design: Fraunces-Headlines + Manrope, Haarlinien,
    wenig Farbe, keine Glows/Verläufe, klares Raster.
-   ENTWURF – noch nicht eingebunden. Aktiv mit Body-Klasse .alp-ed.
+   Aktiv mit config.php → 'design' => 'editorial' (Body-Klasse .alp-ed). '' = bisheriger Look.
    ========================================================================== */
-@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/instrument-serif-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2212; }
-@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../fonts/inter-tight-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../fonts/inter-tight-latin-ext-wght-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+A720-A7FF; }
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("../fonts/fraunces-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: italic; font-display: swap; src: url("../fonts/fraunces-latin-wght-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2"); }
 
 body.alp-ed {
-	--alp-font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
-	--alp-font-body: "Inter Tight", "Inter", system-ui, sans-serif;
+	--alp-font-display: "Fraunces", Georgia, serif;
+	--alp-font-body: "Manrope", system-ui, sans-serif;
 	--ed-ink: #0F1115;
 	--ed-ink-2: #3D424B;
 	--ed-muted: #767B84;
@@ -211,5 +209,42 @@ body.alp-ed .product-small .col-inner:hover .box-image img { transform: scale(1.
 }
 
 /* Buttons auf dunklen Flächen: weiß */
-body.alp-ed :is(.alp-soon--full, #charge-pruefen, .alp-home > .alp-section:last-child) .alp-btn--primary { background: #fff !important; color: var(--ed-ink) !important; border-color: #fff !important; }
+body.alp-ed :is(.alp-soon--full, #charge-pruefen, .alp-coa-hero, .alp-section--dark, .alp-home > .alp-section:last-child) :is(.alp-btn--primary, button[type=submit]) { background: #fff !important; color: var(--ed-ink) !important; border-color: #fff !important; }
 body.alp-ed :is(.alp-soon--full, #charge-pruefen) .alp-btn--primary:hover { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; }
+
+/* ---------- Schrift-Feinschliff (Fraunces) ---------- */
+body.alp-ed :is(h1, h2, .alp-h1, .alp-h2, .alp-hero__title, .alp-deal__title, .alp-wa-band__title, .alp-section__head h2, .alp-faq__item summary, .alp-article__title, .alp-stats__value, .alp-process__n) { font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 420 !important; letter-spacing: -0.03em !important; }
+body.alp-ed .alp-hero__title { font-size: clamp(3rem, 1.9rem + 4.6vw, 6rem); }
+body.alp-ed .alp-faq__item summary, body.alp-ed .alp-article__title { font-size: 1.3rem !important; }
+
+/* ---------- Mint-Akzente (Marke) ---------- */
+body.alp-ed { --ed-mint: #6EDAB4; }
+body.alp-ed .alp-deal__burst { color: var(--ed-mint); }
+body.alp-ed :is(.alp-hero__tick, .alp-partner__tick) { color: #2E9C77; }
+body.alp-ed :is(.alp-hero__proof-ok, .alp-coa-seal--ok, .alp-status--ok) { background: #E6F7F0 !important; color: #1C6B52 !important; }
+body.alp-ed :is(#charge-pruefen.alp-section, .alp-soon--full, .alp-home > .alp-section:last-child) { box-shadow: inset 0 3px 0 var(--ed-mint) !important; }
+body.alp-ed .alp-stats__meter-bar { background: var(--ed-mint) !important; }
+body.alp-ed .alp-stats__timeline li:last-child::before { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; }
+body.alp-ed :is(.add_to_cart_button, .single_add_to_cart_button, .product-small .add-to-cart-button .button, .checkout-button, #place_order):hover { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; color: var(--ed-ink) !important; }
+body.alp-ed .alp-eyebrow::before { color: #2E9C77; }
+@media (max-width: 767px) {
+	body.alp-ed .alp-stats .alp-stats__value { font-size: 1.35rem !important; }
+}
+
+/* ---------- Inhaltsseiten (Wissen, Kontakt, Versand, Early Access …) ---------- */
+body.alp-ed .alp-rich :is(.gl-header, .ship-header, .recon-header, .wis-header, #alp-scope .alp-hero), body.alp-ed .alp-rich > div:first-child > div:first-child:has(> h1) { background: var(--ed-paper) !important; border-radius: var(--alp-r-lg) !important; }
+body.alp-ed .alp-rich .recon-result { background: var(--ed-ink) !important; border-radius: var(--alp-r-lg) !important; }
+body.alp-ed .alp-rich :where(.gl-card, .ship-card, .recon-card, .wis-card, .alp-usp-card), body.alp-ed .alp-rich #alp-scope .alp-card { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; border-color: var(--ed-line) !important; }
+body.alp-ed .alp-rich :is(h1, h2, .alp-hero-h1) { font-family: var(--alp-font-display) !important; font-weight: 420 !important; letter-spacing: -0.025em !important; color: var(--ed-ink); }
+body.alp-ed .alp-rich :is(.ship-icon, .alp-usp-icon, .alp-ea-usp-grid .alp-usp-icon) { background: transparent !important; box-shadow: none !important; color: var(--ed-accent) !important; }
+body.alp-ed .alp-rich .alp-hero-h1 .hi { background: none !important; font-style: italic; }
+body.alp-ed .alp-rich .alp-ea-inner { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; background: #fff !important; }
+body.alp-ed .alp-rich .alp-ea-inner::before { background: var(--ed-mint) !important; height: 3px; }
+body.alp-ed .alp-rich .alp-ea-hero::before { border-radius: var(--alp-r-lg) !important; box-shadow: none !important; }
+body.alp-ed .alp-rich :is(.wpcf7-submit, .alp-ea-form-wrap input[type="submit"]) { background: var(--ed-ink) !important; border: 1px solid var(--ed-ink) !important; color: #fff !important; box-shadow: none !important; border-radius: var(--alp-r-md) !important; }
+body.alp-ed .alp-rich :is(.gl-eyebrow, .ship-header .eyebrow, .recon-header .eyebrow, .wis-header .eyebrow, #alp-scope .alp-eyebrow, .alp-hero-kicker) { background: transparent !important; box-shadow: none !important; color: var(--ed-accent) !important; letter-spacing: 0.04em !important; }
+/* Shop-Kopf, COA-Seite, Konto */
+body.alp-ed :is(.shop-page-title, .page-title.shop-page-title, .alp-shop-head) { background: #fff !important; border-bottom: 1px solid var(--ed-line); }
+body.alp-ed :is(.alp-coa-hero, .alp-coa-page .alp-section--dark) { background: var(--ed-ink) !important; }
+body.alp-ed :is(.alp-coa-hero, .alp-section--dark)::before { display: none !important; }
+body.alp-ed :is(.woocommerce-form-login, .woocommerce-form-register, .u-columns .col-inner, .cart_totals, .woocommerce-checkout-review-order, .alp-pcoa) { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; }

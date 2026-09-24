@@ -223,7 +223,7 @@ function pv_page( $file, $page, $title, $body_class, $content, $product = null, 
 	}
 	$styles .= '<link rel="stylesheet" href="preview.css">' . "\n";
 
-	$classes = array_merge( array( 'alp' ), $body_class, array( 'alp-has-bottom-nav' ), alp_config( 'features.animations' ) ? array( 'alp-motion' ) : array() );
+	$classes = array_merge( array( 'alp' ), $body_class, array( 'alp-has-bottom-nav' ), 'editorial' === alp_config( 'design' ) ? array( 'alp-ed' ) : array(), alp_config( 'features.animations' ) ? array( 'alp-motion' ) : array() );
 	if ( 'product' === $page ) {
 		$classes[] = 'alp-has-sticky-buy';
 	}
