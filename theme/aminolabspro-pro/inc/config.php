@@ -203,7 +203,8 @@ return array(
 				array( 'title' => 'Eigener Partner-Code', 'text' => 'Jede Bestellung mit deinem Code wird dir automatisch zugeordnet.' ),
 				array( 'title' => 'Eigenes Partner-Dashboard', 'text' => 'Klicks, Bestellungen und Provision jederzeit im Blick.' ),
 			),
-			'cta'        => array( 'label' => 'Research-Partner werden', 'url' => '/affiliate-dashboard/' ),
+			// Button öffnet WhatsApp mit diesem Text (ohne WhatsApp-Nummer: Kontaktseite).
+			'cta'        => array( 'label' => 'Research-Partner werden', 'whatsapp' => 'Hey, ich möchte Partner werden.', 'url' => '/contakt/' ),
 		),
 		'process' => array(
 			'eyebrow' => 'Ablauf',

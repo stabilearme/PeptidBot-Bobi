@@ -25,7 +25,13 @@ if ( ! $cfg ) {
 				<?php endforeach; ?>
 			</ul>
 			<?php if ( ! empty( $cfg['cta'] ) ) : ?>
-				<a class="alp-btn alp-btn--primary alp-btn--lg" href="<?php echo esc_url( alp_link( $cfg['cta']['url'] ) ); ?>"><?php echo esc_html( $cfg['cta']['label'] ); ?> <span class="alp-btn__orb"><?php echo alp_icon( 'arrow', 16 ); // phpcs:ignore ?></span></a>
+				<?php $wa = ! empty( $cfg['cta']['whatsapp'] ) && function_exists( 'alp_whatsapp_url' ) ? alp_whatsapp_url( $cfg['cta']['whatsapp'] ) : ''; ?>
+				<?php if ( $wa ) : ?>
+					<a class="alp-btn alp-btn--primary alp-btn--lg alp-partner__cta" href="<?php echo esc_url( $wa ); ?>" target="_blank" rel="noopener"><span class="alp-partner__wa"><?php echo alp_whatsapp_icon( 18 ); // phpcs:ignore ?></span><?php echo esc_html( $cfg['cta']['label'] ); ?> <span class="alp-btn__orb"><?php echo alp_icon( 'arrow', 16 ); // phpcs:ignore ?></span></a>
+					<p class="alp-partner__hint">Schreib uns direkt auf WhatsApp – Antwort meist am selben Tag.</p>
+				<?php else : ?>
+					<a class="alp-btn alp-btn--primary alp-btn--lg" href="<?php echo esc_url( alp_link( $cfg['cta']['url'] ) ); ?>"><?php echo esc_html( $cfg['cta']['label'] ); ?> <span class="alp-btn__orb"><?php echo alp_icon( 'arrow', 16 ); // phpcs:ignore ?></span></a>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 
