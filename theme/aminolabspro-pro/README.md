@@ -129,7 +129,11 @@ aminolabspro-pro/
 │   ├── coa.php               Chargen-Logik, Shortcodes
 │   ├── description.php       Bereinigung der Produktbeschreibungen (Normalizer)
 │   ├── content.php           Bereinigung von Seiten & Beiträgen
-│   ├── woocommerce.php       Shop, Produkt, Warenkorb, Kasse
+│   ├── woocommerce.php       Shop, Produkt, Warenkorb, Kasse (+ Preis-Pflichtangaben, Kanton-Pflicht CH)
+│   ├── contact.php           WhatsApp-Buttons, Sprachumschalter
+│   ├── newsletter.php        Brevo-Newsletterformular (Startseite, [alp_newsletter])
+│   ├── welcome-coupon.php    15-%-Willkommenscode nur für die erste Bestellung
+│   ├── order-numbers.php     Fortlaufende Bestellnummern (auch Apple/Google Pay)
 │   └── schema.php            FAQ-Rich-Snippet
 ├── data/
 │   ├── coa-batches.php       ★ Chargen & Zertifikate
@@ -141,4 +145,4 @@ aminolabspro-pro/
     └── fonts/                lokale Schriften
 ```
 
-**Shortcodes** für beliebige Seiten: `[alp_coa_lookup]` (Chargen-Prüfer), `[alp_coa_grid]` (Zertifikatsübersicht).
+**Shortcodes** für beliebige Seiten: `[alp_coa_lookup]` (Chargen-Prüfer), `[alp_coa_grid]` (Zertifikatsübersicht), `[alp_newsletter]` (Newsletter-Anmeldung über Brevo).

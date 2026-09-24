@@ -95,6 +95,34 @@ return array(
 		'note'        => 'Kein Spam. Abmeldung jederzeit. Mit der Anmeldung akzeptierst du unsere <a href="/datenschutzerklaerung/">Datenschutzerklärung</a>.',
 	),
 
+	/*
+	 * 15-%-Willkommenscode (inc/welcome-coupon.php): Gutscheine, deren Code so beginnt,
+	 * gelten nur für die erste Bestellung einer E-Mail-Adresse.
+	 */
+	'welcome_coupon' => array(
+		'prefix'  => 'NEU15-',
+		'message' => 'Dieser Willkommenscode gilt nur für deine erste Bestellung.',
+	),
+
+	/*
+	 * Fortlaufende Bestellnummern (inc/order-numbers.php), kompatibel zu den bisherigen Nummern.
+	 * 'auto' = nur aktiv, wenn kein anderer Code (z. B. Code Snippet) schon Nummern vergibt.
+	 */
+	'order_numbers'       => 'auto',
+	'order_numbers_start' => 1000, // nur für einen ganz neuen Shop ohne bisherige Nummern
+
+	/*
+	 * Abgeschaltete Seiten: Aufruf leitet dauerhaft um, Menüeinträge werden ausgeblendet.
+	 * Format: 'seiten-slug' => 'ziel' (z. B. '/' für die Startseite).
+	 */
+	'retired_pages' => array(
+		'gluecksrad'     => '/',
+		'kundenwuensche' => '/',
+	),
+
+	/* Länder, in denen Bundesland/Kanton an der Kasse Pflicht ist (Stripe braucht ihn z. B. für die Schweiz). */
+	'checkout_state_required' => array( 'CH' ),
+
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
 
@@ -108,12 +136,14 @@ return array(
 	/* ---------- Startseite: Hero ---------- */
 	'hero' => array(
 		'eyebrow'   => 'Research Grade · Drittlabor-geprüft',
+		/* SEO-Überschrift (H1) der Startseite – ersetzt die kleine Zeile darüber. Leer = die große Headline ist die H1. */
+		'seo_h1'    => 'Forschungspeptide kaufen · Research Grade, drittlabor-geprüft',
 		'title'     => 'Reinheit, die du <em>nachprüfen</em> kannst.',
 		'text'      => 'Jede Charge wird von einem unabhängigen Labor per HPLC analysiert. Das vollständige Zertifikat findest du über die Chargennummer auf deinem Vial.',
 		'primary'   => array( 'label' => 'Peptide entdecken', 'url' => 'shop' ),
 		'secondary' => array( 'label' => 'Charge prüfen', 'url' => '/#charge-pruefen' ),
 		/* Kurze Häkchen-Zeile unter den Buttons. */
-		'checks'    => array( 'Öffentliche COAs', 'Versand aus DE', 'Vorkasse per Überweisung' ),
+		'checks'    => array( 'Öffentliche COAs', 'Versand aus DE', 'Karte, Apple Pay & Vorkasse' ),
 		/*
 		 * Kennzahlen: mit Hero-Bild als schwebende „Labor-Anzeige“ unter dem Hero, sonst im Hero.
 		 * {coa} = Zahl der veröffentlichten Zertifikate.
@@ -131,7 +161,7 @@ return array(
 		 * Das Foto steht rechts in einer Karte; darauf schwebt die Karte der Charge aus 'featured_batch'.
 		 */
 		'image'     => '/wp-content/uploads/2026/09/aminolabspro-hero-2.webp',
-		'image_alt' => 'Research-Peptide-Vials von aminolabspro mit Laborzertifikat von Analiza Białek',
+		'image_alt' => 'Forschungspeptide kaufen – Research Peptide Vials mit COA bei aminolabspro',
 		/* Welche Charge in der Zertifikats-Karte gezeigt wird (Chargennummer aus /data/coa-batches.php). */
 		'featured_batch' => 'BPC-0726-01',
 	),
@@ -141,7 +171,7 @@ return array(
 		array( 'icon' => 'flask',  'title' => 'Unabhängiges Labor',  'text' => 'HPLC-Analyse jeder Charge durch ein Drittlabor' ),
 		array( 'icon' => 'doc',    'title' => 'Öffentliche COAs',    'text' => 'Zertifikat per Chargennummer abrufbar' ),
 		array( 'icon' => 'truck',  'title' => 'Versand aus DE',      'text' => 'Schnell und diskret verpackt' ),
-		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Vorkasse per Banküberweisung, verschlüsselt übertragen' ),
+		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Kreditkarte, Apple Pay oder Vorkasse – verschlüsselt über Stripe' ),
 	),
 
 	/* ---------- Startseite: Abschnitte ---------- */
@@ -272,6 +302,8 @@ return array(
 	'product' => array(
 		/* Kleine Merkmale unter dem Produkttitel. */
 		'chips'  => array( '≥ 98 % Reinheit', 'HPLC-verifiziert', 'Research Use Only' ),
+		/* Preis-Hinweis in Kaufleiste & Aktionsprodukt, nur falls Germanized fehlt (sonst gelten dessen Texte). */
+		'price_note' => 'Kein Ausweis der USt. (Kleinunternehmer, § 19 UStG), zzgl. Versand',
 		/* Liste unter dem Warenkorb-Button. */
 		'trust'  => array(
 			array( 'icon' => 'truck', 'text' => 'Versand aus Deutschland, diskret verpackt' ),
@@ -312,7 +344,7 @@ return array(
 			'AGB'                => '/agb/',
 			'Widerrufsbelehrung' => '/widerrufsbelehrung/',
 		),
-		'payments'   => array( 'Vorkasse', 'Banküberweisung' ), // laut Seite „Versand & Zahlung“: nur Vorkasse per Banküberweisung
+		'payments'   => array( 'Kreditkarte', 'Apple Pay', 'Vorkasse' ), // wie im Shop auf aminolabspro.com (Stripe + Überweisung)
 		'disclaimer' => 'Alle Produkte sind ausschließlich für Forschungs- und Laborzwecke bestimmt. Sie sind keine Arzneimittel, Lebensmittel oder Kosmetika und nicht zur Anwendung am Menschen oder Tier vorgesehen. Abgabe nur an Personen ab 18 Jahren.',
 	),
 

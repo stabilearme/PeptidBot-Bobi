@@ -141,6 +141,8 @@ function alp_on_activate( $old_name, $old_theme = null ) {
 	if ( get_option( 'alp_mods_migrated' ) ) {
 		return;
 	}
+	// Vorschau-Einblendung abschalten, damit unten die echten (gespeicherten) Werte gelesen und geschrieben werden.
+	alp_preview_mods_off();
 
 	$candidates = array();
 	if ( $old_theme instanceof WP_Theme ) {
@@ -168,6 +170,60 @@ function alp_on_activate( $old_name, $old_theme = null ) {
 		set_theme_mod( $key, $value );
 	}
 	update_option( 'alp_mods_migrated', ALP_VERSION, false );
+}
+
+/**
+ * Vorschau vor dem Aktivieren (z. B. mit dem Plugin „Theme Switcha“ nur für Admins):
+ * Solange die Übernahme oben noch nicht gelaufen ist, werden Menüs, Logo usw. des
+ * bisherigen Child Themes nur im Speicher eingeblendet – es wird nichts gespeichert,
+ * und Besucher (die das alte Theme sehen) sind nicht betroffen.
+ */
+alp_preview_mods_boot();
+function alp_preview_mods_boot() {
+	if ( get_option( 'alp_mods_migrated' ) ) {
+		return;
+	}
+	$ours = get_stylesheet();
+	$src  = '';
+	$old  = array();
+	foreach ( array_unique( array( (string) get_option( 'stylesheet' ), 'flatsome child', 'flatsome-child' ) ) as $slug ) {
+		if ( '' === $slug || $slug === $ours ) {
+			continue;
+		}
+		$found = get_option( 'theme_mods_' . $slug );
+		if ( is_array( $found ) && ! empty( $found ) ) {
+			$src = $slug;
+			$old = $found;
+			break;
+		}
+	}
+	if ( ! $src ) {
+		return;
+	}
+	unset( $old['custom_css_post_id'] );
+	$merged = array_merge( $old, (array) alp_config( 'flatsome_mods', array() ) );
+
+	$GLOBALS['alp_preview_mod_filters'] = array(
+		'option_theme_mods_' . $ours         => function ( $mods ) use ( $merged ) {
+			return array_merge( $merged, is_array( $mods ) ? $mods : array() );
+		},
+		'default_option_theme_mods_' . $ours => function () use ( $merged ) {
+			return $merged;
+		},
+		'option_theme_mods_' . $src          => function () use ( $merged ) {
+			return $merged;
+		},
+	);
+	foreach ( $GLOBALS['alp_preview_mod_filters'] as $hook => $callback ) {
+		add_filter( $hook, $callback );
+	}
+}
+
+function alp_preview_mods_off() {
+	foreach ( (array) ( $GLOBALS['alp_preview_mod_filters'] ?? array() ) as $hook => $callback ) {
+		remove_filter( $hook, $callback );
+	}
+	$GLOBALS['alp_preview_mod_filters'] = array();
 }
 
 /**

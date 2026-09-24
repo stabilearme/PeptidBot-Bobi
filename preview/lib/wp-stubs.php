@@ -81,6 +81,7 @@ function wp_list_pluck( $list, $field ) { return array_map( fn( $r ) => $r[ $fie
 function wp_unique_id( $prefix = '' ) { static $i = 0; return $prefix . ( ++$i ); }
 
 /* ---------- Theme-Pfade ---------- */
+function get_stylesheet() { return 'aminolabspro-pro'; }
 function get_stylesheet_directory() { return ALP_PREVIEW_THEME; }
 function get_stylesheet_directory_uri() { return '.'; }
 

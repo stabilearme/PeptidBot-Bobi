@@ -213,6 +213,7 @@
 .alp-buybar__price del { color: var(--alp-muted); font-weight: 400; }
 .alp-buybar__price ins { text-decoration: none; }
 .alp-buybar__price .wc-gzd-additional-info { display: none; }
+.alp-buybar__legal { margin: 0; font-size: 0.6875rem; color: var(--alp-muted); line-height: 1.3; }
 .alp .alp-buybar__btn { min-height: 48px; }
 
 @media (max-width: 549px) {

@@ -767,6 +767,7 @@
 .alp-deal__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; margin-bottom: 1.4rem; }
 .alp-deal__price del { color: var(--alp-muted); font-size: 1.25rem; }
 .alp-deal__price strong { font-family: var(--alp-font-display); font-size: clamp(2.4rem, 1.8rem + 2vw, 3.25rem); font-weight: 700; letter-spacing: -0.03em; color: var(--alp-ink); line-height: 1; }
+.alp-deal__legal { margin: 0.35rem 0 1rem; font-size: 0.75rem; color: var(--alp-muted); }
 .alp-deal__save { padding: 0.3rem 0.7rem; border-radius: 8px; background: #E6F7F0; color: #1F7A5C; font-weight: 700; font-size: 0.875rem; }
 .alp-deal__timer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-bottom: 1.6rem; }
 .alp-deal__timer-label { font-size: 0.8125rem; font-weight: 600; color: var(--alp-muted); }
@@ -846,3 +847,6 @@
 }
 .alp-partner__wa { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: -0.4rem; border-radius: 50%; background: #25D366; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.4); }
 .alp-partner__hint { margin: 0.7rem 0 0; font-size: 0.8125rem; color: var(--alp-muted); }
+
+/* SEO-H1 im Stil der kleinen Zeile (Eyebrow) */
+.alp h1.alp-hero__seo { font-family: var(--alp-font-body); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.27em; line-height: 1.5; text-transform: uppercase; text-wrap: wrap; margin: 0 0 var(--alp-space-3); }

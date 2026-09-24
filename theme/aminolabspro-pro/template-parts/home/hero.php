@@ -16,8 +16,17 @@ if ( ! $batch || ! $batch['done'] ) {
 <section class="alp-hero<?php echo $image ? ' alp-hero--split' : ''; ?>">
 	<div class="alp-container alp-hero__grid">
 		<div class="alp-hero__copy">
-			<p class="alp-eyebrow"><?php echo esc_html( $hero['eyebrow'] ?? '' ); ?></p>
-			<h1 class="alp-hero__title"><?php echo wp_kses( $hero['title'] ?? '', array( 'em' => array(), 'br' => array() ) ); ?></h1>
+			<?php
+			// SEO: Mit 'seo_h1' ist die kleine Zeile die H1 (mit Suchbegriff), die große Headline eine H2 – Optik bleibt gleich.
+			$seo_h1    = trim( (string) ( $hero['seo_h1'] ?? '' ) );
+			$title_tag = $seo_h1 ? 'h2' : 'h1';
+			?>
+			<?php if ( $seo_h1 ) : ?>
+				<h1 class="alp-eyebrow alp-hero__seo"><?php echo esc_html( $seo_h1 ); ?></h1>
+			<?php else : ?>
+				<p class="alp-eyebrow"><?php echo esc_html( $hero['eyebrow'] ?? '' ); ?></p>
+			<?php endif; ?>
+			<<?php echo $title_tag; // phpcs:ignore ?> class="alp-hero__title"><?php echo wp_kses( $hero['title'] ?? '', array( 'em' => array(), 'br' => array() ) ); ?></<?php echo $title_tag; // phpcs:ignore ?>>
 			<p class="alp-hero__text"><?php echo esc_html( $hero['text'] ?? '' ); ?></p>
 			<div class="alp-hero__actions">
 				<?php if ( ! empty( $hero['primary'] ) ) : ?>

@@ -16,6 +16,7 @@ $thumb   = $product->get_image_id() ? wp_get_attachment_image( $product->get_ima
 		<div class="alp-buybar__info">
 			<p class="alp-buybar__name"><?php echo esc_html( $product->get_name() ); ?></p>
 			<p class="alp-buybar__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>
+			<p class="alp-buybar__legal"><?php echo wp_kses_post( alp_price_legal_note( $product ) ); ?></p>
 		</div>
 		<button type="button" class="alp-btn alp-btn--primary alp-buybar__btn" data-alp-buybar-btn tabindex="-1">
 			<?php echo alp_icon( 'cart', 18 ); // phpcs:ignore ?>

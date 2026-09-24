@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALP_VERSION', '2.7.0' );
+define( 'ALP_VERSION', '2.8.0' );
 define( 'ALP_DIR', get_stylesheet_directory() );
 define( 'ALP_URI', get_stylesheet_directory_uri() );
 
@@ -22,6 +22,8 @@ $alp_modules = array(
 	'woocommerce',  // Shop, Produktseite, Warenkorb, Kasse
 	'contact',      // WhatsApp-Buttons (Nummer im Customizer) und Sprachumschalter
 	'newsletter',   // Newsletter-Anmeldung über Brevo (Startseite + Shortcode [alp_newsletter])
+	'welcome-coupon', // 15-%-Willkommenscode nur für die erste Bestellung
+	'order-numbers',  // Fortlaufende Bestellnummern (#1088 …), auch für Apple/Google Pay
 	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math
 );
 

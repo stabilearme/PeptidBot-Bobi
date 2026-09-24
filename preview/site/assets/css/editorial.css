@@ -250,3 +250,6 @@ body.alp-ed :is(.shop-page-title, .page-title.shop-page-title, .alp-shop-head) {
 body.alp-ed :is(.alp-coa-hero, .alp-coa-page .alp-section--dark) { background: var(--ed-ink) !important; }
 body.alp-ed :is(.alp-coa-hero, .alp-section--dark)::before { display: none !important; }
 body.alp-ed :is(.woocommerce-form-login, .woocommerce-form-register, .u-columns .col-inner, .cart_totals, .woocommerce-checkout-review-order, .alp-pcoa) { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; }
+
+/* SEO-H1 im Stil der kleinen Zeile (Eyebrow) */
+body.alp-ed h1.alp-hero__seo { font-family: var(--alp-font-body); font-size: 0.75rem; font-weight: 500 !important; letter-spacing: 0.02em !important; font-variation-settings: normal; text-transform: none; color: var(--ed-muted); line-height: 1.5; }

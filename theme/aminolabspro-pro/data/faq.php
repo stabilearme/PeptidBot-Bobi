@@ -33,6 +33,6 @@ return array(
 	),
 	array(
 		'q' => 'Welche Zahlungsarten gibt es?',
-		'a' => 'Wir akzeptieren ausschließlich Vorkasse per Banküberweisung. Nach der Bestellung erhältst du eine E-Mail mit den Bankdaten; versendet wird nach Zahlungseingang. Details unter <a href="/versandarten/">Versand &amp; Zahlung</a>.',
+		'a' => 'Du bezahlst per Kredit- oder Debitkarte, Apple Pay oder Vorkasse (Banküberweisung). Kartenzahlungen laufen verschlüsselt über Stripe. Bei Vorkasse erhältst du nach der Bestellung eine E-Mail mit den Bankdaten, versendet wird nach Zahlungseingang. Details unter <a href="/versandarten/">Versand &amp; Zahlung</a>.',
 	),
 );

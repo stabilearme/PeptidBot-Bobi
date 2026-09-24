@@ -70,6 +70,7 @@ if ( $ends && $ends < time() ) {
 				<strong><?php echo wc_price( $sale ); // phpcs:ignore ?></strong>
 				<span class="alp-deal__save">Du sparst <?php echo wc_price( $regular - $sale ); // phpcs:ignore ?></span>
 			</div>
+			<p class="alp-deal__legal"><?php echo wp_kses_post( alp_price_legal_note( $product ) ); ?></p>
 
 			<?php if ( $ends ) : ?>
 				<div class="alp-deal__timer" data-alp-countdown="<?php echo (int) $ends; ?>">

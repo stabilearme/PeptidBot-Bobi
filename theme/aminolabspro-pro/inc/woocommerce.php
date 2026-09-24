@@ -179,3 +179,39 @@ function alp_checkout_trust() {
 	}
 	echo '</ul>';
 }
+
+/**
+ * Pflichtangaben zum Preis (Steuer + Versand) für Stellen, an denen das Theme selbst
+ * einen Preis zeigt (Kaufleiste). Kommt aus Germanized, damit dort hinterlegte Texte
+ * (z. B. Kleinunternehmer nach § 19 UStG) gelten; ohne Germanized aus config.php.
+ */
+function alp_price_legal_note( $product ) {
+	if ( function_exists( 'wc_gzd_get_product' ) ) {
+		$gzd   = wc_gzd_get_product( $product );
+		$parts = array();
+		if ( $gzd && method_exists( $gzd, 'get_tax_info' ) ) {
+			$parts[] = wp_strip_all_tags( (string) $gzd->get_tax_info() );
+		}
+		if ( $gzd && method_exists( $gzd, 'get_shipping_costs_html' ) ) {
+			$parts[] = wp_strip_all_tags( (string) $gzd->get_shipping_costs_html() );
+		}
+		$parts = array_filter( array_map( 'trim', $parts ) );
+		if ( $parts ) {
+			return esc_html( implode( ', ', $parts ) );
+		}
+	}
+	return esc_html( alp_config( 'product.price_note', 'Kein Ausweis der USt. (Kleinunternehmer, § 19 UStG), zzgl. Versand' ) );
+}
+
+/**
+ * Bundesland/Kanton als Pflichtfeld für bestimmte Länder (config.php → 'checkout_state_required').
+ * Stripe lehnt z. B. Schweizer Zahlungen ohne Kanton ab („Fehlendes Kundenfeld address->state“),
+ * WooCommerce hält das Feld für die Schweiz aber für optional.
+ */
+add_filter( 'woocommerce_get_country_locale', 'alp_require_state_fields' );
+function alp_require_state_fields( $locale ) {
+	foreach ( (array) alp_config( 'checkout_state_required', array() ) as $country ) {
+		$locale[ $country ]['state']['required'] = true;
+	}
+	return $locale;
+}

@@ -275,3 +275,42 @@ function alp_retired_shortcodes() {
 		}
 	}
 }
+
+/**
+ * Abgeschaltete Seiten (config.php → 'retired_pages'): leiten dauerhaft (301) weiter
+ * und verschwinden automatisch aus allen Menüs – ohne die Seiten löschen zu müssen.
+ */
+function alp_retired_page_target( $slug ) {
+	$pages = (array) alp_config( 'retired_pages', array() );
+	return isset( $pages[ $slug ] ) ? $pages[ $slug ] : null;
+}
+
+add_action( 'template_redirect', 'alp_redirect_retired_pages', 1 );
+function alp_redirect_retired_pages() {
+	if ( ! is_page() ) {
+		return;
+	}
+	$target = alp_retired_page_target( get_post_field( 'post_name', get_queried_object_id() ) );
+	if ( null !== $target ) {
+		wp_safe_redirect( alp_link( $target ), 301 );
+		exit;
+	}
+}
+
+add_filter( 'wp_nav_menu_objects', 'alp_hide_retired_menu_items' );
+function alp_hide_retired_menu_items( $items ) {
+	$retired = array_keys( (array) alp_config( 'retired_pages', array() ) );
+	if ( ! $retired ) {
+		return $items;
+	}
+	return array_filter(
+		$items,
+		function ( $item ) use ( $retired ) {
+			if ( 'page' === ( $item->object ?? '' ) && in_array( get_post_field( 'post_name', (int) $item->object_id ), $retired, true ) ) {
+				return false;
+			}
+			$path = trim( (string) wp_parse_url( (string) $item->url, PHP_URL_PATH ), '/' );
+			return ! in_array( $path, $retired, true );
+		}
+	);
+}
