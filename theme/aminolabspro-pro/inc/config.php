@@ -423,6 +423,7 @@ return array(
 		'topbar_show'               => false,        // Flatsome-Topbar aus – die Theme-Laufleiste ersetzt sie
 		'header_mobile_elements_top' => array(),
 		'header_account_title'      => false,        // nur Symbol statt „Mein Konto“
+		'account_icon_style'        => 'plain',      // Konto-Symbol anzeigen (ohne Stil zeigt Flatsome nur Text)
 		'header_cart_title'         => false,        // nur Betrag + Symbol statt „Warenkorb /“
 		'product_display'           => 'tabs',       // .com: Akkordeon → Reiter „Beschreibung / Laborbericht“
 		'product_info_align'        => 'left',
