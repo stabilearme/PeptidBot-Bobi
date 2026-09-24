@@ -218,6 +218,26 @@
 		});
 	}
 
+	/* 7. Countdown (Aktionsprodukt) -------------------------------------- */
+	function initCountdown() {
+		document.querySelectorAll('[data-alp-countdown]').forEach(function (el) {
+			var end = parseInt(el.getAttribute('data-alp-countdown'), 10) * 1000;
+			var cells = {};
+			el.querySelectorAll('[data-unit]').forEach(function (c) { cells[c.getAttribute('data-unit')] = c; });
+			function pad(n) { return n < 10 ? '0' + n : String(n); }
+			function tick() {
+				var left = Math.max(0, Math.floor((end - Date.now()) / 1000));
+				if (!left) { el.hidden = true; return; }
+				cells.d.textContent = pad(Math.floor(left / 86400));
+				cells.h.textContent = pad(Math.floor(left % 86400 / 3600));
+				cells.m.textContent = pad(Math.floor(left % 3600 / 60));
+				cells.s.textContent = pad(left % 60);
+			}
+			tick();
+			setInterval(tick, 1000);
+		});
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') fn();
 		else document.addEventListener('DOMContentLoaded', fn);
@@ -230,5 +250,6 @@
 		initShipping();
 		initMotion();
 		initTabs();
+		initCountdown();
 	});
 })();

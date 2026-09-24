@@ -19,6 +19,7 @@ get_header();
 		'home/hero',
 		'home/stats',
 		'home/coa',
+		'home/deal',         // Aktionsprodukt (nur wenn ein Produkt reduziert ist)
 		// 'home/trust',       // Vertrauensleiste (steckt jetzt in Hero-Häkchen + Kennzahlen)
 		// 'home/categories',  // Kategorie-Kacheln (jetzt als Filter über den Produkten)
 		'home/products',
@@ -26,6 +27,7 @@ get_header();
 		'home/news',
 		'home/process',
 		'home/knowledge',
+		'home/partner',      // Research-Partner / Affiliate
 		'home/faq',
 		'home/newsletter',
 	);

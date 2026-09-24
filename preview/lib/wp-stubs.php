@@ -292,10 +292,19 @@ class WC_Product {
 	public function is_purchasable() { return true; }
 	public function is_on_sale() { return (bool) $this->data['on_sale']; }
 	public function get_permalink() { return 'produkt-' . $this->data['slug'] . '.html'; }
+	public function get_regular_price() { return $this->data['regular_price']; }
+	public function get_sale_price() { return $this->data['sale_price']; }
+	public function get_price() { return $this->data['price']; }
+	public function get_short_description() { return $this->data['short_description']; }
+	public function get_date_on_sale_to() { return null; }
+	public function add_to_cart_url() { return 'warenkorb.html'; }
+	public function get_categories() { return ''; }
 }
+function wc_get_product( $id ) { return alp_preview_products()[ $id ] ?? null; }
 
 // Mediathek-Fallback des Themes (alp_upload_url): in der Vorschau löst home_url() die Bilder auf.
 if ( ! defined( 'HOUR_IN_SECONDS' ) ) { define( 'HOUR_IN_SECONDS', 3600 ); }
+if ( ! defined( 'DAY_IN_SECONDS' ) ) { define( 'DAY_IN_SECONDS', 86400 ); }
 if ( ! defined( 'WEEK_IN_SECONDS' ) ) { define( 'WEEK_IN_SECONDS', 604800 ); }
 function wp_get_upload_dir() { return array( 'basedir' => ALP_PREVIEW_OUT . '/img', 'baseurl' => 'img' ); }
 function trailingslashit( $s ) { return rtrim( $s, '/\\' ) . '/'; }

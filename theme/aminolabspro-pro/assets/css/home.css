@@ -722,3 +722,125 @@
 	.alp-article__body { padding: 0.85rem var(--alp-gutter) 0.85rem 0.9rem; gap: 0.25rem; }
 	.alp-article__title { font-size: 1rem; }
 }
+
+/* ==========================================================================
+   AKTIONSPRODUKT (home/deal.php)
+   ========================================================================== */
+.alp-deal {
+	position: relative; overflow: hidden;
+	padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+	background:
+		radial-gradient(40% 70% at 22% 50%, rgba(110, 218, 180, 0.28), transparent 70%),
+		radial-gradient(35% 60% at 100% 0%, rgba(110, 218, 180, 0.12), transparent 70%),
+		linear-gradient(180deg, #F2FBF7 0%, var(--alp-surface) 100%);
+}
+.alp-deal__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center; }
+.alp-deal__visual { position: relative; display: grid; place-items: center; min-height: 420px; }
+.alp-deal__halo { position: absolute; width: min(460px, 90%); aspect-ratio: 1; border-radius: 50%;
+	background: radial-gradient(circle, rgba(110, 218, 180, 0.55) 0%, rgba(110, 218, 180, 0.12) 45%, transparent 70%);
+	filter: blur(6px); }
+.alp-deal__img { position: relative; z-index: 1; display: block; width: min(440px, 88%); aspect-ratio: 1; border-radius: 32px; overflow: hidden;
+	box-shadow: 0 40px 80px -30px rgba(11, 26, 38, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.6) inset; transform: rotate(-3deg);
+	transition: transform 600ms var(--alp-ease); }
+.alp-deal__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.alp-deal__visual:hover .alp-deal__img { transform: rotate(0deg) scale(1.02); }
+.alp-deal__burst {
+	position: absolute; z-index: 2; top: 4%; right: 6%;
+	display: grid; place-items: center; align-content: center; width: 128px; height: 128px; border-radius: 50%;
+	background: radial-gradient(circle at 30% 25%, #2B3A52, var(--alp-dark) 70%);
+	color: var(--alp-mint); font-family: var(--alp-font-display); font-size: 2.1rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+	box-shadow: 0 0 0 6px rgba(110, 218, 180, 0.25), 0 20px 40px -12px rgba(11, 26, 38, 0.6);
+	transform: rotate(10deg);
+}
+.alp-deal__burst small { font-family: var(--alp-font-body); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 0.2rem; }
+.alp-deal__badge { display: inline-flex; align-items: center; gap: 0.55rem; margin: 0 0 1rem; padding: 0.4rem 0.9rem; border-radius: 999px;
+	background: var(--alp-dark); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.alp-deal__pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--alp-mint); box-shadow: 0 0 0 0 rgba(110, 218, 180, 0.7); }
+@media (prefers-reduced-motion: no-preference) {
+	.alp-deal__pulse { animation: alp-deal-pulse 1.8s ease-out infinite; }
+	@keyframes alp-deal-pulse { 70%, 100% { box-shadow: 0 0 0 8px rgba(110, 218, 180, 0); } }
+}
+.alp .alp-deal__title { margin: 0 0 0.6rem; font-family: var(--alp-font-display); font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+.alp .alp-deal__title a { color: var(--alp-ink); text-decoration: none; }
+.alp-deal__text { margin: 0 0 1rem; max-width: 34rem; color: var(--alp-ink-2); }
+.alp-deal .alp-card-lab { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 0 1.4rem; padding: 4px 12px; }
+.alp-deal__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; margin-bottom: 1.4rem; }
+.alp-deal__price del { color: var(--alp-muted); font-size: 1.25rem; }
+.alp-deal__price strong { font-family: var(--alp-font-display); font-size: clamp(2.4rem, 1.8rem + 2vw, 3.25rem); font-weight: 700; letter-spacing: -0.03em; color: var(--alp-ink); line-height: 1; }
+.alp-deal__save { padding: 0.3rem 0.7rem; border-radius: 8px; background: #E6F7F0; color: #1F7A5C; font-weight: 700; font-size: 0.875rem; }
+.alp-deal__timer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-bottom: 1.6rem; }
+.alp-deal__timer-label { font-size: 0.8125rem; font-weight: 600; color: var(--alp-muted); }
+.alp-deal__timer-cells { display: inline-flex; gap: 0.5rem; }
+.alp-deal__timer-cells > span { display: grid; justify-items: center; min-width: 58px; padding: 0.5rem 0.4rem 0.4rem; border-radius: 12px;
+	background: var(--alp-surface); border: 1px solid var(--alp-line); box-shadow: 0 8px 20px -14px rgba(26, 31, 46, 0.4); }
+.alp-deal__timer-cells b { font-family: var(--alp-font-display); font-size: 1.5rem; line-height: 1; color: var(--alp-ink); font-variant-numeric: tabular-nums; }
+.alp-deal__timer-cells small { margin-top: 0.2rem; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--alp-muted); }
+.alp-deal__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+@media (max-width: 849px) {
+	.alp-deal__grid { grid-template-columns: 1fr; }
+	.alp-deal__visual { min-height: 0; padding-top: 0.5rem; }
+	.alp-deal__img { width: 78%; }
+	.alp-deal__burst { width: 96px; height: 96px; font-size: 1.6rem; right: 2%; }
+	.alp-deal__actions .alp-btn { flex: 1 1 100%; }
+	.alp-deal__timer-cells > span { min-width: 52px; }
+}
+
+/* ==========================================================================
+   RESEARCH-PARTNER (home/partner.php)
+   ========================================================================== */
+.alp-partner {
+	position: relative; overflow: hidden;
+	padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+	background:
+		radial-gradient(40% 70% at 85% 50%, rgba(110, 218, 180, 0.22), transparent 70%),
+		linear-gradient(180deg, var(--alp-surface) 0%, #F2FBF7 50%, var(--alp-surface) 100%);
+}
+.alp-partner__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center; }
+.alp-partner__text { max-width: 36rem; color: var(--alp-ink-2); margin: 0.75rem 0 1.4rem; }
+.alp-partner__benefits { list-style: none; margin: 0 0 1.8rem; padding: 0; display: grid; gap: 0.9rem; }
+.alp-partner__benefits li { display: flex; gap: 0.8rem; align-items: flex-start; margin: 0; }
+.alp-partner__benefits strong { display: block; color: var(--alp-ink); font-size: 1.0625rem; }
+.alp-partner__benefits li > span:last-child { color: var(--alp-muted); font-size: 0.9375rem; }
+.alp-partner__tick { flex: none; display: grid; place-items: center; width: 26px; height: 26px; margin-top: 0.1rem; border-radius: 50%; color: #fff;
+	background: radial-gradient(circle at 35% 30%, #9AF0CF, #3FB488 75%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 10px -3px rgba(46, 160, 120, 0.6); }
+.alp-partner__tick .alp-icon { stroke-width: 3; }
+.alp-partner__visual { position: relative; display: grid; place-items: center; min-height: 380px; }
+.alp-partner__card {
+	position: relative; width: min(420px, 100%); aspect-ratio: 1.45; padding: 1.6rem 1.7rem; border-radius: 26px; color: #fff; overflow: hidden;
+	background:
+		radial-gradient(70% 90% at 100% 0%, rgba(110, 218, 180, 0.35), transparent 60%),
+		radial-gradient(60% 80% at 0% 100%, rgba(46, 139, 110, 0.35), transparent 60%),
+		linear-gradient(150deg, #1F2B40 0%, var(--alp-dark-deep) 100%);
+	box-shadow: 0 40px 80px -30px rgba(11, 26, 38, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+	transform: rotate(-4deg); transition: transform 600ms var(--alp-ease);
+	display: flex; flex-direction: column;
+}
+.alp-partner__visual:hover .alp-partner__card { transform: rotate(0deg) translateY(-4px); }
+.alp-partner__card-top { display: flex; justify-content: space-between; align-items: center; }
+.alp-partner__brand { font-family: var(--alp-font-display); font-weight: 500; font-size: 1rem; }
+.alp-partner__brand b { color: var(--alp-mint); font-weight: 700; }
+.alp-partner__chip-label { padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(110, 218, 180, 0.16); color: var(--alp-mint); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.alp-partner__big { margin: auto 0 0.4rem; font-family: var(--alp-font-display); font-size: clamp(3.2rem, 2.4rem + 3vw, 4.5rem); font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; }
+.alp-partner__big small { display: block; margin-top: 0.4rem; font-family: var(--alp-font-body); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.65); }
+.alp-partner__code { display: inline-flex; align-items: center; gap: 0.6rem; align-self: flex-start; margin-top: 0.8rem; padding: 0.45rem 0.8rem; border: 1.5px dashed rgba(110, 218, 180, 0.6); border-radius: 10px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); }
+.alp-partner__code b { font-family: var(--alp-font-mono); font-size: 0.9375rem; letter-spacing: 0.12em; color: #fff; }
+.alp-partner__bars { position: absolute; right: 1.6rem; bottom: 1.6rem; display: flex; align-items: flex-end; gap: 5px; height: 64px; }
+.alp-partner__bars i { width: 9px; border-radius: 3px; background: linear-gradient(180deg, var(--alp-mint), rgba(110, 218, 180, 0.35)); }
+.alp-partner__float { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.6rem 0.9rem; border-radius: 12px;
+	background: var(--alp-surface); color: var(--alp-ink); font-size: 0.8125rem; font-weight: 600; white-space: nowrap;
+	box-shadow: 0 18px 40px -16px rgba(26, 31, 46, 0.45), 0 0 0 1px var(--alp-line); }
+.alp-partner__float .alp-icon { color: #2E8B6E; }
+.alp-partner__float--a { left: -2%; bottom: 2%; }
+.alp-partner__float--b { right: 2%; top: 8%; color: #1F7A5C; background: #E6F7F0; font-weight: 800; }
+@media (prefers-reduced-motion: no-preference) {
+	.alp-partner__float--a { animation: alp-float 6s ease-in-out infinite; }
+	.alp-partner__float--b { animation: alp-float 6s ease-in-out 1.5s infinite; }
+	@keyframes alp-float { 50% { transform: translateY(-8px); } }
+}
+@media (max-width: 849px) {
+	.alp-partner__grid { grid-template-columns: 1fr; }
+	.alp-partner__visual { order: -1; min-height: 300px; }
+	.alp-partner__card { width: 88%; }
+	.alp-partner__float--a { left: 2%; bottom: 4%; }
+	.alp-partner .alp-btn { width: 100%; justify-content: center; }
+}

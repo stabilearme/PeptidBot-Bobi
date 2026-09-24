@@ -178,6 +178,33 @@ return array(
 			'text'    => 'Gib die Chargennummer von deinem Etikett ein und sieh das vollständige Analysezertifikat: gemessener Wirkstoffgehalt, HPLC-Reinheit, Prüflabor und Datum.',
 			'cta'     => array( 'label' => 'Alle Laborergebnisse', 'url' => '/coa/' ),
 		),
+		/*
+		 * Aktionsprodukt: großes Produkt mit Rabatt-Hinweis und Countdown.
+		 * 'sku' leer = automatisch das Produkt mit dem höchsten Rabatt.
+		 * Countdown: Enddatum aus dem Produkt („Angebot bis“ in WooCommerce), sonst 'ends' (JJJJ-MM-TT).
+		 * Ist nichts reduziert, wird der Abschnitt ausgeblendet.
+		 */
+		'deal' => array(
+			'eyebrow' => 'Aktionsprodukt',
+			'title'   => 'Nur für kurze Zeit reduziert.',
+			'text'    => 'Jede Woche ein Research-Peptid zum Aktionspreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
+			'sku'     => '',
+			'ends'    => '',
+		),
+		/* Research-Partner / Affiliate */
+		'partner' => array(
+			'eyebrow'    => 'Research-Partner',
+			'title'      => 'Wir suchen ständig neue Research-Partner.',
+			'text'       => 'Du forschst, schreibst oder hast eine Community rund um Peptide? Empfiehl aminolabspro und verdiene an jeder Bestellung mit.',
+			'commission' => '15 %',
+			'code'       => 'DEINCODE',
+			'benefits'   => array(
+				array( 'title' => '15 % Provision von Anfang an', 'text' => 'Auf jede Bestellung über deinen Code – ohne Mindestumsatz.' ),
+				array( 'title' => 'Eigener Partner-Code', 'text' => 'Jede Bestellung mit deinem Code wird dir automatisch zugeordnet.' ),
+				array( 'title' => 'Eigenes Partner-Dashboard', 'text' => 'Klicks, Bestellungen und Provision jederzeit im Blick.' ),
+			),
+			'cta'        => array( 'label' => 'Research-Partner werden', 'url' => '/affiliate-dashboard/' ),
+		),
 		'process' => array(
 			'eyebrow' => 'Ablauf',
 			'title'   => 'Von der Synthese bis zu dir.',
