@@ -1,0 +1,9 @@
+/* Variante C: Geist (technische Grotesk) + Geist Mono */
+@font-face { font-family: "Geist"; font-weight: 100 900; font-display: swap; src: url("../fonts/geist-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 100 900; font-display: swap; src: url("../fonts/geist-mono-latin-wght-normal.woff2") format("woff2"); }
+body.alp-ed { --alp-font-display: "Geist", system-ui, sans-serif; --alp-font-body: "Geist", system-ui, sans-serif; --alp-font-mono: "Geist Mono", ui-monospace, monospace; }
+body.alp-ed :is(h1, h2, .alp-h1, .alp-h2, .alp-hero__title, .alp-deal__title, .alp-wa-band__title, .alp-section__head h2, .alp-stats__value, .alp-process__n) { font-weight: 600 !important; letter-spacing: -0.045em !important; }
+body.alp-ed .alp-hero__title { font-size: clamp(2.8rem, 1.7rem + 4.4vw, 5.6rem); line-height: 0.98; }
+body.alp-ed .alp-hero__title em, body.alp-ed .alp-h2 em { font-style: normal !important; }
+body.alp-ed :is(.alp-faq__item summary, .alp-article__title) { font-weight: 500 !important; font-size: 1.15rem !important; letter-spacing: -0.02em; }
+body.alp-ed .alp-eyebrow, body.alp-ed .alp-stats__label, body.alp-ed .alp-deal__badge, body.alp-ed .product-small :is(.category, p.category) { font-family: var(--alp-font-mono) !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; font-size: 0.6875rem !important; }

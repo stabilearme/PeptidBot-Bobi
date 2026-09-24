@@ -25,7 +25,7 @@ get_header();
 		'home/products',
 		'home/whatsapp',     // WhatsApp-Kontakt (nur mit hinterlegter Nummer)
 		'home/news',
-		'home/process',
+		// 'home/process',    // Ablauf (ausgeblendet, Seite kürzer)
 		'home/knowledge',
 		'home/partner',      // Research-Partner / Affiliate
 		'home/faq',

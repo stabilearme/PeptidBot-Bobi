@@ -1,0 +1,8 @@
+/* Variante B: Fraunces (weiche Serife) + Manrope */
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("../fonts/fraunces-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: italic; font-display: swap; src: url("../fonts/fraunces-latin-wght-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2"); }
+body.alp-ed { --alp-font-display: "Fraunces", Georgia, serif; --alp-font-body: "Manrope", system-ui, sans-serif; }
+body.alp-ed :is(h1, h2, .alp-h1, .alp-h2, .alp-hero__title, .alp-deal__title, .alp-wa-band__title, .alp-section__head h2, .alp-faq__item summary, .alp-article__title, .alp-stats__value, .alp-process__n) { font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 420 !important; letter-spacing: -0.03em !important; }
+body.alp-ed .alp-hero__title { font-size: clamp(3rem, 1.9rem + 4.6vw, 6rem); }
+body.alp-ed .alp-faq__item summary, body.alp-ed .alp-article__title { font-size: 1.3rem !important; }
