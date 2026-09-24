@@ -253,3 +253,13 @@ body.alp-ed :is(.woocommerce-form-login, .woocommerce-form-register, .u-columns 
 
 /* SEO-H1 im Stil der kleinen Zeile (Eyebrow) */
 body.alp-ed h1.alp-hero__seo { font-family: var(--alp-font-body); font-size: 0.75rem; font-weight: 500 !important; letter-spacing: 0.02em !important; font-variation-settings: normal; text-transform: none; color: var(--ed-muted); line-height: 1.5; }
+
+/* „Jetzt kaufen“ (Flatsome, product_buy_now): als umrandeter Zweit-Button unter „In den Warenkorb“ */
+body.alp-ed form.cart button.ux-buy-now-button:not(#alp-x), .alp form.cart button.ux-buy-now-button:not(#alp-x) { /* :not(#…) = gleiche Stärke wie die Button-Regel mit #place_order */
+	flex: 1 1 100%; min-height: 50px; margin: 0;
+	background: #fff !important; color: var(--ed-ink, var(--alp-ink)) !important;
+	border: 1.5px solid var(--ed-ink, var(--alp-ink)) !important; box-shadow: none !important;
+}
+body.alp-ed form.cart button.ux-buy-now-button:not(#alp-x):hover, .alp form.cart button.ux-buy-now-button:not(#alp-x):hover {
+	background: var(--ed-ink, var(--alp-ink)) !important; color: #fff !important; border-color: var(--ed-ink, var(--alp-ink)) !important;
+}

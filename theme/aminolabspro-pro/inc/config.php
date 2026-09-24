@@ -494,5 +494,7 @@ return array(
 		'swatches',
 		'additional_variation_images',
 		'disable_reviews',
+		'product_buy_now',          // „Jetzt kaufen“-Button auf der Produktseite (wie bisher auf .com)
+		'product_buy_now_redirect',
 	),
 );
