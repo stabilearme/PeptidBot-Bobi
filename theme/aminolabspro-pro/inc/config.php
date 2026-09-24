@@ -103,6 +103,8 @@ return array(
 	'welcome_coupon' => array(
 		'prefix'  => 'NEU15-',
 		'message' => 'Dieser Willkommenscode gilt nur für deine erste Bestellung.',
+		'amount'  => 15,
+		'expires' => '2027-09-24 23:59:59', // Paket 1: für Anmeldungen bis ca. März 2027 verwenden, dann neues Paket
 	),
 
 	/*
