@@ -9,17 +9,19 @@
 	.alp .alp-h2 { font-size: 1.35rem; }
 	.alp .alp-eyebrow { font-size: 0.625rem; }
 
-	/* Hero: Text links, Bild rechts */
-	.alp-hero--split .alp-hero__grid { grid-template-columns: 1.15fr 0.85fr !important; gap: 0.75rem; align-items: center; }
-	.alp .alp-hero__title { font-size: 1.65rem; line-height: 1.05; }
-	.alp-hero__text { font-size: 0.8125rem; margin-bottom: 0.9rem; }
-	.alp-hero__actions { flex-direction: column; gap: 0.4rem; }
-	.alp-hero__actions .alp-btn--lg { min-height: 40px; font-size: 0.8125rem; padding: 0 0.7rem; }
-	.alp-hero__checks { font-size: 0.6875rem; gap: 0.3rem 0.7rem; }
-	.alp-hero__visual { margin: 0 !important; }
-	.alp-hero__photo { height: 230px !important; margin-inline: 0 !important; border-radius: 16px !important; }
-	.alp-hero__photo img { border-radius: 16px !important; }
-	.alp .alp-hero__proof { transform: scale(0.8); transform-origin: left bottom; left: -0.4rem; bottom: 0.4rem; }
+	/* Hero: großes Bild oben über die volle Breite, Text darunter */
+	.alp-hero--split { padding-top: 0 !important; }
+	.alp-hero--split .alp-hero__grid { display: flex !important; flex-direction: column; gap: 1.1rem; }
+	.alp-hero--split .alp-hero__visual { order: -1; margin: 0 calc(-1 * var(--alp-gutter)) !important; }
+	.alp-hero--split .alp-hero__photo { height: auto !important; aspect-ratio: 4 / 3.4 !important; margin: 0 !important; border-radius: 0 !important; }
+	.alp-hero--split .alp-hero__photo img { width: 100%; height: 100% !important; object-fit: cover; object-position: 60% 50%; border-radius: 0 !important; }
+	.alp .alp-hero--split .alp-hero__proof { transform: none; left: var(--alp-gutter) !important; right: auto !important; bottom: 0.75rem !important; top: auto !important; padding: 0.55rem 0.8rem !important; }
+	.alp .alp-hero__title { font-size: 2rem; line-height: 1.02; }
+	.alp-hero__text { font-size: 0.875rem; margin-bottom: 1rem; }
+	.alp-hero__actions { flex-direction: row; gap: 0.5rem; }
+	.alp-hero__actions .alp-btn--lg { flex: 1 1 0; min-height: 42px; font-size: 0.8125rem; padding: 0 0.6rem; }
+	.alp-hero__checks { flex-wrap: wrap !important; font-size: 0.6875rem; gap: 0.3rem 0.8rem; }
+	.alp-hero__checks li { white-space: nowrap; }
 
 	/* Kennzahlen: 4 nebeneinander */
 	.alp-stats__panel { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }

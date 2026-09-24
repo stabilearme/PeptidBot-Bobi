@@ -202,10 +202,12 @@ body.alp-ed.alp-motion .alp-reveal.is-in { transform: none; }
 body.alp-ed .product-small .col-inner:hover .box-image img { transform: scale(1.03); }
 
 @media (max-width: 767px) {
-	body.alp-ed .alp-hero__title { font-size: 2.6rem; }
+	body.alp-ed .alp-hero__title { font-size: 2.3rem; margin-bottom: 0.8rem; }
 	body.alp-ed .alp-h2, body.alp-ed .alp-section__head h2 { font-size: 1.9rem; }
 	body.alp-ed .alp-process__step { border-right: 0 !important; margin-right: 0; border-bottom: 1px solid var(--ed-line) !important; padding: 1rem 0 !important; }
-	body.alp-ed .alp-hero__photo { aspect-ratio: auto; }
+	body.alp-ed .alp-hero--split .alp-hero__photo { aspect-ratio: 4 / 3.4 !important; border-radius: 0 !important; }
+	body.alp-ed .alp-hero--split .alp-hero__photo img { border-radius: 0 !important; }
+	body.alp-ed .alp-hero { padding-top: 0; }
 }
 
 /* Buttons auf dunklen Flächen: weiß */
