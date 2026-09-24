@@ -174,7 +174,7 @@ function alp_free_shipping_progress() {
 add_action( 'woocommerce_review_order_after_submit', 'alp_checkout_trust' );
 function alp_checkout_trust() {
 	echo '<ul class="alp-checkout-trust">';
-	foreach ( array( 'lock' => 'Verschlüsselte Übertragung', 'truck' => 'Versand aus Deutschland', 'doc' => 'COA zu jeder Charge' ) as $icon => $text ) {
+	foreach ( array( 'lock' => 'Verschlüsselte Übertragung', 'truck' => 'Versand aus Deutschland', 'doc' => 'Öffentliche Laborzertifikate' ) as $icon => $text ) {
 		echo '<li>' . alp_icon( $icon, 16 ) . esc_html( $text ) . '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput
 	}
 	echo '</ul>';

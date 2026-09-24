@@ -136,7 +136,7 @@ return array(
 	/* ---------- Laufleiste oben ---------- */
 	'announcement' => array(
 		array( 'icon' => 'clock', 'text' => 'Bestellung bis 14 Uhr – Versand am selben Werktag' ),
-		array( 'icon' => 'flask', 'text' => 'Jede Charge unabhängig per HPLC geprüft' ),
+		array( 'icon' => 'flask', 'text' => 'HPLC-Analysen aus unabhängigem Drittlabor' ),
 		array( 'icon' => 'truck', 'text' => 'Versand aus Deutschland · diskret verpackt' ),
 	),
 
@@ -146,7 +146,7 @@ return array(
 		/* SEO-Überschrift (H1) der Startseite – ersetzt die kleine Zeile darüber. Leer = die große Headline ist die H1. */
 		'seo_h1'    => 'Forschungspeptide kaufen · Research Grade, drittlabor-geprüft',
 		'title'     => 'Reinheit, die du <em>nachprüfen</em> kannst.',
-		'text'      => 'Jede Charge wird von einem unabhängigen Labor per HPLC analysiert. Das vollständige Zertifikat findest du über die Chargennummer auf deinem Vial.',
+		'text'      => 'Getestete Chargen werden von einem unabhängigen Labor per HPLC analysiert. Das vollständige Zertifikat findest du öffentlich über die Chargennummer auf deinem Vial.',
 		'primary'   => array( 'label' => 'Peptide entdecken', 'url' => 'shop' ),
 		'secondary' => array( 'label' => 'Charge prüfen', 'url' => '/#charge-pruefen' ),
 		/* Kurze Häkchen-Zeile unter den Buttons. */
@@ -158,7 +158,7 @@ return array(
 		 */
 		'stats'     => array(
 			array( 'value' => '≥ 98 %', 'label' => 'Reinheit laut HPLC', 'icon' => 'flask', 'visual' => 'meter', 'fill' => 98 ),
-			array( 'value' => '100 %', 'label' => 'der Chargen getestet', 'icon' => 'shield', 'visual' => 'ring', 'fill' => 100 ),
+			array( 'value' => 'HPLC', 'label' => 'Analyse im Drittlabor', 'icon' => 'shield', 'visual' => 'ring', 'fill' => 100 ),
 			array( 'value' => '{coa} COAs', 'label' => 'öffentlich einsehbar', 'icon' => 'doc', 'visual' => 'docs' ),
 			array( 'value' => '2–4 Tage', 'label' => 'Lieferzeit in Deutschland', 'icon' => 'truck', 'visual' => 'timeline', 'steps' => array( 'Bestellt', 'Versendet', 'Da' ) ),
 		),
@@ -175,7 +175,7 @@ return array(
 
 	/* ---------- Startseite: Vertrauensleiste ---------- */
 	'trust' => array(
-		array( 'icon' => 'flask',  'title' => 'Unabhängiges Labor',  'text' => 'HPLC-Analyse jeder Charge durch ein Drittlabor' ),
+		array( 'icon' => 'flask',  'title' => 'Unabhängiges Labor',  'text' => 'HPLC-Analyse durch ein unabhängiges Drittlabor' ),
 		array( 'icon' => 'doc',    'title' => 'Öffentliche COAs',    'text' => 'Zertifikat per Chargennummer abrufbar' ),
 		array( 'icon' => 'truck',  'title' => 'Versand aus DE',      'text' => 'Schnell und diskret verpackt' ),
 		array( 'icon' => 'lock',   'title' => 'Sicher bezahlen',     'text' => 'Kreditkarte, Apple Pay oder Vorkasse – verschlüsselt über Stripe' ),
@@ -265,7 +265,7 @@ return array(
 			'title'   => 'Von der Synthese bis zu dir.',
 			'steps'   => array(
 				array( 'title' => 'Synthese & Lyophilisierung', 'text' => 'Research-Grade-Peptide, gefriergetrocknet für maximale Stabilität.' ),
-				array( 'title' => 'Unabhängige Laborprüfung', 'text' => 'Jede Charge wird per HPLC auf Reinheit und Wirkstoffgehalt analysiert.' ),
+				array( 'title' => 'Unabhängige Laborprüfung', 'text' => 'Getestete Chargen werden per HPLC auf Reinheit und Wirkstoffgehalt analysiert.' ),
 				array( 'title' => 'Zertifikat veröffentlicht', 'text' => 'Das COA wird der Chargennummer zugeordnet und öffentlich gestellt.' ),
 				array( 'title' => 'Versand aus Deutschland', 'text' => 'Bis 14 Uhr bestellt, am selben Werktag verschickt – diskret verpackt.' ),
 			),
@@ -296,11 +296,11 @@ return array(
 	/* ---------- Shop & Kategorien ---------- */
 	'shop' => array(
 		/* Text über der Produktliste (Kategorien zeigen stattdessen ihre Beschreibung aus WooCommerce). */
-		'intro' => 'Research-Grade-Peptide, lyophilisiert und einzeln chargengeprüft. Zu jeder Charge gibt es ein öffentliches Laborzertifikat.',
+		'intro' => 'Research-Grade-Peptide, lyophilisiert. Zu getesteten Chargen gibt es ein öffentliches Laborzertifikat.',
 		/* Vorteile als kleine Chips. „Versandkostenfrei ab …“ kommt automatisch aus free_shipping_threshold. */
 		'chips' => array(
 			array( 'icon' => 'flask', 'text' => 'HPLC-geprüft, ≥ 98 %' ),
-			array( 'icon' => 'doc',   'text' => 'COA zu jeder Charge' ),
+			array( 'icon' => 'doc',   'text' => 'Öffentliche COAs' ),
 			array( 'icon' => 'truck', 'text' => 'Versand aus DE, 2–4 Werktage' ),
 		),
 	),
@@ -327,7 +327,7 @@ return array(
 
 	/* ---------- Footer ---------- */
 	'footer' => array(
-		'about'   => 'Research-Grade-Peptide mit öffentlich einsehbaren Laborzertifikaten. Jede Charge unabhängig geprüft, Versand aus Deutschland.',
+		'about'   => 'Research-Grade-Peptide mit öffentlich einsehbaren Laborzertifikaten. Unabhängig im Drittlabor geprüft, Versand aus Deutschland.',
 		'columns' => array(
 			'Shop' => array(
 				'Alle Produkte'        => 'shop',

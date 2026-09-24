@@ -17,7 +17,7 @@ return array(
 	),
 	array(
 		'q' => 'Wer testet die Peptide?',
-		'a' => 'Jede Charge wird von einem unabhängigen Drittlabor per HPLC (Hochleistungsflüssigkeitschromatographie) analysiert. Wir veröffentlichen die vollständigen Zertifikate – nicht nur Auszüge.',
+		'a' => 'Getestete Chargen werden von einem unabhängigen Drittlabor per HPLC (Hochleistungsflüssigkeitschromatographie) analysiert. Wir veröffentlichen die vollständigen Zertifikate – nicht nur Auszüge.',
 	),
 	array(
 		'q' => 'Wie schnell wird versendet?',
