@@ -233,10 +233,12 @@ function alp_preview_mods_off() {
  */
 alp_force_flatsome_mods();
 function alp_force_flatsome_mods() {
-	if ( ! alp_config( 'force_flatsome_mods', false ) ) {
+	$force  = (bool) alp_config( 'force_flatsome_mods', false );
+	$mirror = (bool) alp_config( 'flatsome_mirror', false );
+	if ( ! $force && ! $mirror ) {
 		return;
 	}
-	$forced = (array) alp_config( 'flatsome_mods', array() );
+	$forced = $force ? (array) alp_config( 'flatsome_mods', array() ) : array();
 	if ( ! alp_config( 'features.flatsome_lazy_load', false ) ) {
 		$forced['lazy_load_images'] = 0;
 	}
@@ -251,11 +253,41 @@ function alp_force_flatsome_mods() {
 		);
 	}
 	// 2) Gesamtliste (get_theme_mods) – Flatsome liest manche Werte direkt daraus.
-	$apply = function ( $mods ) use ( $forced ) {
-		return array_merge( is_array( $mods ) ? $mods : array(), $forced );
+	$apply = function ( $mods ) use ( $forced, $mirror ) {
+		$mods = is_array( $mods ) ? $mods : array();
+		if ( $mirror ) {
+			$mods = alp_flatsome_mirror( $mods );
+		}
+		return array_merge( $mods, $forced );
 	};
 	add_filter( 'option_theme_mods_' . get_stylesheet(), $apply, 99 );
 	add_filter( 'default_option_theme_mods_' . get_stylesheet(), $apply, 99 );
+}
+
+/**
+ * Flatsome-Einstellungen wie auf aminolabspro.de (data/flatsome-design.php): Werte der Seite, die
+ * dort nicht vorkommen, entfallen (→ Flatsome-Standard wie auf .de); .de-Werte ersetzen die der Seite.
+ * Ausgenommen sind Inhalte/Funktionen aus config.php → 'flatsome_keep' (Menüs, Logo, Suchtext …).
+ */
+function alp_flatsome_mirror( array $mods ) {
+	static $design = null;
+	if ( null === $design ) {
+		$file   = ALP_DIR . '/data/flatsome-design.php';
+		$design = file_exists( $file ) ? (array) include $file : array();
+	}
+	$keep = (array) alp_config( 'flatsome_keep', array() );
+	$out  = array();
+	foreach ( $keep as $key ) {
+		if ( array_key_exists( $key, $mods ) ) {
+			$out[ $key ] = $mods[ $key ];
+		}
+	}
+	foreach ( $design as $key => $value ) {
+		if ( ! in_array( $key, $keep, true ) ) {
+			$out[ $key ] = $value;
+		}
+	}
+	return $out;
 }
 
 /**

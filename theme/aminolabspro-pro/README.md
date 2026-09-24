@@ -137,6 +137,7 @@ aminolabspro-pro/
 │   └── schema.php            FAQ-Rich-Snippet
 ├── data/
 │   ├── coa-batches.php       ★ Chargen & Zertifikate
+│   ├── flatsome-design.php   Flatsome-Einstellungen von .de (gelten auch auf .com)
 │   └── faq.php               ★ FAQ
 ├── template-parts/           HTML-Bausteine (home, coa, product, shop, footer, global)
 └── assets/
