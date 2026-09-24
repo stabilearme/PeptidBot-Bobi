@@ -262,6 +262,12 @@ function alp_force_flatsome_mods() {
 	};
 	add_filter( 'option_theme_mods_' . get_stylesheet(), $apply, 99 );
 	add_filter( 'default_option_theme_mods_' . get_stylesheet(), $apply, 99 );
+	// Vorschau-Plugins wie Theme Switcha: WordPress liest die Einstellungen dann noch unter dem
+	// Namen des bisher aktiven Themes – auch dort gelten die Vorgaben (nur für diese Anfrage).
+	$active = (string) get_option( 'stylesheet' );
+	if ( '' !== $active && get_stylesheet() !== $active ) {
+		add_filter( 'option_theme_mods_' . $active, $apply, 99 );
+	}
 }
 
 /**

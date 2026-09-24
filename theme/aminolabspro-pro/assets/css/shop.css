@@ -214,3 +214,6 @@
 .alp .product-small img.lazy-load { opacity: 1; }
 /* Produktbild in der Kachel immer sichtbar (Flatsome-Hover „fade_in_back“: nur das COA-Rückbild blendet ein) */
 .alp .product-small .box-image img:not(.back-image):not(.show-on-hover) { opacity: 1 !important; visibility: visible !important; }
+/* Flatsome „gleich hohe Kacheln“ (has-equal-box-heights): Bild füllt den Rahmen statt 0 px Breite */
+.alp .has-equal-box-heights .box-image { position: relative; }
+.alp .has-equal-box-heights .box-image img { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
