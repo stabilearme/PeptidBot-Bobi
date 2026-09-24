@@ -1,0 +1,121 @@
+/* ==========================================================================
+   POLITUR (2.4): weiche Übergänge, breite Balken, einheitliche Tiefe
+   Lädt nach den Seiten-Stylesheets, vor buttons.css. Ganz entfernen = alter Look.
+   ========================================================================== */
+.alp {
+	--alp-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--alp-dur: 320ms;
+	--alp-r-lg: 18px;
+	--alp-r-xl: 28px;
+	--alp-shadow-soft: 0 1px 1px rgba(26, 31, 46, 0.03), 0 4px 10px -2px rgba(26, 31, 46, 0.04), 0 18px 40px -18px rgba(26, 31, 46, 0.14);
+	--alp-shadow-soft-hover: 0 2px 2px rgba(26, 31, 46, 0.03), 0 10px 22px -6px rgba(26, 31, 46, 0.07), 0 32px 60px -24px rgba(46, 139, 110, 0.35);
+}
+
+/* 1) Seite als durchgehende Fläche: graue Abschnitte laufen weich aus statt harter Kante */
+.alp-home .alp-section--tint:not(#charge-pruefen) {
+	background:
+		radial-gradient(60% 50% at 85% 20%, rgba(110, 218, 180, 0.10), transparent 70%),
+		linear-gradient(180deg, var(--alp-surface) 0%, var(--alp-paper) 18%, var(--alp-paper) 82%, var(--alp-surface) 100%);
+}
+.alp-home #charge-pruefen { background: linear-gradient(180deg, var(--alp-paper) 0%, var(--alp-surface) 100%); }
+.alp-stats { background: linear-gradient(180deg, var(--alp-surface) 50%, var(--alp-paper) 50%); }
+/* Hero läuft nach unten ins Weiß aus, mit sanftem Mint-Licht */
+.alp-hero { background:
+	radial-gradient(50% 60% at 90% 10%, rgba(110, 218, 180, 0.20), transparent 70%),
+	radial-gradient(40% 50% at 0% 100%, rgba(110, 218, 180, 0.08), transparent 70%),
+	linear-gradient(180deg, var(--alp-paper) 0%, var(--alp-surface) 100%); }
+
+/* 2) Einheitliche, weiche Tiefe für alle Karten */
+.alp :is(.product-small .col-inner, .product-small.box, .alp-article, .alp-process__step, .alp-soon, .alp-check-card, .alp-cta, .alp-faq__item, .alp-coa-card) {
+	border-radius: var(--alp-r-lg);
+	transition: transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease);
+}
+@media (min-width: 768px) {
+	.alp :is(.alp-article, .alp-process__step) { border-color: rgba(26, 31, 46, 0.06); box-shadow: var(--alp-shadow-soft); }
+	.alp .alp-article:hover, .alp .alp-process__step:hover { transform: translateY(-4px); box-shadow: var(--alp-shadow-soft-hover); border-color: rgba(110, 218, 180, 0.5); }
+}
+.alp .product-small .col-inner { border-color: rgba(26, 31, 46, 0.06) !important; box-shadow: var(--alp-shadow-soft); overflow: hidden; }
+.alp .product-small .col-inner:hover { transform: translateY(-4px); box-shadow: var(--alp-shadow-soft-hover); }
+.alp .product-small .box-image img { transition: transform 700ms var(--alp-ease); }
+.alp .product-small .col-inner:hover .box-image img { transform: scale(1.05); }
+
+/* 3) Dunkle Flächen: Tiefe statt Block */
+.alp .alp-check-card {
+	background:
+		radial-gradient(70% 90% at 100% 0%, rgba(110, 218, 180, 0.16), transparent 60%),
+		radial-gradient(60% 80% at 0% 100%, rgba(46, 139, 110, 0.18), transparent 60%),
+		linear-gradient(160deg, #1D2536 0%, #121a28 100%);
+	box-shadow: 0 30px 70px -30px rgba(11, 26, 38, 0.55);
+}
+.alp .alp-soon--full { box-shadow: 0 30px 70px -30px rgba(11, 26, 38, 0.5); }
+
+/* 4) Breite Balken: Chargen-Prüfer, Kühlschrank, WhatsApp, Newsletter – Inhalt bleibt in der Containerbreite */
+.alp { --alp-band-pad: max(var(--alp-gutter), calc((100vw - var(--alp-container)) / 2)); }
+
+/* Chargen-Prüfer: dunkler Balken, Kennzahlen-Leiste schwebt am Übergang */
+.alp-stats { background: linear-gradient(180deg, var(--alp-surface) 50%, #141C2A 50%); }
+.alp-home #charge-pruefen {
+	padding-block: clamp(3rem, 2rem + 3vw, 5rem);
+	background:
+		radial-gradient(45% 80% at 100% 0%, rgba(110, 218, 180, 0.16), transparent 70%),
+		radial-gradient(40% 70% at 0% 100%, rgba(46, 139, 110, 0.20), transparent 70%),
+		linear-gradient(180deg, #141C2A 0%, #101826 100%);
+}
+.alp .alp-check-card { background: transparent; box-shadow: none; border-radius: 0; padding-inline: 0; }
+
+/* Kühlschrank-Teaser: dunkler Balken über die volle Breite */
+.alp .alp-soon--full {
+	margin-inline: calc(50% - 50vw);
+	border-radius: 0; border: 0; box-shadow: none;
+	padding-inline: var(--alp-band-pad);
+	background:
+		radial-gradient(40% 80% at 100% 50%, rgba(110, 218, 180, 0.14), transparent 70%),
+		var(--alp-dark-deep);
+}
+.alp .alp-soon--full .alp-soon__media img { border-radius: var(--alp-r-lg); }
+
+/* WhatsApp: breiter Balken mit weichem Licht statt harter Kante */
+.alp-wa-band {
+	background:
+		radial-gradient(50% 120% at 0% 0%, rgba(255, 255, 255, 0.22), transparent 60%),
+		radial-gradient(40% 100% at 100% 100%, rgba(7, 94, 84, 0.55), transparent 70%),
+		linear-gradient(115deg, #22C764 0%, #139C7C 50%, #0B6E61 100%);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* 5) Newsletter wird zum oberen Teil des Footers: ein durchgehender dunkler Abschluss */
+.alp-home > .alp-section:last-child {
+	padding-block: clamp(3rem, 2rem + 3vw, 4.5rem) 0;
+	background:
+		radial-gradient(40% 90% at 85% 0%, rgba(110, 218, 180, 0.16), transparent 70%),
+		var(--alp-dark);
+}
+.alp .alp-cta { background: transparent; border: 0; box-shadow: none; padding-inline: 0 !important; color: var(--alp-dark-text); }
+.alp .alp-cta :is(.alp-h2, h2) { color: #fff; }
+.alp .alp-cta p { color: rgba(255, 255, 255, 0.72); }
+.alp .alp-cta .alp-btn--light { background: linear-gradient(180deg, #8BE6C6 0%, var(--alp-action) 45%, #52C99E 100%); border-color: #4DC49A; color: var(--alp-on-action); box-shadow: 0 10px 24px -10px rgba(110, 218, 180, 0.6); }
+.alp .alp-cta .alp-btn--light:hover { background: linear-gradient(180deg, #7DE0BD 0%, #5ED0A7 45%, #45BD92 100%); color: var(--alp-on-action); }
+.alp .alp-footer { border-top: 1px solid rgba(255, 255, 255, 0.07); }
+
+/* 6) Überschriften ruhiger, mehr Luft */
+.alp .alp-section__head { margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.5rem); }
+.alp .alp-h2 { letter-spacing: -0.025em; }
+
+/* 7) Header: Glas mit weichem Schatten */
+.alp #header .header-main { box-shadow: 0 10px 30px -24px rgba(26, 31, 46, 0.35); border-bottom-color: rgba(26, 31, 46, 0.05); }
+
+/* 8) Weicheres Einblenden beim Scrollen: sanft aus der Unschärfe nach oben */
+@media (prefers-reduced-motion: no-preference) {
+	.alp-motion .alp-reveal { transform: translateY(22px); filter: blur(6px); transition: opacity 900ms var(--alp-ease) var(--alp-delay, 0ms), transform 900ms var(--alp-ease) var(--alp-delay, 0ms), filter 900ms var(--alp-ease) var(--alp-delay, 0ms); }
+	.alp-motion .alp-reveal.is-in { transform: none; filter: none; }
+}
+
+/* Handy: Balken-Inhalte mit Seitenrand (Balken selbst randlos), Listen ohne Kartenschatten */
+@media (max-width: 767px) {
+	.alp .alp-check-card, .alp .alp-cta { margin-inline: 0 !important; padding-inline: 0 !important; border-top: 0; }
+	.alp-home #charge-pruefen { padding-block: 2.25rem; }
+	.alp-home > .alp-section:last-child { padding-top: 2.25rem; }
+	.alp .alp-cta { padding-block: 0 1.75rem !important; }
+	.alp :is(.alp-article, .alp-process__step) { box-shadow: none; border-radius: 0; }
+	.alp .product-small .col-inner:hover { transform: none; }
+}
