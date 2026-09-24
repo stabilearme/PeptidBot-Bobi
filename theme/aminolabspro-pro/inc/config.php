@@ -120,6 +120,12 @@ return array(
 		'kundenwuensche' => '/',
 	),
 
+	/* Kasse – Texte wie bisher auf aminolabspro.com (altes Child Theme). */
+	'checkout' => array(
+		'order_button_text' => 'Zahlungspflichtig bestellen',
+		'terms_text'        => 'Ich habe die <a href="/agb/" target="_blank">Allgemeinen Geschäftsbedingungen</a>, die <a href="/datenschutzerklaerung/" target="_blank">Datenschutzerklärung</a> und die <a href="/widerrufsbelehrung/" target="_blank">Widerrufsbelehrung</a> gelesen und akzeptiert.',
+	),
+
 	/* Länder, in denen Bundesland/Kanton an der Kasse Pflicht ist (Stripe braucht ihn z. B. für die Schweiz). */
 	'checkout_state_required' => array( 'CH' ),
 
@@ -304,6 +310,8 @@ return array(
 		'chips'  => array( '≥ 98 % Reinheit', 'HPLC-verifiziert', 'Research Use Only' ),
 		/* Preis-Hinweis in Kaufleiste & Aktionsprodukt, nur falls Germanized fehlt (sonst gelten dessen Texte). */
 		'price_note' => 'Kein Ausweis der USt. (Kleinunternehmer, § 19 UStG), zzgl. Versand',
+		/* Kurzbeschreibung auf der Produktseite zeigen? Bisher auf .com ausgeblendet. */
+		'show_short_description' => false,
 		/* Liste unter dem Warenkorb-Button. */
 		'trust'  => array(
 			array( 'icon' => 'truck', 'text' => 'Versand aus Deutschland, diskret verpackt' ),

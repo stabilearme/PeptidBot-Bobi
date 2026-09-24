@@ -215,3 +215,32 @@ function alp_require_state_fields( $locale ) {
 	}
 	return $locale;
 }
+
+/*
+ * ---------- Übernommen aus dem bisherigen Child Theme („AminoLabs Pro Child“) ----------
+ * Damit sich auf aminolabspro.com beim Theme-Wechsel an Kasse und Produktseite nichts ändert.
+ * Texte/Schalter: config.php → 'checkout' und 'product.show_short_description'.
+ */
+
+// Kurzbeschreibungen bleiben ausgeblendet (wie bisher); die ausführliche Beschreibung steht im Reiter.
+if ( ! alp_config( 'product.show_short_description', false ) ) {
+	add_filter( 'woocommerce_short_description', '__return_empty_string' );
+	add_filter( 'woocommerce_product_get_short_description', '__return_empty_string' );
+}
+
+// Feld „Anmerkungen zur Bestellung“ an der Kasse.
+add_filter( 'woocommerce_enable_order_notes_field', '__return_true' );
+
+// Bestell-Button mit gesetzlich geforderter Beschriftung („Button-Lösung“, § 312j BGB).
+add_filter( 'woocommerce_order_button_text', 'alp_order_button_text' );
+function alp_order_button_text( $text ) {
+	$custom = (string) alp_config( 'checkout.order_button_text', '' );
+	return '' !== $custom ? $custom : $text;
+}
+
+// Text der AGB-Checkbox mit Links zu AGB, Datenschutz und Widerruf.
+add_filter( 'woocommerce_checkout_terms_and_conditions_checkbox_text', 'alp_terms_checkbox_text' );
+function alp_terms_checkbox_text( $text ) {
+	$custom = (string) alp_config( 'checkout.terms_text', '' );
+	return '' !== $custom ? wp_kses_post( $custom ) : $text;
+}
