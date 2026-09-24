@@ -217,6 +217,7 @@ function alp_preview_mods_boot() {
 	foreach ( $GLOBALS['alp_preview_mod_filters'] as $hook => $callback ) {
 		add_filter( $hook, $callback );
 	}
+	alp_protect_active_theme_mods();
 }
 
 function alp_preview_mods_off() {
@@ -268,6 +269,29 @@ function alp_force_flatsome_mods() {
 	if ( '' !== $active && get_stylesheet() !== $active ) {
 		add_filter( 'option_theme_mods_' . $active, $apply, 99 );
 	}
+	alp_protect_active_theme_mods();
+}
+
+/**
+ * Schutz bei Vorschau-Plugins (Theme Switcha): Solange dieses Theme nur zur Ansicht geladen ist,
+ * darf nichts in die Einstellungen des aktiven (alten) Themes zurückgeschrieben werden – sonst
+ * würden die angezeigten Werte dort dauerhaft gespeichert (z. B. über set_theme_mod()).
+ */
+function alp_protect_active_theme_mods() {
+	static $done = false;
+	$active = (string) get_option( 'stylesheet' );
+	if ( $done || '' === $active || get_stylesheet() === $active ) {
+		return;
+	}
+	$done = true;
+	add_filter(
+		'pre_update_option_theme_mods_' . $active,
+		function ( $value, $old_value ) {
+			return $old_value; // unverändert lassen → update_option() schreibt nichts
+		},
+		999,
+		2
+	);
 }
 
 /**
