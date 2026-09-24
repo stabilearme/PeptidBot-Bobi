@@ -355,3 +355,32 @@
 /* Sprachumschalter (TranslatePress / GTranslate) im Menü */
 .alp .alp-menu-lang { display: flex; align-items: center; margin-left: 0.25rem; }
 .alp .alp-menu-lang :is(.trp-language-switcher, .gtranslate_wrapper) { font-size: 0.8125rem; font-weight: 600; }
+
+/* ---------- Newsletter-Anmeldung (Brevo) – Startseite + [alp_newsletter] ---------- */
+.alp-nl-form { flex: 1 1 22rem; max-width: 34rem; margin: 0; }
+.alp-nl-form__row { display: flex; gap: 0.5rem; }
+.alp .alp-nl-form input.alp-nl-form__input {
+	flex: 1 1 auto; min-width: 0; height: 3.25rem; margin: 0; padding: 0 1.1rem;
+	border: 1px solid rgba(255, 255, 255, 0.22); border-radius: var(--alp-r-md);
+	background: rgba(255, 255, 255, 0.08); color: #fff; font-size: 1rem; box-shadow: none;
+}
+.alp .alp-nl-form input.alp-nl-form__input::placeholder { color: rgba(255, 255, 255, 0.55); }
+.alp .alp-nl-form input.alp-nl-form__input:focus { outline: 2px solid var(--alp-action); outline-offset: 1px; border-color: transparent; background: rgba(255, 255, 255, 0.12); }
+.alp .alp-nl-form__btn { height: 3.25rem; margin: 0; white-space: nowrap; flex: 0 0 auto; }
+.alp-nl-form__btn.is-loading { opacity: 0.7; cursor: progress; }
+.alp-nl-form__trap { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.alp-nl-form__note { margin: 0.65rem 0 0; font-size: 0.8125rem; color: rgba(255, 255, 255, 0.6); }
+.alp-nl-form__note a { color: inherit; text-decoration: underline; }
+.alp-cta--form { align-items: center; }
+
+/* Auf hellen Seiten (Shortcode, z. B. Early Access) */
+.alp .alp-nl-form.is-standalone { margin: 1.25rem auto; }
+.alp .alp-nl-form.is-standalone input.alp-nl-form__input { border-color: var(--alp-line, #d9e2df); background: #fff; color: var(--alp-ink); }
+.alp .alp-nl-form.is-standalone input.alp-nl-form__input::placeholder { color: var(--alp-ink-3, #7b8a86); }
+.alp .alp-nl-form.is-standalone .alp-nl-form__note { color: var(--alp-ink-3, #6b7a76); }
+.alp .alp-ea-hero .alp-nl-form.is-standalone input.alp-nl-form__input { border-color: rgba(255,255,255,.3); }
+
+@media (max-width: 549px) {
+	.alp-nl-form__row { flex-direction: column; }
+	.alp .alp-nl-form__btn { width: 100%; justify-content: center; }
+}

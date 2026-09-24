@@ -64,6 +64,18 @@ function alp_link( $target ) {
 }
 
 /**
+ * false, wenn ein Link auf eine WordPress-Seite zeigt, die es zwar gibt, die aber nicht
+ * veröffentlicht ist (Entwurf/privat) – z. B. „Partnerprogramm“, solange das Affiliate-Plugin fehlt.
+ */
+function alp_link_is_live( $target ) {
+	if ( ! preg_match( '#^/([a-z0-9-]+(?:/[a-z0-9-]+)*)/?$#i', (string) $target, $m ) || ! function_exists( 'get_page_by_path' ) ) {
+		return true;
+	}
+	$page = get_page_by_path( $m[1], OBJECT, 'page' );
+	return ! $page || 'publish' === $page->post_status;
+}
+
+/**
  * URL einer Datei aus der Mediathek. Liegt sie nicht unter dem angegebenen Pfad
  * (z. B. nach einem Umzug: anderer Monatsordner oder „-1“ am Dateinamen),
  * wird sie in der Mediathek über den Dateinamen gesucht.

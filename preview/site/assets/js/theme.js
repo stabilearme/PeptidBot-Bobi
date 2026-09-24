@@ -6,6 +6,8 @@
  *  4. „Versand heute“-Countdown
  *  5. Bewegung: Einblenden beim Scrollen, hochzählende Laborwerte, Chromatogramm
  *  6. Umschalter „Neu im Shop“ / „Angebote“ auf der Startseite
+ *  7. Countdown (Aktionsprodukt)
+ *  8. Newsletter-Anmeldung (Brevo)
  */
 (function () {
 	'use strict';
@@ -238,6 +240,24 @@
 		});
 	}
 
+	/* 8. Newsletter-Anmeldung (Brevo) ------------------------------------
+	 * Sendet im Hintergrund an Brevo und leitet dann zur Danke-Seite weiter
+	 * (wie bisher auf aminolabspro.com). Ohne JavaScript geht das Formular direkt an Brevo. */
+	function initNewsletter() {
+		document.querySelectorAll('form[data-alp-newsletter]').forEach(function (form) {
+			form.addEventListener('submit', function (e) {
+				if (!window.fetch || !window.FormData) return;
+				e.preventDefault();
+				var trap = form.querySelector('[name="email_address_check"]');
+				if (trap && trap.value) return;
+				var btn = form.querySelector('button[type="submit"]');
+				if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+				var done = function () { window.location.href = form.getAttribute('data-thanks') || '/'; };
+				fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).then(done, done);
+			});
+		});
+	}
+
 	function ready(fn) {
 		if (document.readyState !== 'loading') fn();
 		else document.addEventListener('DOMContentLoaded', fn);
@@ -251,5 +271,6 @@
 		initMotion();
 		initTabs();
 		initCountdown();
+		initNewsletter();
 	});
 })();

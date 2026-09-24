@@ -81,6 +81,20 @@ return array(
 		'button'  => 'Chat auf WhatsApp starten',
 	),
 
+	/*
+	 * Newsletter-Anmeldung (Brevo) – dasselbe Formular wie bisher auf aminolabspro.com.
+	 * 'action': Formularadresse aus Brevo (Formulare → Formular → Teilen → HTML-Code → <form action="…">).
+	 * Leer lassen = auf der Startseite erscheint stattdessen ein Button zur Seite /early-access/.
+	 * 'thanks': Seite nach dem Absenden (dort steht „Bitte bestätige deine Anmeldung per E-Mail“).
+	 */
+	'newsletter_form' => array(
+		'action'      => 'https://74ab9d24.sibforms.com/serve/MUIFAFVWCAsdLzTdPRPeQiTcD6gkTxpVFS1Efk1EmYD96MpjWFjKLWWFcV7i5UdjDshRnQ2PxOUSjdSJ5lpQYnej6D571OgFShuWdQVFr_KekoPOdtlsR9u1KWAaFqA0Z7AlzZxz-Q13vjyQ2ZVQCF826Ktl2IKhd6Aa9dDHp8J41G36-_m97uZm6DD76iUVPpWodzFxbnMYszQXRg==',
+		'thanks'      => '/newsletter-vielen-dank/',
+		'placeholder' => 'deine@email.de',
+		'button'      => 'Rabatt sichern',
+		'note'        => 'Kein Spam. Abmeldung jederzeit. Mit der Anmeldung akzeptierst du unsere <a href="/datenschutzerklaerung/">Datenschutzerklärung</a>.',
+	),
+
 	/* Bestellschluss für „Versand heute“ (24h-Format, Mo–Fr). */
 	'shipping_cutoff_hour' => 14,
 
@@ -166,7 +180,7 @@ return array(
 				'image_has_text' => true,
 				'tone'           => 'dark',
 				'features' => array( 'Akkubetrieb 4–6 Stunden', 'USB-Aufladung', 'Kompakt & transportabel', 'Konstante Kühltemperatur' ),
-				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/early-access/' ),
+				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/#newsletter' ), // springt zur Newsletter-Anmeldung unten auf der Startseite
 				'note'     => 'Wir informieren dich per E-Mail, sobald er verfügbar ist.',
 			),
 			'limit'   => 4,
@@ -238,7 +252,7 @@ return array(
 		'newsletter' => array(
 			'title' => '15 % auf deine erste Bestellung.',
 			'text'  => 'Trag dich für den Newsletter ein: neue Chargen, Laborergebnisse und exklusive Angebote. Abmeldung jederzeit.',
-			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/early-access/' ),
+			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/early-access/' ), // nur ohne Brevo-Formular (newsletter_form.action) als Button
 		),
 	),
 

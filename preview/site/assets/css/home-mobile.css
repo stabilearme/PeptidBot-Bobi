@@ -116,6 +116,10 @@
 	/* Newsletter: Text + Button in einer Zeile */
 	.alp-cta { display: flex !important; align-items: center; justify-content: space-between; gap: 0.75rem; }
 	.alp-cta p { font-size: 0.6875rem; }
+	.alp-cta--form { flex-direction: column !important; align-items: stretch !important; }
+	.alp-cta--form .alp-nl-form { max-width: none; flex-basis: auto; }
+	.alp-cta--form .alp-nl-form__row { flex-direction: row; }
+	.alp .alp-cta--form .alp-nl-form__btn { width: auto; }
 
 	/* Footer: 3 Spalten */
 	.alp-footer__top { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1rem 0.75rem !important; }

@@ -36,6 +36,7 @@ $logo_id = (int) get_theme_mod( 'site_logo_dark' ) ?: (int) get_theme_mod( 'site
 					<h2 class="alp-footer__title"><?php echo esc_html( $title ); ?></h2>
 					<ul>
 						<?php foreach ( $links as $label => $target ) : ?>
+							<?php if ( ! alp_link_is_live( $target ) ) { continue; } ?>
 							<li><a href="<?php echo esc_url( alp_link( $target ) ); ?>"><?php echo esc_html( $label ); ?></a></li>
 						<?php endforeach; ?>
 					</ul>
