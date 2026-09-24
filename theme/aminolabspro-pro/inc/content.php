@@ -45,3 +45,17 @@ function alp_clean_page_content( $html ) {
 	$slug = get_post_field( 'post_name', get_the_ID() );
 	return '<div class="alp-desc alp-rich alp-rich--' . sanitize_html_class( $slug ) . '">' . $html . '</div>';
 }
+
+/*
+ * Seiten-Auszug nicht über dem Inhalt anzeigen (Flatsome gibt ihn sonst als lose Zeile aus,
+ * z. B. auf „Wissen“). Nur im sichtbaren Bereich der aufgerufenen Seite – im <head> (SEO,
+ * Rank Math) und für andere Beiträge bleibt der Auszug unverändert.
+ */
+add_filter( 'get_the_excerpt', 'alp_hide_page_excerpt_in_body', 99, 2 );
+function alp_hide_page_excerpt_in_body( $excerpt, $post = null ) {
+	if ( is_admin() || ! is_page() || ! did_action( 'wp_body_open' ) || doing_action( 'wp_head' ) ) {
+		return $excerpt;
+	}
+	$post = get_post( $post );
+	return ( $post && (int) $post->ID === (int) get_queried_object_id() ) ? '' : $excerpt;
+}
