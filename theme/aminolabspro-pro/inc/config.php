@@ -414,5 +414,20 @@ return array(
 		'product_zoom'              => false,
 		'breadcrumb_size'           => 'small',
 		'back_to_top_mobile'        => false,
+		/* Ab hier: Werte, die auf aminolabspro.com anders gespeichert sind und das Design sonst verschieben. */
+		'grid_style'                => 'grid1',      // Produktkacheln linksbündig (grid2 = zentriert)
+		'sale_bubble_percentage'    => true,         // Plakette „-31 %“ statt „Angebot!“
+		'header_width'              => 'container',
+		'nav_height'                => '16',         // .com: 107 → Menü/WhatsApp-Button zu hoch
+		'nav_push'                  => '0',
+		'topbar_show'               => false,        // Flatsome-Topbar aus – die Theme-Laufleiste ersetzt sie
+		'header_mobile_elements_top' => array(),
+		'header_account_title'      => false,        // nur Symbol statt „Mein Konto“
+		'header_cart_title'         => false,        // nur Betrag + Symbol statt „Warenkorb /“
+		'product_display'           => 'tabs',       // .com: Akkordeon → Reiter „Beschreibung / Laborbericht“
+		'product_info_align'        => 'left',
+		'product_tabs_align'        => 'left',
 	),
+	/* true = die Werte oben gelten immer (auch wenn im Customizer etwas anderes gespeichert ist). */
+	'force_flatsome_mods' => true,
 );

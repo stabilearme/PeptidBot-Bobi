@@ -171,3 +171,11 @@
 	.alp .alp-announce { font-size: 0.75rem; }
 	.alp .alp-announce__track { height: 34px; }
 }
+
+/* ---------- Absicherung gegen abweichende Flatsome-Einstellungen ---------- */
+/* Konto nur als Symbol, Warenkorb nur Betrag + Symbol (wie im Design) */
+.alp .header-account-title { display: none !important; }
+.alp .header-cart-title { font-size: 0 !important; }
+.alp .header-cart-title :is(.cart-price, .amount, bdi) { font-size: 0.9375rem; }
+/* WhatsApp-Button behält seine Form, auch bei großer Flatsome-Menühöhe */
+.alp .header-main .nav > li.alp-menu-wa > a.alp-wa-pill { line-height: 1 !important; height: auto !important; min-height: 0 !important; }

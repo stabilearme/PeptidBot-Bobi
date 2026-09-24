@@ -244,3 +244,25 @@ function alp_terms_checkbox_text( $text ) {
 	$custom = (string) alp_config( 'checkout.terms_text', '' );
 	return '' !== $custom ? wp_kses_post( $custom ) : $text;
 }
+
+/*
+ * Germanized hängt Steuer-/Versandhinweise in der Produktliste hinter die Kachel
+ * (woocommerce_after_shop_loop_item). Hier rücken sie direkt unter den Preis in die Kachel –
+ * gesetzlich „in unmittelbarer Nähe“ des Preises und optisch Teil der Karte.
+ */
+add_action( 'wp', 'alp_move_gzd_loop_info', 99 );
+function alp_move_gzd_loop_info() {
+	global $wp_filter;
+	if ( empty( $wp_filter['woocommerce_after_shop_loop_item'] ) ) {
+		return;
+	}
+	foreach ( $wp_filter['woocommerce_after_shop_loop_item']->callbacks as $priority => $callbacks ) {
+		foreach ( $callbacks as $callback ) {
+			$fn = $callback['function'];
+			if ( is_string( $fn ) && 0 === strpos( $fn, 'woocommerce_gzd_template_loop_' ) ) {
+				remove_action( 'woocommerce_after_shop_loop_item', $fn, $priority );
+				add_action( 'woocommerce_after_shop_loop_item_title', $fn, 20 + (int) $priority );
+			}
+		}
+	}
+}

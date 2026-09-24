@@ -227,6 +227,27 @@ function alp_preview_mods_off() {
 }
 
 /**
+ * Design-Vorgaben aus config.php → 'flatsome_mods' verbindlich machen ('force_flatsome_mods'):
+ * Auf aminolabspro.com sind viele Flatsome-Werte anders gespeichert (Menühöhe, Kachelstil,
+ * Header-Breite …) – ohne das würde der Header verrutschen und die Kacheln zentriert erscheinen.
+ */
+alp_force_flatsome_mods();
+function alp_force_flatsome_mods() {
+	if ( ! alp_config( 'force_flatsome_mods', false ) ) {
+		return;
+	}
+	foreach ( (array) alp_config( 'flatsome_mods', array() ) as $key => $value ) {
+		add_filter(
+			'theme_mod_' . $key,
+			function () use ( $value ) {
+				return $value;
+			},
+			99
+		);
+	}
+}
+
+/**
  * Logo-Fallback: Ist in Flatsome kein Logo gewählt, das Logo aus config.php (brand.logo) nehmen.
  * Flatsome akzeptiert statt einer Bild-ID auch eine URL (nötig für SVG-Logos).
  */

@@ -198,3 +198,13 @@
 	.alp .alp-card-lab { font-size: 0.6875rem; }
 	.alp .product-small .add_to_cart_button { font-size: 0.8125rem; padding: 0 0.5rem; white-space: nowrap; min-height: 38px; }
 }
+
+/* ---------- Absicherung gegen abweichende Flatsome-Einstellungen (z. B. aminolabspro.com) ---------- */
+/* Plakette immer lesbar */
+.alp .badge-container .badge-inner, .alp .badge-container .onsale, .alp .badge-container .badge-inner * { color: #fff !important; }
+/* Kacheltext immer linksbündig, auch bei Flatsome-Stil „grid2“ (text-center) */
+.alp .product-small .box-text.text-center, .alp .product-small .box-text.text-center * { text-align: left !important; }
+.alp .product-small .box-text.text-center > * { align-self: stretch; margin-left: 0; margin-right: 0; }
+/* Germanized-Hinweise in der Kachel */
+.alp .product-small .box-text :is(.wc-gzd-additional-info, .price-unit, .tax-info, .shipping-costs-info, .delivery-time-info) { display: block; margin: 0.15rem 0 0; font-size: 0.6875rem; line-height: 1.35; color: var(--alp-muted); }
+.alp .product-small .box-text :is(.shipping-costs-info, .wc-gzd-additional-info) a { color: inherit; text-decoration: underline; }
