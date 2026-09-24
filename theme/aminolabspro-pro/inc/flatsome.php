@@ -7,6 +7,17 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/*
+ * Flatsome-Lazy-Load abschalten (config.php → features.flatsome_lazy_load): Dabei stünde im
+ * Bild zuerst nur ein Platzhalter, das echte Bild käme erst per Skript – fällt das Skript aus
+ * (Vorschau, Minify, Skriptfehler), bleiben Produktbilder leer. WordPress setzt ohnehin
+ * loading="lazy", der Browser lädt Bilder also weiterhin erst beim Scrollen.
+ */
+add_filter( 'theme_mod_lazy_load_images', 'alp_flatsome_lazy_load' );
+function alp_flatsome_lazy_load( $value ) {
+	return alp_config( 'features.flatsome_lazy_load', false ) ? $value : 0;
+}
+
 /* Laufleiste über dem Header */
 add_action( 'flatsome_before_header', 'alp_render_announcement', 5 );
 function alp_render_announcement() {

@@ -46,6 +46,7 @@ return array(
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
 		'whatsapp_float'     => true,  // Runder WhatsApp-Button unten rechts (nur mit hinterlegter Nummer)
 		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
+		'flatsome_lazy_load' => false, // Flatsome-Lazy-Load per Skript. Aus = Bilder sofort im HTML, der Browser lädt sie selbst verzögert (robuster, besser für Google).
 	),
 
 	/* Versandkostenfrei ab (in €). 0 = Fortschrittsbalken im Warenkorb ausblenden. */
