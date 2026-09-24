@@ -119,6 +119,7 @@ return array(
 	'retired_pages' => array(
 		'gluecksrad'     => '/',
 		'kundenwuensche' => '/',
+		'early-access'   => '/#newsletter', // Early Access ist vorbei – Anmeldung + 15-%-Code jetzt auf der Startseite
 	),
 
 	/* Kasse – Texte wie bisher auf aminolabspro.com (altes Child Theme). */
@@ -288,8 +289,8 @@ return array(
 		),
 		'newsletter' => array(
 			'title' => '15 % auf deine erste Bestellung.',
-			'text'  => 'Trag dich für den Newsletter ein: neue Chargen, Laborergebnisse und exklusive Angebote. Abmeldung jederzeit.',
-			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/early-access/' ), // nur ohne Brevo-Formular (newsletter_form.action) als Button
+			'text'  => 'Dein Willkommensrabatt: Melde dich an und erhalte nach der Bestätigung per E-Mail deinen persönlichen 15-%-Code für die erste Bestellung. Dazu neue Chargen, Laborergebnisse und Angebote – Abmeldung jederzeit.',
+			'cta'   => array( 'label' => 'Rabatt sichern', 'url' => '/#newsletter' ), // nur ohne Brevo-Formular (newsletter_form.action) als Button
 		),
 	),
 
@@ -344,7 +345,7 @@ return array(
 				'Kontakt'              => '/contakt/',
 				'Versand & Zahlung'    => '/versandarten/',
 				'Partnerprogramm'      => '/affiliate-dashboard/',
-				'Newsletter'           => '/early-access/',
+				'15 % Willkommensrabatt' => '/#newsletter',
 			),
 		),
 		'legal' => array(
