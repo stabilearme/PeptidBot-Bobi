@@ -66,7 +66,59 @@ function alp_debug_box() {
 	foreach ( $rows as $k => $v ) {
 		echo '<tr><td style="padding:2px 12px 2px 0;vertical-align:top;white-space:nowrap"><b>' . esc_html( $k ) . '</b></td><td style="padding:2px 0;word-break:break-all">' . esc_html( (string) $v ) . '</td></tr>';
 	}
-	echo '</table><div style="margin-top:8px"><b>HTML des ersten Produktbilds:</b><pre style="white-space:pre-wrap;word-break:break-all;background:#fff;padding:8px;border:1px solid #ddd">' . esc_html( $html ) . '</pre></div></div>';
+	echo '</table><div style="margin-top:8px"><b>HTML des ersten Produktbilds:</b><pre style="white-space:pre-wrap;word-break:break-all;background:#fff;padding:8px;border:1px solid #ddd">' . esc_html( $html ) . '</pre></div>';
+	echo '<div style="margin-top:8px"><b>Browser-Messung am ersten Produktbild der Seite:</b><pre id="alp-debug-js" style="white-space:pre-wrap;word-break:break-all;background:#fff;padding:8px;border:1px solid #ddd">wird gemessen …</pre></div></div>';
+	alp_debug_js();
+}
+
+/** Misst im Browser: geladen? Größe? Sichtbarkeit? Welche CSS-Regeln? Was liegt darüber? */
+function alp_debug_js() {
+	?>
+	<script>
+	(function () {
+		function desc(el) { return el ? el.tagName.toLowerCase() + (el.className && el.className.baseVal === undefined ? '.' + String(el.className).trim().replace(/\s+/g, '.') : '') : '–'; }
+		function rulesFor(el) {
+			var hits = [];
+			Array.prototype.forEach.call(document.styleSheets, function (sheet) {
+				var rules; try { rules = sheet.cssRules; } catch (e) { return; }
+				(function walk(list) {
+					Array.prototype.forEach.call(list || [], function (r) {
+						if (r.cssRules && !r.selectorText) { if (!r.media || window.matchMedia(r.media.mediaText).matches) walk(r.cssRules); return; }
+						if (!r.selectorText || !r.style) return;
+						var props = ['opacity', 'visibility', 'display', 'height', 'max-height', 'position', 'clip-path', 'z-index'].filter(function (p) { return r.style.getPropertyValue(p); });
+						if (!props.length) return;
+						var ok = false; try { ok = el.matches(r.selectorText); } catch (e) {}
+						if (ok) hits.push((sheet.href || 'inline').split('/').slice(-2).join('/') + ' → ' + r.selectorText.slice(0, 160) + ' { ' + props.map(function (p) { return p + ':' + r.style.getPropertyValue(p) + (r.style.getPropertyPriority(p) ? '!' : ''); }).join('; ') + ' }');
+					});
+				})(rules);
+			});
+			return hits;
+		}
+		function run() {
+			var out = document.getElementById('alp-debug-js');
+			var img = document.querySelector('.product-small .box-image img:not(.back-image)') || document.querySelector('.product-small img');
+			if (!img) { out.textContent = 'Kein Produktbild im DOM gefunden (Seite ohne Produktliste? Bitte den Shop öffnen).'; return; }
+			img.scrollIntoView({ block: 'center' });
+			var r = img.getBoundingClientRect(), cs = getComputedStyle(img), L = [];
+			L.push('geladen=' + img.complete + '  naturalWidth=' + img.naturalWidth + '  currentSrc=' + img.currentSrc);
+			L.push('Größe=' + Math.round(r.width) + 'x' + Math.round(r.height) + '  opacity=' + cs.opacity + '  visibility=' + cs.visibility + '  display=' + cs.display + '  position=' + cs.position + '  z-index=' + cs.zIndex + '  transform=' + cs.transform + '  filter=' + cs.filter + '  clip-path=' + cs.clipPath);
+			L.push('Element: ' + desc(img) + '  loading=' + img.getAttribute('loading'));
+			var top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+			L.push('Oberstes Element in der Bildmitte: ' + desc(top) + (top === img ? '  (= das Bild selbst)' : ''));
+			L.push('--- Eltern ---');
+			for (var el = img.parentElement, i = 0; el && i < 7; el = el.parentElement, i++) {
+				var c = getComputedStyle(el), b = el.getBoundingClientRect();
+				L.push(desc(el) + '  h=' + Math.round(b.height) + ' opacity=' + c.opacity + ' vis=' + c.visibility + ' display=' + c.display + ' overflow=' + c.overflow + ' bg=' + c.backgroundColor);
+			}
+			L.push('--- CSS-Regeln, die das Bild treffen (Sichtbarkeit/Größe) ---');
+			L = L.concat(rulesFor(img));
+			out.textContent = L.join('\n');
+			window.scrollTo(0, 0);
+		}
+		if (document.readyState === 'complete') { setTimeout(run, 600); } else { window.addEventListener('load', function () { setTimeout(run, 600); }); }
+	})();
+	</script>
+	<?php
 }
 
 function alp_debug_callbacks( $hook ) {
