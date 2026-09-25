@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALP_VERSION', '3.0.2' );
+define( 'ALP_VERSION', '3.0.3' );
 define( 'ALP_DIR', get_stylesheet_directory() );
 define( 'ALP_URI', get_stylesheet_directory_uri() );
 
@@ -23,6 +23,7 @@ $alp_modules = array(
 	'contact',      // WhatsApp-Buttons (Nummer im Customizer) und Sprachumschalter
 	'newsletter',   // Newsletter-Anmeldung über Brevo (Startseite + Shortcode [alp_newsletter])
 	'welcome-coupon', // 15-%-Willkommenscode nur für die erste Bestellung
+	'notify',         // „Benachrichtigen lassen“ für kommende Produkte (E-Mails in WordPress, Export als CSV)
 	'order-numbers',  // Fortlaufende Bestellnummern (#1088 …), auch für Apple/Google Pay
 	'debug',          // Diagnose für Admins: Seite mit ?alp_debug=1 aufrufen
 	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math

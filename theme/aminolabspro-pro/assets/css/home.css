@@ -850,3 +850,25 @@
 
 /* SEO-H1 im Stil der kleinen Zeile (Eyebrow) */
 .alp h1.alp-hero__seo { font-family: var(--alp-font-body); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.27em; line-height: 1.5; text-transform: uppercase; text-wrap: wrap; margin: 0 0 var(--alp-space-3); }
+
+/* „Benachrichtigen lassen“ – E-Mail-Feld in der Neuheiten-Karte (inc/notify.php) */
+.alp-notify { width: 100%; max-width: 30rem; margin: 0; }
+.alp-notify__row { display: flex; gap: 0.5rem; }
+.alp .alp-notify input.alp-notify__input { flex: 1; min-width: 0; height: 3rem; margin: 0; padding: 0 0.9rem; border-radius: var(--alp-r-md); border: 1px solid rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.08); color: #fff; font-size: 1rem; box-shadow: none; }
+.alp .alp-notify input.alp-notify__input::placeholder { color: rgba(255, 255, 255, 0.55); }
+.alp .alp-notify input.alp-notify__input:focus { outline: 2px solid var(--alp-mint); outline-offset: 1px; border-color: transparent; }
+.alp .alp-notify .alp-notify__btn { height: 3rem; margin: 0; white-space: nowrap; flex: 0 0 auto; }
+.alp-notify__note { margin: 0.6rem 0 0 !important; font-size: 0.75rem; line-height: 1.45; color: var(--alp-dark-muted); }
+.alp-notify__note a { color: inherit; text-decoration: underline; }
+.alp-notify__error { margin: 0 0 0.5rem !important; font-size: 0.8125rem; color: #FFB4B4; }
+.alp-notify__done { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 !important; padding: 0.7rem 1rem; border-radius: var(--alp-r-md); background: rgba(110, 218, 180, 0.14); color: #fff; font-weight: 600; }
+.alp-notify__done .alp-icon { color: var(--alp-mint); flex: none; }
+/* helle Karte */
+.alp .alp-soon--light .alp-notify input.alp-notify__input { border-color: var(--alp-line-2); background: var(--alp-field); color: var(--alp-ink); }
+.alp .alp-soon--light .alp-notify input.alp-notify__input::placeholder { color: var(--alp-muted); }
+.alp-soon--light .alp-notify__note { color: var(--alp-muted); }
+.alp-soon--light .alp-notify__done { color: var(--alp-ink); background: var(--alp-brand-soft); }
+@media (max-width: 549px) {
+	.alp-notify__row { flex-direction: column; }
+	.alp .alp-notify .alp-notify__btn { width: 100%; justify-content: center; }
+}

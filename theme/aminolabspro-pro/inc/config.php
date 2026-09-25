@@ -238,7 +238,16 @@ return array(
 				'image_has_text' => true,
 				'tone'           => 'dark',
 				'features' => array( 'Akkubetrieb 4–6 Stunden', 'USB-Aufladung', 'Kompakt & transportabel', 'Konstante Kühltemperatur' ),
-				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/#newsletter' ), // springt zur Newsletter-Anmeldung unten auf der Startseite
+				// E-Mail-Feld direkt in der Karte. Adressen landen in WordPress unter WooCommerce → Benachrichtigungen
+				// (CSV-Export für Brevo). Ohne 'notify' erscheint stattdessen der Button aus 'cta'.
+				'notify'   => array(
+					'list'        => 'kuehlschrank',
+					'button'      => 'Benachrichtigen lassen',
+					'placeholder' => 'deine@email.de',
+					'consent'     => 'Wir schreiben dir einmalig, sobald der Kühlschrank verfügbar ist. Kein Newsletter. <a href="/datenschutzerklaerung/">Datenschutz</a>',
+					'success'     => 'Danke! Wir schreiben dir, sobald der Kühlschrank verfügbar ist.',
+				),
+				'cta'      => array( 'label' => 'Benachrichtigen lassen', 'url' => '/#newsletter' ),
 				'note'     => 'Wir informieren dich per E-Mail, sobald er verfügbar ist.',
 			),
 			'limit'   => 4,

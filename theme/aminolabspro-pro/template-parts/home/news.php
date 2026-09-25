@@ -59,10 +59,12 @@ if ( ! $teaser && ! $tabs ) {
 								<?php endforeach; ?>
 							</ul>
 						<?php endif; ?>
-						<?php if ( ! empty( $teaser['cta'] ) ) : ?>
+						<?php if ( ! empty( $teaser['notify'] ) && function_exists( 'alp_notify_form' ) ) : ?>
+							<?php echo alp_notify_form( (array) $teaser['notify'] ); // phpcs:ignore ?>
+						<?php elseif ( ! empty( $teaser['cta'] ) ) : ?>
 							<a class="alp-btn alp-btn--primary" href="<?php echo esc_url( alp_link( $teaser['cta']['url'] ) ); ?>"><?php echo alp_icon( 'mail', 18 ); // phpcs:ignore ?> <?php echo esc_html( $teaser['cta']['label'] ); ?></a>
 						<?php endif; ?>
-						<?php if ( ! empty( $teaser['note'] ) ) : ?>
+						<?php if ( ! empty( $teaser['note'] ) && empty( $teaser['notify'] ) ) : ?>
 							<p class="alp-soon__note"><?php echo esc_html( $teaser['note'] ); ?></p>
 						<?php endif; ?>
 					</div>
