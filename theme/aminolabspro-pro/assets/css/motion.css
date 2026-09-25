@@ -22,7 +22,8 @@
 .alp-motion .alp-hero__copy > :nth-child(3) { animation-delay: 180ms; }
 .alp-motion .alp-hero__copy > :nth-child(4) { animation-delay: 270ms; }
 .alp-motion .alp-hero__copy > :nth-child(5) { animation-delay: 360ms; }
-.alp-motion :is(.alp-hero__media, .alp-hero__photo) img { animation: alp-fade-in 1200ms var(--alp-ease) both; }
+/* Hero-Bild nicht ausblenden: es ist das größte Element beim Laden (LCP) und soll sofort sichtbar sein. */
+.alp-motion :is(.alp-hero__media, .alp-hero__photo) img { animation: none; }
 .alp-motion .alp-hero__proof { animation: alp-fade-in 900ms var(--alp-ease) 450ms both; }
 .alp-motion .alp-hero .alp-cert { animation: alp-fade-in 900ms var(--alp-ease) 250ms both; }
 
@@ -49,6 +50,11 @@
 	.alp-motion .alp-hero__copy > :nth-child(4) { animation-delay: 270ms; }
 	.alp-motion .alp-hero__copy > :nth-child(5) { animation-delay: 360ms; }
 	.alp-motion :is(.alp-hero__media, .alp-hero__photo) img { animation: alp-hero-zoom 1800ms var(--alp-ease) both; }
+
+	/* Am Handy: Hero ohne Auftritt, damit Bild und Überschrift sofort stehen (schneller, kein Springen) */
+	@media (max-width: 767px) {
+		.alp-motion .alp-hero__copy > *, .alp-motion .alp-hero__proof, .alp-motion :is(.alp-hero__media, .alp-hero__photo) img { animation: none; }
+	}
 	.alp-motion .alp-hero__proof { animation: alp-hero-in 900ms var(--alp-ease) 450ms both; }
 	.alp-motion .alp-hero .alp-cert { animation: alp-hero-in 900ms var(--alp-ease) 250ms both; }
 
@@ -78,7 +84,7 @@
 
 @keyframes alp-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes alp-hero-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-@keyframes alp-hero-zoom { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+@keyframes alp-hero-zoom { from { transform: scale(1.06); } to { transform: none; } }
 @keyframes alp-pulse {
 	0% { box-shadow: 0 0 0 0 rgba(110, 218, 180, 0.45); }
 	70% { box-shadow: 0 0 0 9px rgba(110, 218, 180, 0); }

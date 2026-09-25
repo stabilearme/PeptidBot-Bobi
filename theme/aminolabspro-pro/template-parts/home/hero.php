@@ -55,7 +55,12 @@ if ( ! $batch || ! $batch['done'] ) {
 		<?php if ( $image ) : ?>
 			<div class="alp-hero__visual">
 				<div class="alp-hero__photo">
-					<img src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $hero['image_alt'] ?? '' ); ?>" width="1671" height="941" fetchpriority="high" decoding="async">
+					<?php
+					// Kleinere Bildgrößen fürs Handy, falls das Bild in der Mediathek liegt.
+					$alp_hero_id     = function_exists( 'attachment_url_to_postid' ) ? attachment_url_to_postid( $image ) : 0;
+					$alp_hero_srcset = $alp_hero_id ? wp_get_attachment_image_srcset( $alp_hero_id, 'full' ) : '';
+					?>
+					<img src="<?php echo esc_url( $image ); ?>"<?php if ( $alp_hero_srcset ) : ?> srcset="<?php echo esc_attr( $alp_hero_srcset ); ?>" sizes="(max-width: 767px) 100vw, 50vw"<?php endif; ?> alt="<?php echo esc_attr( $hero['image_alt'] ?? '' ); ?>" width="1671" height="941" fetchpriority="high" decoding="async">
 				</div>
 				<?php if ( $batch ) : ?>
 					<a class="alp-hero__proof" href="<?php echo esc_url( alp_link( '/coa/' ) . '#charge-' . strtolower( $batch['batch'] ) ); ?>" aria-label="Zertifikat der Charge <?php echo esc_attr( $batch['batch'] ); ?> ansehen">

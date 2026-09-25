@@ -11,8 +11,9 @@
 
 	/* Hero: großes Bild oben über die volle Breite, Text darunter */
 	.alp-hero--split { padding-top: 0 !important; }
-	.alp-hero--split .alp-hero__grid { display: flex !important; flex-direction: column; gap: 1.1rem; }
-	.alp-hero--split .alp-hero__visual { order: -1; margin: 0 calc(-1 * var(--alp-gutter)) !important; }
+	.alp-hero--split .alp-hero__grid { display: flex !important; flex-direction: column; gap: 1.1rem; align-items: stretch !important; }
+	/* volle Breite von Anfang an (sonst ist das Bild bis zum Laden 0 px breit und der Text springt nach unten) */
+	.alp-hero--split .alp-hero__visual { order: -1; align-self: stretch; width: auto; margin: 0 calc(-1 * var(--alp-gutter)) !important; }
 	.alp-hero--split .alp-hero__photo { height: auto !important; aspect-ratio: 4 / 3.4 !important; margin: 0 !important; border-radius: 0 !important; }
 	.alp-hero--split .alp-hero__photo img { width: 100%; height: 100% !important; object-fit: cover; object-position: 60% 50%; border-radius: 0 !important; }
 	.alp .alp-hero--split .alp-hero__proof { transform: none; left: var(--alp-gutter) !important; right: auto !important; bottom: 0.75rem !important; top: auto !important; padding: 0.55rem 0.8rem !important; }
