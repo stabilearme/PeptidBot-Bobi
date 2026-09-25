@@ -384,3 +384,40 @@
 	.alp-nl-form__row { flex-direction: column; }
 	.alp .alp-nl-form__btn { width: 100%; justify-content: center; }
 }
+
+/* 15-%-Einblendung (features.welcome_popup) */
+.alp .alp-offer {
+	position: fixed; right: 18px; bottom: 22px; z-index: 1000;
+	width: 340px; max-width: calc(100vw - 32px);
+	display: grid; gap: 0.5rem; padding: 1.1rem 1.1rem 1rem;
+	background: var(--alp-surface); color: var(--alp-ink);
+	border: 1px solid var(--alp-line); border-radius: var(--alp-r-lg);
+	box-shadow: 0 12px 44px rgba(26, 31, 46, 0.18);
+	opacity: 0; transform: translateY(20px);
+	transition: opacity 300ms var(--alp-ease), transform 300ms var(--alp-ease);
+}
+.alp .alp-offer[hidden] { display: none; }
+.alp .alp-offer.is-open { opacity: 1; transform: none; }
+.alp-offer__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.alp .alp-offer__amount { margin: 0; font-family: var(--alp-font-display); font-size: 2rem; font-weight: 700; line-height: 1; color: var(--alp-brand); }
+.alp .alp-offer__close { flex: none; display: grid; place-items: center; width: 32px; height: 32px; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 50%; background: var(--alp-paper-2); color: var(--alp-ink); cursor: pointer; }
+.alp .alp-offer__close:hover { background: var(--alp-line); }
+.alp .alp-offer__title { margin: 0; font-family: var(--alp-font-display); font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+.alp .alp-offer__text { margin: 0; font-size: 0.875rem; line-height: 1.45; color: var(--alp-ink-2); }
+.alp .alp-offer .alp-nl-form.is-offer { margin: 0.25rem 0 0; max-width: none; }
+.alp .alp-offer .alp-nl-form__row { flex-direction: column; }
+.alp .alp-offer .alp-nl-form input.alp-nl-form__input { height: 2.9rem; }
+.alp .alp-offer .alp-nl-form__btn { width: 100%; height: 2.9rem; justify-content: center; background: var(--alp-action) !important; color: var(--alp-on-action) !important; border-color: var(--alp-action) !important; }
+.alp .alp-offer .alp-nl-form__btn:hover { background: var(--alp-action-hover) !important; }
+.alp .alp-offer .alp-nl-form__note { margin-top: 0.5rem; font-size: 0.6875rem; line-height: 1.4; }
+.alp .alp-offer__fine { margin: 0; font-size: 0.6875rem; color: var(--alp-muted); }
+/* Solange die Einblendung offen ist, macht der WhatsApp-Button Platz */
+.alp.alp-offer-on .alp-wa-float { opacity: 0; pointer-events: none; }
+@media (max-width: 849px) {
+	.alp .alp-offer { left: 10px; right: 10px; width: auto; max-width: none; bottom: calc(var(--alp-bottom-nav-h, 64px) + 10px + env(safe-area-inset-bottom, 0px)); padding: 0.9rem; gap: 0.4rem; }
+	.alp .alp-offer__amount { font-size: 1.6rem; }
+	.alp .alp-offer__text { font-size: 0.8125rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.alp .alp-offer { transition: none; }
+}

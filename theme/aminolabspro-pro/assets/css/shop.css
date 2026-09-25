@@ -217,3 +217,26 @@
 /* Flatsome „gleich hohe Kacheln“ (has-equal-box-heights): Bild füllt den Rahmen statt 0 px Breite */
 .alp .has-equal-box-heights .box-image { position: relative; }
 .alp .has-equal-box-heights .box-image img { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* HPLC-Etikett unten links auf dem Produktbild (features.card_hplc_tag) */
+.alp .product-small .box-image { position: relative; }
+.alp .alp-hplc-tag {
+	position: absolute; left: 10px; bottom: 10px; z-index: 3;
+	display: inline-flex; align-items: stretch; overflow: hidden;
+	border-radius: var(--alp-r-md);
+	box-shadow: 0 2px 10px rgba(26, 31, 46, 0.14);
+	font-family: var(--alp-font-mono); line-height: 1;
+	pointer-events: none;
+	transition: transform var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-hplc-tag__k { display: flex; align-items: center; padding: 6px 7px; background: var(--alp-ink); color: var(--alp-mint); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.06em; }
+.alp .alp-hplc-tag__v { display: flex; align-items: center; padding: 5px 8px; background: #fff; color: var(--alp-ink); font-size: 0.8125rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.alp .product-small .col-inner:hover .alp-hplc-tag { transform: translateY(-2px); }
+.alp .product-small .alp-card-lab--meta,
+body.alp-ed .product-small .alp-card-lab--meta { display: block; margin: 0 0 0.5rem; padding: 0 !important; border: 0 !important; background: transparent !important; font-family: var(--alp-font-mono) !important; font-size: 0.6875rem !important; font-weight: 500; color: var(--alp-muted) !important; line-height: 1.4; }
+.alp .alp-card-lab--meta a { color: var(--alp-brand); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 549px) {
+	.alp .alp-hplc-tag { left: 6px; bottom: 6px; }
+	.alp .alp-hplc-tag__k { padding: 4px 5px; font-size: 0.5625rem; }
+	.alp .alp-hplc-tag__v { padding: 4px 6px; font-size: 0.6875rem; }
+}

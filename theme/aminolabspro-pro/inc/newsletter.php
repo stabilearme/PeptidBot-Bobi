@@ -67,3 +67,46 @@ function alp_newsletter_shortcode( $atts ) {
 	$atts = shortcode_atts( array( 'button' => '', 'placeholder' => '' ), $atts, 'alp_newsletter' );
 	return alp_newsletter_form( array_filter( $atts ) + array( 'class' => 'is-standalone' ) );
 }
+
+/*
+ * ---------- 15-%-Einblendung ----------
+ * Versteckt im Footer ausgegeben, theme.js (initOffer) blendet sie ein:
+ * nach config 'welcome_popup.delay' Sekunden oder am PC beim Verlassen der Seite.
+ * Wer schließt, hat 'snooze_days' Tage Ruhe; wer sich anmeldet, sieht sie nie wieder.
+ */
+add_action( 'wp_footer', 'alp_render_welcome_popup', 7 );
+function alp_render_welcome_popup() {
+	if ( ! alp_config( 'features.welcome_popup' ) || ! alp_newsletter_action() || is_customize_preview() ) {
+		return;
+	}
+	if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) ) {
+		return;
+	}
+	$cfg    = (array) alp_config( 'welcome_popup', array() );
+	$thanks = (string) alp_config( 'newsletter_form.thanks', '/newsletter-vielen-dank/' );
+	if ( is_page( trim( $thanks, '/' ) ) ) {
+		return;
+	}
+	?>
+	<div class="alp-offer" id="alp-offer" role="dialog" aria-labelledby="alp-offer-title" data-delay="<?php echo (int) ( $cfg['delay'] ?? 30 ); ?>" data-snooze="<?php echo (int) ( $cfg['snooze_days'] ?? 30 ); ?>" hidden>
+		<div class="alp-offer__top">
+			<p class="alp-offer__amount"><?php echo esc_html( $cfg['amount'] ?? '15 %' ); ?></p>
+			<button type="button" class="alp-offer__close" data-alp-offer-close aria-label="Schließen"><?php echo alp_icon( 'close', 18 ); // phpcs:ignore ?></button>
+		</div>
+		<p class="alp-offer__title" id="alp-offer-title"><?php echo esc_html( $cfg['title'] ?? '' ); ?></p>
+		<p class="alp-offer__text"><?php echo esc_html( $cfg['text'] ?? '' ); ?></p>
+		<?php
+		echo alp_newsletter_form( // phpcs:ignore WordPress.Security.EscapeOutput
+			array(
+				'button' => $cfg['button'] ?? 'Code sichern',
+				'class'  => 'is-standalone is-offer',
+				'id'     => 'alp-offer-email',
+			)
+		);
+		?>
+		<?php if ( ! empty( $cfg['fine'] ) ) : ?>
+			<p class="alp-offer__fine"><?php echo esc_html( $cfg['fine'] ); ?></p>
+		<?php endif; ?>
+	</div>
+	<?php
+}

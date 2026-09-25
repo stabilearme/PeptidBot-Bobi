@@ -31,7 +31,7 @@ function alp_shop_intro() {
 	}
 }
 
-/* Kleiner Laborhinweis in jeder Produktkachel */
+/* Kleiner Laborhinweis in jeder Produktkachel: Charge, gemessener Gehalt, Link zum Zertifikat */
 add_action( 'woocommerce_after_shop_loop_item_title', 'alp_loop_lab_badge', 4 );
 function alp_loop_lab_badge() {
 	global $product;
@@ -39,7 +39,15 @@ function alp_loop_lab_badge() {
 		return;
 	}
 	$batch = alp_coa_for_sku( $product->get_sku() );
-	if ( $batch && $batch['done'] ) {
+	if ( $batch && $batch['done'] && alp_config( 'features.card_hplc_tag' ) ) {
+		$content = null !== $batch['content'] ? ' · ' . alp_num( $batch['content'] ) . ' mg gemessen' : '';
+		printf(
+			'<p class="alp-card-lab alp-card-lab--meta"><span>Charge %s%s · <a href="%s">COA</a></span></p>',
+			esc_html( $batch['batch'] ),
+			esc_html( $content ),
+			esc_url( alp_link( '/coa/' ) . '#charge-' . strtolower( $batch['batch'] ) )
+		);
+	} elseif ( $batch && $batch['done'] ) {
 		printf(
 			'<p class="alp-card-lab">%s<span>COA · %s %% HPLC</span></p>',
 			alp_icon( 'check', 14 ), // phpcs:ignore WordPress.Security.EscapeOutput
@@ -48,6 +56,24 @@ function alp_loop_lab_badge() {
 	} elseif ( $batch ) {
 		printf( '<p class="alp-card-lab is-pending">%s<span>Laborprüfung läuft</span></p>', alp_icon( 'clock', 14 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 	}
+}
+
+/* HPLC-Reinheit als Etikett unten links auf dem Produktbild (Flatsome-Kachel) */
+add_action( 'flatsome_woocommerce_shop_loop_images', 'alp_loop_hplc_tag', 30 );
+function alp_loop_hplc_tag() {
+	global $product;
+	if ( ! alp_config( 'features.card_hplc_tag' ) || ! $product instanceof WC_Product ) {
+		return;
+	}
+	$batch = alp_coa_for_sku( $product->get_sku() );
+	if ( ! $batch || ! $batch['done'] || null === $batch['purity'] || '' === $batch['purity'] ) {
+		return;
+	}
+	printf(
+		'<span class="alp-hplc-tag" aria-label="%1$s"><span class="alp-hplc-tag__k" aria-hidden="true">HPLC</span><span class="alp-hplc-tag__v" aria-hidden="true">%2$s&nbsp;%%</span></span>',
+		esc_attr( sprintf( 'HPLC-Reinheit %s Prozent', alp_num( $batch['purity'], 0 ) ) ),
+		esc_html( alp_num( $batch['purity'], 0 ) )
+	);
 }
 
 /* Ähnliche Produkte: 4 Stück in einer Reihe */

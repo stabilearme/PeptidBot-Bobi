@@ -253,9 +253,67 @@
 				if (trap && trap.value) return;
 				var btn = form.querySelector('button[type="submit"]');
 				if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+				offerStore('s');
 				var done = function () { window.location.href = form.getAttribute('data-thanks') || '/'; };
 				fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).then(done, done);
 			});
+		});
+	}
+
+	/* 8b. 15-%-Einblendung ------------------------------------------------
+	 * Erscheint nach data-delay Sekunden oder am PC, wenn die Maus oben aus der Seite geht.
+	 * Gespeichert im Browser: 's' = angemeldet (nie wieder), sonst Zeitpunkt des Schließens. */
+	function offerStore(value) {
+		try {
+			if (value === undefined) return window.localStorage.getItem('alp_offer');
+			window.localStorage.setItem('alp_offer', value);
+		} catch (e) { return null; }
+	}
+
+	function initOffer() {
+		var box = document.getElementById('alp-offer');
+		if (!box) return;
+		var state = offerStore();
+		var snooze = (parseInt(box.getAttribute('data-snooze'), 10) || 30) * 864e5;
+		if (state === 's' || (state && Date.now() - parseInt(state, 10) < snooze)) return;
+		if (location.hash === '#newsletter') return;
+
+		var shown = false, timer = null;
+		var inView = function (el) {
+			if (!el) return false;
+			var r = el.getBoundingClientRect();
+			return r.top < window.innerHeight && r.bottom > 0;
+		};
+		var show = function () {
+			if (shown) return;
+			// Nicht über dem Newsletter-Abschnitt und nicht über der Kaufleiste auf Produktseiten.
+			if (inView(document.getElementById('newsletter')) || document.body.classList.contains('alp-buybar-on')) {
+				timer = setTimeout(show, 10000);
+				return;
+			}
+			shown = true;
+			box.hidden = false;
+			document.body.classList.add('alp-offer-on');
+			requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('is-open'); }); });
+			document.removeEventListener('mouseout', onLeave);
+		};
+		var close = function () {
+			offerStore(String(Date.now()));
+			box.classList.remove('is-open');
+			document.body.classList.remove('alp-offer-on');
+			setTimeout(function () { box.hidden = true; }, 300);
+		};
+		var onLeave = function (e) {
+			if (!e.relatedTarget && e.clientY <= 0) show();
+		};
+
+		timer = setTimeout(show, (parseInt(box.getAttribute('data-delay'), 10) || 30) * 1000);
+		if (window.matchMedia('(hover: hover) and (min-width: 850px)').matches) {
+			setTimeout(function () { if (!shown) document.addEventListener('mouseout', onLeave); }, 5000);
+		}
+		box.querySelector('[data-alp-offer-close]').addEventListener('click', function () { clearTimeout(timer); close(); });
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape' && shown && !box.hidden) close();
 		});
 	}
 
@@ -290,6 +348,7 @@
 		initTabs();
 		initCountdown();
 		initNewsletter();
+		initOffer();
 		initImageFallback();
 	});
 })();

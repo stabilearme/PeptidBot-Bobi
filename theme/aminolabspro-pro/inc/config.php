@@ -46,6 +46,8 @@ return array(
 		'faq_schema'         => true,  // FAQ-Rich-Snippets auf der Startseite
 		'whatsapp_float'     => true,  // Runder WhatsApp-Button unten rechts (nur mit hinterlegter Nummer)
 		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
+		'card_hplc_tag'      => true,  // Reinheit als Etikett auf dem Produktbild + Charge/Gehalt/COA-Link in der Kachel
+		'welcome_popup'      => true,  // Kleine 15-%-Einblendung (unten rechts / am Handy unten), siehe 'welcome_popup'
 		'flatsome_lazy_load' => false, // Flatsome-Lazy-Load per Skript. Aus = Bilder sofort im HTML, der Browser lädt sie selbst verzögert (robuster, besser für Google).
 	),
 
@@ -94,6 +96,21 @@ return array(
 		'placeholder' => 'deine@email.de',
 		'button'      => 'Rabatt sichern',
 		'note'        => 'Kein Spam. Abmeldung jederzeit. Mit der Anmeldung akzeptierst du unsere <a href="/datenschutzerklaerung/">Datenschutzerklärung</a>.',
+	),
+
+	/*
+	 * 15-%-Einblendung (inc/newsletter.php + theme.js): erscheint nach 'delay' Sekunden
+	 * oder am PC, wenn die Maus die Seite verlassen will. Nie in Warenkorb, Kasse und Konto.
+	 * Geschlossen → 'snooze_days' Tage Ruhe. Angemeldet → nie wieder.
+	 */
+	'welcome_popup' => array(
+		'delay'       => 30,
+		'snooze_days' => 30,
+		'amount'      => '15 %',
+		'title'       => 'auf deine erste Bestellung',
+		'text'        => 'Trag deine E-Mail ein. Nach der Bestätigung bekommst du deinen persönlichen Code.',
+		'button'      => 'Code sichern',
+		'fine'        => 'Einmal pro Kunde, nicht auf reduzierte Produkte.',
 	),
 
 	/*
