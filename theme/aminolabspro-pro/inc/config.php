@@ -114,6 +114,27 @@ return array(
 	),
 
 	/*
+	 * Affiliate-Wunschcode (inc/affiliate-coupon.php, YITH WooCommerce Affiliates):
+	 * Feld im Affiliate-Anmeldeformular, Prüfung „schon vergeben“, Gutschein wird erst
+	 * nach Genehmigung angelegt und dem Affiliate zugeordnet (Provision).
+	 * Rabatt usw. gelten für neu angelegte Codes; bestehende unter Marketing → Gutscheine ändern.
+	 */
+	'affiliate_coupon' => array(
+		'enabled'              => true,
+		'label'                => 'Wunsch-Gutscheincode',
+		'placeholder'          => 'z. B. MAX10',
+		'hint'                 => 'Diesen Code können deine Kunden an der Kasse eingeben. Er wird aktiv, sobald wir deine Anmeldung freigegeben haben.',
+		'min_length'           => 4,
+		'max_length'           => 20,
+		'reserved_prefixes'    => array( 'NEU15' ), // für Shop-Codes reserviert
+		'discount_type'        => 'percent', // percent = Prozent, fixed_cart = fester Betrag
+		'amount'               => 10,        // Rabatt für Kunden, die den Code einlösen
+		'individual_use'       => true,      // nicht mit anderen Gutscheinen kombinierbar
+		'exclude_sale_items'   => true,      // nicht auf reduzierte Produkte
+		'usage_limit_per_user' => 0,         // 0 = beliebig oft pro Kunde
+	),
+
+	/*
 	 * 15-%-Willkommenscode (inc/welcome-coupon.php): Gutscheine, deren Code so beginnt,
 	 * gelten nur für die erste Bestellung einer E-Mail-Adresse.
 	 */
