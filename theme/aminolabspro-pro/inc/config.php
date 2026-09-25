@@ -47,7 +47,7 @@ return array(
 		'whatsapp_float'     => true,  // Runder WhatsApp-Button unten rechts (nur mit hinterlegter Nummer)
 		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
 		'card_hplc_tag'      => true,  // Reinheit als Etikett auf dem Produktbild + Charge/Gehalt/COA-Link in der Kachel
-		'welcome_popup'      => false, // (an, sobald Brevo die Codes verschickt) Kleine 15-%-Einblendung (unten rechts / am Handy unten), siehe 'welcome_popup'
+		'welcome_popup'      => true,  // Kleine 15-%-Einblendung (unten rechts / am Handy unten), siehe 'welcome_popup'
 		'flatsome_lazy_load' => false, // Flatsome-Lazy-Load per Skript. Aus = Bilder sofort im HTML, der Browser lädt sie selbst verzögert (robuster, besser für Google).
 	),
 
@@ -119,6 +119,7 @@ return array(
 	 */
 	'welcome_coupon' => array(
 		'prefix'  => 'NEU15-',
+		'shared_code' => 'NEU15-WILLKOMMEN', // steht in der Brevo-Willkommensmail; für alle gleich, gilt je E-Mail-Adresse nur für die erste Bestellung
 		'message' => 'Dieser Willkommenscode gilt nur für deine erste Bestellung.',
 		'amount'  => 15,
 		'expires' => '2027-09-24 23:59:59', // Paket 1: für Anmeldungen bis ca. März 2027 verwenden, dann neues Paket

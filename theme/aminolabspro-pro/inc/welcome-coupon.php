@@ -107,7 +107,24 @@ function alp_welcome_codes_tool() {
 	$done  = array();
 	$new   = 0;
 
+	$shared = (string) alp_config( 'welcome_coupon.shared_code', '' );
+
 	if ( 'POST' === ( $_SERVER['REQUEST_METHOD'] ?? '' ) && check_admin_referer( 'alp_welcome_codes' ) ) {
+		// Gemeinsamer Code aus der Willkommensmail: beliebig oft einlösbar, aber je Kunde nur einmal
+		// und (über alp_welcome_coupon_is_valid) nur für die erste Bestellung.
+		if ( $shared && ! wc_get_coupon_id_by_code( $shared ) ) {
+			$coupon = new WC_Coupon();
+			$coupon->set_code( $shared );
+			$coupon->set_discount_type( 'percent' );
+			$coupon->set_amount( (string) alp_config( 'welcome_coupon.amount', 15 ) );
+			$coupon->set_individual_use( true );
+			$coupon->set_exclude_sale_items( true );
+			$coupon->set_usage_limit_per_user( 1 );
+			$coupon->set_date_expires( alp_config( 'welcome_coupon.expires', '2027-09-24 23:59:59' ) );
+			$coupon->set_description( 'Newsletter-Willkommensrabatt (Brevo-Willkommensmail), gemeinsamer Code – nur erste Bestellung' );
+			$coupon->save();
+			$new++;
+		}
 		$start = time();
 		foreach ( $codes as $code ) {
 			if ( wc_get_coupon_id_by_code( $code ) ) {
@@ -135,7 +152,7 @@ function alp_welcome_codes_tool() {
 			$done[] = $code;
 		}
 	}
-	$missing = count( $codes ) - count( $done );
+	$missing = count( $codes ) - count( $done ) + ( $shared && ! wc_get_coupon_id_by_code( $shared ) ? 1 : 0 );
 
 	nocache_headers();
 	echo '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Willkommenscodes</title>';
@@ -144,7 +161,10 @@ function alp_welcome_codes_tool() {
 	if ( $new ) {
 		echo '<p style="color:#1F7A5C"><b>' . (int) $new . ' Codes neu angelegt.</b></p>';
 	}
-	echo '<p>Angelegt: <b>' . count( $done ) . ' von ' . count( $codes ) . '</b></p>';
+	if ( $shared ) {
+		echo '<p>Gemeinsamer Code <b>' . esc_html( strtoupper( $shared ) ) . '</b>: ' . ( wc_get_coupon_id_by_code( $shared ) ? 'angelegt' : '<b>fehlt</b>' ) . '</p>';
+	}
+	echo '<p>Einzelcodes angelegt: <b>' . count( $done ) . ' von ' . count( $codes ) . '</b></p>';
 	if ( $missing > 0 ) {
 		echo '<form method="post">';
 		wp_nonce_field( 'alp_welcome_codes' );
