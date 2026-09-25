@@ -106,7 +106,11 @@ function alp_asset_version( $file ) {
  */
 add_action( 'wp_head', 'alp_preload_fonts', 1 );
 function alp_preload_fonts() {
-	foreach ( array( 'inter-latin-var.woff2', 'space-grotesk-latin-var.woff2' ) as $font ) {
+	// Die Schriften vorladen, die das aktive Design oben auf der Seite wirklich nutzt.
+	$fonts = 'editorial' === alp_config( 'design' )
+		? array( 'fraunces-latin-wght-normal.woff2', 'fraunces-latin-wght-italic.woff2', 'manrope-latin-wght-normal.woff2' )
+		: array( 'inter-latin-var.woff2', 'space-grotesk-latin-var.woff2' );
+	foreach ( $fonts as $font ) {
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( ALP_URI . '/assets/fonts/' . $font ) );
 	}
 	echo '<meta name="theme-color" content="#1A1F2E">' . "\n";
