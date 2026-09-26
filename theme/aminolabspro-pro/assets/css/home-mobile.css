@@ -137,3 +137,12 @@
 	.alp .alp-soon__body .alp-notify .alp-notify__btn { min-height: 3rem; font-size: 0.9375rem; padding: 0 1rem; }
 	.alp .alp-soon__body .alp-notify input.alp-notify__input { font-size: 16px; }
 }
+
+/* Stack-Angebot am Handy: Bild ist klein → Namen weglassen (stehen auf den Fläschchen), Liste kompakt */
+@media (max-width: 767px) {
+	.alp-deal__vial-names { display: none; }
+	.alp-deal__vials { inset: 16% 4% 8%; }
+	.alp-deal__stack-tag { top: 6px; left: 6px; font-size: 0.5rem; padding: 3px 6px; }
+	.alp-deal__items li { flex-wrap: wrap; gap: 0 0.5rem; padding: 0.3rem 0; font-size: 0.75rem; }
+	.alp-deal__items span { margin-left: auto; }
+}

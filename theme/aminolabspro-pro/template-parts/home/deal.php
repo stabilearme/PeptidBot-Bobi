@@ -96,10 +96,19 @@ $lab     = $is_stack ? null : alp_coa_for_sku( $product->get_sku() );
 		<div class="alp-deal__visual">
 			<span class="alp-deal__halo" aria-hidden="true"></span>
 			<?php if ( $is_stack ) : ?>
-				<div class="alp-deal__img alp-deal__img--stack alp-deal__img--n<?php echo (int) min( 4, count( $products ) ); ?>" aria-hidden="true">
-					<?php foreach ( array_slice( $products, 0, 4 ) as $row ) : ?>
-						<?php echo wp_get_attachment_image( $row[0]->get_image_id(), 'woocommerce_single', false, array( 'alt' => '' ) ); // phpcs:ignore ?>
-					<?php endforeach; ?>
+				<?php $alp_shown = array_slice( $products, 0, 4 ); ?>
+				<div class="alp-deal__img alp-deal__stage alp-deal__stage--n<?php echo (int) count( $alp_shown ); ?>" aria-hidden="true">
+					<span class="alp-deal__stack-tag"><?php echo (int) count( $products ); ?>er-Stack</span>
+					<div class="alp-deal__vials">
+						<?php foreach ( $alp_shown as $row ) : ?>
+							<figure><?php echo wp_get_attachment_image( $row[0]->get_image_id(), 'woocommerce_single', false, array( 'alt' => '', 'loading' => 'lazy' ) ); // phpcs:ignore ?></figure>
+						<?php endforeach; ?>
+					</div>
+					<div class="alp-deal__vial-names">
+						<?php foreach ( $alp_shown as $row ) : ?>
+							<b><?php echo esc_html( trim( preg_replace( array( '/\s*\([^)]*\)/', '/\s*\d+([.,]\d+)?\s*(mg|ml|mcg)\b.*$/i' ), '', $row[0]->get_name() ) ) ); ?></b>
+						<?php endforeach; ?>
+					</div>
 				</div>
 			<?php else : ?>
 				<a class="alp-deal__img" href="<?php echo esc_url( $product->get_permalink() ); ?>" tabindex="-1" aria-hidden="true">

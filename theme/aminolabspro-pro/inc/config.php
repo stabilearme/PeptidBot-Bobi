@@ -137,32 +137,86 @@ return array(
 		'timezone'    => 'Europe/Berlin',
 		'first_week'  => '2026-09-22', // In dieser Woche läuft das erste Angebot der Liste (Mo 21.09. 22 Uhr bis Mo 28.09. 22 Uhr).
 		'deals'       => array(
+			// 1 · ab Mo 21.09.
 			array(
-				'title'   => 'Retatrutide (Triple G) 10 mg',
-				'text'    => 'Der Triple-Agonist zum Wochenpreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
-				'items'   => array( array( 'sku' => 'ALP-RETA-10', 'price' => 54.90 ) ),
+				'title' => 'Retatrutide (Triple G) 10 mg',
+				'text'  => 'Der Triple-Agonist zum Wochenpreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
+				'items' => array( array( 'sku' => 'ALP-RETA-10', 'price' => 54.90 ) ),
 			),
+			// 2 · ab Mo 28.09.
 			array(
 				'title'   => 'Recovery-Stack',
 				'text'    => 'BPC-157, TB-500 und GHK-Cu im Set – 15 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-BPC157-10', 'ALP-TB500-10', 'ALP-GHKCU-50' ),
 				'percent' => 15,
 			),
+			// 3 · ab Mo 05.10.
 			array(
-				'title'   => 'Retatrutide (Triple G) 30 mg',
-				'text'    => 'Die große Einheit für längere Versuchsreihen – diese Woche besonders günstig.',
-				'items'   => array( array( 'sku' => 'ALP-RETA-30', 'price' => 119.90 ) ),
+				'title'   => 'Metabolic-Stack XL',
+				'text'    => 'Retatrutide 30 mg und Cagrilintide 5 mg – die große Kombination für längere Versuchsreihen, 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-RETA-30', 'ALP-CAGRI-5' ),
+				'percent' => 15,
 			),
+			// 4 · ab Mo 12.10.
 			array(
 				'title'   => 'Nootropic-Stack',
 				'text'    => 'Semax und Selank zusammen – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-SEMAX-10', 'ALP-SELANK-10' ),
 				'percent' => 20,
 			),
+			// 5 · ab Mo 19.10.
 			array(
-				'title'   => 'Metabolic-Stack',
+				'title'   => 'Mitochondrien-Stack',
 				'text'    => 'MOTS-c 10 mg und 5-Amino-1MQ 50 mg im Set – 15 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-MOTSC-10', 'ALP-5A1MQ-50' ),
+				'percent' => 15,
+			),
+			// 6 · ab Mo 26.10.
+			array(
+				'title'   => 'Metabolic-Stack',
+				'text'    => 'Retatrutide 10 mg und Cagrilintide 5 mg – der Einstieg in die Kombination, 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-RETA-10', 'ALP-CAGRI-5' ),
+				'percent' => 15,
+			),
+			// 7 · ab Mo 02.11.
+			array(
+				'title'   => 'GH-Stack',
+				'text'    => 'Ipamorelin und Tesamorelin im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-IPA-10', 'ALP-TESA-10' ),
+				'percent' => 15,
+			),
+			// 8 · ab Mo 09.11.
+			array(
+				'title'   => 'Longevity-Stack',
+				'text'    => 'MOTS-c 40 mg und Epithalon 50 mg – die großen Einheiten zusammen, 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-MOTSC-40', 'ALP-EPI-50' ),
+				'percent' => 15,
+			),
+			// 9 · ab Mo 16.11.
+			array(
+				'title' => 'Retatrutide (Triple G) 30 mg',
+				'text'  => 'Die große Einheit für längere Versuchsreihen – diese Woche besonders günstig.',
+				'items' => array( array( 'sku' => 'ALP-RETA-30', 'price' => 119.90 ) ),
+			),
+			// 10 · ab Mo 23.11.
+			array(
+				'title'   => 'Skin-Stack',
+				'text'    => 'GHK-Cu 100 mg und SNAP-8 im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-GHKCU-100', 'ALP-SNAP8-10' ),
+				'percent' => 15,
+			),
+			// 11 · ab Mo 30.11.
+			array(
+				'title'   => 'Immun- & Darm-Stack',
+				'text'    => 'KPV, Thymosin Alpha-1 und BPC-157 im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-KPV-10', 'ALP-TA1-10', 'ALP-BPC157-10' ),
+				'percent' => 15,
+			),
+			// 12 · ab Mo 07.12. – danach beginnt die Liste wieder mit 1
+			array(
+				'title'   => 'Melanocortin-Stack',
+				'text'    => 'Melanotan 2 und PT-141 im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-MT2-10', 'ALP-PT141-10' ),
 				'percent' => 15,
 			),
 		),

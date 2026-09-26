@@ -177,6 +177,8 @@ function alp_wd_onsale_ids( $ids ) {
 
 /* ---------- Stack: Aktionspreis im Warenkorb, sobald alle Produkte drin sind ---------- */
 add_action( 'woocommerce_before_calculate_totals', 'alp_wd_bundle_prices', 50 );
+// Auch direkt nach dem Laden des Warenkorbs, damit Gutscheine den Stack sofort als reduziert erkennen.
+add_action( 'woocommerce_cart_loaded_from_session', 'alp_wd_bundle_prices', 50 );
 function alp_wd_bundle_prices( $cart ) {
 	$week = alp_wd_current();
 	if ( ! $week || ! $week['deal']['bundle'] || ! is_object( $cart ) ) {

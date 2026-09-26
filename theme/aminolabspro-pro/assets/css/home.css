@@ -873,11 +873,30 @@
 	.alp .alp-notify .alp-notify__btn { width: 100%; justify-content: center; }
 }
 
-/* Wochenangebot als Stack: mehrere Produktbilder + Positionsliste */
-.alp-deal__img--stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; background: var(--alp-paper-2); padding: 6px; }
-.alp-deal__img--stack img { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
-.alp-deal__img--n1 { grid-template-columns: 1fr; }
-.alp-deal__img--n3 img:first-child { grid-row: span 2; }
+/* Wochenangebot als Stack: „Vial-Reihe“ aus den Produktfotos + Positionsliste */
+.alp .alp-deal__stage { transform: none; background: radial-gradient(120% 90% at 50% 100%, #123238 0%, #0B1A26 55%, #070F16 100%) !important; box-shadow: 0 30px 60px -30px rgba(11, 26, 38, 0.6); }
+.alp-deal__stage::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: 9%; height: 14%; background: radial-gradient(50% 50% at 50% 50%, rgba(110, 218, 180, 0.35), transparent 70%); filter: blur(8px); pointer-events: none; }
+.alp-deal__visual:hover .alp-deal__stage { transform: none; }
+.alp-deal__stack-tag { position: absolute; top: 18px; left: 18px; z-index: 3; padding: 7px 10px; border-radius: 999px; border: 1px solid rgba(110, 218, 180, 0.45); background: rgba(11, 26, 38, 0.6); color: var(--alp-mint); font: 700 0.7rem/1 var(--alp-font-mono); letter-spacing: 0.08em; }
+.alp-deal__vials { position: absolute; inset: 14% 6% 14%; display: flex; align-items: flex-end; justify-content: center; }
+.alp-deal__vials figure { position: relative; margin: 0; width: 34%; aspect-ratio: 3 / 5; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); }
+.alp-deal__vials img { width: 100% !important; height: 100% !important; object-fit: cover; object-position: 50% 52%; transform: scale(1.28); }
+.alp-deal__stage--n2 .alp-deal__vials figure { width: 40%; }
+.alp-deal__stage--n2 .alp-deal__vials figure:first-child { transform: translateX(6%) scale(.94); }
+.alp-deal__stage--n2 .alp-deal__vials figure:last-child { transform: translateX(-6%); z-index: 2; }
+.alp-deal__stage--n3 .alp-deal__vials figure:nth-child(1) { transform: translateX(12%) scale(.9); }
+.alp-deal__stage--n3 .alp-deal__vials figure:nth-child(2) { width: 38%; z-index: 2; }
+.alp-deal__stage--n3 .alp-deal__vials figure:nth-child(3) { transform: translateX(-12%) scale(.9); }
+.alp-deal__stage--n4 .alp-deal__vials figure { width: 28%; }
+.alp-deal__stage--n4 .alp-deal__vials figure:nth-child(odd) { transform: scale(.9); }
+.alp-deal__stage--n4 .alp-deal__vials figure:nth-child(even) { z-index: 2; }
+.alp-deal__stage--n4 .alp-deal__vials figure + figure { margin-left: -4%; }
+.alp-deal__vial-names { position: absolute; left: 0; right: 0; bottom: 5%; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding-inline: 12px; }
+.alp-deal__vial-names b { padding: 6px 9px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.1); color: #fff; font: 700 0.68rem/1 var(--alp-font-mono); letter-spacing: 0.06em; }
+@media (max-width: 767px) {
+	.alp-deal__stack-tag { top: 10px; left: 10px; font-size: 0.6rem; padding: 5px 8px; }
+	.alp-deal__vial-names b { font-size: 0.58rem; padding: 4px 7px; }
+}
 .alp-deal__items { list-style: none; margin: 0 0 1.1rem; padding: 0; display: grid; gap: 0.35rem; max-width: 34rem; }
 .alp-deal__items li { display: flex; justify-content: space-between; gap: 1rem; margin: 0; padding: 0.45rem 0; border-bottom: 1px solid var(--alp-line); font-size: 0.9375rem; }
 .alp-deal__items a { color: var(--alp-ink); text-decoration: none; font-weight: 600; }
