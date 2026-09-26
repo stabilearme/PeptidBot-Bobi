@@ -891,6 +891,8 @@
 .alp-deal__stage--n4 .alp-deal__vials figure:nth-child(odd) { transform: scale(.9); }
 .alp-deal__stage--n4 .alp-deal__vials figure:nth-child(even) { z-index: 2; }
 .alp-deal__stage--n4 .alp-deal__vials figure + figure { margin-left: -4%; }
+.alp-deal__stack-save { position: absolute; left: 50%; bottom: 15%; z-index: 4; transform: translateX(-50%); white-space: nowrap; padding: 9px 16px; border-radius: 999px; background: var(--alp-mint); color: var(--alp-ink); font: 700 0.95rem/1 var(--alp-font-body); box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.55); }
+.alp-deal__stack-save .amount, .alp-deal__stack-save bdi { color: inherit; font-weight: 800; }
 .alp-deal__vial-names { position: absolute; left: 0; right: 0; bottom: 5%; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding-inline: 12px; }
 .alp-deal__vial-names b { padding: 6px 9px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.1); color: #fff; font: 700 0.68rem/1 var(--alp-font-mono); letter-spacing: 0.06em; }
 @media (max-width: 767px) {

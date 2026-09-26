@@ -99,6 +99,9 @@ $lab     = $is_stack ? null : alp_coa_for_sku( $product->get_sku() );
 				<?php $alp_shown = array_slice( $products, 0, 4 ); ?>
 				<div class="alp-deal__img alp-deal__stage alp-deal__stage--n<?php echo (int) count( $alp_shown ); ?>" aria-hidden="true">
 					<span class="alp-deal__stack-tag"><?php echo (int) count( $products ); ?>er-Stack</span>
+					<?php if ( $regular - $sale > 0.005 ) : ?>
+						<span class="alp-deal__stack-save">Du sparst <?php echo wp_kses_post( wc_price( $regular - $sale ) ); ?></span>
+					<?php endif; ?>
 					<div class="alp-deal__vials">
 						<?php foreach ( $alp_shown as $row ) : ?>
 							<figure><?php echo wp_get_attachment_image( $row[0]->get_image_id(), 'woocommerce_single', false, array( 'alt' => '', 'loading' => 'lazy' ) ); // phpcs:ignore ?></figure>
