@@ -181,8 +181,8 @@ return array(
 			// 7 · ab Mo 02.11.
 			array(
 				'title'   => 'GH-Stack',
-				'text'    => 'Ipamorelin und Tesamorelin im Set – 20 % unter dem Einzelpreis.',
-				'items'   => array( 'ALP-IPA-10', 'ALP-TESA-10' ),
+				'text'    => 'Ipamorelin, Tesamorelin und IGF-1 LR3 im Set – 20 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-IPA-10', 'ALP-TESA-10', 'ALP-IGF1LR3-1' ),
 				'percent' => 20,
 			),
 			// 8 · ab Mo 09.11.
@@ -207,16 +207,30 @@ return array(
 			),
 			// 11 · ab Mo 30.11.
 			array(
+				'title'   => 'KLOW + Retatrutide 30 mg',
+				'text'    => 'Der KLOW-Blend und die große Retatrutide-Einheit zusammen – 20 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-KLOW-80', 'ALP-RETA-30' ),
+				'percent' => 20,
+			),
+			// 12 · ab Mo 07.12.
+			array(
 				'title'   => 'Immun- & Darm-Stack',
 				'text'    => 'KPV, Thymosin Alpha-1 und BPC-157 im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-KPV-10', 'ALP-TA1-10', 'ALP-BPC157-10' ),
 				'percent' => 20,
 			),
-			// 12 · ab Mo 07.12. – danach beginnt die Liste wieder mit 1
+			// 13 · ab Mo 14.12.
 			array(
 				'title'   => 'Melanocortin-Stack',
 				'text'    => 'Melanotan 2 und PT-141 im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-MT2-10', 'ALP-PT141-10' ),
+				'percent' => 20,
+			),
+			// 14 · ab Mo 21.12. – danach beginnt die Liste wieder mit 1
+			array(
+				'title'   => 'Recovery-Stack Pro',
+				'text'    => 'KLOW-Blend mit BPC-157 und TB-500 – 20 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-KLOW-80', 'ALP-BPC157-10', 'ALP-TB500-10' ),
 				'percent' => 20,
 			),
 		),
