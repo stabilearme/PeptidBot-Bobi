@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALP_VERSION', '3.0.14' );
+define( 'ALP_VERSION', '3.0.15' );
 define( 'ALP_DIR', get_stylesheet_directory() );
 define( 'ALP_URI', get_stylesheet_directory_uri() );
 
@@ -28,7 +28,6 @@ $alp_modules = array(
 	'affiliate-coupon', // Wunsch-Gutscheincode für Affiliates (YITH), gültig erst nach Genehmigung
 	'notify',         // „Benachrichtigen lassen“ für kommende Produkte (E-Mails in WordPress, Export als CSV)
 	'order-numbers',  // Fortlaufende Bestellnummern (#1088 …), auch für Apple/Google Pay
-	'debug',          // Diagnose für Admins: Seite mit ?alp_debug=1 aufrufen
 	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math
 );
 

@@ -48,6 +48,7 @@ return array(
 		'animations'         => true,  // Dezente Animationen (Einblenden, hochzählende Werte). Bei „Bewegung reduzieren“ automatisch aus.
 		'card_hplc_tag'      => true,  // Reinheit als Etikett auf dem Produktbild + Charge/Gehalt/COA-Link in der Kachel
 		'welcome_popup'      => true,  // Kleine 15-%-Einblendung (unten rechts / am Handy unten), siehe 'welcome_popup'
+		'css_bundle'         => true,  // Theme-CSS als eine Datei laden (schneller). Bei Darstellungsproblemen auf false.
 		'flatsome_lazy_load' => false, // Flatsome-Lazy-Load per Skript. Aus = Bilder sofort im HTML, der Browser lädt sie selbst verzögert (robuster, besser für Google).
 	),
 

@@ -61,24 +61,33 @@ function alp_style_needed( $when ) {
 
 add_action( 'wp_enqueue_scripts', 'alp_enqueue_assets', 120 );
 function alp_enqueue_assets() {
-	$deps = array();
+	$files = array();
 	foreach ( alp_styles() as $name => $when ) {
-		if ( ! alp_style_needed( $when ) ) {
-			continue;
+		if ( alp_style_needed( $when ) && file_exists( ALP_DIR . '/assets/css/' . $name . '.css' ) ) {
+			$files[ $name ] = '/assets/css/' . $name . '.css';
 		}
-		$file = '/assets/css/' . $name . '.css';
-		if ( ! file_exists( ALP_DIR . $file ) ) {
-			continue;
+	}
+
+	// Alle Theme-Styles dieser Seite als EINE Datei (schneller). Klappt das nicht, wie bisher einzeln.
+	$bundle     = alp_config( 'features.css_bundle', true ) ? alp_css_bundle( $files ) : null;
+	$css_handle = '';
+	if ( $bundle ) {
+		wp_enqueue_style( 'alp-bundle', $bundle['url'], array(), $bundle['ver'] );
+		$css_handle = 'alp-bundle';
+	} else {
+		$deps = array();
+		foreach ( $files as $name => $file ) {
+			$handle = 'alp-' . $name;
+			wp_enqueue_style( $handle, ALP_URI . $file, $deps, alp_asset_version( $file ) );
+			$deps = array( $handle );
 		}
-		$handle = 'alp-' . $name;
-		wp_enqueue_style( $handle, ALP_URI . $file, $deps, alp_asset_version( $file ) );
-		$deps = array( $handle );
+		$css_handle = isset( $files['pages'] ) ? 'alp-pages' : '';
 	}
 
 	// Banner-Bild der Early-Access-/Newsletter-Seite (Klasse alp-ea-has-image über alp_ea_body_class) (ersetzt das Foto aus dem Seiteninhalt).
 	$ea_image = alp_config( 'early_access_image' );
-	if ( $ea_image && wp_style_is( 'alp-pages', 'enqueued' ) ) {
-		wp_add_inline_style( 'alp-pages', '.alp-rich .alp-ea-hero{--alp-ea-image:url("' . esc_url( alp_link( $ea_image ) ) . '")}' );
+	if ( $ea_image && $css_handle && isset( $files['pages'] ) ) {
+		wp_add_inline_style( $css_handle, '.alp-rich .alp-ea-hero{--alp-ea-image:url("' . esc_url( alp_link( $ea_image ) ) . '")}' );
 	}
 
 	wp_enqueue_script( 'alp-theme', ALP_URI . '/assets/js/theme.js', array(), alp_asset_version( '/assets/js/theme.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
@@ -91,6 +100,58 @@ function alp_enqueue_assets() {
 	// DSGVO: Flatsome lädt Schriften sonst von Google-Servern. Das Theme bringt eigene, lokal gehostete Schriften mit.
 	wp_dequeue_style( 'flatsome-googlefonts' );
 	wp_deregister_style( 'flatsome-googlefonts' );
+}
+
+/**
+ * Fasst die Theme-CSS-Dateien einer Seite in derselben Reihenfolge zu einer Datei zusammen
+ * (wp-content/uploads/alp-cache/). Der Dateiname hängt von Liste + Änderungsdatum ab,
+ * nach einem Theme-Update entsteht also automatisch eine neue Datei.
+ * Rückgabe: [ url, ver ] oder null (dann lädt das Theme die Einzeldateien wie bisher).
+ */
+function alp_css_bundle( $files ) {
+	if ( ! $files || ! function_exists( 'wp_upload_dir' ) ) {
+		return null;
+	}
+	$sig = ALP_VERSION . '|' . ALP_URI;
+	foreach ( $files as $file ) {
+		$sig .= '|' . $file . ':' . (string) @filemtime( ALP_DIR . $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	}
+	$hash = substr( md5( $sig ), 0, 12 );
+	$up   = wp_upload_dir( null, false );
+	if ( ! empty( $up['error'] ) ) {
+		return null;
+	}
+	$dir  = trailingslashit( $up['basedir'] ) . 'alp-cache';
+	$path = $dir . '/theme-' . $hash . '.css';
+	$url  = trailingslashit( $up['baseurl'] ) . 'alp-cache/theme-' . $hash . '.css';
+
+	if ( ! file_exists( $path ) ) {
+		if ( ! wp_mkdir_p( $dir ) ) {
+			return null;
+		}
+		$css = '';
+		foreach ( $files as $name => $file ) {
+			$chunk = file_get_contents( ALP_DIR . $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			if ( false === $chunk ) {
+				return null;
+			}
+			// Relative Pfade (../fonts/…) auf die Theme-Adresse umschreiben, da die Datei woanders liegt.
+			$chunk = preg_replace( '#url\(\s*([\'"]?)\.\./#', 'url($1' . ALP_URI . '/assets/', $chunk );
+			$css  .= "/* ---- {$name}.css ---- */\n" . $chunk . "\n";
+		}
+		$tmp = $path . '.' . wp_generate_password( 6, false ) . '.tmp';
+		if ( false === file_put_contents( $tmp, $css ) || ! @rename( $tmp, $path ) ) { // phpcs:ignore
+			@unlink( $tmp ); // phpcs:ignore
+			return file_exists( $path ) ? array( 'url' => $url, 'ver' => $hash ) : null;
+		}
+		// Alte Bündel aufräumen (älter als 1 Tag).
+		foreach ( (array) glob( $dir . '/theme-*.css' ) as $old ) {
+			if ( $old !== $path && filemtime( $old ) < time() - DAY_IN_SECONDS ) {
+				@unlink( $old ); // phpcs:ignore
+			}
+		}
+	}
+	return array( 'url' => $url, 'ver' => $hash );
 }
 
 /**
