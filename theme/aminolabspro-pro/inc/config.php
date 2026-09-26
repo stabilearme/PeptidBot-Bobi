@@ -146,16 +146,16 @@ return array(
 			// 2 · ab Mo 28.09.
 			array(
 				'title'   => 'Recovery-Stack',
-				'text'    => 'BPC-157, TB-500 und GHK-Cu im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'BPC-157, TB-500 und GHK-Cu im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-BPC157-10', 'ALP-TB500-10', 'ALP-GHKCU-50' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 3 · ab Mo 05.10.
 			array(
 				'title'   => 'Metabolic-Stack XL',
-				'text'    => 'Retatrutide 30 mg und Cagrilintide 5 mg – die große Kombination für längere Versuchsreihen, 15 % unter dem Einzelpreis.',
+				'text'    => 'Retatrutide 30 mg und Cagrilintide 5 mg – die große Kombination für längere Versuchsreihen, 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-RETA-30', 'ALP-CAGRI-5' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 4 · ab Mo 12.10.
 			array(
@@ -167,30 +167,30 @@ return array(
 			// 5 · ab Mo 19.10.
 			array(
 				'title'   => 'Mitochondrien-Stack',
-				'text'    => 'MOTS-c 10 mg und 5-Amino-1MQ 50 mg im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'MOTS-c 10 mg und 5-Amino-1MQ 50 mg im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-MOTSC-10', 'ALP-5A1MQ-50' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 6 · ab Mo 26.10.
 			array(
 				'title'   => 'Metabolic-Stack',
-				'text'    => 'Retatrutide 10 mg und Cagrilintide 5 mg – der Einstieg in die Kombination, 15 % unter dem Einzelpreis.',
+				'text'    => 'Retatrutide 10 mg und Cagrilintide 5 mg – der Einstieg in die Kombination, 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-RETA-10', 'ALP-CAGRI-5' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 7 · ab Mo 02.11.
 			array(
 				'title'   => 'GH-Stack',
-				'text'    => 'Ipamorelin und Tesamorelin im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'Ipamorelin und Tesamorelin im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-IPA-10', 'ALP-TESA-10' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 8 · ab Mo 09.11.
 			array(
 				'title'   => 'Longevity-Stack',
-				'text'    => 'MOTS-c 40 mg und Epithalon 50 mg – die großen Einheiten zusammen, 15 % unter dem Einzelpreis.',
+				'text'    => 'MOTS-c 40 mg und Epithalon 50 mg – die großen Einheiten zusammen, 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-MOTSC-40', 'ALP-EPI-50' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 9 · ab Mo 16.11.
 			array(
@@ -201,23 +201,23 @@ return array(
 			// 10 · ab Mo 23.11.
 			array(
 				'title'   => 'Skin-Stack',
-				'text'    => 'GHK-Cu 100 mg und SNAP-8 im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'GHK-Cu 100 mg und SNAP-8 im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-GHKCU-100', 'ALP-SNAP8-10' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 11 · ab Mo 30.11.
 			array(
 				'title'   => 'Immun- & Darm-Stack',
-				'text'    => 'KPV, Thymosin Alpha-1 und BPC-157 im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'KPV, Thymosin Alpha-1 und BPC-157 im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-KPV-10', 'ALP-TA1-10', 'ALP-BPC157-10' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 			// 12 · ab Mo 07.12. – danach beginnt die Liste wieder mit 1
 			array(
 				'title'   => 'Melanocortin-Stack',
-				'text'    => 'Melanotan 2 und PT-141 im Set – 15 % unter dem Einzelpreis.',
+				'text'    => 'Melanotan 2 und PT-141 im Set – 20 % unter dem Einzelpreis.',
 				'items'   => array( 'ALP-MT2-10', 'ALP-PT141-10' ),
-				'percent' => 15,
+				'percent' => 20,
 			),
 		),
 	),
