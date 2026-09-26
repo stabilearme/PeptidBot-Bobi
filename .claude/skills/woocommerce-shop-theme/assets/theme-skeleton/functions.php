@@ -1,0 +1,36 @@
+<?php
+/**
+ * AminoLabs Pro 2 – Child Theme für Flatsome.
+ *
+ * Diese Datei lädt nur die Module aus /inc/. Bitte hier nichts direkt einbauen,
+ * sondern im passenden Modul (siehe README.md).
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+define( 'ALP_VERSION', '1.0.0' );
+define( 'ALP_DIR', get_stylesheet_directory() );
+define( 'ALP_URI', get_stylesheet_directory_uri() );
+
+$alp_modules = array(
+	'helpers',      // Hilfsfunktionen: alp_config(), alp_icon(), alp_part() …
+	'setup',        // Assets, Schriften, Body-Klassen, Übernahme der alten Flatsome-Einstellungen
+	'flatsome',     // Header-Leiste, eigener Footer, Mobile-Navigation
+	'coa',          // Chargen-/COA-Daten, Chargen-Prüfer, COA-Box am Produkt
+	'description',  // Einheitliche Darstellung der Produktbeschreibungen
+	'content',      // Einheitliche Darstellung von Seiten und Beiträgen
+	'woocommerce',  // Shop, Produktseite, Warenkorb, Kasse
+	'contact',      // WhatsApp-Buttons (Nummer im Customizer) und Sprachumschalter
+	'newsletter',   // Newsletter-Anmeldung über Brevo (Startseite + Shortcode [alp_newsletter])
+	'welcome-coupon', // 15-%-Willkommenscode nur für die erste Bestellung
+	'pricing',        // Preise vereinheitlichen (Werkzeug) + Preisverlauf für Streichpreise (30-Tage-Regel)
+	'weekly-deal',    // Wochenangebot: wechselt automatisch jeden Montag 22 Uhr (Einzelprodukt oder Stack)
+	'affiliate-coupon', // Wunsch-Gutscheincode für Affiliates (YITH), gültig erst nach Genehmigung
+	'notify',         // „Benachrichtigen lassen“ für kommende Produkte (E-Mails in WordPress, Export als CSV)
+	'order-numbers',  // Fortlaufende Bestellnummern (#1088 …), auch für Apple/Google Pay
+	'schema',       // Strukturierte Daten (FAQ) – ergänzt Rank Math
+);
+
+foreach ( $alp_modules as $alp_module ) {
+	require_once ALP_DIR . '/inc/' . $alp_module . '.php';
+}

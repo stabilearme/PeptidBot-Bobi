@@ -1,0 +1,13 @@
+/* ==========================================================================
+   ÜBERGANGS-CSS
+   Falls eine bestehende Seite (z. B. Rekonstitutionsrechner, Glücksrad,
+   Kundenwünsche) nach dem Wechsel Styles aus dem ALTEN „Zusätzlichen CSS“
+   braucht: die benötigten Regeln hier einfügen statt im Customizer.
+   Die Datei wird auf allen Seiten geladen.
+   ========================================================================== */
+
+/* Jede Seite hat eine eigene Body-Klasse nach ihrem Slug, z. B.:
+   .alp-page-dosierungsrechner, .alp-page-gluecksrad, .alp-page-wissen
+   Beispiel:
+   .alp-page-dosierungsrechner .entry-content > * { margin-inline: auto; }
+*/

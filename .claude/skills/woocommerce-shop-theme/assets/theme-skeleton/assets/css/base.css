@@ -1,0 +1,285 @@
+/* ==========================================================================
+   BASIS: Typografie, Links, Buttons, Formulare, Standardseiten
+   Alles ist an die Klasse .alp am <body> gebunden, damit es Flatsome sauber überschreibt.
+   ========================================================================== */
+
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
+html.alp-lock { overflow: hidden; }
+
+body.alp {
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base);
+	line-height: 1.65;
+	color: var(--alp-ink-2);
+	background: var(--alp-surface);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "ss01", "cv11";
+}
+
+/* Flatsome färbt diese Flächen weiß – hier auf den Creme-Ton der Seite */
+.alp #wrapper, .alp #main, .alp .page-wrapper, .alp .shop-container, .alp .product-main,
+.alp .product-footer, .alp .off-canvas .mfp-content, .alp .off-canvas-left .mfp-content,
+.alp .mfp-content .lightbox-content, .alp .nav-dropdown, .alp .flickity-slider > .col,
+.alp .woocommerce-tabs .panel, .alp .box-text, .alp .searchform .live-search-results { background-color: var(--alp-surface); }
+.alp .nav-dropdown { background-color: var(--alp-surface) !important; }
+
+.alp h1, .alp h2, .alp h3, .alp h4, .alp h5, .alp h6,
+.alp .heading-font, .alp .product-title, .alp .entry-title {
+	font-family: var(--alp-font-display);
+	color: var(--alp-ink);
+	font-weight: 650;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+	text-wrap: balance;
+}
+.alp .alt-font { font-family: var(--alp-font-body); }
+
+.alp p { text-wrap: pretty; }
+.alp strong, .alp b { color: var(--alp-ink); font-weight: 650; }
+
+.alp a { color: var(--alp-brand); transition: color var(--alp-dur) var(--alp-ease); }
+.alp a:hover { color: var(--alp-brand-hover); }
+
+.alp :focus-visible {
+	outline: 2px solid var(--alp-brand);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.alp ::selection { background: var(--alp-mint); color: var(--alp-ink); }
+
+/* Überschriften-Stufen für eigene Templates */
+.alp .alp-h1 { font-size: var(--alp-fs-2xl); margin: 0 0 var(--alp-space-4); }
+.alp .alp-h2 { font-size: var(--alp-fs-xl); margin: 0; }
+.alp .alp-h3 { font-size: var(--alp-fs-lg); margin: 0 0 var(--alp-space-4); }
+.alp .alp-h4 { font-size: var(--alp-fs-md); margin: 0 0 var(--alp-space-2); letter-spacing: -0.01em; }
+.alp .alp-lead { font-size: var(--alp-fs-md); line-height: 1.6; max-width: 58ch; }
+.alp .alp-mono, .alp .is-mono { font-family: var(--alp-font-mono); font-size: 0.92em; letter-spacing: 0; }
+
+/* Eyebrow: kleine Überzeile in Versalien mit Mint-Strich davor (Design System: eyebrow) */
+.alp .alp-eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-family: var(--alp-font-body);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.27em;
+	text-transform: uppercase;
+	color: var(--alp-ink);
+	margin: 0 0 var(--alp-space-3);
+}
+.alp .alp-eyebrow::before { content: ""; flex: none; width: 20px; height: 2px; background: var(--alp-action); }
+.alp .alp-eyebrow .alp-dot { display: none; }
+.alp .alp-eyebrow--light { color: var(--alp-mint); }
+.alp .alp-dot {
+	width: 7px; height: 7px; border-radius: 50%;
+	background: var(--alp-action);
+	box-shadow: 0 0 0 4px var(--alp-brand-soft);
+}
+
+/* ---------- Buttons ---------- */
+.alp .alp-btn,
+.alp .button,
+.alp button.button,
+.alp input[type="submit"].button,
+.alp .single_add_to_cart_button,
+.alp .checkout-button,
+.alp #place_order {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--alp-space-2);
+	min-height: 46px;
+	padding: 0 1.25rem;
+	margin: 0;
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base);
+	font-weight: 650;
+	letter-spacing: 0;
+	text-transform: none;
+	line-height: 1.1;
+	border-radius: var(--alp-r-md);
+	border: 1.5px solid transparent;
+	box-shadow: none;
+	cursor: pointer;
+	transition: background-color var(--alp-dur) var(--alp-ease), color var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease);
+	text-decoration: none;
+}
+.alp .alp-btn:active, .alp .button:active { transform: translateY(1px); }
+
+.alp .alp-btn--primary,
+.alp .button.primary,
+.alp .button.alt,
+.alp .single_add_to_cart_button,
+.alp .checkout-button,
+.alp #place_order,
+.alp .button.checkout,
+.alp .woocommerce-mini-cart__buttons .checkout {
+	background: var(--alp-action);
+	color: var(--alp-on-action);
+	border-color: var(--alp-action);
+}
+.alp .alp-btn--primary:hover,
+.alp .button.primary:hover,
+.alp .button.alt:hover,
+.alp .single_add_to_cart_button:hover,
+.alp .checkout-button:hover,
+.alp #place_order:hover {
+	background: var(--alp-action-hover);
+	border-color: var(--alp-action-hover);
+	color: var(--alp-on-action);
+	box-shadow: var(--alp-shadow-mint);
+}
+
+.alp .alp-btn--ghost,
+.alp .button.is-outline,
+.alp .button.secondary.is-outline {
+	background: transparent;
+	color: var(--alp-ink);
+	border-color: var(--alp-line-2);
+}
+.alp .alp-btn--ghost:hover,
+.alp .button.is-outline:hover {
+	background: var(--alp-ink);
+	border-color: var(--alp-ink);
+	color: #fff;
+}
+
+/* Plastische Buttons: Verlauf, Lichtkante oben, dunklere Unterkante, farbiger Schatten */
+.alp .alp-btn--primary {
+	background: linear-gradient(180deg, #8BE6C6 0%, var(--alp-action) 45%, #52C99E 100%);
+	border-color: #4DC49A;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.12), 0 1px 2px rgba(26, 31, 46, 0.1), 0 8px 20px -6px rgba(46, 160, 120, 0.55);
+	transition: background-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-btn--primary:hover {
+	background: linear-gradient(180deg, #7DE0BD 0%, #5ED0A7 45%, #45BD92 100%);
+	transform: translateY(-2px);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(26, 31, 46, 0.14), 0 2px 4px rgba(26, 31, 46, 0.1), 0 14px 28px -8px rgba(46, 160, 120, 0.65);
+}
+.alp .alp-btn--primary:active { transform: translateY(0); box-shadow: inset 0 2px 4px rgba(26, 31, 46, 0.18); }
+.alp .alp-btn--ghost {
+	background: linear-gradient(180deg, #FFFFFF, #F4F8FA);
+	box-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(26, 31, 46, 0.06), 0 6px 16px -8px rgba(26, 31, 46, 0.2);
+	transition: color var(--alp-dur) var(--alp-ease), border-color var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-btn--ghost:hover {
+	background: linear-gradient(180deg, #FFFFFF, #F4F8FA);
+	color: var(--alp-ink);
+	border-color: var(--alp-action);
+	transform: translateY(-2px);
+	box-shadow: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(26, 31, 46, 0.06), 0 12px 24px -10px rgba(46, 160, 120, 0.45);
+}
+/* Pfeil in dunkler Kugel / Icon in Mint-Kachel */
+.alp-btn__orb { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: -0.6rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #3A4458, var(--alp-ink) 70%); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 3px 8px -2px rgba(26, 31, 46, 0.45); transition: transform var(--alp-dur) var(--alp-ease); }
+.alp-btn:hover .alp-btn__orb { transform: translateX(3px); }
+.alp-btn__chip { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: -0.5rem; border-radius: 8px; background: linear-gradient(160deg, #F2FBF7, #CDEEDF); color: #2E8B6E; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(46, 139, 110, 0.4); transition: transform var(--alp-dur) var(--alp-ease); }
+.alp-btn__chip .alp-icon { stroke-width: 2; }
+.alp-btn:hover .alp-btn__chip { transform: rotate(-8deg) scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+	.alp .alp-btn--primary:hover, .alp .alp-btn--ghost:hover { transform: none; }
+	.alp-btn:hover .alp-btn__orb, .alp-btn:hover .alp-btn__chip { transform: none; }
+}
+
+.alp .alp-btn--light { background: var(--alp-surface); color: var(--alp-ink); border-color: var(--alp-surface); }
+.alp .alp-btn--light:hover { background: var(--alp-mint); border-color: var(--alp-mint); color: var(--alp-ink); }
+
+.alp .alp-btn--lg { min-height: 54px; padding: 0 1.6rem; font-size: var(--alp-fs-md); }
+.alp .alp-btn--sm { min-height: 38px; padding: 0 0.9rem; font-size: var(--alp-fs-sm); }
+
+.alp .button.disabled, .alp .button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Textlink mit Pfeil */
+.alp .alp-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-weight: 650;
+	color: var(--alp-brand);
+	text-decoration: none;
+}
+.alp .alp-link .alp-icon { transition: transform var(--alp-dur) var(--alp-ease); }
+.alp .alp-link:hover .alp-icon, .alp a:hover > .alp-link .alp-icon { transform: translateX(3px); }
+.alp .alp-link--light { color: var(--alp-mint); }
+.alp .alp-link--light:hover { color: #fff; }
+
+/* ---------- Formulare ---------- */
+.alp input[type="text"], .alp input[type="email"], .alp input[type="tel"], .alp input[type="number"],
+.alp input[type="password"], .alp input[type="search"], .alp input[type="url"], .alp textarea, .alp select {
+	font-family: var(--alp-font-body);
+	font-size: var(--alp-fs-base); /* 16px: verhindert Auto-Zoom auf iPhone */
+	color: var(--alp-ink);
+	background-color: var(--alp-field);
+	border: 1.5px solid var(--alp-line-2);
+	border-radius: var(--alp-r-md);
+	box-shadow: none;
+	min-height: 48px;
+	padding: 0 0.9rem;
+	transition: border-color var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease);
+}
+.alp textarea { padding: 0.75rem 0.9rem; min-height: 120px; }
+.alp input:focus, .alp textarea:focus, .alp select:focus {
+	border-color: var(--alp-brand);
+	box-shadow: 0 0 0 4px var(--alp-brand-soft);
+	outline: none;
+}
+.alp label { font-weight: 600; color: var(--alp-ink); font-size: var(--alp-fs-sm); }
+.alp ::placeholder { color: #93A3AA; opacity: 1; }
+
+/* ---------- Standardseiten (Impressum, Wissen, Versand …) ---------- */
+.alp .page-wrapper { padding-top: var(--alp-space-7); padding-bottom: var(--alp-space-8); }
+.alp .entry-content,
+.alp .alp-prose {
+	font-size: 1.0625rem;
+	line-height: 1.75;
+}
+/* Lesebreite nur für Fließtext – eigene Layouts (Raster, Karten) im Seiteninhalt behalten ihre Breite */
+.alp .entry-content > :is(p, ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, pre),
+.alp .alp-prose > :is(p, ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, pre) { max-width: 72ch; }
+.alp .entry-content h2, .alp .alp-prose h2 { font-size: var(--alp-fs-lg); margin: 2.2em 0 0.6em; }
+.alp .entry-content h3, .alp .alp-prose h3 { font-size: var(--alp-fs-md); margin: 1.8em 0 0.5em; }
+.alp .entry-content ul, .alp .entry-content ol { padding-left: 1.2em; }
+.alp .entry-content li { margin-bottom: 0.4em; }
+.alp .entry-content table { width: 100%; border-collapse: collapse; font-size: var(--alp-fs-sm); }
+.alp .entry-content th, .alp .entry-content td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--alp-line); text-align: left; }
+.alp .entry-content blockquote {
+	margin: 1.5em 0; padding: 1rem 1.25rem;
+	border-left: 3px solid var(--alp-brand);
+	background: var(--alp-paper);
+	border-radius: 0 var(--alp-r-md) var(--alp-r-md) 0;
+}
+.alp .page-title, .alp .entry-header .entry-title { font-size: var(--alp-fs-2xl); }
+
+/* Breadcrumbs */
+.alp .breadcrumbs, .alp .woocommerce-breadcrumb, .alp .rank-math-breadcrumb {
+	font-size: var(--alp-fs-sm);
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--alp-muted);
+}
+.alp .breadcrumbs a, .alp .rank-math-breadcrumb a { color: var(--alp-muted); }
+.alp .breadcrumbs a:hover { color: var(--alp-brand); }
+.alp .breadcrumbs .divider { opacity: 0.5; margin: 0 0.35em; }
+
+/* WooCommerce-Hinweise */
+.alp .woocommerce-message, .alp .woocommerce-info, .alp .woocommerce-error, .alp .message-container {
+	border-radius: var(--alp-r-md);
+	border: 1px solid var(--alp-line);
+	background: var(--alp-paper);
+	color: var(--alp-ink-2);
+	font-size: var(--alp-fs-sm);
+}
+.alp .woocommerce-message { background: var(--alp-ok-soft); border-color: #BFE3D2; }
+.alp .woocommerce-error { background: var(--alp-error-soft); border-color: #F1C4BD; }
+
+/* Bildschirmleser-Text */
+.alp .screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px; padding: 0; margin: -1px;
+	overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.alp-icon { flex: none; display: inline-block; vertical-align: middle; }

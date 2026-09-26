@@ -1,0 +1,265 @@
+/* ==========================================================================
+   EDITORIAL – ruhiges Agentur-Design: Fraunces-Headlines + Manrope, Haarlinien,
+   wenig Farbe, keine Glows/Verläufe, klares Raster.
+   Aktiv mit config.php → 'design' => 'editorial' (Body-Klasse .alp-ed). '' = bisheriger Look.
+   ========================================================================== */
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("../fonts/fraunces-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 100 900; font-style: italic; font-display: swap; src: url("../fonts/fraunces-latin-wght-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2"); }
+
+body.alp-ed {
+	--alp-font-display: "Fraunces", Georgia, serif;
+	--alp-font-body: "Manrope", system-ui, sans-serif;
+	--ed-ink: #0F1115;
+	--ed-ink-2: #3D424B;
+	--ed-muted: #767B84;
+	--ed-line: #E4E3DF;
+	--ed-paper: #F5F4F0;
+	--ed-accent: #1C6B52;
+	--ed-mint: #7DDBB8;
+	--alp-ink: var(--ed-ink); --alp-ink-2: var(--ed-ink-2); --alp-muted: var(--ed-muted);
+	--alp-line: var(--ed-line); --alp-line-2: #D6D5D0; --alp-paper: var(--ed-paper); --alp-paper-2: #ECEBE6;
+	--alp-brand: var(--ed-accent);
+	--alp-r-sm: 2px; --alp-r-md: 3px; --alp-r-lg: 4px; --alp-r-xl: 6px;
+	--alp-shadow-soft: none; --alp-shadow-soft-hover: none;
+	--alp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+	font-family: var(--alp-font-body);
+	color: var(--ed-ink-2);
+	letter-spacing: -0.005em;
+	background: #fff;
+}
+
+/* ---------- Typografie ---------- */
+body.alp-ed :is(h1, h2, h3, .alp-h1, .alp-h2, .alp-h3, .alp-hero__title, .alp-deal__title, .alp-wa-band__title, .alp-section__head h2) {
+	font-family: var(--alp-font-display); font-weight: 400; letter-spacing: -0.02em; color: var(--ed-ink);
+}
+body.alp-ed .alp-h2, body.alp-ed .alp-section__head h2 { font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.6rem); line-height: 1.02; }
+body.alp-ed .alp-h2 em, body.alp-ed .alp-hero__title em { font-style: italic; background: none !important; color: var(--ed-accent); padding: 0; }
+body.alp-ed :is(h3, h4, .alp-h3, .alp-h4) { font-family: var(--alp-font-body); font-weight: 600; letter-spacing: -0.01em; }
+
+/* Eyebrow: kleines Label mit Laufnummer statt Strich */
+body.alp-ed { counter-reset: edsec; }
+body.alp-ed .alp-eyebrow { font-family: var(--alp-font-body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.02em; text-transform: none; color: var(--ed-muted); gap: 0.6rem; }
+body.alp-ed .alp-eyebrow::before { content: counter(edsec, decimal-leading-zero); counter-increment: edsec; width: auto; height: auto; background: none; font-variant-numeric: tabular-nums; color: var(--ed-ink); font-weight: 600; }
+body.alp-ed .alp-section__head { padding-top: 1.1rem; border-top: 1px solid var(--ed-ink); margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem); align-items: end; }
+
+/* ---------- Flächen: keine Verläufe, keine Glows ---------- */
+body.alp-ed :is(.alp-hero, .alp-deal, .alp-partner, .alp-stats) { background: #fff !important; }
+body.alp-ed .alp-section--tint:not(#charge-pruefen) { background: #fff !important; }
+body.alp-ed .alp-section { padding-block: clamp(4rem, 3rem + 4vw, 8rem); }
+body.alp-ed :is(.alp-deal__halo, .alp-hero__photo::after, .alp-stats__panel::before) { display: none !important; content: none !important; }
+
+/* ---------- Header & Laufleiste ---------- */
+body.alp-ed .alp-announce { background: var(--ed-ink); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.01em; }
+body.alp-ed .alp-announce__item .alp-icon { display: none; }
+body.alp-ed #header .header-main { background: #fff !important; box-shadow: none; border-bottom: 1px solid var(--ed-line); backdrop-filter: none; }
+body.alp-ed .header-nav-main > li > a { font-family: var(--alp-font-body); font-weight: 500; font-size: 0.875rem; letter-spacing: 0; color: var(--ed-ink) !important; }
+body.alp-ed .alp-wa-pill { background: transparent !important; color: var(--ed-ink) !important; box-shadow: inset 0 0 0 1px var(--ed-line) !important; font-weight: 500; }
+body.alp-ed .alp-wa-pill .alp-icon { color: #25D366; }
+
+/* ---------- Buttons: flach, eckig, Tinte ---------- */
+body.alp-ed :is(.alp-btn--primary, .button.alt, .single_add_to_cart_button, .checkout-button, #place_order, .add_to_cart_button, .product-small .add-to-cart-button .button, .wpcf7-submit, a.button, button.button) {
+	background: var(--ed-ink) !important; border: 1px solid var(--ed-ink) !important; color: #fff !important;
+	border-radius: var(--alp-r-md) !important; box-shadow: none !important; font-weight: 500 !important; letter-spacing: 0 !important; text-shadow: none !important;
+}
+body.alp-ed :is(.alp-btn--primary, .button.alt, .single_add_to_cart_button, .checkout-button, #place_order, .add_to_cart_button, .product-small .add-to-cart-button .button, .wpcf7-submit, a.button, button.button):hover { background: var(--ed-accent) !important; border-color: var(--ed-accent) !important; transform: none !important; }
+body.alp-ed :is(.alp-btn--ghost, .button.is-outline, .coupon .button, .button-continue-shopping, .alp-coa-card__open) {
+	background: transparent !important; border: 1px solid var(--ed-ink) !important; color: var(--ed-ink) !important; box-shadow: none !important; border-radius: var(--alp-r-md) !important; font-weight: 500 !important;
+}
+body.alp-ed :is(.alp-btn--ghost, .button.is-outline):hover { background: var(--ed-ink) !important; color: #fff !important; transform: none !important; }
+body.alp-ed :is(.alp-btn__orb, .alp-btn__chip) { display: none; }
+body.alp-ed .alp-btn--primary::after { content: "→"; margin-left: 0.2rem; font-family: var(--alp-font-body); }
+body.alp-ed .alp-btn--primary .alp-icon { display: none; }
+
+/* ---------- Hero: große Serife, ruhige Fläche ---------- */
+body.alp-ed .alp-hero { padding-block: clamp(3rem, 2rem + 5vw, 7rem) clamp(2.5rem, 2rem + 3vw, 5rem); border-bottom: 1px solid var(--ed-line); }
+body.alp-ed .alp-hero--split .alp-hero__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: end; }
+body.alp-ed .alp-hero__title { font-size: clamp(3.2rem, 2rem + 5.2vw, 6.6rem); line-height: 0.95; letter-spacing: -0.035em; margin-bottom: 1.6rem; }
+body.alp-ed .alp-hero__text { font-size: 1.125rem; max-width: 34rem; color: var(--ed-ink-2); }
+body.alp-ed .alp-hero__checks { color: var(--ed-muted); font-weight: 400; gap: 0.4rem 1.6rem; }
+body.alp-ed .alp-hero__tick { background: none; box-shadow: none; color: var(--ed-accent); width: auto; height: auto; }
+body.alp-ed .alp-hero__photo, body.alp-ed .alp-hero__photo img { border-radius: var(--alp-r-lg) !important; box-shadow: none !important; }
+body.alp-ed .alp-hero__photo { aspect-ratio: 4 / 5; height: auto !important; }
+body.alp-ed .alp-hero__photo img { width: 100%; height: 100%; object-fit: cover; }
+body.alp-ed .alp .alp-hero__proof, body.alp-ed .alp-hero__proof { border-radius: var(--alp-r-md); box-shadow: none; border: 1px solid var(--ed-line); background: #fff; }
+body.alp-ed .alp-hero__proof-val strong { font-family: var(--alp-font-display); font-weight: 400; }
+
+/* ---------- Kennzahlen: Zahlenleiste mit Haarlinien ---------- */
+body.alp-ed .alp-stats { padding-block: 0; }
+body.alp-ed .alp-stats__panel { background: #fff !important; border: 0 !important; border-bottom: 1px solid var(--ed-line) !important; border-radius: 0 !important; box-shadow: none !important; }
+body.alp-ed .alp-stats__item { border-color: var(--ed-line) !important; padding: 2rem 1.5rem !important; }
+body.alp-ed .alp-stats .alp-icon3d, body.alp-ed .alp-stats__top .alp-stats__ring, body.alp-ed .alp-stats__icon { display: none !important; }
+body.alp-ed .alp-stats .alp-stats__value { font-family: var(--alp-font-display); font-weight: 400; font-size: clamp(2.4rem, 1.8rem + 1.6vw, 3.4rem); color: var(--ed-ink) !important; letter-spacing: -0.03em; }
+body.alp-ed .alp-stats__label, body.alp-ed .alp-stats__scale { color: var(--ed-muted) !important; }
+body.alp-ed .alp-stats__meter { background: var(--ed-line) !important; height: 2px; }
+body.alp-ed .alp-stats__meter-bar { background: var(--ed-ink) !important; }
+body.alp-ed .alp-stats__meter-mark { display: none; }
+body.alp-ed .alp-stats__note { background: transparent !important; padding: 0; color: var(--ed-muted) !important; }
+body.alp-ed .alp .alp-stats__note .alp-mono, body.alp-ed .alp-stats__note .alp-mono { color: var(--ed-ink) !important; }
+body.alp-ed .alp-stats__docs span { background: #fff; border-color: var(--ed-line-2, #D6D5D0); box-shadow: none; transform: none !important; }
+body.alp-ed .alp-stats__docs span::after { background: var(--ed-ink); box-shadow: 0 3px 0 var(--ed-line), 0 6px 0 var(--ed-line); }
+body.alp-ed .alp-stats__docs span::before { display: none; }
+body.alp-ed .alp-stats__timeline { color: var(--ed-ink) !important; }
+body.alp-ed .alp-stats__timeline::before { background: var(--ed-ink); height: 1px; }
+body.alp-ed .alp-stats__timeline li::before { background: #fff !important; border: 1px solid var(--ed-ink) !important; width: 9px; height: 9px; }
+body.alp-ed .alp-stats__timeline li:last-child::before { background: var(--ed-ink) !important; }
+
+/* ---------- Chargen-Prüfer: ein ruhiger Tintenblock ---------- */
+body.alp-ed #charge-pruefen.alp-section { background: var(--ed-ink) !important; }
+body.alp-ed .alp-check-card :is(p, .alp-section__text, label, span) { color: rgba(255,255,255,.7); }
+body.alp-ed .alp-check-card .alp-link { color: #fff !important; }
+body.alp-ed .alp-check-card :is(.alp-chip, .alp-lookup__examples button, .alp-lookup__ex) { color: #fff !important; border-color: rgba(255,255,255,.3) !important; background: transparent !important; }
+body.alp-ed .alp-check-card { background: transparent !important; box-shadow: none !important; }
+body.alp-ed .alp-check-card :is(h2, .alp-h2) { color: #fff; }
+body.alp-ed .alp-check-card .alp-eyebrow { color: rgba(255,255,255,.55); }
+body.alp-ed .alp-check-card .alp-eyebrow::before { color: #fff; }
+body.alp-ed .alp-check-card :is(.alp-btn--primary, button[type=submit]) { background: #fff !important; color: var(--ed-ink) !important; border-color: #fff !important; }
+body.alp-ed .alp-check-card input { border-radius: var(--alp-r-md) !important; }
+
+/* ---------- Aktionsprodukt: redaktionell, ohne Glow ---------- */
+body.alp-ed .alp-deal { border-top: 1px solid var(--ed-line); border-bottom: 1px solid var(--ed-line); }
+body.alp-ed .alp-deal__img { border-radius: var(--alp-r-lg); transform: none; box-shadow: none; background: var(--ed-paper); }
+body.alp-ed .alp-deal__burst { background: var(--ed-ink); color: #fff; box-shadow: none; transform: none; width: 104px; height: 104px; font-family: var(--alp-font-display); font-weight: 400; font-size: 2rem; }
+body.alp-ed .alp-deal__burst small { color: rgba(255,255,255,.6); font-weight: 500; letter-spacing: 0.06em; }
+body.alp-ed .alp-deal__badge { background: transparent; color: var(--ed-accent); padding: 0; font-weight: 600; letter-spacing: 0.04em; }
+body.alp-ed .alp-deal__pulse { background: var(--ed-accent); }
+body.alp-ed .alp-deal__title { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.4rem) !important; line-height: 0.98; }
+body.alp-ed .alp-deal__price strong { font-family: var(--alp-font-display); font-weight: 400; }
+body.alp-ed .alp-deal__save { background: transparent; color: var(--ed-accent); padding: 0; font-weight: 600; }
+body.alp-ed .alp-deal__timer-cells > span { border-radius: var(--alp-r-md); box-shadow: none; border-color: var(--ed-line); }
+body.alp-ed .alp-deal__timer-cells b { font-family: var(--alp-font-display); font-weight: 400; font-size: 1.75rem; }
+
+/* ---------- Produktkarten: Bild auf Papier, Text frei ---------- */
+body.alp-ed .product-small .col-inner { border: 0 !important; box-shadow: none !important; background: transparent !important; border-radius: 0 !important; transform: none !important; }
+body.alp-ed .product-small .box-image { background: var(--ed-paper); border-radius: var(--alp-r-lg); overflow: hidden; }
+body.alp-ed .product-small .box-text { padding: 0.9rem 0 0 !important; }
+body.alp-ed .product-small :is(.category, p.category) { font-family: var(--alp-font-body) !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--ed-muted) !important; font-size: 0.75rem !important; }
+body.alp-ed .product-small :is(.name, .name a, .product-title, .product-title a, .woocommerce-loop-product__title) { font-family: var(--alp-font-body) !important; font-weight: 600 !important; font-size: 1rem !important; color: var(--ed-ink) !important; }
+body.alp-ed .product-small .price { font-family: var(--alp-font-body) !important; font-weight: 500 !important; }
+body.alp-ed .alp-card-lab { background: transparent !important; border: 0 !important; padding: 0 !important; font-family: var(--alp-font-body) !important; color: var(--ed-accent) !important; font-size: 0.75rem !important; }
+body.alp-ed .product-small .badge-container .onsale, body.alp-ed .badge-inner { background: var(--ed-ink) !important; border-radius: var(--alp-r-sm) !important; }
+body.alp-ed .alp-pill { border-radius: var(--alp-r-md); border-color: var(--ed-line); font-weight: 500; }
+body.alp-ed .alp-pill.is-active { background: var(--ed-ink); border-color: var(--ed-ink); }
+
+/* ---------- WhatsApp: schlichte Tintenzeile mit grünem Akzent ---------- */
+body.alp-ed .alp-wa-band { background: var(--ed-paper) !important; box-shadow: none !important; color: var(--ed-ink); border-block: 1px solid var(--ed-line); }
+body.alp-ed .alp-wa-band::after { content: none; }
+body.alp-ed .alp-wa-band__inner { background: transparent !important; box-shadow: none !important; }
+body.alp-ed .alp-wa-band__icon { background: #25D366; box-shadow: none; transform: none; border-radius: 50%; }
+body.alp-ed .alp-wa-band__title { color: var(--ed-ink) !important; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem) !important; }
+body.alp-ed .alp-wa-band__text { color: var(--ed-ink-2); }
+body.alp-ed .alp-wa-band__kicker { color: var(--ed-muted); letter-spacing: 0.02em; text-transform: none; font-weight: 500; }
+body.alp-ed .alp-wa-band__live { background: #25D366; box-shadow: none; }
+body.alp-ed .alp-wa-band__btn { background: var(--ed-ink) !important; color: #fff !important; box-shadow: none !important; border-radius: var(--alp-r-md) !important; font-weight: 500; }
+body.alp-ed .alp-wa-band__btn .alp-icon { color: #25D366 !important; }
+body.alp-ed .alp-wa-float { background: #25D366 !important; box-shadow: 0 6px 20px -8px rgba(0,0,0,.35) !important; }
+body.alp-ed .alp-wa-float::before { display: none; }
+
+/* ---------- Kühlschrank-Teaser ---------- */
+body.alp-ed .alp-soon--full { background: var(--ed-ink) !important; border-radius: 0 !important; box-shadow: none !important; }
+body.alp-ed .alp-soon__badge { border-radius: var(--alp-r-sm); background: transparent; border: 1px solid rgba(255,255,255,.3); letter-spacing: 0.04em; }
+
+/* ---------- Ablauf: nummerierte Spalten mit Haarlinie ---------- */
+body.alp-ed .alp-process { gap: 0 !important; border-top: 1px solid var(--ed-line); }
+body.alp-ed .alp-process__step { border: 0 !important; border-right: 1px solid var(--ed-line) !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; padding: 1.75rem 1.5rem 0 0 !important; margin-right: 1.5rem; transform: none !important; }
+body.alp-ed .alp-process__step:last-child { border-right: 0 !important; margin-right: 0; }
+body.alp-ed .alp-process__n { font-family: var(--alp-font-display); font-size: 3rem; line-height: 1; font-weight: 400; color: var(--ed-ink); margin-bottom: 1.25rem; }
+
+/* ---------- Wissen: Magazin-Liste ---------- */
+body.alp-ed .alp .alp-article, body.alp-ed .alp-article { border: 0 !important; box-shadow: none !important; border-radius: 0 !important; background: transparent !important; transform: none !important; }
+body.alp-ed .alp-article__img { border-radius: var(--alp-r-lg); }
+body.alp-ed .alp-article__body { padding: 1rem 0 0 !important; }
+body.alp-ed .alp-article__cat { letter-spacing: 0.02em; text-transform: none; font-weight: 500; }
+body.alp-ed .alp-article__title { font-family: var(--alp-font-display) !important; font-weight: 400 !important; font-size: 1.6rem !important; line-height: 1.1 !important; letter-spacing: -0.015em; }
+
+/* ---------- Research-Partner ---------- */
+body.alp-ed .alp-partner { border-top: 1px solid var(--ed-line); }
+body.alp-ed .alp-partner__card { background: var(--ed-ink) !important; box-shadow: none; transform: none; border-radius: var(--alp-r-lg); }
+body.alp-ed .alp-partner__big { font-family: var(--alp-font-display); font-weight: 400; }
+body.alp-ed .alp-partner__bars i { background: rgba(255,255,255,.75); border-radius: 0; }
+body.alp-ed .alp-partner__float { box-shadow: none; border: 1px solid var(--ed-line); border-radius: var(--alp-r-md); animation: none !important; }
+body.alp-ed .alp-partner__float--b { background: #fff; color: var(--ed-accent); }
+body.alp-ed .alp-partner__tick { background: none; box-shadow: none; color: var(--ed-accent); width: 20px; height: 20px; }
+body.alp-ed .alp-partner__benefits li { padding-bottom: 0.9rem; border-bottom: 1px solid var(--ed-line); }
+body.alp-ed .alp-partner__wa { background: transparent; color: #25D366; box-shadow: none; }
+
+/* ---------- FAQ ---------- */
+body.alp-ed .alp-faq__item { border-radius: 0 !important; box-shadow: none !important; background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--ed-line) !important; }
+body.alp-ed .alp-faq__item summary { font-family: var(--alp-font-display); font-weight: 400; font-size: 1.5rem; color: var(--ed-ink); }
+body.alp-ed .alp-faq__icon { color: var(--ed-ink); }
+
+/* ---------- Newsletter & Footer ---------- */
+body.alp-ed .alp-home > .alp-section:last-child { background: var(--ed-ink) !important; }
+body.alp-ed .alp-cta :is(h2, .alp-h2) { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); }
+body.alp-ed .alp-cta .alp-btn--light { background: #fff !important; color: var(--ed-ink) !important; border-color: #fff !important; box-shadow: none !important; border-radius: var(--alp-r-md) !important; }
+body.alp-ed .alp-footer { background: var(--ed-ink) !important; border-radius: 0 !important; }
+body.alp-ed .alp-footer__title { font-family: var(--alp-font-body); letter-spacing: 0.02em; text-transform: none; color: rgba(255,255,255,.5); font-weight: 500; }
+body.alp-ed .alp-wordmark, body.alp-ed .alp-footer__logo { font-family: var(--alp-font-display); }
+
+/* ---------- Bewegung: nur ruhige Überblendung ---------- */
+body.alp-ed.alp-motion .alp-reveal { filter: none !important; transform: translateY(12px); }
+body.alp-ed.alp-motion .alp-reveal.is-in { transform: none; }
+body.alp-ed .product-small .col-inner:hover .box-image img { transform: scale(1.03); }
+
+@media (max-width: 767px) {
+	body.alp-ed .alp-hero__title { font-size: 2.3rem; margin-bottom: 0.8rem; }
+	body.alp-ed .alp-h2, body.alp-ed .alp-section__head h2 { font-size: 1.9rem; }
+	body.alp-ed .alp-process__step { border-right: 0 !important; margin-right: 0; border-bottom: 1px solid var(--ed-line) !important; padding: 1rem 0 !important; }
+	body.alp-ed .alp-hero--split .alp-hero__photo { aspect-ratio: 4 / 3.4 !important; border-radius: 0 !important; }
+	body.alp-ed .alp-hero--split .alp-hero__photo img { border-radius: 0 !important; }
+	body.alp-ed .alp-hero { padding-top: 0; }
+}
+
+/* Buttons auf dunklen Flächen: weiß */
+body.alp-ed :is(.alp-soon--full, #charge-pruefen, .alp-coa-hero, .alp-section--dark, .alp-home > .alp-section:last-child) :is(.alp-btn--primary, button[type=submit]) { background: #fff !important; color: var(--ed-ink) !important; border-color: #fff !important; }
+body.alp-ed :is(.alp-soon--full, #charge-pruefen) .alp-btn--primary:hover { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; }
+
+/* ---------- Schrift-Feinschliff (Fraunces) ---------- */
+body.alp-ed :is(h1, h2, .alp-h1, .alp-h2, .alp-hero__title, .alp-deal__title, .alp-wa-band__title, .alp-section__head h2, .alp-faq__item summary, .alp-article__title, .alp-stats__value, .alp-process__n) { font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 420 !important; letter-spacing: -0.03em !important; }
+body.alp-ed .alp-hero__title { font-size: clamp(3rem, 1.9rem + 4.6vw, 6rem); }
+body.alp-ed .alp-faq__item summary, body.alp-ed .alp-article__title { font-size: 1.3rem !important; }
+
+/* ---------- Mint-Akzente (Marke) ---------- */
+body.alp-ed { --ed-mint: #6EDAB4; }
+body.alp-ed .alp-deal__burst { color: var(--ed-mint); }
+body.alp-ed :is(.alp-hero__tick, .alp-partner__tick) { color: #2E9C77; }
+body.alp-ed :is(.alp-hero__proof-ok, .alp-coa-seal--ok, .alp-status--ok) { background: #E6F7F0 !important; color: #1C6B52 !important; }
+body.alp-ed :is(#charge-pruefen.alp-section, .alp-soon--full, .alp-home > .alp-section:last-child) { box-shadow: inset 0 3px 0 var(--ed-mint) !important; }
+body.alp-ed .alp-stats__meter-bar { background: var(--ed-mint) !important; }
+body.alp-ed .alp-stats__timeline li:last-child::before { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; }
+body.alp-ed :is(.add_to_cart_button, .single_add_to_cart_button, .product-small .add-to-cart-button .button, .checkout-button, #place_order):hover { background: var(--ed-mint) !important; border-color: var(--ed-mint) !important; color: var(--ed-ink) !important; }
+body.alp-ed .alp-eyebrow::before { color: #2E9C77; }
+@media (max-width: 767px) {
+	body.alp-ed .alp-stats .alp-stats__value { font-size: 1.35rem !important; }
+}
+
+/* ---------- Inhaltsseiten (Wissen, Kontakt, Versand, Early Access …) ---------- */
+body.alp-ed .alp-rich :is(.gl-header, .ship-header, .recon-header, .wis-header, #alp-scope .alp-hero), body.alp-ed .alp-rich > div:first-child > div:first-child:has(> h1) { background: var(--ed-paper) !important; border-radius: var(--alp-r-lg) !important; }
+body.alp-ed .alp-rich .recon-result { background: var(--ed-ink) !important; border-radius: var(--alp-r-lg) !important; }
+body.alp-ed .alp-rich :where(.gl-card, .ship-card, .recon-card, .wis-card, .alp-usp-card), body.alp-ed .alp-rich #alp-scope .alp-card { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; border-color: var(--ed-line) !important; }
+body.alp-ed .alp-rich :is(h1, h2, .alp-hero-h1) { font-family: var(--alp-font-display) !important; font-weight: 420 !important; letter-spacing: -0.025em !important; color: var(--ed-ink); }
+body.alp-ed .alp-rich :is(.ship-icon, .alp-usp-icon, .alp-ea-usp-grid .alp-usp-icon) { background: transparent !important; box-shadow: none !important; color: var(--ed-accent) !important; }
+body.alp-ed .alp-rich .alp-hero-h1 .hi { background: none !important; font-style: italic; }
+body.alp-ed .alp-rich .alp-ea-inner { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; background: #fff !important; }
+body.alp-ed .alp-rich .alp-ea-inner::before { background: var(--ed-mint) !important; height: 3px; }
+body.alp-ed .alp-rich .alp-ea-hero::before { border-radius: var(--alp-r-lg) !important; box-shadow: none !important; }
+body.alp-ed .alp-rich :is(.wpcf7-submit, .alp-ea-form-wrap input[type="submit"]) { background: var(--ed-ink) !important; border: 1px solid var(--ed-ink) !important; color: #fff !important; box-shadow: none !important; border-radius: var(--alp-r-md) !important; }
+body.alp-ed .alp-rich :is(.gl-eyebrow, .ship-header .eyebrow, .recon-header .eyebrow, .wis-header .eyebrow, #alp-scope .alp-eyebrow, .alp-hero-kicker) { background: transparent !important; box-shadow: none !important; color: var(--ed-accent) !important; letter-spacing: 0.04em !important; }
+/* Shop-Kopf, COA-Seite, Konto */
+body.alp-ed :is(.shop-page-title, .page-title.shop-page-title, .alp-shop-head) { background: #fff !important; border-bottom: 1px solid var(--ed-line); }
+body.alp-ed :is(.alp-coa-hero, .alp-coa-page .alp-section--dark) { background: var(--ed-ink) !important; }
+body.alp-ed :is(.alp-coa-hero, .alp-section--dark)::before { display: none !important; }
+body.alp-ed :is(.woocommerce-form-login, .woocommerce-form-register, .u-columns .col-inner, .cart_totals, .woocommerce-checkout-review-order, .alp-pcoa) { box-shadow: none !important; border-radius: var(--alp-r-lg) !important; }
+
+/* SEO-H1 im Stil der kleinen Zeile (Eyebrow) */
+body.alp-ed h1.alp-hero__seo { font-family: var(--alp-font-body); font-size: 0.75rem; font-weight: 500 !important; letter-spacing: 0.02em !important; font-variation-settings: normal; text-transform: none; color: var(--ed-muted); line-height: 1.5; }
+
+/* „Jetzt kaufen“ (Flatsome, product_buy_now): als umrandeter Zweit-Button unter „In den Warenkorb“ */
+body.alp-ed form.cart button.ux-buy-now-button:not(#alp-x), .alp form.cart button.ux-buy-now-button:not(#alp-x) { /* :not(#…) = gleiche Stärke wie die Button-Regel mit #place_order */
+	flex: 1 1 100%; min-height: 50px; margin: 0;
+	background: #fff !important; color: var(--ed-ink, var(--alp-ink)) !important;
+	border: 1.5px solid var(--ed-ink, var(--alp-ink)) !important; box-shadow: none !important;
+}
+body.alp-ed form.cart button.ux-buy-now-button:not(#alp-x):hover, .alp form.cart button.ux-buy-now-button:not(#alp-x):hover {
+	background: var(--ed-ink, var(--alp-ink)) !important; color: #fff !important; border-color: var(--ed-ink, var(--alp-ink)) !important;
+}

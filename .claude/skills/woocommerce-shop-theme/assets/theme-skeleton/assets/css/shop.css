@@ -1,0 +1,242 @@
+/* ==========================================================================
+   SHOP: Shopseite, Kategorien, Produktkacheln (auch Startseite & „Ähnliche Produkte“)
+   ========================================================================== */
+
+/* Seitenkopf Shop/Kategorie */
+.alp .shop-page-title,
+.alp .category-page-title { background: var(--alp-paper); border-bottom: 1px solid var(--alp-line); }
+.alp .shop-page-title .page-title-inner { padding-block: 1.75rem; }
+.alp .shop-page-title h1, .alp .category-page-title h1 {
+	font-size: var(--alp-fs-xl);
+	text-transform: none;
+	letter-spacing: -0.02em;
+}
+.alp .woocommerce-result-count { font-size: var(--alp-fs-sm); color: var(--alp-muted); }
+.alp .woocommerce-ordering select { min-height: 42px; font-size: var(--alp-fs-sm); font-weight: 600; }
+.alp .term-description { max-width: 70ch; color: var(--alp-muted); }
+
+/* Einleitung über der Produktliste */
+.alp .alp-shop-intro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; margin: 0 0 1.25rem; }
+.alp .alp-shop-intro__text { margin: 0; max-width: 62ch; color: var(--alp-ink-2); }
+.alp .alp-shop-intro__usps { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+.alp .alp-shop-intro__usps li {
+	display: inline-flex; align-items: center; gap: 0.35rem; margin: 0;
+	padding: 0.35rem 0.7rem; border-radius: 999px;
+	background: var(--alp-brand-soft); color: var(--alp-brand-hover);
+	font-size: 0.8125rem; font-weight: 600; white-space: nowrap;
+}
+@media (max-width: 549px) {
+	.alp .alp-shop-intro__usps { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--alp-gutter) * -1); padding-inline: var(--alp-gutter); }
+}
+
+.alp .alp-cat-pills {
+	margin: 0 0 1.75rem;
+	padding-bottom: 0.25rem;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+	mask-image: linear-gradient(90deg, #000 90%, transparent);
+	-webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+}
+.alp .alp-cat-pills::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) {
+	.alp .alp-cat-pills { flex-wrap: wrap; mask-image: none; -webkit-mask-image: none; }
+}
+
+/* ---------- Produktkachel ---------- */
+.alp .products .product-small.col { padding-bottom: 1rem; }
+.alp .product-small.box,
+.alp .product-small .box {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: var(--alp-surface);
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	overflow: hidden;
+	transition: border-color var(--alp-dur) var(--alp-ease), box-shadow var(--alp-dur) var(--alp-ease), transform var(--alp-dur) var(--alp-ease);
+}
+.alp .product-small .box:hover {
+	border-color: var(--alp-line-2);
+	box-shadow: var(--alp-shadow-md);
+	transform: translateY(-3px);
+}
+.alp .product-small .box-image {
+	background: var(--alp-dark);   /* passt zu den dunklen Produktfotos */
+	border-radius: 0;
+}
+.alp .product-small .box-image img { transition: transform 400ms var(--alp-ease); }
+.alp .product-small .box:hover .box-image img { transform: scale(1.035); }
+
+.alp .product-small .box-text {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 0.9rem 1rem 1rem;
+	text-align: left;
+}
+.alp .product-small .box-text .category,
+.alp .product-small p.category {
+	order: -1;
+	margin: 0 0 0.25rem;
+	font-family: var(--alp-font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--alp-brand);
+	opacity: 1;
+}
+.alp .product-small .product-title,
+.alp .product-small .name.product-title a {
+	font-family: var(--alp-font-display);
+	font-size: 1.0625rem;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	line-height: 1.25;
+	color: var(--alp-ink);
+	margin-bottom: 0.35rem;
+}
+.alp .product-small .price-wrapper { margin-top: auto; }
+.alp .product-small .price {
+	font-family: var(--alp-font-display);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--alp-ink);
+	font-variant-numeric: tabular-nums;
+}
+.alp .product-small .price del { color: var(--alp-muted); font-weight: 500; font-size: 0.875rem; opacity: 1; }
+.alp .product-small .price ins { text-decoration: none; color: var(--alp-ink); }
+
+/* Germanized-Hinweise (MwSt., Versand) klein und dezent */
+.alp .product-small .wc-gzd-additional-info,
+.alp .product-small .price-unit,
+.alp .product-small .shipping-costs-info,
+.alp .product-small .tax-info { font-size: 0.6875rem; color: var(--alp-muted); line-height: 1.35; }
+
+/* Laborhinweis in der Kachel */
+.alp .alp-card-lab {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	margin: 0 0 0.6rem;
+	padding: 3px 10px;
+	border: 1px solid var(--alp-brand-line);
+	border-radius: 999px;
+	background: var(--alp-brand-soft);
+	font-family: var(--alp-font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	color: var(--alp-ink);
+}
+.alp .alp-card-lab .alp-icon { color: var(--alp-brand); }
+.alp .alp-card-lab.is-pending { color: var(--alp-warn); background: var(--alp-warn-soft); border-color: #EDD9B0; }
+
+/* Kaufen-Button in der Kachel */
+.alp .product-small .add-to-cart-button { margin-top: 0.75rem; }
+.alp .product-small .add-to-cart-button .button,
+.alp .product-small .add_to_cart_button {
+	width: 100%;
+	min-height: 40px;
+	font-size: var(--alp-fs-sm);
+	background: var(--alp-action);
+	border-color: var(--alp-action);
+	color: var(--alp-on-action);
+	margin: 0;
+}
+.alp .product-small .add_to_cart_button:hover { background: var(--alp-action-hover); border-color: var(--alp-action-hover); color: var(--alp-on-action); box-shadow: var(--alp-shadow-mint); }
+.alp .product-small .added_to_cart { font-size: 0.8125rem; font-weight: 600; display: block; margin-top: 0.4rem; }
+
+/* Angebots-Plakette */
+.alp .badge-container { margin: 0.75rem; }
+.alp .badge .badge-inner,
+.alp .badge-circle .badge-inner,
+.alp .onsale {
+	border-radius: var(--alp-r-sm);
+	background: var(--alp-ink);
+	color: #fff;
+	font-family: var(--alp-font-body);
+	font-weight: 700;
+	font-size: 0.75rem;
+	text-transform: none;
+	letter-spacing: 0;
+	padding: 0.3rem 0.55rem;
+	height: auto;
+	width: auto;
+	min-height: 0;
+	line-height: 1.2;
+}
+.alp .badge { height: auto; width: auto; }
+.alp .badge-circle, .alp .badge-circle-inside { border-radius: var(--alp-r-sm); }
+
+/* Schnellansicht-Knopf von Flatsome */
+.alp .quick-view { background: rgba(26, 31, 46, 0.86); font-weight: 600; letter-spacing: 0; text-transform: none; }
+
+/* Seitennavigation */
+.alp .woocommerce-pagination .page-numbers li > *,
+.alp .page-numbers.button,
+.alp .nav-pagination > li > a,
+.alp .nav-pagination > li > span {
+	border-radius: var(--alp-r-md);
+	border: 1.5px solid var(--alp-line-2);
+	min-width: 42px;
+	height: 42px;
+	line-height: 38px;
+	font-weight: 600;
+	color: var(--alp-ink);
+}
+.alp .nav-pagination > li > .current,
+.alp .nav-pagination > li > a:hover { background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
+
+@media (max-width: 549px) {
+	.alp .products.row { margin-inline: -6px; }
+	.alp .products .product-small.col { padding-inline: 6px; padding-bottom: 12px; }
+	.alp .product-small .box-text { padding: 0.7rem 0.75rem 0.8rem; }
+	.alp .product-small .product-title, .alp .product-small .name.product-title a { font-size: 0.9375rem; }
+	.alp .product-small .price { font-size: 0.9375rem; }
+	.alp .alp-card-lab { font-size: 0.6875rem; }
+	.alp .product-small .add_to_cart_button { font-size: 0.8125rem; padding: 0 0.5rem; white-space: nowrap; min-height: 38px; }
+}
+
+/* ---------- Absicherung gegen abweichende Flatsome-Einstellungen (z. B. aminolabspro.com) ---------- */
+/* Plakette immer lesbar */
+.alp .badge-container .badge-inner, .alp .badge-container .onsale, .alp .badge-container .badge-inner * { color: #fff !important; }
+/* Kacheltext immer linksbündig, auch bei Flatsome-Stil „grid2“ (text-center) */
+.alp .product-small .box-text.text-center, .alp .product-small .box-text.text-center * { text-align: left !important; }
+.alp .product-small .box-text.text-center > * { align-self: stretch; margin-left: 0; margin-right: 0; }
+/* Germanized-Hinweise in der Kachel */
+.alp .product-small .box-text :is(.wc-gzd-additional-info, .price-unit, .tax-info, .shipping-costs-info, .delivery-time-info) { display: block; margin: 0.15rem 0 0; font-size: 0.6875rem; line-height: 1.35; color: var(--alp-muted); }
+.alp .product-small .box-text :is(.shipping-costs-info, .wc-gzd-additional-info) a { color: inherit; text-decoration: underline; }
+/* Produktbild im quadratischen Flatsome-Rahmen (image-cover) halten; COA-Rückbild nur bei Hover */
+.alp .product-small .image-cover { position: relative; overflow: hidden; }
+.alp .product-small .image-cover img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.alp .product-small img.lazy-load { opacity: 1; }
+/* Produktbild in der Kachel immer sichtbar (Flatsome-Hover „fade_in_back“: nur das COA-Rückbild blendet ein) */
+.alp .product-small .box-image img:not(.back-image):not(.show-on-hover) { opacity: 1 !important; visibility: visible !important; }
+/* Flatsome „gleich hohe Kacheln“ (has-equal-box-heights): Bild füllt den Rahmen statt 0 px Breite */
+.alp .has-equal-box-heights .box-image { position: relative; }
+.alp .has-equal-box-heights .box-image img { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* HPLC-Etikett unten links auf dem Produktbild (features.card_hplc_tag) */
+.alp .product-small .box-image { position: relative; }
+.alp .alp-hplc-tag {
+	position: absolute; left: 10px; bottom: 10px; z-index: 3;
+	display: inline-flex; align-items: stretch; overflow: hidden;
+	border-radius: var(--alp-r-md);
+	box-shadow: 0 2px 10px rgba(26, 31, 46, 0.14);
+	font-family: var(--alp-font-mono); line-height: 1;
+	pointer-events: none;
+	transition: transform var(--alp-dur) var(--alp-ease);
+}
+.alp .alp-hplc-tag__k { display: flex; align-items: center; padding: 6px 7px; background: var(--alp-ink); color: var(--alp-mint); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.06em; }
+.alp .alp-hplc-tag__v { display: flex; align-items: center; padding: 5px 8px; background: #fff; color: var(--alp-ink); font-size: 0.8125rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.alp .product-small .col-inner:hover .alp-hplc-tag { transform: translateY(-2px); }
+.alp .product-small .alp-card-lab--meta,
+body.alp-ed .product-small .alp-card-lab--meta { display: block; margin: 0 0 0.5rem; padding: 0 !important; border: 0 !important; background: transparent !important; font-family: var(--alp-font-mono) !important; font-size: 0.6875rem !important; font-weight: 500; color: var(--alp-muted) !important; line-height: 1.4; }
+.alp .alp-card-lab--meta a { color: var(--alp-brand); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 549px) {
+	.alp .alp-hplc-tag { left: 6px; bottom: 6px; }
+	.alp .alp-hplc-tag__k { padding: 4px 5px; font-size: 0.5625rem; }
+	.alp .alp-hplc-tag__v { padding: 4px 6px; font-size: 0.6875rem; }
+}

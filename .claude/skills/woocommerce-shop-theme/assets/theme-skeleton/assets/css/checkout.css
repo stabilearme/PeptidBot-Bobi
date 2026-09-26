@@ -1,0 +1,196 @@
+/* ==========================================================================
+   WARENKORB, KASSE, MEIN KONTO
+   ========================================================================== */
+
+/* Fortschrittsanzeige */
+.alp .alp-steps {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0 auto 2rem;
+	padding: 0;
+	counter-reset: none;
+}
+.alp .alp-steps__item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0;
+	font-size: var(--alp-fs-sm);
+	font-weight: 600;
+	color: var(--alp-muted);
+}
+.alp .alp-steps__item + .alp-steps__item::before {
+	content: "";
+	width: clamp(1.5rem, 4vw, 4rem);
+	height: 2px;
+	background: var(--alp-line);
+	border-radius: 2px;
+	margin-right: 0.5rem;
+}
+.alp .alp-steps__item.is-done::before, .alp .alp-steps__item.is-current::before { background: var(--alp-action); }
+.alp .alp-steps__item a { display: inline-flex; align-items: center; gap: 0.5rem; color: inherit; text-decoration: none; }
+.alp .alp-steps__n {
+	display: grid;
+	place-items: center;
+	width: 28px; height: 28px;
+	border-radius: 50%;
+	border: 1.5px solid var(--alp-line-2);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	background: var(--alp-surface);
+}
+.alp .alp-steps__item.is-current { color: var(--alp-ink); }
+.alp .alp-steps__item.is-current .alp-steps__n { background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
+.alp .alp-steps__item.is-done { color: var(--alp-brand); }
+.alp .alp-steps__item.is-done .alp-steps__n { background: var(--alp-action); border-color: var(--alp-action); color: var(--alp-on-action); }
+@media (max-width: 480px) { .alp .alp-steps__label { display: none; } .alp .alp-steps__item.is-current .alp-steps__label { display: inline; } }
+
+/* Flatsome zeigt eigene Checkout-Breadcrumbs – durch unsere Schritte ersetzt */
+.alp.woocommerce-cart .checkout-breadcrumbs,
+.alp.woocommerce-checkout .checkout-breadcrumbs { display: none; }
+.alp.woocommerce-cart .page-title, .alp.woocommerce-checkout .page-title { background: transparent; }
+
+/* Tabellen */
+.alp .shop_table { border: 0; font-size: 0.9375rem; }
+.alp .shop_table th {
+	font-family: var(--alp-font-mono);
+	font-size: var(--alp-fs-xs);
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--alp-muted);
+	border-bottom: 1px solid var(--alp-line);
+}
+.alp .shop_table td { border-bottom: 1px solid var(--alp-line); vertical-align: middle; }
+.alp .shop_table .product-name a { font-weight: 650; color: var(--alp-ink); }
+.alp .shop_table .product-thumbnail img { border-radius: var(--alp-r-md); background: var(--alp-paper); }
+.alp .shop_table .remove { color: var(--alp-muted) !important; border-color: var(--alp-line-2) !important; }
+.alp .shop_table .remove:hover { background: var(--alp-error) !important; border-color: var(--alp-error) !important; color: #fff !important; }
+.alp .shop_table .order-total .amount, .alp .cart_totals .order-total .amount {
+	font-family: var(--alp-font-display);
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--alp-ink);
+}
+
+/* Summen-Box & Bestellübersicht als Karte */
+.alp .cart_totals,
+.alp .cart-sidebar .col-inner,
+.alp #order_review,
+.alp .checkout-sidebar .col-inner,
+.alp .has-border {
+	border: 1px solid var(--alp-line) !important;
+	border-radius: var(--alp-r-lg);
+	background: var(--alp-surface);
+	padding: 1.5rem;
+	box-shadow: var(--alp-shadow-sm);
+}
+.alp .cart_totals > h2, .alp #order_review_heading {
+	font-family: var(--alp-font-display);
+	font-size: var(--alp-fs-lg);
+	text-transform: none;
+	letter-spacing: -0.02em;
+	margin-bottom: 1rem;
+}
+.alp .wc-proceed-to-checkout .checkout-button { width: 100%; min-height: 54px; font-size: 1.0625rem; }
+
+/* Gutschein */
+.alp .coupon input.input-text { min-height: 46px; }
+.alp .coupon .button { min-height: 46px; background: var(--alp-ink); border-color: var(--alp-ink); color: #fff; }
+
+/* Versandkostenfrei-Balken */
+.alp .alp-freeship { margin: 0 0 1.25rem; padding: 0.9rem 1rem; border-radius: var(--alp-r-md); background: var(--alp-paper); }
+.alp .alp-freeship p { margin: 0 0 0.5rem; font-size: var(--alp-fs-sm); font-weight: 600; color: var(--alp-ink); }
+.alp .alp-freeship__bar { height: 6px; border-radius: 3px; background: var(--alp-line); overflow: hidden; }
+.alp .alp-freeship__bar span { display: block; height: 100%; background: var(--alp-action); border-radius: 3px; transition: width 400ms var(--alp-ease); }
+
+/* Kasse: Formularfelder */
+.alp .woocommerce-billing-fields h3, .alp .woocommerce-shipping-fields h3, .alp .woocommerce-additional-fields h3 {
+	font-family: var(--alp-font-display);
+	font-size: var(--alp-fs-lg);
+	text-transform: none;
+	letter-spacing: -0.02em;
+}
+.alp .form-row { margin-bottom: 0.9rem; }
+.alp .form-row label { margin-bottom: 0.3rem; }
+.alp .form-row .required { color: var(--alp-error); text-decoration: none; }
+.alp .select2-container .select2-selection--single {
+	min-height: 48px;
+	border: 1.5px solid var(--alp-line-2);
+	border-radius: var(--alp-r-md);
+	display: flex;
+	align-items: center;
+}
+.alp .select2-container--default .select2-selection--single .select2-selection__arrow { height: 46px; }
+
+/* Zahlarten */
+.alp .woocommerce-checkout-payment,
+.alp #payment { background: transparent; border-radius: var(--alp-r-md); }
+.alp .wc_payment_methods { border: 0 !important; padding: 0 !important; }
+.alp .wc_payment_method {
+	border: 1.5px solid var(--alp-line);
+	border-radius: var(--alp-r-md);
+	padding: 0.85rem 1rem !important;
+	margin-bottom: 0.5rem !important;
+	transition: border-color var(--alp-dur) var(--alp-ease);
+}
+.alp .wc_payment_method:has(input:checked) { border-color: var(--alp-brand); background: #FAFDFC; }
+.alp .wc_payment_method label { font-size: 0.9375rem; font-weight: 650; }
+.alp .payment_box { background: var(--alp-paper) !important; border-radius: var(--alp-r-sm); font-size: var(--alp-fs-sm); margin-top: 0.6rem; }
+.alp .payment_box::before { display: none; }
+.alp #place_order { width: 100%; min-height: 56px; font-size: 1.125rem; margin-top: 0.5rem; }
+
+/* Germanized-Checkboxen & Rechtstexte */
+.alp .wc-gzd-checkbox-placeholder, .alp .legal, .alp .woocommerce-terms-and-conditions-wrapper { font-size: 0.8125rem; line-height: 1.55; }
+.alp .woocommerce-form__label-for-checkbox { font-weight: 500; }
+
+/* Vertrauenshinweise unter „Kaufen“ */
+.alp .alp-checkout-trust {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem 1.25rem;
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0;
+	font-size: 0.8125rem;
+	color: var(--alp-muted);
+}
+.alp .alp-checkout-trust li { display: inline-flex; align-items: center; gap: 0.35rem; margin: 0; }
+.alp .alp-checkout-trust .alp-icon { color: var(--alp-brand); }
+
+/* Danke-Seite */
+.alp .woocommerce-thankyou-order-received {
+	font-family: var(--alp-font-display);
+	font-size: var(--alp-fs-lg);
+	color: var(--alp-ink);
+	padding: 1.25rem 1.5rem;
+	border-radius: var(--alp-r-lg);
+	background: var(--alp-ok-soft);
+}
+.alp .woocommerce-order-overview { border-radius: var(--alp-r-lg); }
+
+/* Mein Konto */
+.alp .woocommerce-MyAccount-navigation ul { list-style: none; margin: 0; padding: 0; }
+.alp .woocommerce-MyAccount-navigation li { margin: 0; }
+.alp .woocommerce-MyAccount-navigation li a {
+	display: block;
+	padding: 0.7rem 0.9rem;
+	border-radius: var(--alp-r-md);
+	font-weight: 600;
+	color: var(--alp-ink-2);
+	text-transform: none;
+	letter-spacing: 0;
+}
+.alp .woocommerce-MyAccount-navigation li.is-active a,
+.alp .woocommerce-MyAccount-navigation li a:hover { background: var(--alp-paper); color: var(--alp-ink); }
+.alp .account-container .account-login-inner,
+.alp .account-container .account-register-inner,
+.alp form.woocommerce-form-login,
+.alp form.woocommerce-form-register {
+	border: 1px solid var(--alp-line);
+	border-radius: var(--alp-r-lg);
+	padding: 1.5rem;
+}
