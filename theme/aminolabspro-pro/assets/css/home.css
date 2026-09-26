@@ -872,3 +872,14 @@
 	.alp-notify__row { flex-direction: column; }
 	.alp .alp-notify .alp-notify__btn { width: 100%; justify-content: center; }
 }
+
+/* Wochenangebot als Stack: mehrere Produktbilder + Positionsliste */
+.alp-deal__img--stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; background: var(--alp-paper-2); padding: 6px; }
+.alp-deal__img--stack img { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
+.alp-deal__img--n1 { grid-template-columns: 1fr; }
+.alp-deal__img--n3 img:first-child { grid-row: span 2; }
+.alp-deal__items { list-style: none; margin: 0 0 1.1rem; padding: 0; display: grid; gap: 0.35rem; max-width: 34rem; }
+.alp-deal__items li { display: flex; justify-content: space-between; gap: 1rem; margin: 0; padding: 0.45rem 0; border-bottom: 1px solid var(--alp-line); font-size: 0.9375rem; }
+.alp-deal__items a { color: var(--alp-ink); text-decoration: none; font-weight: 600; }
+.alp-deal__items span { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--alp-ink); font-weight: 600; }
+.alp-deal__items del { color: var(--alp-muted); font-weight: 400; margin-right: 0.35rem; }

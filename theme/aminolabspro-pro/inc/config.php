@@ -114,6 +114,59 @@ return array(
 	),
 
 	/*
+	 * Wochenangebot (inc/weekly-deal.php): Das Angebot auf der Startseite wechselt automatisch
+	 * jeden Montag um 22 Uhr zum nächsten Eintrag in 'deals' und fängt am Ende wieder von vorn an.
+	 * Kontrolle mit Datum und Preisen: WooCommerce → Wochenangebote.
+	 *
+	 * Pro Angebot:
+	 *   'title'   Überschrift auf der Startseite
+	 *   'text'    kurzer Satz darunter (optional)
+	 *   'items'   Artikelnummern (SKU). Ein Eintrag = Einzelprodukt, mehrere = Stack.
+	 *             Menge: array( 'sku' => 'ALP-BAC-10ML', 'qty' => 2 ). Fester Preis: 'price' => 29.90
+	 *   'percent' Rabatt in % auf den aktuellen Verkaufspreis (0 = aktueller Preis bleibt)
+	 * Einzelprodukt: in der Woche überall reduziert. Stack: reduziert im Warenkorb, wenn alle Produkte drin sind.
+	 * Der Button legt alle Produkte des Angebots in den Warenkorb.
+	 */
+	'weekly_deals' => array(
+		'enabled'     => true,
+		'switch_day'  => 'monday',
+		'switch_time' => '22:00',
+		'timezone'    => 'Europe/Berlin',
+		'first_week'  => '2026-09-22', // In dieser Woche läuft das erste Angebot der Liste (Mo 21.09. 22 Uhr bis Mo 28.09. 22 Uhr).
+		'deals'       => array(
+			array(
+				'title'   => 'Retatrutide (Triple G) 10 mg',
+				'text'    => 'Der Triple-Agonist zum Wochenpreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
+				'items'   => array( 'ALP-RETA-10' ),
+				'percent' => 0, // aktueller Preis 54,90 € (statt 79,90 €)
+			),
+			array(
+				'title'   => 'Recovery-Stack',
+				'text'    => 'BPC-157, TB-500 und GHK-Cu im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-BPC157-10', 'ALP-TB500-10', 'ALP-GHKCU-50' ),
+				'percent' => 15,
+			),
+			array(
+				'title'   => 'Retatrutide (Triple G) 30 mg',
+				'text'    => 'Die große Einheit für längere Versuchsreihen – diese Woche besonders günstig.',
+				'items'   => array( array( 'sku' => 'ALP-RETA-30', 'price' => 119.90 ) ),
+			),
+			array(
+				'title'   => 'Nootropic-Stack',
+				'text'    => 'Semax und Selank zusammen – 20 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-SEMAX-10', 'ALP-SELANK-10' ),
+				'percent' => 20,
+			),
+			array(
+				'title'   => 'Metabolic-Stack',
+				'text'    => 'MOTS-c 10 mg und 5-Amino-1MQ 50 mg im Set – 15 % unter dem Einzelpreis.',
+				'items'   => array( 'ALP-MOTSC-10', 'ALP-5A1MQ-50' ),
+				'percent' => 15,
+			),
+		),
+	),
+
+	/*
 	 * Affiliate-Wunschcode (inc/affiliate-coupon.php, YITH WooCommerce Affiliates):
 	 * Feld im Affiliate-Anmeldeformular, Prüfung „schon vergeben“, Gutschein wird erst
 	 * nach Genehmigung angelegt und dem Affiliate zugeordnet (Provision).
@@ -290,8 +343,8 @@ return array(
 		 * Ist nichts reduziert, wird der Abschnitt ausgeblendet.
 		 */
 		'deal' => array(
-			'eyebrow' => 'Aktionsprodukt',
-			'title'   => 'Nur für kurze Zeit reduziert.',
+			'eyebrow' => 'Wochenangebot',
+			'title'   => 'Jeden Montag ein neues Angebot.',
 			'text'    => 'Jede Woche ein Research-Peptid zum Aktionspreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
 			'sku'     => '',
 			'ends'    => '',

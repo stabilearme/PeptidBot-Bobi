@@ -230,7 +230,17 @@
 			function pad(n) { return n < 10 ? '0' + n : String(n); }
 			function tick() {
 				var left = Math.max(0, Math.floor((end - Date.now()) / 1000));
-				if (!left) { el.hidden = true; return; }
+				if (!left) {
+					if (el.hidden) return;
+					el.hidden = true;
+					// Wochenangebot abgelaufen: Seite ohne Cache neu laden, dann erscheint das neue Angebot.
+					if (el.hasAttribute('data-alp-reload') && location.search.indexOf('alp_week=') === -1) {
+						setTimeout(function () {
+							location.replace(location.pathname + (location.search ? location.search + '&' : '?') + 'alp_week=' + Math.floor(end / 1000) + '#aktion');
+						}, 4000);
+					}
+					return;
+				}
 				cells.d.textContent = pad(Math.floor(left / 86400));
 				cells.h.textContent = pad(Math.floor(left % 86400 / 3600));
 				cells.m.textContent = pad(Math.floor(left % 3600 / 60));
