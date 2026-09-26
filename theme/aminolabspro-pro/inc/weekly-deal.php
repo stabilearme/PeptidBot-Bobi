@@ -332,7 +332,7 @@ function alp_wd_admin_page() {
 	}
 	echo '<p>Wechsel automatisch jeden ' . esc_html( ucfirst( (string) alp_config( 'weekly_deals.switch_day', 'monday' ) ) ) . ' um ' . esc_html( (string) alp_config( 'weekly_deals.switch_time', '22:00' ) ) . ' Uhr. Angebote ändern: <code>inc/config.php → weekly_deals</code>.</p>';
 	echo '<table class="widefat striped" style="max-width:980px"><thead><tr><th>Zeitraum</th><th>Angebot</th><th>Produkte</th><th>Normal</th><th>Aktion</th></tr></thead><tbody>';
-	for ( $i = 0; $i < 8; $i++ ) {
+	for ( $i = 0, $alp_n = max( 8, count( (array) alp_config( 'weekly_deals.deals', array() ) ) + 1 ); $i < $alp_n; $i++ ) { // ganzer Durchlauf + erste Wiederholung
 		$week   = alp_wd_week( $i );
 		$deal   = $week['deal'];
 		$lines  = array();
