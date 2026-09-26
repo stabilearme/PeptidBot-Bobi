@@ -111,31 +111,58 @@ function alp_wd_price( $deal, $product_id, $base ) {
 }
 
 /* ---------- Einzelprodukt: Aktionspreis überall ---------- */
-add_filter( 'woocommerce_product_get_price', 'alp_wd_filter_price', 50, 2 );
-add_filter( 'woocommerce_product_get_sale_price', 'alp_wd_filter_price', 50, 2 );
-function alp_wd_filter_price( $value, $product ) {
+
+/** Wochenangebot-Daten für ein Einzelprodukt im aktuellen Angebot, sonst null: [ Aktionspreis, Referenzpreis ]. */
+function alp_wd_single( $product ) {
 	$week = alp_wd_current();
-	if ( ! $week || $week['deal']['bundle'] || ! isset( $week['deal']['items'][ $product->get_id() ] ) ) {
-		return $value;
+	if ( ! $week || $week['deal']['bundle'] || ! is_object( $product ) || ! isset( $week['deal']['items'][ $product->get_id() ] ) ) {
+		return null;
 	}
-	$base = (float) $product->get_price( 'edit' ); // Preis ohne Wochenangebot (inkl. bestehender Reduzierung)
+	$base = (float) $product->get_price( 'edit' ); // Preis ohne Wochenangebot
 	$deal = alp_wd_price( $week['deal'], $product->get_id(), $base );
-	return $deal < $base || '' === (string) $value ? (string) $deal : $value;
+	return array( $deal, alp_wd_ref_price( $product ) );
+}
+
+/**
+ * Referenz für den durchgestrichenen Preis: der niedrigste Preis der letzten 30 Tage
+ * (höchstens der Normalpreis). Liegt der Aktionspreis nicht darunter, wird nichts durchgestrichen.
+ */
+function alp_wd_ref_price( $product ) {
+	$base    = (float) $product->get_price( 'edit' );
+	$regular = (float) $product->get_regular_price( 'edit' );
+	$ref     = $regular > 0 ? min( $regular, $base > 0 ? $base : $regular ) : $base;
+	return function_exists( 'alp_price_low30' ) ? alp_price_low30( $product->get_id(), $ref ) : $ref;
+}
+
+add_filter( 'woocommerce_product_get_price', 'alp_wd_filter_price', 50, 2 );
+function alp_wd_filter_price( $value, $product ) {
+	$single = alp_wd_single( $product );
+	return $single && $single[0] < (float) $product->get_price( 'edit' ) ? (string) $single[0] : $value;
+}
+
+add_filter( 'woocommerce_product_get_sale_price', 'alp_wd_filter_sale_price', 50, 2 );
+function alp_wd_filter_sale_price( $value, $product ) {
+	$single = alp_wd_single( $product );
+	return $single && $single[0] < $single[1] ? (string) $single[0] : $value;
+}
+
+/* Durchgestrichen wird der Referenzpreis (niedrigster Preis der letzten 30 Tage), nicht ein höherer Normalpreis. */
+add_filter( 'woocommerce_product_get_regular_price', 'alp_wd_filter_regular_price', 50, 2 );
+function alp_wd_filter_regular_price( $value, $product ) {
+	$single = alp_wd_single( $product );
+	return $single && $single[0] < $single[1] ? (string) $single[1] : $value;
 }
 
 add_filter( 'woocommerce_product_is_on_sale', 'alp_wd_filter_on_sale', 50, 2 );
 function alp_wd_filter_on_sale( $on_sale, $product ) {
-	if ( $on_sale || ! is_object( $product ) ) {
+	if ( ! is_object( $product ) ) {
 		return $on_sale;
 	}
 	if ( $product->get_meta( '_alp_wd_bundle', true ) ) {
 		return true; // Stack-Artikel im Warenkorb gelten als reduziert (z. B. für „nicht auf reduzierte Produkte“)
 	}
-	$week = alp_wd_current();
-	if ( $week && ! $week['deal']['bundle'] && isset( $week['deal']['items'][ $product->get_id() ] ) ) {
-		return (float) $product->get_price() < (float) $product->get_regular_price();
-	}
-	return $on_sale;
+	$single = alp_wd_single( $product );
+	return $single ? ( $on_sale || $single[0] < $single[1] ) : $on_sale;
 }
 
 /* Angebote-Liste auf der Startseite („Angebote“) kennt auch das Wochenangebot. */
@@ -252,6 +279,16 @@ function alp_wd_check_switch() {
 	}
 	if ( get_option( 'alp_wd_key' ) !== $week['key'] ) {
 		update_option( 'alp_wd_key', $week['key'], true );
+		// Aktionspreise der abgelaufenen Woche merken (Referenz „niedrigster Preis der letzten 30 Tage“).
+		$prev = alp_wd_week( -1 );
+		if ( $prev && ! $prev['deal']['bundle'] && function_exists( 'alp_price_log_add' ) ) {
+			foreach ( $prev['deal']['items'] as $pid => $item ) {
+				$p = wc_get_product( $pid );
+				if ( $p ) {
+					alp_price_log_add( $pid, alp_wd_price( $prev['deal'], $pid, (float) $p->get_price( 'edit' ) ), $prev['end'] );
+				}
+			}
+		}
 		alp_wd_purge_cache( $week );
 	}
 	// Nächsten Wechsel vormerken (WP-Cron läuft beim nächsten Seitenaufruf nach diesem Zeitpunkt).

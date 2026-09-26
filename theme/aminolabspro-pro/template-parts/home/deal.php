@@ -70,14 +70,22 @@ $product  = $products[0][0];
 $regular  = 0.0;
 $sale     = 0.0;
 foreach ( $products as $row ) {
-	// Beim Einzelprodukt „statt“-Preis = regulärer Preis (zeigt auch eine bestehende Reduzierung).
-	$regular += ( $is_stack ? $row[2] : max( $row[2], (float) $row[0]->get_regular_price() ) ) * $row[1];
+	// Stack: Summe der Einzelpreise. Einzelprodukt: niedrigster Preis der letzten 30 Tage (§ 11 PAngV).
+	if ( $is_stack ) {
+		$ref = $row[2];
+	} elseif ( function_exists( 'alp_wd_ref_price' ) && $week ) {
+		$ref = alp_wd_ref_price( $row[0] );
+	} else {
+		$ref = max( $row[2], (float) $row[0]->get_regular_price() );
+	}
+	$regular += $ref * $row[1];
 	$sale    += $row[3] * $row[1];
 }
 $discount = $regular > 0 ? (int) round( ( 1 - $sale / $regular ) * 100 ) : 0;
-if ( $discount < 1 ) {
+if ( $discount < 1 && ! $week ) {
 	return;
 }
+$discount = max( 0, $discount );
 $title   = $title ? $title : $product->get_name();
 $link    = $is_stack ? '#aktion' : $product->get_permalink();
 $add_url = $add_url ? $add_url : $product->add_to_cart_url();
@@ -98,7 +106,9 @@ $lab     = $is_stack ? null : alp_coa_for_sku( $product->get_sku() );
 					<?php echo wp_get_attachment_image( $product->get_image_id(), 'large', false, array( 'alt' => '' ) ); // phpcs:ignore ?>
 				</a>
 			<?php endif; ?>
-			<span class="alp-deal__burst"><small>Aktion</small>−<?php echo (int) $discount; ?> %</span>
+			<?php if ( $discount > 0 ) : ?>
+				<span class="alp-deal__burst"><small>Aktion</small>−<?php echo (int) $discount; ?> %</span>
+			<?php endif; ?>
 		</div>
 
 		<div class="alp-deal__copy">
@@ -122,9 +132,15 @@ $lab     = $is_stack ? null : alp_coa_for_sku( $product->get_sku() );
 			<?php endif; ?>
 
 			<div class="alp-deal__price">
-				<del><?php echo wc_price( $regular ); // phpcs:ignore ?></del>
+				<?php if ( $discount > 0 ) : ?>
+					<del><?php echo $is_stack ? 'Einzeln ' : ''; ?><?php echo wc_price( $regular ); // phpcs:ignore ?></del>
+				<?php endif; ?>
 				<strong><?php echo wc_price( $sale ); // phpcs:ignore ?></strong>
-				<span class="alp-deal__save">Du sparst <?php echo wc_price( $regular - $sale ); // phpcs:ignore ?></span>
+				<?php if ( $discount > 0 ) : ?>
+					<span class="alp-deal__save">Du sparst <?php echo wc_price( $regular - $sale ); // phpcs:ignore ?></span>
+				<?php else : ?>
+					<span class="alp-deal__save">Wochenpreis</span>
+				<?php endif; ?>
 			</div>
 			<p class="alp-deal__legal"><?php echo $is_stack ? 'Stack-Preis gilt im Warenkorb, wenn alle Produkte enthalten sind. ' : ''; ?><?php echo wp_kses_post( alp_price_legal_note( $product ) ); ?></p>
 

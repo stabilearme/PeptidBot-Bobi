@@ -124,6 +124,9 @@ return array(
 	 *   'items'   Artikelnummern (SKU). Ein Eintrag = Einzelprodukt, mehrere = Stack.
 	 *             Menge: array( 'sku' => 'ALP-BAC-10ML', 'qty' => 2 ). Fester Preis: 'price' => 29.90
 	 *   'percent' Rabatt in % auf den aktuellen Verkaufspreis (0 = aktueller Preis bleibt)
+	 * Durchgestrichen wird beim Einzelprodukt der niedrigste Preis der letzten 30 Tage (§ 11 PAngV);
+	 * liegt der Aktionspreis nicht darunter, steht dort nur „Wochenpreis“ ohne Streichpreis.
+	 * Ein Produkt höchstens alle 5 Wochen ins Angebot nehmen, sonst gibt es keinen Streichpreis.
 	 * Einzelprodukt: in der Woche überall reduziert. Stack: reduziert im Warenkorb, wenn alle Produkte drin sind.
 	 * Der Button legt alle Produkte des Angebots in den Warenkorb.
 	 */
@@ -137,8 +140,7 @@ return array(
 			array(
 				'title'   => 'Retatrutide (Triple G) 10 mg',
 				'text'    => 'Der Triple-Agonist zum Wochenpreis – dieselbe geprüfte Charge, dasselbe öffentliche COA.',
-				'items'   => array( 'ALP-RETA-10' ),
-				'percent' => 0, // aktueller Preis 54,90 € (statt 79,90 €)
+				'items'   => array( array( 'sku' => 'ALP-RETA-10', 'price' => 54.90 ) ),
 			),
 			array(
 				'title'   => 'Recovery-Stack',
