@@ -12,7 +12,7 @@
 | Streichpreis-Abmahnrisiko | Dauer-Rabatte, 30-Tage-Regel | Preise vereinheitlichen, Referenz = 30-Tage-Tiefstpreis |
 | Doppelter Rabatt im Stack | `before_calculate_totals` läuft mehrfach | Ursprungspreis im Produkt-Meta merken, nicht vom geänderten Preis rechnen |
 | Gutschein auf Stack | Stack-Artikel nicht „reduziert“ | Bundle-Flag → `is_on_sale` true, auch bei `cart_loaded_from_session` |
-| Mail-Bilder fehlen | WebP; Brevo-Branding-Domain mit abgelaufenem SSL | JPG; Branding prüfen |
+| Mail-Bilder fehlen | WebP; Brevo-Branding-Domain (img.mail.…) antwortet 403 | JPG; Bild als CSS-Hintergrund einbinden (wird nicht umgeschrieben) oder Branding reparieren |
 | Brevo-Gutscheine „Forbidden“ | Feature nur Pro-Tarif | gemeinsamer Code |
 | Versand von Kampagnen blockiert | Sicherheitsregel: keine Nachrichten an echte Kunden auslösen | Entwürfe + Testmail, Nutzer plant |
 | Geplante Mails mit falschem Datum | Nutzer-Fehler beim Planen | nach dem Planen Termine per API gegenprüfen |

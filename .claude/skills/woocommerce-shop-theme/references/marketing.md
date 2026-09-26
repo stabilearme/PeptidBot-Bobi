@@ -15,8 +15,11 @@
   Nutzer. Geplante Kampagnen sind gesperrt; „pausiert“ lässt sich per API ändern.
 - **Mail-Bilder:** kein WebP (Outlook/Gmail) → JPG. Ein fertiges Bild pro Mail (PIL, 1120×760,
   dunkle Bühne, Produktfotos als Reihe, Badge) nach `assets/mail/` im Theme, per URL einbinden.
-  Brevo lädt Bilder beim Versand auf `img.<branding-domain>` um – ist dort das SSL-Zertifikat
-  abgelaufen, fehlen **alle** Bilder: Branding in Brevo prüfen/entfernen oder Support.
+  Brevo schreibt jedes `<img src>` (und `background=`) beim Versand auf `img.<branding-domain>` um.
+  Ist diese Branding-Adresse kaputt (403/SSL), fehlen alle Bilder. **Umweg, der funktioniert:**
+  Bild als CSS-Hintergrund einer Tabellenzelle (`style="background-image:url('…');background-size:cover;height:342px"`)
+  – das schreibt Brevo nicht um, Gmail/Apple Mail/Handy zeigen es (Outlook-Desktop nicht).
+  Sauberste Lösung: Branding in Brevo reparieren/entfernen.
 - Kampagnen-Texte ohne Euro-Beträge, wenn Preise sich noch ändern können („20 % günstiger als
   einzeln“); feste Preise nur bei festen Angebotspreisen.
 
